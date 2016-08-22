@@ -1,7 +1,7 @@
 # Arraybot
 
 
-A simple bot with a lot of features.
+###A simple bot with a lot of features.
 
 
 ##Moderation commands
