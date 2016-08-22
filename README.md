@@ -1,9 +1,15 @@
 # Arraybot
+
 ---
+
 A simple bot with a lot of features.
+
 ---
+
 ##Moderation commands
+
 ---
+
 * //clear - Clears # amount of messages. Values are from 1-50.
 Example: //clear 19
 
