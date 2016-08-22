@@ -173,12 +173,12 @@ The user tag will be SECOND in the message, independent to where you have put it
 The current placeholders are: {user} & {guild}
 Example: //createcmd //hi Hello.;Hey, {user}!
 
-*//deletecmd (name) - Deletes the custom command.
+* //deletecmd (name) - Deletes the custom command.
 Make sure to put the _ instead of space!
 Deleted commands cannot be recovered.
 Example: //deletecmd hi
 
-*//customcmds - List all custom commands.
+* //customcmds - List all custom commands.
 This applies for the current guild only, not globally.
 Spaces are repalced with an _ here.
 Example: //customcmds
