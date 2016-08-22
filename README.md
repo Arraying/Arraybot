@@ -131,13 +131,13 @@ You cannot enable/disable one of them.
 Example: //joinleavemsg
 
 * //joinmsg [message] - Shows or sets the join message.
-The current placeholders are: 
-{user} && {guild}
+The current placeholders are: {user} && {guild}
+Seperate multiple messages with a semi-colon.
 Example: //joinmsg Welcome to *{guild}*, **{user}**!
 
 * //leavemsg [message] - Shows or sets the leave message.
-The current placeholders are: 
-{user} && {guild}
+The current placeholders are: {user} && {guild}
+Seperate multiple messages with a semi-colon.
 Example: //leavemsg Say goodbye to *{guild}*, **{user}**!
 
 * //autorole - Toggles the auto-role function for newcomers.
@@ -145,18 +145,43 @@ This is per guild.
 The role is set with a different command.
 Example: //autorole
 
-* //setrole <role name> - Sets the auto-role role for newcomers.
+* //setrole (role name) - Sets the auto-role role for newcomers.
 This role can have spaces.
 If there are multiple roles with the same name, it'll apply both.
 Example: //setrole User
 
-* //abc <id> - Sets the channel for Arraybot. Use //search for the ID.
+* //abc (id) - Sets the channel for Arraybot. Use //search for the ID.
 Join/leave messages will be displayed here.
 By default this is the defaul channel.
 Example: //abc 215520148373635074
 
 
 
+##Custom commands
+* //createcmd (name) <response> - Create a custom command.
+The command will have no prefix, so if you want it to be //hi set the name to //hi.
+The the name can only be one word.
+Use underscores in names as space placeholders.
+You can have multiple replies by seperating them with a semi-colon.
+You can set the bot to tag a user by adding "[user]", then the user ID, then "[/user]".
+You can only tag one user.
+You can set the bot to tag a role by adding "[role]", then the role ID, then "[/role]".
+You can only set one role.
+It is possible to have one role and one user tag per reply.
+The role tag will be FIRST in the message, independent to where you have put it.
+The user tag will be SECOND in the message, independent to where you have put it.
+The current placeholders are: {user} & {guild}
+Example: //createcmd //hi Hello.;Hey, {user}!
+
+*//deletecmd (name) - Deletes the custom command.
+Make sure to put the _ instead of space!
+Deleted commands cannot be recovered.
+Example: //deletecmd hi
+
+*//customcmds - List all custom commands.
+This applies for the current guild only, not globally.
+Spaces are repalced with an _ here.
+Example: //customcmds
 
 
 
