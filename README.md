@@ -1,6 +1,6 @@
 # **Arraybot**
 
-Arraybot is currently getting recoded (version 2.0.0). This document will be back and updated as soon as the recode is finished.
+Arraybot has been recoded, however, this file is still work in progress. Please type //help [command/category] for help on the command.
 
 
 
