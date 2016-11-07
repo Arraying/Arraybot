@@ -1,6 +1,5 @@
-# **Arraybot**
+# Arraybot
 
-Arraybot has been recoded, however, this file is still work in progress. Please type //help [command/category] for help on the command.
-
+Arraybot has been recoded, a lot of features have changed. For help, please check out: [wiki](https://github.com/Wiildanimal/Arraybot/wiki)
 
 
