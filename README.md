@@ -1,5 +1,5 @@
-#Arraybot
-###A dynamic multipurpose bot with advanced custom commands.
+# Arraybot
+### A dynamic multipurpose bot with advanced custom commands.
 
 Hello there. The source code of the bot is not here, but you can check out the amazingly detailed wiki.
 
