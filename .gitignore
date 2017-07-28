@@ -1,5 +1,6 @@
 config.json
 .gradle/
+.idea/workspace.xml
 build/
 gradle/
 lib/
