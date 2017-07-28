@@ -46,7 +46,7 @@ class SubCommandCustomSetValue:
                     .append(args[i])
                     .append(" ")
         }
-        var value = stringBuilder.toString().trim()
+        val value = stringBuilder.toString().trim()
         cache.customCommands[commandName]!!.value = value
         Messages.COMMAND_CUSTOM_UPDATE.send(channel).queue()
     }

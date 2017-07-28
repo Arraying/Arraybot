@@ -67,13 +67,6 @@ class ManagerSQL {
      */
     init {
         try {
-            val requestConfig = RequestConfig.custom()
-                    .setCookieSpec(CookieSpecs.IGNORE_COOKIES)
-                    .build()
-            val httpClient = HttpClients.custom()
-                    .setDefaultRequestConfig(requestConfig)
-                    .build()
-            Unirest.setHttpClient(httpClient)
             val hikariConfig = HikariConfig()
             hikariConfig.jdbcUrl = "jdbc:mysql://$host:3306/$database?useSSL=false&characterEncoding=utf-8"
             hikariConfig.username = username
@@ -571,9 +564,7 @@ class ManagerSQL {
                         it.getString("description"),
                         it.getString("value"))
                 val guild = getGuild(id)
-                if(guild != null) {
-                    guild.customCommands.put(command.name, command)
-                }
+                guild?.customCommands?.put(command.name, command)
             }
         }
         arraybot.logger.info("Finished caching custom commands.")

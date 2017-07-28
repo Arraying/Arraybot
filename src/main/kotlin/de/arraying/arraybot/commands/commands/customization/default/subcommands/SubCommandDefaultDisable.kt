@@ -49,7 +49,7 @@ class SubCommandDefaultDisable:
             Messages.COMMAND_DEFAULT_DISABLE_DEVELOPER.send(channel).queue()
             return
         }
-        if(commandName == commandName) {
+        if(commandName == this.commandName) {
             Messages.COMMAND_DEFAULT_DISABLE_DEFAULT.send(channel).queue()
             return
         }

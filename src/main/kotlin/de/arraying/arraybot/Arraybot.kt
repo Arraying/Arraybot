@@ -10,8 +10,6 @@ import kotlinx.coroutines.experimental.launch
 import kotlinx.coroutines.experimental.runBlocking
 import net.dv8tion.jda.core.utils.SimpleLog
 
-
-
 /**
  * Copyright 2017 Arraying
  *
