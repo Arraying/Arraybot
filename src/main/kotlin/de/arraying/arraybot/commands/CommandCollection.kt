@@ -11,9 +11,10 @@ import de.arraying.arraybot.commands.commands.customization.default.CommandDefau
 import de.arraying.arraybot.commands.commands.customization.default.subcommands.SubCommandDefaultDisable
 import de.arraying.arraybot.commands.commands.customization.default.subcommands.SubCommandDefaultEnable
 import de.arraying.arraybot.commands.commands.customization.default.subcommands.SubCommandDefaultList
-import de.arraying.arraybot.commands.commands.customization.filter.CommandFilter
-import de.arraying.arraybot.commands.commands.customization.filter.subcommands.*
+import de.arraying.arraybot.commands.commands.moderation.filter.CommandFilter
+import de.arraying.arraybot.commands.commands.moderation.filter.subcommands.*
 import de.arraying.arraybot.commands.commands.customization.prefix.CommandPrefix
+import de.arraying.arraybot.commands.commands.developer.eval.CommandEval
 import de.arraying.arraybot.commands.commands.developer.restart.CommandRestart
 import de.arraying.arraybot.commands.commands.moderation.ban.CommandBan
 import de.arraying.arraybot.commands.commands.moderation.ban.CommandBanSoft
@@ -95,6 +96,7 @@ enum class CommandCollection(val command: DefaultCommand) {
             SubCommandAnnouncerJoin(),
             SubCommandAnnouncerLeave(),
             SubCommandAnnouncerStatus()
-    )))
+    ))),
+    //EVAL(CommandEval())
 
 }

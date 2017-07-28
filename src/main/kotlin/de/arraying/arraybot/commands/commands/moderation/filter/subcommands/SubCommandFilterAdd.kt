@@ -1,8 +1,11 @@
-package de.arraying.arraybot.commands.commands.customization.filter.subcommands
+package de.arraying.arraybot.commands.commands.moderation.filter.subcommands
 
 import de.arraying.arraybot.commands.CommandEnvironment
 import de.arraying.arraybot.commands.entities.SubCommand
 import de.arraying.arraybot.language.Messages
+import de.arraying.arraybot.utils.UtilsLimit
+import java.util.regex.Pattern
+import java.util.regex.PatternSyntaxException
 
 /**
  * Copyright 2017 Arraying
@@ -19,8 +22,8 @@ import de.arraying.arraybot.language.Messages
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-class SubCommandFilterRemove: 
-        SubCommand("remove") {
+class SubCommandFilterAdd: 
+        SubCommand("add") {
 
     /**
      * Invokes the subcommand.
@@ -29,7 +32,7 @@ class SubCommandFilterRemove:
         val channel = environment.channel
         val mod = environment.cache?.mod?: return
         if(args.size < 3) {
-            Messages.COMMAND_FILTER_REMOVE_PROVIDE.send(channel).queue()
+            Messages.COMMAND_FILTER_ADD_PROVIDE.send(channel).queue()
             return
         }
         val stringBuilder = StringBuilder()
@@ -39,12 +42,24 @@ class SubCommandFilterRemove:
         }
         val phrase = stringBuilder.toString().toLowerCase().trim()
                 .replace("{space}", " ")
-        if(!mod.filtered.contains(phrase)) {
-            Messages.COMMAND_FILTER_REMOVE_EXISTS.send(channel).queue()
+        if(phrase.length > UtilsLimit.FILTER_PHRASE.maxLength) {
+            Messages.COMMAND_FILTER_ADD_LENGTH.send(channel).queue()
             return
         }
-        arraybot.managerSql.removeChatFilterPhrase(environment.guild.idLong, phrase)
-        Messages.COMMAND_FILTER_REMOVE_UPDATE.send(channel).queue()
+        if(mod.filtered.contains(phrase)) {
+            Messages.COMMAND_FILTER_ADD_EXISTS.send(channel).queue()
+            return
+        }
+        if(mod.filterRegex) {
+            try {
+                Pattern.compile(phrase)
+            } catch(exception: PatternSyntaxException) {
+                Messages.COMMAND_FILTER_ADD_REGEX.send(channel).queue()
+                return
+            }
+        }
+        arraybot.managerSql.addChatFilterPhrase(environment.guild.idLong, phrase)
+        Messages.COMMAND_FILTER_ADD_UPDATE.send(channel).queue()
     }
 
 }

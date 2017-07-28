@@ -1,4 +1,4 @@
-package de.arraying.arraybot.commands.commands.customization.filter
+package de.arraying.arraybot.commands.commands.moderation.filter
 
 import de.arraying.arraybot.commands.CommandEnvironment
 import de.arraying.arraybot.commands.entities.DefaultCommand
@@ -24,7 +24,7 @@ import net.dv8tion.jda.core.Permission
  */
 class CommandFilter(override val subCommands: Array<SubCommand>):
         DefaultCommand("filter",
-                CommandCategory.CUSTOMIZATION,
+                CommandCategory.MODERATION,
                 Permission.MANAGE_SERVER,
                 subCommands) {
 

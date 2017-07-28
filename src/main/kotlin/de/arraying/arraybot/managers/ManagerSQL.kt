@@ -313,6 +313,31 @@ class ManagerSQL {
     }
 
     /**
+     * Adds a chat filter bypass.
+     */
+    fun addChatFilterBypass(id: Long, bypassId: Long, type: String, value: Long): CBypass? {
+        val filterBypassObject = CBypass(id, bypassId, type, value)
+        SQLQuery("INSERT INTO ${Table.FILTER_BYPASS.tableName} (`id`, `bypass_id`, `type`, `value`) VALUES (?, ?, ?, ?)", dataSource)
+                .with(id, bypassId, type, value)
+                .update()
+        val guild = getGuild(id)?: return null
+        guild.mod?.filterBypasses?.put(bypassId, filterBypassObject)
+        guild.mod?.bypassCount = bypassId
+        return filterBypassObject
+    }
+
+    /**
+     * Removes a chat filter bypass.
+     */
+    fun removeChatFilterBypass(id: Long, bypassId: Long) {
+        val guild = getGuild(id)?: return
+        guild.mod?.filterBypasses?.remove(bypassId)
+        SQLQuery("DELETE FROM ${Table.FILTER_BYPASS.tableName} WHERE `id`=? AND `bypass_id`=?", dataSource)
+                .with(id, bypassId)
+                .update()
+    }
+
+    /**
      * Logs the statistics.
      */
     fun logStatistics() {
@@ -482,6 +507,7 @@ class ManagerSQL {
         SQLQuery("CREATE TABLE IF NOT EXISTS `${Table.MOD.tableName}`(" +
                             "`id` BIGINT, " +
                             "`punishment_count` BIGINT DEFAULT 0, " +
+                            "`bypass_count` BIGINT DEFAULT 0, " +
                             "`filter_enabled` BOOLEAN DEFAULT FALSE, " +
                             "`filter_regex` BOOLEAN DEFAULT FALSE, " +
                             "`filter_silent` BOOLEAN DEFAULT FALSE, " +

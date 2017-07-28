@@ -5,7 +5,7 @@ import de.arraying.arraybot.language.Messages
 import de.arraying.arraybot.utils.UtilsLimit
 import de.arraying.arraybot.utils.UtilsPermission
 import de.arraying.arraybot.utils.UtilsTime
-import de.arraying.arraybot.utils.UtilsUser
+import de.arraying.arraybot.utils.UtilsInput
 import net.dv8tion.jda.core.Permission
 
 /**
@@ -62,15 +62,15 @@ abstract class PunishmentCommand(val commandName: String,
         val validUser: Boolean
         if(type == PunishmentType.TEMPBAN
                 || type == PunishmentType.BAN) {
-            validUser = UtilsUser.isUser(userRaw, true)
+            validUser = UtilsInput.isValid(UtilsInput.InputType.USER, userRaw, true)
         } else {
-            validUser = UtilsUser.isUser(userRaw)
+            validUser = UtilsInput.isValid(UtilsInput.InputType.USER, userRaw)
         }
         if(!validUser) {
             Messages.PUNISH_COMMAND_INVALID_USER.send(channel).queue()
             return
         }
-        val user = UtilsUser.getUser(userRaw)
+        val user = UtilsInput.retrieve(userRaw)
         val expiration: Long
         val firstReasonIndex: Int
         if(type.isTemp()) {

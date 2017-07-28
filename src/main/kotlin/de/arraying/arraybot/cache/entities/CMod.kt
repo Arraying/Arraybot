@@ -21,6 +21,7 @@ import de.arraying.arraybot.managers.ManagerSQL
  */
 class CMod(val id: Long,
            punishmentCount: Long,
+           bypassCount: Long,
            filterEnabled: Boolean,
            filterRegex: Boolean,
            filterSilent: Boolean,
@@ -41,6 +42,15 @@ class CMod(val id: Long,
         set(value) {
             field = value
             arraybot.managerSql.updateModuleTable(id, ManagerSQL.Table.MOD, "punishment_count", value)
+        }
+
+    /**
+     * The ID of the last filter bypass, used to create unique bypass IDs for management.
+     */
+    var bypassCount = bypassCount
+        set(value) {
+            field = value
+            arraybot.managerSql.updateModuleTable(id, ManagerSQL.Table.MOD, "bypass_count", value)
         }
 
     /**

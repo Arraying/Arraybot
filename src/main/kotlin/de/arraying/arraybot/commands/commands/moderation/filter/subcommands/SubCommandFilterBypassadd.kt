@@ -1,9 +1,7 @@
-package de.arraying.arraybot.commands.commands.customization.filter.subcommands
+package de.arraying.arraybot.commands.commands.moderation.filter.subcommands
 
 import de.arraying.arraybot.commands.CommandEnvironment
 import de.arraying.arraybot.commands.entities.SubCommand
-import de.arraying.arraybot.language.Messages
-
 
 /**
  * Copyright 2017 Arraying
@@ -20,21 +18,15 @@ import de.arraying.arraybot.language.Messages
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-class SubCommandFilterRegex: 
-        SubCommand("regex") {
+class SubCommandFilterBypassadd:
+        SubCommand("bypassadd") {
 
     /**
      * Invokes the subcommand.
      */
     override fun onSubCommand(environment: CommandEnvironment, args: Array<String>) {
-        val channel = environment.channel
-        val mod = environment.cache?.mod?: return
-        if(!mod.filterRegex) {
-            mod.filterRegex = true
-            Messages.COMMAND_FILTER_REGEX_ENABLED.send(channel).queue()
-        } else {
-            mod.filterRegex = false
-            Messages.COMMAND_FILTER_REGEX_DISABLED.send(channel).queue()
+        if(args.size < 3) {
+
         }
     }
 

@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.jetbrains.kotlin:kotlin-script-runtime:1.1.3-2">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-script-runtime/1.1.3-2/3671be4dc1d8912af2a0b0bf6e83d68ff835b337/kotlin-script-runtime-1.1.3-2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-script-runtime/1.1.3-2/414327884ffa5e9cc633325da2d3e402c4531112/kotlin-script-runtime-1.1.3-2-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

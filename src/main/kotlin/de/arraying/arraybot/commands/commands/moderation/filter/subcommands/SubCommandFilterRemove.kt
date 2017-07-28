@@ -1,10 +1,8 @@
-package de.arraying.arraybot.commands.commands.customization.filter.subcommands
+package de.arraying.arraybot.commands.commands.moderation.filter.subcommands
 
 import de.arraying.arraybot.commands.CommandEnvironment
 import de.arraying.arraybot.commands.entities.SubCommand
 import de.arraying.arraybot.language.Messages
-import de.arraying.arraybot.misc.Pages
-import de.arraying.arraybot.utils.Utils
 
 /**
  * Copyright 2017 Arraying
@@ -21,8 +19,8 @@ import de.arraying.arraybot.utils.Utils
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-class SubCommandFilterList:
-        SubCommand("list") {
+class SubCommandFilterRemove: 
+        SubCommand("remove") {
 
     /**
      * Invokes the subcommand.
@@ -30,23 +28,23 @@ class SubCommandFilterList:
     override fun onSubCommand(environment: CommandEnvironment, args: Array<String>) {
         val channel = environment.channel
         val mod = environment.cache?.mod?: return
-        if(mod.filtered.isEmpty()) {
-            Messages.COMMAND_FILTER_LIST_NONE.send(channel).queue()
+        if(args.size < 3) {
+            Messages.COMMAND_FILTER_REMOVE_PROVIDE.send(channel).queue()
             return
         }
-        val embed = Utils.getEmbed(channel)
-                .setDescription(Messages.COMMAND_FILTER_LIST_DESCRIPTION.content(channel))
-        val pages = Pages(embed,
-                Messages.COMMAND_FILTER_LIST_FILTERED.content(channel),
-                mod.filtered.toTypedArray())
-        if(args.size > 2
-                && Utils.isInt(args[2])
-                && args[2].toInt() > 0
-                && args[2].toInt() <= pages.getTotal()) {
-            channel.sendMessage(pages.getPage(args[2].toInt(), channel).build()).queue()
+        val stringBuilder = StringBuilder()
+        for(i in (2..args.size-1)) {
+            stringBuilder.append(args[i])
+                    .append(" ")
+        }
+        val phrase = stringBuilder.toString().toLowerCase().trim()
+                .replace("{space}", " ")
+        if(!mod.filtered.contains(phrase)) {
+            Messages.COMMAND_FILTER_REMOVE_EXISTS.send(channel).queue()
             return
         }
-        channel.sendMessage(pages.getPage(channel = channel).build()).queue()
+        arraybot.managerSql.removeChatFilterPhrase(environment.guild.idLong, phrase)
+        Messages.COMMAND_FILTER_REMOVE_UPDATE.send(channel).queue()
     }
 
 }

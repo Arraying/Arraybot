@@ -1,4 +1,4 @@
-package de.arraying.arraybot.commands.commands.customization.filter.subcommands
+package de.arraying.arraybot.commands.commands.moderation.filter.subcommands
 
 import de.arraying.arraybot.commands.CommandEnvironment
 import de.arraying.arraybot.commands.entities.SubCommand

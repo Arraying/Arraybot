@@ -1,8 +1,10 @@
-package de.arraying.arraybot.commands.commands.customization.filter.subcommands
+package de.arraying.arraybot.commands.commands.moderation.filter.subcommands
 
 import de.arraying.arraybot.commands.CommandEnvironment
 import de.arraying.arraybot.commands.entities.SubCommand
 import de.arraying.arraybot.language.Messages
+import de.arraying.arraybot.misc.Pages
+import de.arraying.arraybot.utils.Utils
 
 /**
  * Copyright 2017 Arraying
@@ -19,8 +21,8 @@ import de.arraying.arraybot.language.Messages
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-class SubCommandFilterToggle: 
-        SubCommand("toggle") {
+class SubCommandFilterList:
+        SubCommand("list") {
 
     /**
      * Invokes the subcommand.
@@ -28,13 +30,23 @@ class SubCommandFilterToggle:
     override fun onSubCommand(environment: CommandEnvironment, args: Array<String>) {
         val channel = environment.channel
         val mod = environment.cache?.mod?: return
-        if(!mod.filterEnabled) {
-            mod.filterEnabled = true
-            Messages.COMMAND_FILTER_FILTER_ENABLED.send(channel).queue()
-        } else {
-            mod.filterEnabled = false
-            Messages.COMMAND_FILTER_FILTER_DISABLED.send(channel).queue()
+        if(mod.filtered.isEmpty()) {
+            Messages.COMMAND_FILTER_LIST_NONE.send(channel).queue()
+            return
         }
+        val embed = Utils.getEmbed(channel)
+                .setDescription(Messages.COMMAND_FILTER_LIST_DESCRIPTION.content(channel))
+        val pages = Pages(embed,
+                Messages.COMMAND_FILTER_LIST_FILTERED.content(channel),
+                mod.filtered.toTypedArray())
+        if(args.size > 2
+                && Utils.isInt(args[2])
+                && args[2].toInt() > 0
+                && args[2].toInt() <= pages.getTotal()) {
+            channel.sendMessage(pages.getPage(args[2].toInt(), channel).build()).queue()
+            return
+        }
+        channel.sendMessage(pages.getPage(channel = channel).build()).queue()
     }
 
 }

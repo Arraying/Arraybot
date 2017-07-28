@@ -28,8 +28,10 @@ dependencies {
     compile "com.zaxxer:HikariCP:2.5.1"
     compile "mysql:mysql-connector-java:5.1.39"
     compile "net.dv8tion:JDA:3.2.0_238"
-    compile "org.jetbrains.kotlinx:kotlinx-coroutines-core:0.15"
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
+    compile "org.jetbrains.kotlin:kotlin-script-util:$kotlin_version"
+    compile "org.jetbrains.kotlin:kotlin-script-runtime:$kotlin_version"
+    compile "org.jetbrains.kotlinx:kotlinx-coroutines-core:0.15"
     compile "org.json:json:20170516"
     compile "org.slf4j:slf4j-nop:1.7.9"
     compile files("libs/Pastebin.jar")
