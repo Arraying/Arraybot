@@ -1,7 +1,7 @@
-package de.arraying.arraybot.commands
+package de.arraying.arraybot.iface
 
-import de.arraying.arraybot.commands.entities.Command
-import java.util.*
+import de.arraying.arraybot.commands.other.CommandEnvironment
+
 
 /**
  * Copyright 2017 Arraying
@@ -18,23 +18,16 @@ import java.util.*
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-class CommandComparator: Comparator<Command> {
+interface ICommand {
 
     /**
-     * Compares the two commands.
+     * The name of the command.
      */
-    override fun compare(command1: Command?, command2: Command?): Int {
-        if(command1 == null
-                && command2 == null) {
-            return 0
-        }
-        if(command1 == null) {
-            return -69
-        }
-        if(command2 == null) {
-            return 69
-        }
-        return command1.name.compareTo(command2.name)
-    }
+    val name: String
+
+    /**
+     * Invokes the command.
+     */
+    suspend fun invoke(environment: CommandEnvironment, args: Array<String>)
 
 }

@@ -1,10 +1,10 @@
 package de.arraying.arraybot.commands.commands.custom.types
 
-import de.arraying.arraybot.commands.CommandEnvironment
+import de.arraying.arraybot.commands.other.CommandEnvironment
 import de.arraying.arraybot.commands.commands.custom.entities.CustomCommandTypes
 import de.arraying.arraybot.commands.commands.custom.entities.action.CustomCommandActionPair
 import de.arraying.arraybot.language.Messages
-import de.arraying.arraybot.utils.UtilsLimit
+import de.arraying.arraybot.utils.ULimit
 import net.dv8tion.jda.core.exceptions.PermissionException
 
 /**
@@ -31,7 +31,7 @@ class CustomCommandTypeNickname:
     override fun invoke(environment: CommandEnvironment, value: String) {
         val channel = environment.channel
         val guild = channel.guild
-        if(value.length > UtilsLimit.NICKNAME.maxLength) {
+        if(value.length > ULimit.NICKNAME.maxLength) {
             Messages.CUSTOMCOMMAND_NICKNAME_LENGTH.send(channel).queue()
             return
         }

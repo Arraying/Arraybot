@@ -1,13 +1,14 @@
-package de.arraying.arraybot.commands.entities
+package de.arraying.arraybot.commands.types
 
 import de.arraying.arraybot.Arraybot
 import de.arraying.arraybot.cache.Cache
 import de.arraying.arraybot.cache.storage.CustomCommandDataStorage
-import de.arraying.arraybot.commands.CommandEnvironment
+import de.arraying.arraybot.commands.other.CommandEnvironment
 import de.arraying.arraybot.commands.commands.custom.CustomCommands
 import de.arraying.arraybot.commands.commands.custom.entities.CustomCommandPermission
 import de.arraying.arraybot.commands.commands.custom.entities.CustomCommandSyntax
 import de.arraying.arraybot.commands.commands.custom.entities.CustomCommandTypes
+import de.arraying.arraybot.iface.ICommand
 import de.arraying.arraybot.language.Messages
 import de.arraying.arraybot.utils.Utils
 import net.dv8tion.jda.core.exceptions.PermissionException
@@ -34,7 +35,7 @@ class CustomCommand(val id: Long,
                     type: CustomCommandTypes,
                     description: String?,
                     value: String):
-        Command(name) {
+        ICommand {
 
     private val arraybot = Arraybot.instance
 

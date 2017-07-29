@@ -1,7 +1,7 @@
 package de.arraying.arraybot.cache
 
 import de.arraying.arraybot.misc.ArraybotException
-import de.arraying.arraybot.utils.UtilsEmbedBuilder
+import de.arraying.arraybot.misc.CustomEmbedBuilder
 import org.json.JSONException
 import org.json.JSONObject
 import java.io.BufferedWriter
@@ -181,7 +181,7 @@ data class Configuration(val botShards: Int,
                 || mySQLModTable.isEmpty()
                 || mySQLFilterBypassTable.isEmpty()
                 || (!miscAnnouncement.isEmpty()
-                    && miscAnnouncement.length > UtilsEmbedBuilder.TEXT_MAX_LENGTH
+                    && miscAnnouncement.length > CustomEmbedBuilder.TEXT_MAX_LENGTH
                 )) {
             return false
         }

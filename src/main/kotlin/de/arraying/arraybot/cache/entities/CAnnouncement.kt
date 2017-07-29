@@ -1,6 +1,6 @@
 package de.arraying.arraybot.cache.entities
 
-import de.arraying.arraybot.cache.entities.iface.Cachable
+import de.arraying.arraybot.iface.ICache
 
 /**
  * Copyright 2017 Arraying
@@ -20,4 +20,4 @@ import de.arraying.arraybot.cache.entities.iface.Cachable
 data class CAnnouncement(val id: Long,
                     val announcementId: Long,
                     val announcement: String):
-        Cachable
+        ICache

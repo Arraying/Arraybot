@@ -1,8 +1,7 @@
-package de.arraying.arraybot.commands.commands.custom.types
+package de.arraying.arraybot.commands.types
 
+import de.arraying.arraybot.Arraybot
 import de.arraying.arraybot.commands.other.CommandEnvironment
-import de.arraying.arraybot.commands.commands.custom.entities.CustomCommandTypes
-import de.arraying.arraybot.commands.commands.custom.entities.action.CustomCommandRoleAction
 
 /**
  * Copyright 2017 Arraying
@@ -19,14 +18,13 @@ import de.arraying.arraybot.commands.commands.custom.entities.action.CustomComma
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-class CustomCommandTypeToggleRole:
-        CustomCommandType(CustomCommandTypes.TOGGLEROLE) {
+abstract class SubCommand(val subCommandName: String, val aliases: Array<String> = arrayOf()) {
+
+    protected val arraybot = Arraybot.instance
 
     /**
-     * Invokes the custom command type.
+     * What happens when the subcommand is invoked.
      */
-    override fun invoke(environment: CommandEnvironment, value: String) {
-        CustomCommandRoleAction.execute(environment, value, CustomCommandTypes.TOGGLEROLE)
-    }
+    abstract fun onSubCommand(environment: CommandEnvironment, args: Array<String>)
 
 }

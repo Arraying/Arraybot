@@ -1,4 +1,7 @@
-package de.arraying.arraybot.utils
+package de.arraying.arraybot.commands.other
+
+import de.arraying.arraybot.iface.ICommand
+import java.util.*
 
 /**
  * Copyright 2017 Arraying
@@ -15,16 +18,23 @@ package de.arraying.arraybot.utils
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-enum class UtilsLimit(val maxLength: Int) {
+class CommandComparator: Comparator<ICommand> {
 
-    MESSAGE(2000),
-    PREFIX(128),
-    IDENTIFIER(128),
-    CUSTOM_COMMAND_VALUE(1900),
-    ANNOUNCEMENT(1900),
-    NICKNAME(32),
-    REASON(1000),
-    FILTER_PHRASE(1000),
-    FILTER_MESSAGE(1900)
+    /**
+     * Compares the two commands.
+     */
+    override fun compare(command1: ICommand?, command2: ICommand?): Int {
+        if(command1 == null
+                && command2 == null) {
+            return 0
+        }
+        if(command1 == null) {
+            return -69
+        }
+        if(command2 == null) {
+            return 69
+        }
+        return command1.name.compareTo(command2.name)
+    }
 
 }

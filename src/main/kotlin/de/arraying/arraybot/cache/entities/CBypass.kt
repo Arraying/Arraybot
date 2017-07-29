@@ -1,5 +1,7 @@
 package de.arraying.arraybot.cache.entities
 
+import de.arraying.arraybot.iface.ICache
+
 /**
  * Copyright 2017 Arraying
  *
@@ -18,7 +20,8 @@ package de.arraying.arraybot.cache.entities
 class CBypass(val id: Long,
               val bypassId: Long,
               rawType: String,
-              val value: Long) {
+              val value: Long):
+        ICache {
 
     val bypassType = BypassType.getBypassType(rawType)
 

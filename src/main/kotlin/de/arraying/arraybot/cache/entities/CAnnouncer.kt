@@ -1,7 +1,7 @@
 package de.arraying.arraybot.cache.entities
 
 import de.arraying.arraybot.Arraybot
-import de.arraying.arraybot.cache.entities.iface.Cachable
+import de.arraying.arraybot.iface.ICache
 import de.arraying.arraybot.managers.ManagerSQL
 
 /**
@@ -31,7 +31,7 @@ class CAnnouncer(val id: Long,
                  announcementAnnouncer: Boolean,
                  announcementChannel: Long,
                  announcementCount: Long):
-        Cachable {
+        ICache {
     
     private val arraybot = Arraybot.instance
     val announcements = HashMap<Long, CAnnouncement>()

@@ -1,9 +1,9 @@
 package de.arraying.arraybot.commands.commands.moderation.filter.subcommands
 
-import de.arraying.arraybot.commands.CommandEnvironment
-import de.arraying.arraybot.commands.entities.SubCommand
+import de.arraying.arraybot.commands.other.CommandEnvironment
+import de.arraying.arraybot.commands.types.SubCommand
 import de.arraying.arraybot.language.Messages
-import de.arraying.arraybot.utils.UtilsLimit
+import de.arraying.arraybot.utils.ULimit
 
 /**
  * Copyright 2017 Arraying
@@ -45,7 +45,7 @@ class SubCommandFilterMessage:
                     .append(" ")
         }
         val message = stringBuilder.toString().trim()
-        if(message.length > UtilsLimit.FILTER_MESSAGE.maxLength) {
+        if(message.length > ULimit.FILTER_MESSAGE.maxLength) {
             Messages.COMMAND_FILTER_MESSAGE_LENGTH.send(channel).queue()
             return
         }

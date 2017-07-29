@@ -3,8 +3,10 @@ package de.arraying.arraybot.commands
 import de.arraying.arraybot.Arraybot
 import de.arraying.arraybot.cache.Cache
 import de.arraying.arraybot.cache.entities.CGuild
-import de.arraying.arraybot.commands.entities.Command
-import de.arraying.arraybot.commands.entities.DefaultCommand
+import de.arraying.arraybot.iface.ICommand
+import de.arraying.arraybot.commands.other.CommandComparator
+import de.arraying.arraybot.commands.other.CommandEnvironment
+import de.arraying.arraybot.commands.types.DefaultCommand
 import net.dv8tion.jda.core.Permission
 import net.dv8tion.jda.core.entities.Member
 import net.dv8tion.jda.core.entities.TextChannel
@@ -34,9 +36,9 @@ object Commands {
     /**
      * Gets commands by name.
      */
-    fun getCommands(commandName: String, cache: CGuild): Array<Command> {
+    fun getCommands(commandName: String, cache: CGuild): Array<ICommand> {
         val name = commandName.toLowerCase()
-        val commandList = ArrayList<Command>()
+        val commandList = ArrayList<ICommand>()
         this.commands.stream()
                 .filter {
                     it.name == name
@@ -53,9 +55,9 @@ object Commands {
     /**
      * Fun gets all commands.
      */
-    fun getCommandList(member: Member, channel: TextChannel, all: Boolean = true): Array<Command> {
+    fun getCommandList(member: Member, channel: TextChannel, all: Boolean = true): Array<ICommand> {
         val cache = Cache.guilds[channel.guild.idLong]!!
-        val commandList = TreeSet<Command>(CommandComparator())
+        val commandList = TreeSet<ICommand>(CommandComparator())
         Commands.commands
                 .filter {
                     !(!all
@@ -108,7 +110,7 @@ object Commands {
         }
         val parts: Array<String> = message.split(" ").toTypedArray()
         val commandName = parts[0].toLowerCase()
-        val commandsToInvoke = ArrayList<Command>()
+        val commandsToInvoke = ArrayList<ICommand>()
         Commands.commands
                 .stream()
                 .filter {

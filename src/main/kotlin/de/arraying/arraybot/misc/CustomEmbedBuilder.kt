@@ -1,4 +1,4 @@
-package de.arraying.arraybot.utils
+package de.arraying.arraybot.misc
 
 import net.dv8tion.jda.core.EmbedBuilder
 import net.dv8tion.jda.core.entities.MessageEmbed
@@ -19,7 +19,7 @@ import java.awt.Color
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-class UtilsEmbedBuilder: EmbedBuilder() {
+class CustomEmbedBuilder : EmbedBuilder() {
 
     companion object {
         /**
@@ -42,14 +42,14 @@ class UtilsEmbedBuilder: EmbedBuilder() {
     /**
      * When the wrong field adding method is invoked.
      */
-    override fun addField(field: MessageEmbed.Field?): UtilsEmbedBuilder {
+    override fun addField(field: MessageEmbed.Field?): CustomEmbedBuilder {
         return this
     }
 
     /**
      * Adds a filed to the embed.
      */
-    override fun addField(name: String?, value: String?, inline: Boolean): UtilsEmbedBuilder {
+    override fun addField(name: String?, value: String?, inline: Boolean): CustomEmbedBuilder {
         val localName = if(name == null) getCorrectTitle("null") else getCorrectTitle(name)
         val localValue = if(value == null) getCorrectText("null") else getCorrectText(value)
         super.addField(localName, localValue, inline)
@@ -59,14 +59,14 @@ class UtilsEmbedBuilder: EmbedBuilder() {
     /**
      * When the description is appended to.
      */
-    override fun appendDescription(description: CharSequence?): UtilsEmbedBuilder {
+    override fun appendDescription(description: CharSequence?): CustomEmbedBuilder {
         return this
     }
 
     /**
      * Sets the author.
      */
-    override fun setAuthor(name: String?, url: String?, iconUrl: String?): UtilsEmbedBuilder {
+    override fun setAuthor(name: String?, url: String?, iconUrl: String?): CustomEmbedBuilder {
         val localName = if(name == null) getCorrectTitle("null") else getCorrectTitle(name)
         super.setAuthor(localName, url, iconUrl)
         return this
@@ -75,7 +75,7 @@ class UtilsEmbedBuilder: EmbedBuilder() {
     /**
      * Sets the colour.
      */
-    override fun setColor(color: Color?): UtilsEmbedBuilder {
+    override fun setColor(color: Color?): CustomEmbedBuilder {
         val localColour = color ?: Color.RED
         super.setColor(localColour)
         return this
@@ -84,7 +84,7 @@ class UtilsEmbedBuilder: EmbedBuilder() {
     /**
      * Sets the description.
      */
-    override fun setDescription(description: CharSequence?): UtilsEmbedBuilder {
+    override fun setDescription(description: CharSequence?): CustomEmbedBuilder {
         val localDescription = if(description == null) getCorrectText("null") else getCorrectText(description.toString())
         super.setDescription(localDescription)
         return this
@@ -93,14 +93,14 @@ class UtilsEmbedBuilder: EmbedBuilder() {
     /**
      * Sets the title
      */
-    override fun setTitle(title: String?): UtilsEmbedBuilder {
+    override fun setTitle(title: String?): CustomEmbedBuilder {
         return setTitle(title, null)
     }
 
     /**
      * Sets the title.
      */
-    override fun setTitle(title: String?, url: String?): UtilsEmbedBuilder {
+    override fun setTitle(title: String?, url: String?): CustomEmbedBuilder {
         val localTitle = if(title == null) getCorrectTitle("null") else getCorrectTitle(title)
         super.setTitle(localTitle, url)
         return this
@@ -109,7 +109,7 @@ class UtilsEmbedBuilder: EmbedBuilder() {
     /**
      * Sets the footer.
      */
-    override fun setFooter(text: String?, iconUrl: String?): UtilsEmbedBuilder {
+    override fun setFooter(text: String?, iconUrl: String?): CustomEmbedBuilder {
         val localText = if(text == null) getCorrectText("null") else getCorrectText(text)
         super.setFooter(localText, iconUrl)
         return this
@@ -121,11 +121,11 @@ class UtilsEmbedBuilder: EmbedBuilder() {
     private fun getCorrectTitle(title: String): String {
         var localTitle =
             if(title.length > TITLE_MAX_LENGTH)
-                title.substring(0, TITLE_MAX_LENGTH-lengthPlaceholder.length) + lengthPlaceholder
+                title.substring(0, TITLE_MAX_LENGTH -lengthPlaceholder.length) + lengthPlaceholder
             else
                 title
         if(totalLength + localTitle.length > MAX_LENGTH) {
-            localTitle = localTitle.substring(0, MAX_LENGTH-lengthPlaceholder.length) + lengthPlaceholder
+            localTitle = localTitle.substring(0, MAX_LENGTH -lengthPlaceholder.length) + lengthPlaceholder
         }
         totalLength += localTitle.length
         if(totalLength >= MAX_LENGTH) {
@@ -141,11 +141,11 @@ class UtilsEmbedBuilder: EmbedBuilder() {
     private fun getCorrectText(value: String): String {
         var localValue =
             if(value.length > TEXT_MAX_LENGTH)
-                value.substring(0, TEXT_MAX_LENGTH-lengthPlaceholder.length) + lengthPlaceholder
+                value.substring(0, TEXT_MAX_LENGTH -lengthPlaceholder.length) + lengthPlaceholder
             else
                 value
         if(totalLength + localValue.length > MAX_LENGTH) {
-            localValue = localValue.substring(0, MAX_LENGTH-lengthPlaceholder.length) + lengthPlaceholder
+            localValue = localValue.substring(0, MAX_LENGTH -lengthPlaceholder.length) + lengthPlaceholder
         }
         totalLength += localValue.length
         if(totalLength >= MAX_LENGTH) {

@@ -1,8 +1,8 @@
 package de.arraying.arraybot.cache.entities
 
 import de.arraying.arraybot.Arraybot
-import de.arraying.arraybot.cache.entities.iface.Cachable
-import de.arraying.arraybot.commands.entities.PunishmentCommand
+import de.arraying.arraybot.iface.ICache
+import de.arraying.arraybot.commands.types.PunishmentCommand
 import net.dv8tion.jda.core.entities.User
 
 /**
@@ -28,7 +28,7 @@ class CPunishment(val id: Long,
                   val expiration: Long,
                   revoked: Boolean,
                   val reason: String):
-        Cachable {
+        ICache {
 
     private val arraybot = Arraybot.instance
     val type = PunishmentCommand.PunishmentType.getPunishableType(rawType)

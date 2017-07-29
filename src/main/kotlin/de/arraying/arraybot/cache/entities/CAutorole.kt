@@ -1,7 +1,7 @@
 package de.arraying.arraybot.cache.entities
 
 import de.arraying.arraybot.Arraybot
-import de.arraying.arraybot.cache.entities.iface.Cachable
+import de.arraying.arraybot.iface.ICache
 import de.arraying.arraybot.managers.ManagerSQL
 
 /**
@@ -23,7 +23,7 @@ class CAutorole(val id: Long,
                 enabled: Boolean,
                 message: Boolean,
                 role: Long):
-        Cachable {
+        ICache {
 
     private val arraybot = Arraybot.instance
 

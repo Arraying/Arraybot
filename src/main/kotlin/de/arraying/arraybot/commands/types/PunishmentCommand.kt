@@ -1,11 +1,11 @@
-package de.arraying.arraybot.commands.entities
+package de.arraying.arraybot.commands.types
 
-import de.arraying.arraybot.commands.CommandEnvironment
+import de.arraying.arraybot.commands.other.CommandEnvironment
 import de.arraying.arraybot.language.Messages
-import de.arraying.arraybot.utils.UtilsLimit
-import de.arraying.arraybot.utils.UtilsPermission
-import de.arraying.arraybot.utils.UtilsTime
-import de.arraying.arraybot.utils.UtilsInput
+import de.arraying.arraybot.utils.ULimit
+import de.arraying.arraybot.utils.UPermission
+import de.arraying.arraybot.utils.UTime
+import de.arraying.arraybot.utils.UInput
 import net.dv8tion.jda.core.Permission
 
 /**
@@ -47,7 +47,7 @@ abstract class PunishmentCommand(val commandName: String,
         val staff = environment.member
         if((type == PunishmentType.MUTE
                 || type == PunishmentType.TEMPMUTE)
-                && !UtilsPermission.hasPermission(staff, environment.cache!!.mod!!.mutePermission.toString())) {
+                && !UPermission.hasPermission(staff, environment.cache!!.mod!!.mutePermission.toString())) {
             Messages.PUNISH_COMMAND_PERMISSION.send(channel).queue()
             return
         } else if(!staff.hasPermission(commandPermission)) {
@@ -62,15 +62,15 @@ abstract class PunishmentCommand(val commandName: String,
         val validUser: Boolean
         if(type == PunishmentType.TEMPBAN
                 || type == PunishmentType.BAN) {
-            validUser = UtilsInput.isValid(UtilsInput.InputType.USER, userRaw, true)
+            validUser = UInput.isValid(UInput.InputType.USER, userRaw, true)
         } else {
-            validUser = UtilsInput.isValid(UtilsInput.InputType.USER, userRaw)
+            validUser = UInput.isValid(UInput.InputType.USER, userRaw)
         }
         if(!validUser) {
             Messages.PUNISH_COMMAND_INVALID_USER.send(channel).queue()
             return
         }
-        val user = UtilsInput.retrieve(userRaw)
+        val user = UInput.retrieve(userRaw)
         val expiration: Long
         val firstReasonIndex: Int
         if(type.isTemp()) {
@@ -79,7 +79,7 @@ abstract class PunishmentCommand(val commandName: String,
                 return
             }
             val timeRaw = args[2]
-            expiration = UtilsTime.parseDuration(timeRaw)
+            expiration = UTime.parseDuration(timeRaw)
             if(expiration == -1L) {
                 Messages.PUNISH_COMMAND_INVALID_TIME.send(channel).queue()
                 return
@@ -101,7 +101,7 @@ abstract class PunishmentCommand(val commandName: String,
         } else {
             reason = Messages.PUNISH_REASON.content(channel)
         }
-        if(reason.length > UtilsLimit.REASON.maxLength) {
+        if(reason.length > ULimit.REASON.maxLength) {
             Messages.PUNISH_REASON_LENGTH.send(channel).queue()
             return
         }

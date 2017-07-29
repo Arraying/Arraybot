@@ -4,7 +4,7 @@ import de.arraying.arraybot.cache.Configuration
 import de.arraying.arraybot.language.Language
 import de.arraying.arraybot.managers.*
 import de.arraying.arraybot.misc.ArraybotException
-import de.arraying.arraybot.utils.UtilsStartup
+import de.arraying.arraybot.utils.UStartup
 import kotlinx.coroutines.experimental.CommonPool
 import kotlinx.coroutines.experimental.launch
 import kotlinx.coroutines.experimental.runBlocking
@@ -80,10 +80,10 @@ class Arraybot {
             return
         }
         logger.info("The configuration has been set up, starting bot version "+configuration.botVersion)
-        val procedures = listOf(UtilsStartup::startLanguages,
-                UtilsStartup::startCommands,
-                UtilsStartup::startData,
-                UtilsStartup::startMisc)
+        val procedures = listOf(UStartup::startLanguages,
+                UStartup::startCommands,
+                UStartup::startData,
+                UStartup::startMisc)
                 .map {
                     launch(CommonPool) {
                         try {
@@ -99,7 +99,7 @@ class Arraybot {
             }
             managerBot = ManagerBot()
             managerBot.start()
-            if(UtilsStartup.areIdsInvalid()) {
+            if(UStartup.areIdsInvalid()) {
                 logger.fatal("One of the provided IDs is invalid.")
                 managerBot.kill()
                 System.exit(0)

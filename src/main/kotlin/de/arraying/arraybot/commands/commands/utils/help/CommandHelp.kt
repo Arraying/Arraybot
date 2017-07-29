@@ -1,7 +1,7 @@
 package de.arraying.arraybot.commands.commands.utils.help
 
-import de.arraying.arraybot.commands.CommandEnvironment
-import de.arraying.arraybot.commands.entities.DefaultCommand
+import de.arraying.arraybot.commands.other.CommandEnvironment
+import de.arraying.arraybot.commands.types.DefaultCommand
 import de.arraying.arraybot.language.Messages
 import de.arraying.arraybot.utils.Utils
 import net.dv8tion.jda.core.Permission

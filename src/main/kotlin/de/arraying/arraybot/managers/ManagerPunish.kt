@@ -4,13 +4,13 @@ import de.arraying.arraybot.Arraybot
 import de.arraying.arraybot.cache.Cache
 import de.arraying.arraybot.cache.entities.CGuild
 import de.arraying.arraybot.cache.entities.CPunishment
-import de.arraying.arraybot.commands.entities.PunishmentCommand
+import de.arraying.arraybot.commands.types.PunishmentCommand
 import de.arraying.arraybot.language.Messages
 import de.arraying.arraybot.scheduler.Scheduler
 import de.arraying.arraybot.scheduler.SchedulerTask
 import de.arraying.arraybot.utils.Utils
-import de.arraying.arraybot.utils.UtilsEmbedBuilder
-import de.arraying.arraybot.utils.UtilsTime
+import de.arraying.arraybot.misc.CustomEmbedBuilder
+import de.arraying.arraybot.utils.UTime
 import net.dv8tion.jda.core.entities.Guild
 import net.dv8tion.jda.core.entities.Member
 import net.dv8tion.jda.core.entities.User
@@ -120,7 +120,7 @@ class ManagerPunish {
     /**
      * Gets the punishment log embed.
      */
-    private fun getPunishmentEmbed(guild: Guild, punishmentId: Long, finish: Boolean = false, manual: Boolean = false): UtilsEmbedBuilder? {
+    private fun getPunishmentEmbed(guild: Guild, punishmentId: Long, finish: Boolean = false, manual: Boolean = false): CustomEmbedBuilder? {
         val cache = Cache.guilds[guild.idLong]?: return null
         val punishment = cache.punishments[punishmentId]?: return null
         val channel = guild.publicChannel
@@ -176,7 +176,7 @@ class ManagerPunish {
                 && !finish) {
             try {
                 embed.addField(Messages.PUNISH_EMBED_EXPIRATION.content(channel),
-                        UtilsTime.getDisplayableTime(guild, punishment.expiration),
+                        UTime.getDisplayableTime(guild, punishment.expiration),
                         false)
                 embed.setFooter(Messages.PUNISH_EMBED_EXPIRATION_FOOTER.content(channel), null)
             } catch(exception: Exception) {

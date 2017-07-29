@@ -1,7 +1,7 @@
 package de.arraying.arraybot.misc
 
 import com.zaxxer.hikari.HikariDataSource
-import de.arraying.arraybot.cache.entities.iface.Cachable
+import de.arraying.arraybot.iface.ICache
 import java.sql.PreparedStatement
 import java.sql.ResultSet
 import java.util.*
@@ -39,7 +39,7 @@ class SQLQuery(query: String,
     /**
      * Executes the select query.
      */
-    fun select(target: Class<out Cachable>): Array<out Any> {
+    fun select(target: Class<out ICache>): Array<out Any> {
         if(target.constructors.isEmpty()) {
             throw IllegalArgumentException("There must be at least one constructor for the provided class.")
         }
@@ -74,7 +74,7 @@ class SQLQuery(query: String,
     }
 
     /**
-     * Executes the insert query.
+     * Executes the update query.
      */
     fun update() {
         statement.execute()

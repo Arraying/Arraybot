@@ -3,6 +3,7 @@ package de.arraying.arraybot.utils
 import de.arraying.arraybot.Arraybot
 import de.arraying.arraybot.cache.Cache
 import de.arraying.arraybot.language.Messages
+import de.arraying.arraybot.misc.CustomEmbedBuilder
 import net.dv8tion.jda.core.entities.Guild
 import net.dv8tion.jda.core.entities.TextChannel
 import java.awt.Color
@@ -31,10 +32,10 @@ object Utils {
     /**
      * Gets the arraybot default embed.
      */
-    fun getEmbed(channel: TextChannel): UtilsEmbedBuilder {
+    fun getEmbed(channel: TextChannel): CustomEmbedBuilder {
         val calendar = Calendar.getInstance()
         val year = calendar.get(Calendar.YEAR)
-        val embedBuilder = UtilsEmbedBuilder()
+        val embedBuilder = CustomEmbedBuilder()
                 .setAuthor("Arraybot", "http://arraybot.xyz",
                         if(shouldImage(channel.guild))
                             "http://i.imgur.com/yA9rB2j.png"

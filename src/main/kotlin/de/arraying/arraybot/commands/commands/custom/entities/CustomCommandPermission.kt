@@ -1,7 +1,7 @@
 package de.arraying.arraybot.commands.commands.custom.entities
 
 import de.arraying.arraybot.language.Messages
-import de.arraying.arraybot.utils.UtilsPermission
+import de.arraying.arraybot.utils.UPermission
 import net.dv8tion.jda.core.Permission
 import net.dv8tion.jda.core.entities.Member
 import net.dv8tion.jda.core.entities.TextChannel
@@ -42,6 +42,6 @@ class CustomCommandPermission(val value: String) {
     /**
      * Checks if the user has permission to execute the custom command.
      */
-    fun hasPermission(member: Member) = UtilsPermission.hasPermission(member, value)
+    fun hasPermission(member: Member) = UPermission.hasPermission(member, value)
 
 }

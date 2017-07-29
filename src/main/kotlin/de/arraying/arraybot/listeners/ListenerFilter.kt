@@ -3,7 +3,7 @@ package de.arraying.arraybot.listeners
 import de.arraying.arraybot.cache.Cache
 import de.arraying.arraybot.cache.entities.CMod
 import de.arraying.arraybot.language.Messages
-import de.arraying.arraybot.utils.UtilsPlaceholder
+import de.arraying.arraybot.utils.UPlaceholders
 import kotlinx.coroutines.experimental.CommonPool
 import kotlinx.coroutines.experimental.launch
 import net.dv8tion.jda.core.Permission
@@ -70,7 +70,7 @@ class ListenerFilter:
         val message = messageObject.rawContent
         if(messageObject.author.idLong == event.jda.selfUser.idLong
                 || (mod.filterMessage != null
-                    && message == UtilsPlaceholder.process(messageObject.member, mod.filterMessage!!))){
+                    && message == UPlaceholders.process(messageObject.member, mod.filterMessage!!))){
             return
         }
         var filteredPhrase: String? = null
@@ -100,7 +100,7 @@ class ListenerFilter:
         if(mod.filterSilent) {
            return
         }
-        val filterMessage = UtilsPlaceholder.process(messageObject.member, mod.filterMessage?: Messages.FILTER_MESSAGE.content(event.guild.idLong))
+        val filterMessage = UPlaceholders.process(messageObject.member, mod.filterMessage?: Messages.FILTER_MESSAGE.content(event.guild.idLong))
         if(!mod.filterPrivate) {
             if(PermissionUtil.checkPermission(event.channel, event.guild.selfMember, Permission.MESSAGE_WRITE)) {
                 event.channel.sendMessage(filterMessage).queue()

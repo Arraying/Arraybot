@@ -1,7 +1,7 @@
 package de.arraying.arraybot.listeners
 
 import de.arraying.arraybot.cache.Cache
-import de.arraying.arraybot.commands.CommandEnvironment
+import de.arraying.arraybot.commands.other.CommandEnvironment
 import de.arraying.arraybot.commands.Commands
 import kotlinx.coroutines.experimental.CommonPool
 import kotlinx.coroutines.experimental.launch

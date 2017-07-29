@@ -1,6 +1,6 @@
 package de.arraying.arraybot.commands.commands.custom.parameters
 
-import de.arraying.arraybot.commands.CommandEnvironment
+import de.arraying.arraybot.commands.other.CommandEnvironment
 
 /**
  * Copyright 2017 Arraying

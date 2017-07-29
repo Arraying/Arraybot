@@ -1,13 +1,14 @@
-package de.arraying.arraybot.commands.entities
+package de.arraying.arraybot.commands.types
 
 import de.arraying.arraybot.Arraybot
 import de.arraying.arraybot.cache.Cache
-import de.arraying.arraybot.commands.CommandEnvironment
+import de.arraying.arraybot.commands.other.CommandEnvironment
 import de.arraying.arraybot.commands.Commands
+import de.arraying.arraybot.iface.ICommand
 import de.arraying.arraybot.language.Language
 import de.arraying.arraybot.language.Messages
 import de.arraying.arraybot.utils.Utils
-import de.arraying.arraybot.utils.UtilsLimit
+import de.arraying.arraybot.utils.ULimit
 import net.dv8tion.jda.core.Permission
 import net.dv8tion.jda.core.entities.TextChannel
 import net.dv8tion.jda.core.utils.PermissionUtil
@@ -33,7 +34,7 @@ abstract class DefaultCommand(override final val name: String,
                               open val subCommands: Array<SubCommand> = arrayOf(),
                               val aliases: Array<String> = arrayOf(),
                               protected val customPermissionChecking: Boolean = false):
-        Command(name) {
+        ICommand {
 
     val descriptionPath = "command.$name.description"
     val syntaxPath = "command.$name.syntax"
@@ -47,12 +48,14 @@ abstract class DefaultCommand(override final val name: String,
     abstract protected fun onDefaultCommand(environment: CommandEnvironment, args: Array<String>)
 
     enum class CommandCategory {
+
         UTILS,
         FUN,
         MODERATION,
         CUSTOMIZATION,
         PREMIUM,
         DEVELOPER
+
     }
 
     /**
@@ -99,7 +102,7 @@ abstract class DefaultCommand(override final val name: String,
         if(!enabled) {
             Messages.COMMAND_DISABLED.send(channel).queue()
             if(message != null
-                    && message!!.length < UtilsLimit.MESSAGE.maxLength) {
+                    && message!!.length < ULimit.MESSAGE.maxLength) {
                 channel.sendMessage(message).queue()
             }
             return
@@ -128,7 +131,10 @@ abstract class DefaultCommand(override final val name: String,
             if(args.size >= 2) {
                 val subCommandName = args[1].toLowerCase()
                 for(subCommand in subCommands) {
-                    if(subCommand.subCommandName.equals(subCommandName, true)) {
+                    if(subCommand.subCommandName.equals(subCommandName, true)
+                            || subCommand.aliases.any {
+                                it.equals(subCommandName, true)
+                            }) {
                         subCommand.onSubCommand(environment, args)
                         return
                     }

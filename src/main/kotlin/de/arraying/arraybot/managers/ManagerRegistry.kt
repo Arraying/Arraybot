@@ -1,7 +1,7 @@
 package de.arraying.arraybot.managers
 
 import de.arraying.arraybot.Arraybot
-import de.arraying.arraybot.commands.CommandCollection
+import de.arraying.arraybot.commands.other.CommandCollection
 import de.arraying.arraybot.commands.Commands
 import de.arraying.arraybot.commands.commands.custom.CustomCommands
 import de.arraying.arraybot.commands.commands.custom.collections.CustomCommandParameterCollection

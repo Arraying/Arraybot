@@ -1,7 +1,7 @@
 package de.arraying.arraybot.commands.commands.moderation.filter.subcommands
 
-import de.arraying.arraybot.commands.CommandEnvironment
-import de.arraying.arraybot.commands.entities.SubCommand
+import de.arraying.arraybot.commands.other.CommandEnvironment
+import de.arraying.arraybot.commands.types.SubCommand
 
 /**
  * Copyright 2017 Arraying
@@ -19,7 +19,8 @@ import de.arraying.arraybot.commands.entities.SubCommand
  * limitations under the License.
  */
 class SubCommandFilterBypassadd:
-        SubCommand("bypassadd") {
+        SubCommand("bypassadd",
+                arrayOf("addbypass")) {
 
     /**
      * Invokes the subcommand.

@@ -1,13 +1,10 @@
 package de.arraying.arraybot.commands.commands.developer.eval
 
-import de.arraying.arraybot.cache.Cache
-import de.arraying.arraybot.commands.CommandEnvironment
-import de.arraying.arraybot.commands.entities.DefaultCommand
+import de.arraying.arraybot.commands.other.CommandEnvironment
+import de.arraying.arraybot.commands.types.DefaultCommand
+import de.arraying.arraybot.commands.types.SubCommand
 import de.arraying.arraybot.language.Messages
-import de.arraying.arraybot.utils.UtilsLimit
 import net.dv8tion.jda.core.Permission
-import javax.script.ScriptEngineManager
-import javax.script.ScriptException
 
 /**
  * Copyright 2017 Arraying
@@ -24,59 +21,32 @@ import javax.script.ScriptException
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-class CommandEval:
+class CommandEval(override val subCommands: Array<SubCommand>):
         DefaultCommand("eval",
                 CommandCategory.DEVELOPER,
                 Permission.MESSAGE_WRITE,
+                subCommands,
                 aliases = arrayOf("evaluate", "exec", "execute")) {
-
-    //TODO NEED TO WORK ON SCRIPT ENGINE
-
-    val engine = ScriptEngineManager().getEngineByExtension("kts")!!
-
-    init {
-        engine.eval("var imports = new JavaImporter(java.io, java.lang, java.util, java.net, " +
-                "Packages.net.dv8tion.jda.core, Packages.net.dv8tion.jda.core.entities, Packages.net.dv8tion.jda.core.managers);")
-        engine.put("arraybot", arraybot)
-        engine.put("cache", Cache)
-    }
 
     /**
      * When the command is executed.
      */
     override fun onDefaultCommand(environment: CommandEnvironment, args: Array<String>) {
         val channel = environment.channel
-        if(args.size < 2) {
-            Messages.COMMAND_EVAL_PROVIDE.send(channel).queue()
-            return
+        val stringBuilder = StringBuilder(Messages.COMMAND_EVAL_INFO.content(channel))
+        for(mode in EvalModes.values()) {
+            stringBuilder.append(mode.name.toLowerCase())
+                    .append(", ")
         }
-        engine.put("jda", environment.guild.jda)
-        engine.put("e", environment)
-        engine.put("environment", environment)
-        val stringBuilder = StringBuilder()
-        for(i in (1..args.size-1)) {
-            stringBuilder.append(args[i])
-                    .append(" ")
-        }
-        val input = stringBuilder.toString().trim()
-        var output: Any?
-        try {
-            output = engine.eval("(function() { with (imports) {\n$input\n} })();")
-        } catch(scriptException: ScriptException) {
-            val message = scriptException.message?: Messages.MISC_NONE.content(channel)
-            output = Messages.COMMAND_EVAL_ERROR.content(channel)
-                    .replace("{error}", message)
-        }
-        if(output == null) {
-            output = Messages.COMMAND_EVAL_SUCCESSFUL.content(channel)
-        }
-        val outputString = output.toString()
-        if(outputString.length > UtilsLimit.MESSAGE.maxLength) {
-            Messages.COMMAND_EVAL_LENGTH.send(channel).queue()
-            return
-        }
-        channel.sendMessage(outputString).queue()
+        stringBuilder.setCharAt(stringBuilder.length-2, '.')
+        channel.sendMessage(stringBuilder.toString().trim()).queue()
     }
 
+    enum class EvalModes {
+
+        KOTLIN,
+        JAVASCRIPT
+
+    }
 
 }

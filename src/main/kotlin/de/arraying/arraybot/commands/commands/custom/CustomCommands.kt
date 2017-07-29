@@ -12,7 +12,7 @@ import de.arraying.arraybot.commands.commands.custom.entities.CustomCommandSynta
 import de.arraying.arraybot.commands.commands.custom.entities.CustomCommandTypes
 import de.arraying.arraybot.commands.commands.custom.parameters.CustomCommandParameter
 import de.arraying.arraybot.commands.commands.custom.types.CustomCommandType
-import de.arraying.arraybot.commands.entities.CustomCommand
+import de.arraying.arraybot.commands.types.CustomCommand
 import de.arraying.arraybot.language.Messages
 import net.dv8tion.jda.core.entities.TextChannel
 import org.apache.commons.io.IOUtils
@@ -61,7 +61,7 @@ object CustomCommands {
             commandObject.put("description", JSONObject.NULL)
         }
         val pasteBuilder = pastebinfactory.createPaste()
-        pasteBuilder.setTitle("Custom Command Export")
+        pasteBuilder.setTitle("Custom ICommand Export")
         pasteBuilder.setRaw(commandObject.toString())
         pasteBuilder.setMachineFriendlyLanguage("json")
         pasteBuilder.setVisiblity(PasteVisiblity.Unlisted)

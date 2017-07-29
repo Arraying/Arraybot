@@ -2,6 +2,7 @@ package de.arraying.arraybot.utils
 
 import de.arraying.arraybot.Arraybot
 import de.arraying.arraybot.cache.Cache
+import de.arraying.arraybot.commands.commands.developer.eval.Evaluator
 import de.arraying.arraybot.language.Language
 import de.arraying.arraybot.managers.ManagerPunish
 import de.arraying.arraybot.managers.ManagerRegistry
@@ -24,7 +25,7 @@ import de.arraying.arraybot.misc.ArraybotException
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-object UtilsStartup {
+object UStartup {
 
     private val arraybot = Arraybot.instance
 
@@ -79,6 +80,7 @@ object UtilsStartup {
         arraybot.managerScheduler = ManagerScheduler()
         arraybot.managerScheduler.scheduleGuildPurges()
         arraybot.managerPunish = ManagerPunish()
+        Evaluator.init()
         arraybot.logger.info("Finished loading misc. tasks.")
     }
 

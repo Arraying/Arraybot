@@ -1,6 +1,6 @@
 package de.arraying.arraybot.cache.entities
 
-import de.arraying.arraybot.cache.entities.iface.Cachable
+import de.arraying.arraybot.iface.ICache
 
 /**
  * Copyright 2017 Arraying
@@ -25,4 +25,4 @@ data class CStatistics(private val id: Long,
                        val channels: Long,
                        val messages: Long,
                        val commands: Long):
-        Cachable
+        ICache

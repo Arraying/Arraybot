@@ -1,8 +1,9 @@
-package de.arraying.arraybot.commands.commands.custom.types
+package de.arraying.arraybot.commands.commands.developer.eval.subcommands
 
 import de.arraying.arraybot.commands.other.CommandEnvironment
-import de.arraying.arraybot.commands.commands.custom.CustomCommands
-import de.arraying.arraybot.commands.commands.custom.entities.CustomCommandTypes
+import de.arraying.arraybot.commands.commands.developer.eval.CommandEval
+import de.arraying.arraybot.commands.commands.developer.eval.Evaluator
+import de.arraying.arraybot.commands.types.SubCommand
 import de.arraying.arraybot.language.Messages
 
 /**
@@ -20,20 +21,20 @@ import de.arraying.arraybot.language.Messages
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-class CustomCommandTypePrivateMessage:
-        CustomCommandType(CustomCommandTypes.PRIVATEMESSAGE) {
+class SubCommandEvalJavascript:
+        SubCommand("javascript",
+                arrayOf("js")) {
 
     /**
-     * Invokes the custom command type.
+     * Invokes the subcommand.
      */
-    override fun invoke(environment: CommandEnvironment, value: String) {
-        environment.author.openPrivateChannel().queue {
-            it.sendMessage(value).queue()
+    override fun onSubCommand(environment: CommandEnvironment, args: Array<String>) {
+        val channel = environment.channel
+        if(args.size < 3) {
+            Messages.COMMAND_EVAL_PROVIDE.send(channel).queue()
+            return
         }
-        val data = CustomCommands.storage.retrieve(environment.message.idLong)
-        if(!data!!.silent) {
-            Messages.CUSTOMCOMMAND_PRIVATEMESSAGE.send(environment.channel).queue()
-        }
+        Evaluator.evaluate(CommandEval.EvalModes.JAVASCRIPT, environment, args)
     }
 
 }

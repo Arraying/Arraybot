@@ -1,9 +1,9 @@
 package de.arraying.arraybot.commands.commands.customization.prefix
 
-import de.arraying.arraybot.commands.CommandEnvironment
-import de.arraying.arraybot.commands.entities.DefaultCommand
+import de.arraying.arraybot.commands.other.CommandEnvironment
+import de.arraying.arraybot.commands.types.DefaultCommand
 import de.arraying.arraybot.language.Messages
-import de.arraying.arraybot.utils.UtilsLimit
+import de.arraying.arraybot.utils.ULimit
 import net.dv8tion.jda.core.Permission
 
 /**
@@ -43,9 +43,9 @@ class CommandPrefix:
                     .trim()
                     .replace("{space}", " ")
                     .replace("{empty}", "")
-            if(prefix.length > UtilsLimit.PREFIX.maxLength)  {
+            if(prefix.length > ULimit.PREFIX.maxLength)  {
                 channel.sendMessage(Messages.COMMAND_PREFIX_LENGTH.content(channel)
-                        .replace("{max}", UtilsLimit.PREFIX.maxLength.toString())).queue()
+                        .replace("{max}", ULimit.PREFIX.maxLength.toString())).queue()
                 return
             }
             cache!!.prefix = prefix

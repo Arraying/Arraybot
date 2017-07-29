@@ -9,7 +9,7 @@ import java.util.regex.Pattern
 /**
  * Credits to this duration parser code goes to @AlphartDev on GitHub.
  */
-object UtilsTime {
+object UTime {
 
     private val timePattern = Pattern.compile("(?:([0-9]+)\\s*y[a-z]*[,\\s]*)?"
             + "(?:([0-9]+)\\s*mo[a-z]*[,\\s]*)?" + "(?:([0-9]+)\\s*w[a-z]*[,\\s]*)?"

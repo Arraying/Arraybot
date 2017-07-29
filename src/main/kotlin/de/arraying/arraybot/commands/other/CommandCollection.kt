@@ -1,4 +1,4 @@
-package de.arraying.arraybot.commands
+package de.arraying.arraybot.commands.other
 
 import de.arraying.arraybot.commands.commands.customization.announcer.CommandAnnouncer
 import de.arraying.arraybot.commands.commands.customization.announcer.subcommands.SubCommandAnnouncerAnnouncements
@@ -15,6 +15,8 @@ import de.arraying.arraybot.commands.commands.moderation.filter.CommandFilter
 import de.arraying.arraybot.commands.commands.moderation.filter.subcommands.*
 import de.arraying.arraybot.commands.commands.customization.prefix.CommandPrefix
 import de.arraying.arraybot.commands.commands.developer.eval.CommandEval
+import de.arraying.arraybot.commands.commands.developer.eval.subcommands.SubCommandEvalJavascript
+import de.arraying.arraybot.commands.commands.developer.eval.subcommands.SubCommandEvalKotlin
 import de.arraying.arraybot.commands.commands.developer.restart.CommandRestart
 import de.arraying.arraybot.commands.commands.moderation.ban.CommandBan
 import de.arraying.arraybot.commands.commands.moderation.ban.CommandBanSoft
@@ -29,7 +31,7 @@ import de.arraying.arraybot.commands.commands.utils.commands.subcommands.SubComm
 import de.arraying.arraybot.commands.commands.utils.commands.subcommands.SubCommandCommandsListall
 import de.arraying.arraybot.commands.commands.utils.help.CommandHelp
 import de.arraying.arraybot.commands.commands.utils.uptime.CommandUptime
-import de.arraying.arraybot.commands.entities.DefaultCommand
+import de.arraying.arraybot.commands.types.DefaultCommand
 
 /**
  * Copyright 2017 Arraying
@@ -97,6 +99,9 @@ enum class CommandCollection(val command: DefaultCommand) {
             SubCommandAnnouncerLeave(),
             SubCommandAnnouncerStatus()
     ))),
-    //EVAL(CommandEval())
+    EVAL(CommandEval(arrayOf(
+            SubCommandEvalKotlin(),
+            SubCommandEvalJavascript()
+    )))
 
 }

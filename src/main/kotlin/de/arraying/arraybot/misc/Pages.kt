@@ -2,11 +2,10 @@ package de.arraying.arraybot.misc
 
 import de.arraying.arraybot.cache.Cache
 import de.arraying.arraybot.commands.commands.custom.entities.CustomCommandSyntax
-import de.arraying.arraybot.commands.entities.Command
-import de.arraying.arraybot.commands.entities.CustomCommand
-import de.arraying.arraybot.commands.entities.DefaultCommand
+import de.arraying.arraybot.iface.ICommand
+import de.arraying.arraybot.commands.types.CustomCommand
+import de.arraying.arraybot.commands.types.DefaultCommand
 import de.arraying.arraybot.language.Messages
-import de.arraying.arraybot.utils.UtilsEmbedBuilder
 import net.dv8tion.jda.core.entities.TextChannel
 import java.util.*
 import kotlin.collections.ArrayList
@@ -26,7 +25,7 @@ import kotlin.collections.ArrayList
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-open class Pages(private val embedBuilder: UtilsEmbedBuilder,
+open class Pages(private val embedBuilder: CustomEmbedBuilder,
                  private val contentTitle: String,
                  entries: Array<out Any>,
                  itemsPerPage: Int = 1) {
@@ -63,7 +62,7 @@ open class Pages(private val embedBuilder: UtilsEmbedBuilder,
     /**
      * Gets the specified page number.
      */
-    fun getPage(pageNumber: Int = 1, channel: TextChannel): UtilsEmbedBuilder {
+    fun getPage(pageNumber: Int = 1, channel: TextChannel): CustomEmbedBuilder {
         if(!pages.containsKey(pageNumber)) {
             throw IllegalArgumentException("A page with that page number does not exist.")
         }
@@ -74,7 +73,7 @@ open class Pages(private val embedBuilder: UtilsEmbedBuilder,
             throw IllegalArgumentException("The page entries were null.")
         }
         for(entry in pageEntries) {
-            if(entry !is Command) {
+            if(entry !is ICommand) {
                 pageContentBuilder
                         .append("- $entry")
                         .append("\n")

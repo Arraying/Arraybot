@@ -1,8 +1,8 @@
 package de.arraying.arraybot.cache.entities
 
 import de.arraying.arraybot.Arraybot
-import de.arraying.arraybot.cache.entities.iface.Cachable
-import de.arraying.arraybot.commands.entities.CustomCommand
+import de.arraying.arraybot.iface.ICache
+import de.arraying.arraybot.commands.types.CustomCommand
 import java.util.*
 
 /**
@@ -24,7 +24,7 @@ class CGuild(val id: Long,
              prefix: String,
              val password: String,
              language: String?):
-        Cachable {
+        ICache {
 
     private var arraybot = Arraybot.instance
 

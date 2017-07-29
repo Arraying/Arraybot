@@ -1,6 +1,6 @@
 package de.arraying.arraybot.commands.commands.moderation.ban
 
-import de.arraying.arraybot.commands.entities.PunishmentCommand
+import de.arraying.arraybot.commands.types.PunishmentCommand
 import net.dv8tion.jda.core.Permission
 
 /**

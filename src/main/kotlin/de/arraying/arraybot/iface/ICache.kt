@@ -1,7 +1,4 @@
-package de.arraying.arraybot.commands.entities
-
-import de.arraying.arraybot.Arraybot
-import de.arraying.arraybot.commands.CommandEnvironment
+package de.arraying.arraybot.iface
 
 /**
  * Copyright 2017 Arraying
@@ -18,13 +15,4 @@ import de.arraying.arraybot.commands.CommandEnvironment
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-abstract class SubCommand(val subCommandName: String) {
-
-    protected val arraybot = Arraybot.instance
-
-    /**
-     * What happens when the subcommand is invoked.
-     */
-    abstract fun onSubCommand(environment: CommandEnvironment, args: Array<String>)
-
-}
+interface ICache

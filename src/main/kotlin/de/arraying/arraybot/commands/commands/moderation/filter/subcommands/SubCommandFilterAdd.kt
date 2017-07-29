@@ -1,9 +1,9 @@
 package de.arraying.arraybot.commands.commands.moderation.filter.subcommands
 
-import de.arraying.arraybot.commands.CommandEnvironment
-import de.arraying.arraybot.commands.entities.SubCommand
+import de.arraying.arraybot.commands.other.CommandEnvironment
+import de.arraying.arraybot.commands.types.SubCommand
 import de.arraying.arraybot.language.Messages
-import de.arraying.arraybot.utils.UtilsLimit
+import de.arraying.arraybot.utils.ULimit
 import java.util.regex.Pattern
 import java.util.regex.PatternSyntaxException
 
@@ -23,7 +23,8 @@ import java.util.regex.PatternSyntaxException
  * limitations under the License.
  */
 class SubCommandFilterAdd: 
-        SubCommand("add") {
+        SubCommand("add",
+                arrayOf("create")) {
 
     /**
      * Invokes the subcommand.
@@ -42,7 +43,7 @@ class SubCommandFilterAdd:
         }
         val phrase = stringBuilder.toString().toLowerCase().trim()
                 .replace("{space}", " ")
-        if(phrase.length > UtilsLimit.FILTER_PHRASE.maxLength) {
+        if(phrase.length > ULimit.FILTER_PHRASE.maxLength) {
             Messages.COMMAND_FILTER_ADD_LENGTH.send(channel).queue()
             return
         }

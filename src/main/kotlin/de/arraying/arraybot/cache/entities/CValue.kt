@@ -1,6 +1,6 @@
 package de.arraying.arraybot.cache.entities
 
-import de.arraying.arraybot.cache.entities.iface.Cachable
+import de.arraying.arraybot.iface.ICache
 
 /**
  * Copyright 2017 Arraying
@@ -19,4 +19,4 @@ import de.arraying.arraybot.cache.entities.iface.Cachable
  */
 data class CValue(val id: Long,
                   val value: String):
-        Cachable
+        ICache

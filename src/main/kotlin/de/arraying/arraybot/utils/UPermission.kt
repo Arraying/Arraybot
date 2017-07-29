@@ -1,5 +1,6 @@
 package de.arraying.arraybot.utils
 
+import net.dv8tion.jda.core.Permission
 import net.dv8tion.jda.core.entities.Member
 
 /**
@@ -17,20 +18,21 @@ import net.dv8tion.jda.core.entities.Member
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-object UtilsPlaceholder {
+object UPermission {
 
     /**
-     * Replaces all placeholders.
+     * Checks if the user has permission.
+     * This permission can be a Permission object name, or a role ID.
      */
-    fun process(member: Member, input: String): String {
-        return input.replace("{user}", member.asMention)
-                .replace("{username}", member.user.name)
-                .replace("{userdiscriminator}", member.user.discriminator)
-                .replace("{usercombo}", "${member.user.name}#${member.user.discriminator}")
-                .replace("{guildname}", member.guild.name)
-                .replace("{guildid}", member.guild.id)
-                .replace("{guildcount}", member.guild.members.size.toString())
-                .replace("{time}", UtilsTime.getDisplayableTime(member.guild))
+    fun hasPermission(member: Member, value: String): Boolean {
+        try {
+            val permission = Permission.valueOf(value.toUpperCase())
+            return member.hasPermission(permission)
+        } catch(exception: Exception) {
+            return member.roles.any {
+                it.id == value
+            }
+        }
     }
 
 }

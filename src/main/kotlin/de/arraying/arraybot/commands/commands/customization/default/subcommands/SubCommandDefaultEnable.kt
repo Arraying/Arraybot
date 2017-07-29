@@ -1,8 +1,8 @@
 package de.arraying.arraybot.commands.commands.customization.default.subcommands
 
-import de.arraying.arraybot.commands.CommandEnvironment
+import de.arraying.arraybot.commands.other.CommandEnvironment
 import de.arraying.arraybot.commands.Commands
-import de.arraying.arraybot.commands.entities.SubCommand
+import de.arraying.arraybot.commands.types.SubCommand
 import de.arraying.arraybot.language.Messages
 
 /**
@@ -21,7 +21,8 @@ import de.arraying.arraybot.language.Messages
  * limitations under the License.
  */
 class SubCommandDefaultEnable:
-        SubCommand("enable") {
+        SubCommand("enable",
+                arrayOf("on")) {
 
     /**
      * Invokes the subcommand.

@@ -1,7 +1,6 @@
-package de.arraying.arraybot.commands.entities
+package de.arraying.arraybot.iface
 
-import de.arraying.arraybot.commands.CommandEnvironment
-
+import net.dv8tion.jda.core.entities.TextChannel
 
 /**
  * Copyright 2017 Arraying
@@ -18,11 +17,8 @@ import de.arraying.arraybot.commands.CommandEnvironment
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-abstract class Command(open val name: String) {
+interface IResultMessage {
 
-    /**
-     * Invokes the command.
-     */
-    abstract suspend fun invoke(environment: CommandEnvironment, args: Array<String>)
+    fun getMessage(channel: TextChannel): String
 
 }

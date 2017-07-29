@@ -1,6 +1,6 @@
 package de.arraying.arraybot.commands.commands.custom.entities.action
 
-import de.arraying.arraybot.commands.CommandEnvironment
+import de.arraying.arraybot.commands.other.CommandEnvironment
 import de.arraying.arraybot.commands.commands.custom.CustomCommands
 import de.arraying.arraybot.commands.commands.custom.entities.CustomCommandTypes
 import de.arraying.arraybot.language.Messages

@@ -1,7 +1,7 @@
 package de.arraying.arraybot.commands.commands.customization.custom.subcommands
 
-import de.arraying.arraybot.commands.CommandEnvironment
-import de.arraying.arraybot.commands.entities.SubCommand
+import de.arraying.arraybot.commands.other.CommandEnvironment
+import de.arraying.arraybot.commands.types.SubCommand
 import de.arraying.arraybot.language.Messages
 
 /**
@@ -20,7 +20,8 @@ import de.arraying.arraybot.language.Messages
  * limitations under the License.
  */
 class SubCommandCustomDelete:
-        SubCommand("delete") {
+        SubCommand("delete",
+                arrayOf("remove")) {
 
     /**
      * Invokes the subcommand.

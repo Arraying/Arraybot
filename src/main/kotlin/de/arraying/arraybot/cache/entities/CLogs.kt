@@ -1,7 +1,7 @@
 package de.arraying.arraybot.cache.entities
 
 import de.arraying.arraybot.Arraybot
-import de.arraying.arraybot.cache.entities.iface.Cachable
+import de.arraying.arraybot.iface.ICache
 import de.arraying.arraybot.managers.ManagerSQL
 
 /**
@@ -28,7 +28,7 @@ class CLogs(val id: Long,
             guildChannel: Long,
             modEnabled: Boolean,
             modChannel: Long):
-        Cachable {
+        ICache {
 
     private val arraybot = Arraybot.instance
 

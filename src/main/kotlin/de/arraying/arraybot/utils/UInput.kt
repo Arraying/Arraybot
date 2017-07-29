@@ -17,7 +17,7 @@ import java.util.regex.Pattern
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-object UtilsInput {
+object UInput {
 
     private val idRegex = Pattern.compile("^(\\d{17,20})$")
     private val userMentionRegex = Pattern.compile("^(<@!?\\d{17,20}>)$")
