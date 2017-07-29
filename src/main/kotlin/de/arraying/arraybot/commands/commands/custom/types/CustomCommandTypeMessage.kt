@@ -2,6 +2,7 @@ package de.arraying.arraybot.commands.commands.custom.types
 
 import de.arraying.arraybot.commands.other.CommandEnvironment
 import de.arraying.arraybot.commands.commands.custom.entities.CustomCommandTypes
+import net.dv8tion.jda.core.entities.TextChannel
 
 /**
  * Copyright 2017 Arraying
@@ -20,6 +21,13 @@ import de.arraying.arraybot.commands.commands.custom.entities.CustomCommandTypes
  */
 class CustomCommandTypeMessage:
         CustomCommandType(CustomCommandTypes.MESSAGE) {
+
+    /**
+     * Gets the message.
+     */
+    override fun getMessage(channel: TextChannel): String {
+        throw IllegalStateException("This custom command type does not have a message.")
+    }
 
     /**
      * Invokes the custom command type.

@@ -84,6 +84,7 @@ enum class CommandCollection(val command: DefaultCommand) {
     SOFT_BAN(CommandBanSoft()),
     FILTER(CommandFilter(arrayOf(
             SubCommandFilterAdd(),
+            SubCommandFilterBypassadd(),
             SubCommandFilterList(),
             SubCommandFilterMessage(),
             SubCommandFilterPrivate(),

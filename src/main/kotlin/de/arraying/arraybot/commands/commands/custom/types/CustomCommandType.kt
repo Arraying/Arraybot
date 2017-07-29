@@ -2,6 +2,7 @@ package de.arraying.arraybot.commands.commands.custom.types
 
 import de.arraying.arraybot.commands.other.CommandEnvironment
 import de.arraying.arraybot.commands.commands.custom.entities.CustomCommandTypes
+import de.arraying.arraybot.iface.IResultMessage
 
 /**
  * Copyright 2017 Arraying
@@ -18,7 +19,8 @@ import de.arraying.arraybot.commands.commands.custom.entities.CustomCommandTypes
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-abstract class CustomCommandType(val type: CustomCommandTypes) {
+abstract class CustomCommandType(val type: CustomCommandTypes):
+        IResultMessage {
 
     /**
      * What happens when this type is invoked.

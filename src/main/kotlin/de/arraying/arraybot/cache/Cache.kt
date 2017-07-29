@@ -1,6 +1,7 @@
 package de.arraying.arraybot.cache
 
 import de.arraying.arraybot.cache.entities.CGuild
+import de.arraying.arraybot.utils.Utils
 import net.dv8tion.jda.core.entities.Guild
 import net.dv8tion.jda.core.entities.Role
 import net.dv8tion.jda.core.entities.User
@@ -32,5 +33,15 @@ object Cache {
     var premiumRole: Role? = null
     var commandsRun = 0L
     var messagesSent = 0L
+
+    /**
+     * Eval method to get a guild.
+     */
+    fun getGuild(id: String): CGuild? {
+        if(!Utils.isLong(id)) {
+            return null
+        }
+        return guilds[id.toLong()]
+    }
 
 }

@@ -39,11 +39,7 @@ object UInput {
      * isValid MUST be checked beforehand!!!
      */
     fun retrieve(input: String): Long {
-        return if(idRegex.matcher(input).find()) {
-            input.toLong()
-        } else {
-            input.replace("\\D".toRegex(), "").toLong()
-        }
+        return input.replace("\\D".toRegex(), "").toLong()
     }
 
     /**

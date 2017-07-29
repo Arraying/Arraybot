@@ -1,6 +1,7 @@
 package de.arraying.arraybot.commands.commands.developer.eval
 
 import de.arraying.arraybot.Arraybot
+import de.arraying.arraybot.cache.Cache
 import de.arraying.arraybot.commands.other.CommandEnvironment
 import de.arraying.arraybot.language.Messages
 import de.arraying.arraybot.utils.ULimit
@@ -37,8 +38,10 @@ object Evaluator {
         if(initialized) {
             throw IllegalStateException("The evaluator has already been initialized.")
         }
+        kotlinEngine.put("arraybot", Arraybot.instance)
+        kotlinEngine.put("cache", Cache)
         javascriptEngine.put("arraybot", Arraybot.instance)
-        javascriptEngine.put("cache", Arraybot.instance)
+        javascriptEngine.put("cache", Cache)
         javascriptEngine.eval("var imports = new JavaImporter(java.io, java.lang, java.util, java.net, " +
                 "Packages.net.dv8tion.jda.core, Packages.net.dv8tion.jda.core.entities, Packages.net.dv8tion.jda.core.managers);")
         initialized = true

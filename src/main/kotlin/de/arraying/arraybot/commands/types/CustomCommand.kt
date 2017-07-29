@@ -124,7 +124,8 @@ class CustomCommand(val id: Long,
                 value = parameter.handleParameter(environment, value)
             }
         }
-        if(CustomCommands.storage.retrieve(storageId)!!.delete) {
+        val storage = CustomCommands.storage.retrieve(storageId)!!
+        if(storage.delete) {
             try {
                 environment.message.delete().queue()
             } catch(exception: PermissionException) {
@@ -135,8 +136,14 @@ class CustomCommand(val id: Long,
             Messages.CUSTOMCOMMAND_EMPTY.send(channel).queue()
             return
         }
-        CustomCommands.types[type]!!.invoke(environment, value)
+        val type = CustomCommands.types[type]!!
+        type.invoke(environment, value)
+        if(!storage.silent
+                && this.type != CustomCommandTypes.MESSAGE) {
+            channel.sendMessage(type.getMessage(channel)).queue()
+        }
         CustomCommands.storage.prune(storageId)
+        // TODO SEND MESSAGE AND CHECK IF ITS SILENT
     }
 
 }

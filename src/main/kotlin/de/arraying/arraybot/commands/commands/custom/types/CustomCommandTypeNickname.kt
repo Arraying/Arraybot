@@ -5,6 +5,7 @@ import de.arraying.arraybot.commands.commands.custom.entities.CustomCommandTypes
 import de.arraying.arraybot.commands.commands.custom.entities.action.CustomCommandActionPair
 import de.arraying.arraybot.language.Messages
 import de.arraying.arraybot.utils.ULimit
+import net.dv8tion.jda.core.entities.TextChannel
 import net.dv8tion.jda.core.exceptions.PermissionException
 
 /**
@@ -24,6 +25,13 @@ import net.dv8tion.jda.core.exceptions.PermissionException
  */
 class CustomCommandTypeNickname:
         CustomCommandType(CustomCommandTypes.NICKNAME) {
+
+    /**
+     * Gets the custom command message.
+     */
+    override fun getMessage(channel: TextChannel): String {
+        return Messages.CUSTOMCOMMAND_NICKNAME.content(channel)
+    }
 
     /**
      * Invokes the custom command type.

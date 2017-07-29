@@ -1,6 +1,7 @@
 package de.arraying.arraybot.listeners
 
 import de.arraying.arraybot.cache.Cache
+import de.arraying.arraybot.cache.entities.CBypass
 import de.arraying.arraybot.cache.entities.CMod
 import de.arraying.arraybot.language.Messages
 import de.arraying.arraybot.utils.UPlaceholders
@@ -90,6 +91,15 @@ class ListenerFilter:
             }
         }
         if(filteredPhrase == null) {
+            return
+        }
+        val bypasses = mod.filterBypasses.values
+        if(bypasses.any {
+            (it.bypassType == CBypass.BypassType.USER
+                        && it.value == messageAuthor.idLong)
+                    || (it.bypassType == CBypass.BypassType.CHANNEL
+                        && it.value == event.channel.idLong)
+        }) {
             return
         }
         try {

@@ -667,6 +667,7 @@ class ManagerSQL {
     private fun cacheRelatedModeration() {
         cacheModSettings()
         cacheFilteredPhrases()
+        cacheFilterBypasses()
     }
 
     /**
@@ -684,7 +685,7 @@ class ManagerSQL {
     }
 
     /**
-     * Coroutine methdod to cache filtered phrases.
+     * Coroutine method to cache filtered phrases.
      */
     private fun cacheFilteredPhrases() {
         arraybot.logger.info("Caching filtered phrases...")
@@ -695,6 +696,20 @@ class ManagerSQL {
                     guild.mod?.filtered?.add(it.value)
                 }
         arraybot.logger.info("Finished caching filtered phrases.")
+    }
+
+    /**
+     * Coroutine method to cache filter bypasses.
+     */
+    private fun cacheFilterBypasses() {
+        arraybot.logger.info("Caching filter bypasses...")
+        SQLQuery("SELECT * FROM ${Table.FILTER_BYPASS.tableName}", dataSource).select(CBypass::class.java)
+                .filterIsInstance<CBypass>()
+                .forEach {
+                    val guild = getGuild(it.id)?: return
+                    guild.mod?.filterBypasses?.put(it.bypassId, it)
+                }
+        arraybot.logger.info("Finished caching filter bypasses.")
     }
 
 

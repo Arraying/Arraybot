@@ -1,7 +1,10 @@
 package de.arraying.arraybot.commands.commands.moderation.filter.subcommands
 
+import de.arraying.arraybot.cache.entities.CBypass
 import de.arraying.arraybot.commands.other.CommandEnvironment
 import de.arraying.arraybot.commands.types.SubCommand
+import de.arraying.arraybot.language.Messages
+import de.arraying.arraybot.utils.UInput
 
 /**
  * Copyright 2017 Arraying
@@ -26,9 +29,46 @@ class SubCommandFilterBypassadd:
      * Invokes the subcommand.
      */
     override fun onSubCommand(environment: CommandEnvironment, args: Array<String>) {
+        val channel = environment.channel
+        val guild = environment.guild
         if(args.size < 3) {
-
+            Messages.COMMAND_FILTER_BYPASSADD_PROVIDETYPE.send(channel).queue()
+            return
         }
+        if(args.size < 4) {
+            Messages.COMMAND_FILTER_BYPASSADD_PROVIDEID.send(channel).queue()
+            return
+        }
+        val type = CBypass.BypassType.getBypassType(args[2].toLowerCase())
+        if(type == CBypass.BypassType.UNKNOWN) {
+            Messages.COMMAND_FILTER_BYPASSADD_INVALIDTYPE.send(channel).queue()
+            return
+        }
+        val target = args[3]
+        if(!UInput.isValid(UInput.InputType.BOTH, target, true)) {
+            Messages.COMMAND_FILTER_BYPASSADD_INVALIDID.send(channel).queue()
+            return
+        }
+        val value = UInput.retrieve(target)
+        if((type == CBypass.BypassType.USER
+                && guild.getMemberById(value) == null)
+                || (type == CBypass.BypassType.CHANNEL
+                && guild.getTextChannelById(value) == null)) {
+            Messages.COMMAND_FILTER_BYPASSADD_INVALIDID.send(channel).queue()
+            return
+        }
+        val mod = environment.cache!!.mod!!
+        if(mod.filterBypasses.values.any {
+            it.bypassType == type
+            && it.value == value
+        }) {
+            Messages.COMMAND_FILTER_BYPASSADD_EXISTS.send(channel).queue()
+            return
+        }
+        val bypassId = ++mod.bypassCount
+        arraybot.managerSql.addChatFilterBypass(guild.idLong, bypassId, type.toString(), value)
+        channel.sendMessage(Messages.COMMAND_FILTER_BYPASSADD_UPDATE.content(channel)
+                .replace("{id}", bypassId.toString())).queue()
     }
 
 }

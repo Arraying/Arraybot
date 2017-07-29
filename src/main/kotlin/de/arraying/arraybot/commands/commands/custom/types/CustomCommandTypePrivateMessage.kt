@@ -4,6 +4,7 @@ import de.arraying.arraybot.commands.other.CommandEnvironment
 import de.arraying.arraybot.commands.commands.custom.CustomCommands
 import de.arraying.arraybot.commands.commands.custom.entities.CustomCommandTypes
 import de.arraying.arraybot.language.Messages
+import net.dv8tion.jda.core.entities.TextChannel
 
 /**
  * Copyright 2017 Arraying
@@ -24,15 +25,18 @@ class CustomCommandTypePrivateMessage:
         CustomCommandType(CustomCommandTypes.PRIVATEMESSAGE) {
 
     /**
+     * Gets the message.
+     */
+    override fun getMessage(channel: TextChannel): String {
+        return Messages.CUSTOMCOMMAND_PRIVATEMESSAGE.content(channel)
+    }
+
+    /**
      * Invokes the custom command type.
      */
     override fun invoke(environment: CommandEnvironment, value: String) {
         environment.author.openPrivateChannel().queue {
             it.sendMessage(value).queue()
-        }
-        val data = CustomCommands.storage.retrieve(environment.message.idLong)
-        if(!data!!.silent) {
-            Messages.CUSTOMCOMMAND_PRIVATEMESSAGE.send(environment.channel).queue()
         }
     }
 
