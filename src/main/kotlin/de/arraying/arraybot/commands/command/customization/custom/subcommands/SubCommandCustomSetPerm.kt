@@ -25,7 +25,12 @@ import net.dv8tion.jda.core.Permission
 class SubCommandCustomSetPerm: 
         ISubCommand {
 
-    override val subCommandName = "setperm"
+    /**
+     * Gets the name.
+     */
+    override fun getName(): String {
+        return "setperm"
+    }
 
     /**
      * Gets the aliases.

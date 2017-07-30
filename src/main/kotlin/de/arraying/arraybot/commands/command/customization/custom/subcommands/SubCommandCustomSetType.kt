@@ -23,7 +23,12 @@ import de.arraying.arraybot.language.Messages
 class SubCommandCustomSetType: 
         ISubCommand {
 
-    override val subCommandName = "settype"
+    /**
+     * Gets the name.
+     */
+    override fun getName(): String {
+        return "settype"
+    }
 
     /**
      * Gets the aliases.

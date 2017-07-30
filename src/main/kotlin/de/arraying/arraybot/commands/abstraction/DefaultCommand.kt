@@ -132,7 +132,7 @@ abstract class DefaultCommand(override final val name: String,
             if(args.size >= 2) {
                 val subCommandName = args[1].toLowerCase()
                 for(subCommand in subCommands) {
-                    if(subCommand.subCommandName.equals(subCommandName, true)
+                    if(subCommand.getName().equals(subCommandName, true)
                             || subCommand.getAliases().any {
                                 it.equals(subCommandName, true)
                             }) {

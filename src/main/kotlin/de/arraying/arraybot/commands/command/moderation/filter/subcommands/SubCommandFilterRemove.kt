@@ -23,8 +23,14 @@ import de.arraying.arraybot.language.Messages
 class SubCommandFilterRemove: 
         ISubCommand {
 
-    override val subCommandName = "remove"
     private val arraybot = Arraybot.instance
+
+    /**
+     * Gets the name.
+     */
+    override fun getName(): String {
+        return "remove"
+    }
 
     /**
      * Gets the aliases.

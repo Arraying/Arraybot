@@ -23,7 +23,12 @@ import de.arraying.arraybot.language.Messages
 class SubCommandCustomImport: 
         ISubCommand {
 
-    override val subCommandName = "import"
+    /**
+     * Gets the name.
+     */
+    override fun getName(): String {
+        return "import"
+    }
 
     /**
      * Invokes the subcommand.

@@ -22,10 +22,15 @@ import de.arraying.arraybot.utils.Utils
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-class SubCommandCommandsListall: 
+class SubCommandCommandsListAll :
         ISubCommand {
 
-    override val subCommandName = "listall"
+    /**
+     * Gets the name.
+     */
+    override fun getName(): String {
+        return "listall"
+    }
 
     /**
      * Invokes the subcommand.

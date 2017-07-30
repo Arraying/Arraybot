@@ -27,8 +27,14 @@ import de.arraying.arraybot.utils.Utils
 class SubCommandCommandsCategory: 
         ISubCommand {
 
-    override val subCommandName = "category"
     private val categories: String
+
+    /**
+     * Gets the name.
+     */
+    override fun getName(): String {
+        return "category"
+    }
 
     /**
      * Initializes the categories.

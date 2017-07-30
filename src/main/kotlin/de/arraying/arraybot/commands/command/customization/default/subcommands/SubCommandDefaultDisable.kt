@@ -25,9 +25,15 @@ import de.arraying.arraybot.language.Messages
 class SubCommandDefaultDisable:
         ISubCommand {
 
-    override val subCommandName = "disable"
     private val commandName = "default"
     private val arraybot = Arraybot.instance
+
+    /**
+     * Gets the name.
+     */
+    override fun getName(): String {
+        return "disable"
+    }
 
     /**
      * Gets the aliases.

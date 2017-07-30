@@ -23,8 +23,14 @@ import de.arraying.arraybot.language.Messages
 class SubCommandCustomDelete:
         ISubCommand {
 
-    override val subCommandName = "delete"
     private val arraybot = Arraybot.instance
+
+    /**
+     * Gets the name.
+     */
+    override fun getName(): String {
+        return "delete"
+    }
 
     /**
      * Gets the aliases.

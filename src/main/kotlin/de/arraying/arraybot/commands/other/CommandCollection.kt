@@ -30,7 +30,7 @@ import de.arraying.arraybot.commands.command.utils.commands.CommandCommands
 import de.arraying.arraybot.commands.command.utils.commands.subcommands.SubCommandCommandsCategory
 import de.arraying.arraybot.commands.command.utils.commands.subcommands.SubCommandCommandsInfo
 import de.arraying.arraybot.commands.command.utils.commands.subcommands.SubCommandCommandsList
-import de.arraying.arraybot.commands.command.utils.commands.subcommands.SubCommandCommandsListall
+import de.arraying.arraybot.commands.command.utils.commands.subcommands.SubCommandCommandsListAll
 import de.arraying.arraybot.commands.command.utils.help.CommandHelp
 import de.arraying.arraybot.commands.command.utils.uptime.CommandUptime
 
@@ -56,7 +56,7 @@ enum class CommandCollection(val command: DefaultCommand) {
             SubCommandCommandsCategory(),
             SubCommandCommandsInfo(),
             SubCommandCommandsList(),
-            SubCommandCommandsListall()
+            SubCommandCommandsListAll()
     ))),
     CUSTOM(CommandCustom(arrayOf(
             SubCommandCustomCreate(),
@@ -85,10 +85,10 @@ enum class CommandCollection(val command: DefaultCommand) {
     SOFT_BAN(CommandBanSoft()),
     FILTER(CommandFilter(arrayOf(
             SubCommandFilterAdd(),
-            SubCommandFilterBypassadd(),
-            SubCommandFilterBypasslist(),
-            SubCommandFilterBypassinfo(),
-            SubCommandFilterBypassremove(),
+            SubCommandFilterBypassAdd(),
+            SubCommandFilterBypassList(),
+            SubCommandFilterBypassInfo(),
+            SubCommandFilterBypassRemove(),
             SubCommandFilterList(),
             SubCommandFilterMessage(),
             SubCommandFilterPrivate(),

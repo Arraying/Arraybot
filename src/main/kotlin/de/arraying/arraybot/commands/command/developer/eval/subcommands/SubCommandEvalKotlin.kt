@@ -24,7 +24,12 @@ import de.arraying.arraybot.language.Messages
 class SubCommandEvalKotlin:
         ISubCommand {
 
-    override val subCommandName = "kotlin"
+    /**
+     * Gets the name.
+     */
+    override fun getName(): String {
+        return "kotlin"
+    }
 
     /**
      * Gets the aliases.

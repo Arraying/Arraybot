@@ -21,11 +21,17 @@ import de.arraying.arraybot.utils.Utils
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-class SubCommandFilterBypassremove:
+class SubCommandFilterBypassRemove :
         ISubCommand {
 
-    override val subCommandName = "bypassremove"
     private val arraybot = Arraybot.instance
+
+    /**
+     * Gets the name.
+     */
+    override fun getName(): String {
+        return "bypassremove"
+    }
 
     /**
      * Gets the aliases

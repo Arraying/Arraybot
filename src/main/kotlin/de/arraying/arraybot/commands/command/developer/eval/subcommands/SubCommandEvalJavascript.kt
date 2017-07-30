@@ -24,7 +24,12 @@ import de.arraying.arraybot.language.Messages
 class SubCommandEvalJavascript:
         ISubCommand {
 
-    override val subCommandName = "javascript"
+    /**
+     * Gets the name.
+     */
+    override fun getName(): String {
+        return "javascript"
+    }
 
     /**
      * Gets the aliases.

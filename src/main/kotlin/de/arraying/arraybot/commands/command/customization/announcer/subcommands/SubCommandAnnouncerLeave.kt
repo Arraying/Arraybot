@@ -22,7 +22,12 @@ import de.arraying.arraybot.language.Messages
 class SubCommandAnnouncerLeave:
         ISubCommand {
 
-    override val subCommandName = "leave"
+    /**
+     * Gets the name.
+     */
+    override fun getName(): String {
+        return "leave"
+    }
 
     /**
      * Invokes the subcommand.

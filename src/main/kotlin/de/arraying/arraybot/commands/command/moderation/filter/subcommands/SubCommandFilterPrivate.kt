@@ -22,7 +22,19 @@ import de.arraying.arraybot.language.Messages
 class SubCommandFilterPrivate: 
         ISubCommand {
 
-    override val subCommandName = "private"
+    /**
+     * Gets the name.
+     */
+    override fun getName(): String {
+        return "private"
+    }
+
+    /**
+     * Gets the aliases.
+     */
+    override fun getAliases(): Array<String> {
+        return arrayOf("privatemessage")
+    }
 
     /**
      * Invokes the subcommand.

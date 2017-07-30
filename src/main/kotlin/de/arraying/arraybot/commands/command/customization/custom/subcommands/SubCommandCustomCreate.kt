@@ -23,8 +23,14 @@ import de.arraying.arraybot.language.Messages
 class SubCommandCustomCreate:
         ISubCommand {
 
-    override val subCommandName = "create"
     private val arraybot = Arraybot.instance
+
+    /**
+     * Gets the name.
+     */
+    override fun getName(): String {
+        return "create"
+    }
 
     /**
      * Gets the aliases.

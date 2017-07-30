@@ -23,7 +23,12 @@ import de.arraying.arraybot.language.Messages
 class SubCommandFilterRegex: 
         ISubCommand {
 
-    override val subCommandName = "regex"
+    /**
+     * Gets the name.
+     */
+    override fun getName(): String {
+        return "regex"
+    }
 
     /**
      * Invokes the subcommand.

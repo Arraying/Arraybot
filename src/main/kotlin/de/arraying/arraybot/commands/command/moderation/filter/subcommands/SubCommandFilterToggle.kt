@@ -22,7 +22,12 @@ import de.arraying.arraybot.language.Messages
 class SubCommandFilterToggle: 
         ISubCommand {
 
-    override val subCommandName = "toggle"
+    /**
+     * Gets the name.
+     */
+    override fun getName(): String {
+        return "toggle"
+    }
 
     /**
      * Invokes the subcommand.

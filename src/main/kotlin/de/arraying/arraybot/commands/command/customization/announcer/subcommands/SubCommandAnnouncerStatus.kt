@@ -22,7 +22,12 @@ import de.arraying.arraybot.language.Messages
 class SubCommandAnnouncerStatus:
         ISubCommand {
 
-    override val subCommandName = "status"
+    /**
+     * Gets the name.
+     */
+    override fun getName(): String {
+        return "status"
+    }
 
     /**
      * Invokes the subcommand.

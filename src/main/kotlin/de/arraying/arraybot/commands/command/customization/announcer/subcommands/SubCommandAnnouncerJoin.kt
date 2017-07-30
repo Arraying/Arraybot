@@ -22,7 +22,12 @@ import de.arraying.arraybot.language.Messages
 class SubCommandAnnouncerJoin:
         ISubCommand {
 
-    override val subCommandName = "join"
+    /**
+     * Gets the name.
+     */
+    override fun getName(): String {
+        return "join"
+    }
 
     /**
      * Invokes the subcommand.

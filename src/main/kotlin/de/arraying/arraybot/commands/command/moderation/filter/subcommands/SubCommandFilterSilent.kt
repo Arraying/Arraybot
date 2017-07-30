@@ -22,7 +22,12 @@ import de.arraying.arraybot.language.Messages
 class SubCommandFilterSilent: 
         ISubCommand {
 
-    override val subCommandName = "silent"
+    /**
+     * Gets the name.
+     */
+    override fun getName(): String {
+        return "silent"
+    }
 
     /**
      * Invokes the subcommand.

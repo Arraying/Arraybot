@@ -24,7 +24,12 @@ import de.arraying.arraybot.utils.Utils
 class SubCommandFilterList:
         ISubCommand {
 
-    override val subCommandName = "list"
+    /**
+     * Gets the name.
+     */
+    override fun getName(): String {
+        return "list"
+    }
 
     /**
      * Invokes the subcommand.

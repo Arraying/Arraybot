@@ -23,7 +23,12 @@ import de.arraying.arraybot.utils.ULimit
 class SubCommandFilterMessage:
         ISubCommand {
 
-    override val subCommandName = "message"
+    /**
+     * Gets the name.
+     */
+    override fun getName(): String {
+        return "message"
+    }
 
     /**
      * Invokes the subcommand.

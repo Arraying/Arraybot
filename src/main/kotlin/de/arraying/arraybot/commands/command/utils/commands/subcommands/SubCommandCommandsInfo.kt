@@ -27,7 +27,12 @@ import de.arraying.arraybot.utils.Utils
 class SubCommandCommandsInfo: 
         ISubCommand {
 
-    override val subCommandName = "info"
+    /**
+     * Gets the name.
+     */
+    override fun getName(): String {
+        return "info"
+    }
 
     /**
      * Invokes the subcommand.

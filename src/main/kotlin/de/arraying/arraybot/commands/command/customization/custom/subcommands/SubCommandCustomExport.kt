@@ -23,7 +23,12 @@ import de.arraying.arraybot.language.Messages
 class SubCommandCustomExport: 
         ISubCommand {
 
-    override val subCommandName = "export"
+    /**
+     * Gets the name.
+     */
+    override fun getName(): String {
+        return "export"
+    }
 
     /**
      * Invokes the custom command.

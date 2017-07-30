@@ -22,11 +22,17 @@ import de.arraying.arraybot.utils.UInput
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-class SubCommandFilterBypassadd:
+class SubCommandFilterBypassAdd:
         ISubCommand {
 
-    override val subCommandName = "bypassadd"
     private val arraybot = Arraybot.instance
+
+    /**
+     * Gets the name.
+     */
+    override fun getName(): String {
+        return "bypassadd"
+    }
 
     /**
      * Gets the aliases.

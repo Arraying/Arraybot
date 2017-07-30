@@ -22,10 +22,15 @@ import java.util.*
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-class SubCommandFilterBypasslist:
+class SubCommandFilterBypassList:
         ISubCommand {
 
-    override val subCommandName = "bypasslist"
+    /**
+     * Gets the name.
+     */
+    override fun getName(): String {
+        return "bypasslist"
+    }
 
     /**
      * Gets the aliases.
