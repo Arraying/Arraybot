@@ -22,6 +22,7 @@ object UInput {
     private val idRegex = Pattern.compile("^(\\d{17,20})$")
     private val userMentionRegex = Pattern.compile("^(<@!?\\d{17,20}>)$")
     private val textChannelMentionRegex = Pattern.compile("^(<#?\\d{17,20}>)$")
+    private val roleMentionRegex = Pattern.compile("^(<@&?\\d{17,20}>)\$")
 
     /**
      * Checks if the input is valid.
@@ -30,7 +31,8 @@ object UInput {
         return when(inputType) {
             InputType.USER -> isUser(input, idAllowed)
             InputType.TEXT_CHANNEL -> isTextChannel(input, idAllowed)
-            InputType.BOTH -> isUser(input, idAllowed) || isTextChannel(input, idAllowed)
+            InputType.ROLE -> isRole(input, idAllowed)
+            InputType.ALL -> isUser(input, idAllowed) || isTextChannel(input, idAllowed) || isRole(input, idAllowed)
         }
     }
 
@@ -56,11 +58,19 @@ object UInput {
         return textChannelMentionRegex.matcher(input).find() || (idAllowed && idRegex.matcher(input).find())
     }
 
+    /**
+     * Checks if an input contains a valid role.
+     */
+    private fun isRole(input: String, idAllowed: Boolean): Boolean {
+        return roleMentionRegex.matcher(input).find() || (idAllowed && idRegex.matcher(input).find())
+    }
+
     enum class InputType {
 
         USER,
         TEXT_CHANNEL,
-        BOTH
+        ROLE,
+        ALL
 
     }
 

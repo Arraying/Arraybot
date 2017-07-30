@@ -30,7 +30,6 @@ class SubCommandCustomImport:
      */
     override fun onSubCommand(environment: CommandEnvironment, args: Array<String>) {
         val channel = environment.channel
-        val cache = environment.cache!!
         if(args.size < 3) {
             Messages.COMMAND_CUSTOM_IMPORT_ARGUMENT.send(channel).queue()
             return

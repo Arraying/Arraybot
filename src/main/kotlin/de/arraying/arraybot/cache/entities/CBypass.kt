@@ -29,6 +29,7 @@ class CBypass(val id: Long,
 
         USER,
         CHANNEL,
+        ROLE,
         UNKNOWN;
 
         companion object {

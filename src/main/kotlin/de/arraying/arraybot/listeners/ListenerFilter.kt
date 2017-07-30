@@ -61,7 +61,8 @@ class ListenerFilter:
      * Handles the filter related things.
      */
     private suspend fun handleFilter(event: GenericGuildMessageEvent) {
-        val messageObject = event.channel.getMessageById(event.messageIdLong).complete()
+        val guild = event.guild
+        val messageObject = event.channel.getMessageById(event.messageIdLong).complete()?: return
         val messageAuthor = messageObject.author
         val cache = Cache.guilds[event.guild.idLong]?: return
         val mod = cache.mod?: return
@@ -99,6 +100,10 @@ class ListenerFilter:
                         && it.value == messageAuthor.idLong)
                     || (it.bypassType == CBypass.BypassType.CHANNEL
                         && it.value == event.channel.idLong)
+                    || (it.bypassType == CBypass.BypassType.ROLE
+                        && messageObject.member.roles.any {
+                            role -> it.value == role.idLong
+                        })
         }) {
             return
         }
@@ -110,9 +115,9 @@ class ListenerFilter:
         if(mod.filterSilent) {
            return
         }
-        val filterMessage = UPlaceholders.process(messageObject.member, mod.filterMessage?: Messages.FILTER_MESSAGE.content(event.guild.idLong))
+        val filterMessage = UPlaceholders.process(messageObject.member, mod.filterMessage?: Messages.FILTER_MESSAGE.content(guild.idLong))
         if(!mod.filterPrivate) {
-            if(PermissionUtil.checkPermission(event.channel, event.guild.selfMember, Permission.MESSAGE_WRITE)) {
+            if(PermissionUtil.checkPermission(event.channel, guild.selfMember, Permission.MESSAGE_WRITE)) {
                 event.channel.sendMessage(filterMessage).queue()
             }
         } else {

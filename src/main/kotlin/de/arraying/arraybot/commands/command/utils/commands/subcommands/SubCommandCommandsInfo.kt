@@ -76,6 +76,7 @@ class SubCommandCommandsInfo:
                 syntax = description
                 help = permission
             }
+            val prefix = cache.prefix
             val embed = Utils.getEmbed(channel)
                     .setDescription(Messages.COMMAND_COMMANDS_INFO_DESCRIPTION.content(channel))
                     .addField(Messages.COMMAND_COMMANDS_INFO_NAME.content(channel),
@@ -91,7 +92,7 @@ class SubCommandCommandsInfo:
                             permission,
                             false)
                     .addField(Messages.COMMAND_COMMANDS_INFO_SYNTAX.content(channel),
-                            "`$syntax`",
+                            "`$prefix$syntax`",
                             false)
                     .addField(Messages.COMMAND_COMMANDS_INFO_HELP.content(channel),
                             help,

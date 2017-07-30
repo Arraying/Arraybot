@@ -152,7 +152,7 @@ abstract class DefaultCommand(override final val name: String,
      */
     protected fun sendPermissionMessage(channel: TextChannel, perm: Permission) {
         var permission = Messages.COMMAND_PERMISSION.content(channel)
-        permission = permission.replace("{permission}", perm.toString())
+        permission = permission.replace("{permission}", perm.getName())
         channel.sendMessage(permission).queue()
     }
 

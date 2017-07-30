@@ -85,6 +85,9 @@ enum class CommandCollection(val command: DefaultCommand) {
     FILTER(CommandFilter(arrayOf(
             SubCommandFilterAdd(),
             SubCommandFilterBypassadd(),
+            SubCommandFilterBypasslist(),
+            SubCommandFilterBypassinfo(),
+            SubCommandFilterBypassremove(),
             SubCommandFilterList(),
             SubCommandFilterMessage(),
             SubCommandFilterPrivate(),

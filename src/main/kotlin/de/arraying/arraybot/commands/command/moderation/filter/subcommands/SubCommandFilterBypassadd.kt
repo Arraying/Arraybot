@@ -55,7 +55,7 @@ class SubCommandFilterBypassadd:
             return
         }
         val target = args[3]
-        if(!UInput.isValid(UInput.InputType.BOTH, target, true)) {
+        if(!UInput.isValid(UInput.InputType.ALL, target, true)) {
             Messages.COMMAND_FILTER_BYPASSADD_INVALIDID.send(channel).queue()
             return
         }
@@ -63,7 +63,9 @@ class SubCommandFilterBypassadd:
         if((type == CBypass.BypassType.USER
                 && guild.getMemberById(value) == null)
                 || (type == CBypass.BypassType.CHANNEL
-                && guild.getTextChannelById(value) == null)) {
+                && guild.getTextChannelById(value) == null)
+                || (type == CBypass.BypassType.ROLE
+                && guild.getRoleById(value) == null)) {
             Messages.COMMAND_FILTER_BYPASSADD_INVALIDID.send(channel).queue()
             return
         }
