@@ -1,4 +1,4 @@
-package de.arraying.arraybot.commands.command.custom.types
+package de.arraying.arraybot.core.iface
 
 import de.arraying.arraybot.commands.command.custom.entities.CustomCommandTypes
 import de.arraying.arraybot.commands.other.CommandEnvironment
@@ -19,12 +19,17 @@ import de.arraying.arraybot.core.iface.IResultMessage
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-abstract class CustomCommandType(val type: CustomCommandTypes):
+interface ICustomCommandType :
         IResultMessage {
+
+    /**
+     * Gets the custom command type.
+     */
+    fun getType(): CustomCommandTypes
 
     /**
      * What happens when this type is invoked.
      */
-    abstract fun invoke(environment: CommandEnvironment, value: String)
+    fun invoke(environment: CommandEnvironment, value: String)
 
 }

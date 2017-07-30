@@ -2,6 +2,7 @@ package de.arraying.arraybot.commands.command.custom.collections
 
 import de.arraying.arraybot.commands.command.custom.entities.CustomCommandTypes
 import de.arraying.arraybot.commands.command.custom.types.*
+import de.arraying.arraybot.core.iface.ICustomCommandType
 
 /**
  * Copyright 2017 Arraying
@@ -18,7 +19,7 @@ import de.arraying.arraybot.commands.command.custom.types.*
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-enum class CustomCommandTypeCollection(val type: CustomCommandType,
+enum class CustomCommandTypeCollection(val type: ICustomCommandType,
                                        val types: CustomCommandTypes) {
 
     ADD_ROLE(CustomCommandTypeAddRole(), CustomCommandTypes.ADDROLE),

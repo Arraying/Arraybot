@@ -3,6 +3,7 @@ package de.arraying.arraybot.commands.command.custom.types
 import de.arraying.arraybot.commands.command.custom.entities.CustomCommandTypes
 import de.arraying.arraybot.commands.command.custom.entities.action.CustomCommandRoleAction
 import de.arraying.arraybot.commands.other.CommandEnvironment
+import de.arraying.arraybot.core.iface.ICustomCommandType
 import de.arraying.arraybot.language.Messages
 import net.dv8tion.jda.core.entities.TextChannel
 
@@ -22,7 +23,14 @@ import net.dv8tion.jda.core.entities.TextChannel
  * limitations under the License.
  */
 class CustomCommandTypeAddRole:
-        CustomCommandType(CustomCommandTypes.ADDROLE) {
+        ICustomCommandType {
+
+    /**
+     * Gets the custom command type.
+     */
+    override fun getType(): CustomCommandTypes {
+        return CustomCommandTypes.ADDROLE
+    }
 
     /**
      * Gets the message.

@@ -20,9 +20,9 @@ import de.arraying.arraybot.commands.other.CommandEnvironment
 interface ISubCommand {
 
     /**
-     * The name of the subcommand.
+     * Gets the name.
      */
-    val subCommandName: String
+    fun getName(): String
 
     /**
      * Gets the aliases.

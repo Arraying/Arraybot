@@ -11,7 +11,7 @@ import de.arraying.arraybot.commands.command.custom.entities.CustomCommandPermis
 import de.arraying.arraybot.commands.command.custom.entities.CustomCommandSyntax
 import de.arraying.arraybot.commands.command.custom.entities.CustomCommandTypes
 import de.arraying.arraybot.commands.command.custom.parameters.CustomCommandParameter
-import de.arraying.arraybot.commands.command.custom.types.CustomCommandType
+import de.arraying.arraybot.core.iface.ICustomCommandType
 import de.arraying.arraybot.language.Messages
 import net.dv8tion.jda.core.entities.TextChannel
 import org.apache.commons.io.IOUtils
@@ -38,7 +38,7 @@ import java.util.regex.Pattern
 object CustomCommands {
 
     internal val storage = DataStorage<CustomCommandDataStorage>()
-    internal val types = LinkedHashMap<CustomCommandTypes, CustomCommandType>()
+    internal val types = LinkedHashMap<CustomCommandTypes, ICustomCommandType>()
     internal val parameters = LinkedHashMap<String, CustomCommandParameter>()
     private val pastebinfactory = PastebinFactory()
     private val pastebin = pastebinfactory.createPastebin(Arraybot.instance.configuration.keyPastebin)
