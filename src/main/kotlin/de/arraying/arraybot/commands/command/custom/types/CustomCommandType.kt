@@ -2,7 +2,7 @@ package de.arraying.arraybot.commands.command.custom.types
 
 import de.arraying.arraybot.commands.command.custom.entities.CustomCommandTypes
 import de.arraying.arraybot.commands.other.CommandEnvironment
-import de.arraying.arraybot.iface.IResultMessage
+import de.arraying.arraybot.core.iface.IResultMessage
 
 /**
  * Copyright 2017 Arraying

@@ -7,8 +7,9 @@ import de.arraying.arraybot.commands.command.custom.entities.CustomCommandPermis
 import de.arraying.arraybot.commands.command.custom.entities.CustomCommandSyntax
 import de.arraying.arraybot.commands.command.custom.entities.CustomCommandTypes
 import de.arraying.arraybot.commands.other.CommandEnvironment
-import de.arraying.arraybot.iface.ICommand
+import de.arraying.arraybot.core.iface.ICommand
 import de.arraying.arraybot.language.Messages
+import de.arraying.arraybot.utils.UPlaceholders
 import de.arraying.arraybot.utils.Utils
 import net.dv8tion.jda.core.exceptions.PermissionException
 
@@ -118,6 +119,7 @@ class CustomCommand(val id: Long,
             Messages.CUSTOMCOMMAND_PERMISSION.send(channel).queue()
             return
         }
+        value = UPlaceholders.process(environment.member, value)
         for(parameter in CustomCommands.parameters.values) {
             while(value.toLowerCase().contains(parameter.trigger)) {
                 value = parameter.handleParameter(environment, value)

@@ -23,6 +23,7 @@ import de.arraying.arraybot.commands.command.moderation.ban.CommandBanTemp
 import de.arraying.arraybot.commands.command.moderation.filter.CommandFilter
 import de.arraying.arraybot.commands.command.moderation.filter.subcommands.*
 import de.arraying.arraybot.commands.command.moderation.kick.CommandKick
+import de.arraying.arraybot.commands.command.moderation.lookup.CommandLookup
 import de.arraying.arraybot.commands.command.moderation.mute.CommandMute
 import de.arraying.arraybot.commands.command.moderation.mute.CommandMuteTemp
 import de.arraying.arraybot.commands.command.utils.commands.CommandCommands
@@ -106,6 +107,7 @@ enum class CommandCollection(val command: DefaultCommand) {
     EVAL(CommandEval(arrayOf(
             SubCommandEvalKotlin(),
             SubCommandEvalJavascript()
-    )))
+    ))),
+    LOOKUP(CommandLookup())
 
 }

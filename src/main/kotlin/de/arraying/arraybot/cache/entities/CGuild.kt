@@ -2,7 +2,7 @@ package de.arraying.arraybot.cache.entities
 
 import de.arraying.arraybot.Arraybot
 import de.arraying.arraybot.commands.command.custom.CustomCommand
-import de.arraying.arraybot.iface.ICache
+import de.arraying.arraybot.core.iface.ICache
 import java.util.*
 
 /**

@@ -1,6 +1,7 @@
 package de.arraying.arraybot.commands.abstraction
 
 import de.arraying.arraybot.commands.other.CommandEnvironment
+import de.arraying.arraybot.core.punishment.PunishmentType
 import de.arraying.arraybot.language.Messages
 import de.arraying.arraybot.utils.UInput
 import de.arraying.arraybot.utils.ULimit
@@ -121,46 +122,6 @@ abstract class PunishmentCommand(val commandName: String,
                 || type == PunishmentType.UNKNOWN) {
             throw IllegalArgumentException("The punishment type provided is invalid.")
         }
-    }
-
-    enum class PunishmentType {
-
-        KICK,
-        TEMPMUTE,
-        UNMUTE,
-        MUTE,
-        SOFTBAN,
-        TEMPBAN,
-        UNBAN,
-        BAN,
-        UNKNOWN;
-
-        /**
-         * Whether or not the punishment type is temporary.
-         */
-        fun isTemp() = (this == TEMPMUTE || this == TEMPBAN)
-
-        companion object {
-
-            /**
-             * Gets the punishment type via string.
-             */
-            fun getPunishableType(value: String): PunishmentType {
-                var type: PunishmentType
-                try {
-                    type = PunishmentType.valueOf(value.toUpperCase())
-                    if(type == UNMUTE
-                            || type == UNBAN) {
-                        type = UNKNOWN
-                    }
-                } catch(exception: Exception) {
-                    type = UNKNOWN
-                }
-                return type
-            }
-
-        }
-
     }
 
 }

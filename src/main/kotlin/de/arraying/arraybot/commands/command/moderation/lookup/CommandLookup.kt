@@ -1,8 +1,7 @@
-package de.arraying.arraybot.commands.command.customization.custom
+package de.arraying.arraybot.commands.command.moderation.lookup
 
 import de.arraying.arraybot.commands.abstraction.DefaultCommand
 import de.arraying.arraybot.commands.other.CommandEnvironment
-import de.arraying.arraybot.core.iface.ISubCommand
 import de.arraying.arraybot.language.Messages
 import de.arraying.arraybot.utils.Utils
 import net.dv8tion.jda.core.Permission
@@ -22,23 +21,31 @@ import net.dv8tion.jda.core.Permission
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-class CommandCustom(override val subCommands: Array<ISubCommand>):
-        DefaultCommand("custom",
-                CommandCategory.CUSTOMIZATION,
-                Permission.MANAGE_SERVER,
-                subCommands) {
+class CommandLookup:
+        DefaultCommand("lookup",
+                CommandCategory.MODERATION,
+                Permission.KICK_MEMBERS){
 
     /**
-     * Invokes the command. Shows a list of commands.
+     * Invokes the default command which looks up the punishment.
      */
     override fun onDefaultCommand(environment: CommandEnvironment, args: Array<String>) {
         val channel = environment.channel
-        val embed = Utils.getEmbed(channel)
-                .setDescription(Messages.COMMAND_CUSTOM_EMBED_DESCRIPTION.content(channel))
-                .addField(Messages.COMMAND_CUSTOM_EMBED_TITLE.content(channel),
-                        Messages.COMMAND_CUSTOM_EMBED_VALUE.content(channel),
-                        false)
-        channel.sendMessage(embed.build()).queue()
+        if(args.size < 2) {
+            Messages.COMMAND_LOOKUP_PROVIDE.send(channel).queue()
+            return
+        }
+        if(!Utils.isLong(args[1])) {
+            Messages.COMMAND_LOOKUP_INVALID.send(channel).queue()
+            return
+        }
+        val punishmentId = args[1].toLong()
+        val cache = environment.cache!!
+        if(!cache.punishments.containsKey(punishmentId)) {
+            Messages.COMMAND_LOOKUP_EXISTS.send(channel).queue()
+            return
+        }
+        channel.sendMessage(arraybot.managerPunish.getPunishmentEmbed(environment.guild, punishmentId)?.build()).queue()
     }
 
 }

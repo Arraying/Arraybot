@@ -1,7 +1,7 @@
-package de.arraying.arraybot.commands.other
+package de.arraying.arraybot.core.scheduler
 
-import de.arraying.arraybot.core.iface.ICommand
 import java.util.*
+import kotlin.concurrent.timer
 
 /**
  * Copyright 2017 Arraying
@@ -18,23 +18,32 @@ import java.util.*
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-class CommandComparator: Comparator<ICommand> {
+abstract class SchedulerTask(val delay: Long, val period: Long, val once: Boolean) {
+
+    private lateinit var task: Timer
 
     /**
-     * Compares the two commands.
+     * Schedules the task.
      */
-    override fun compare(command1: ICommand?, command2: ICommand?): Int {
-        if(command1 == null
-                && command2 == null) {
-            return 0
+    fun schedule() {
+        task = timer(initialDelay = delay, period = period) {
+            onTask()
+            if(once) {
+                this.cancel()
+            }
         }
-        if(command1 == null) {
-            return -69
-        }
-        if(command2 == null) {
-            return 69
-        }
-        return command1.name.compareTo(command2.name)
     }
+
+    /**
+     * Stops the task.
+     */
+    fun stop() {
+        task.cancel()
+    }
+
+    /**
+     * What happens when the task is invoked.
+     */
+    abstract fun onTask()
 
 }

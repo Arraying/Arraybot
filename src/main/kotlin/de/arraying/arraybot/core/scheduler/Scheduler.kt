@@ -1,4 +1,4 @@
-package de.arraying.arraybot.scheduler
+package de.arraying.arraybot.core.scheduler
 
 /**
  * Copyright 2017 Arraying

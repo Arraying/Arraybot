@@ -1,7 +1,6 @@
-package de.arraying.arraybot.scheduler
+package de.arraying.arraybot.core.iface
 
-import java.util.*
-import kotlin.concurrent.timer
+import de.arraying.arraybot.commands.other.CommandEnvironment
 
 /**
  * Copyright 2017 Arraying
@@ -18,32 +17,23 @@ import kotlin.concurrent.timer
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-abstract class SchedulerTask(val delay: Long, val period: Long, val once: Boolean) {
-
-    private lateinit var task: Timer
+interface ISubCommand {
 
     /**
-     * Schedules the task.
+     * The name of the subcommand.
      */
-    fun schedule() {
-        task = timer(initialDelay = delay, period = period) {
-            onTask()
-            if(once) {
-                this.cancel()
-            }
-        }
+    val subCommandName: String
+
+    /**
+     * Gets the aliases.
+     */
+    fun getAliases(): Array<String> {
+        return arrayOf()
     }
 
     /**
-     * Stops the task.
+     * What happens when the subcommand is invoked.
      */
-    fun stop() {
-        task.cancel()
-    }
-
-    /**
-     * What happens when the task is invoked.
-     */
-    abstract fun onTask()
+    fun onSubCommand(environment: CommandEnvironment, args: Array<String>)
 
 }

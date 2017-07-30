@@ -1,8 +1,8 @@
 package de.arraying.arraybot.cache.entities
 
 import de.arraying.arraybot.Arraybot
-import de.arraying.arraybot.iface.ICache
-import de.arraying.arraybot.managers.ManagerSQL
+import de.arraying.arraybot.core.iface.ICache
+import de.arraying.arraybot.core.managers.ManagerSQL
 
 /**
  * Copyright 2017 Arraying

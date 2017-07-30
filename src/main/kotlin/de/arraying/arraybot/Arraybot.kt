@@ -1,8 +1,8 @@
 package de.arraying.arraybot
 
 import de.arraying.arraybot.cache.Configuration
+import de.arraying.arraybot.core.managers.*
 import de.arraying.arraybot.language.Language
-import de.arraying.arraybot.managers.*
 import de.arraying.arraybot.misc.ArraybotException
 import de.arraying.arraybot.utils.UStartup
 import kotlinx.coroutines.experimental.CommonPool

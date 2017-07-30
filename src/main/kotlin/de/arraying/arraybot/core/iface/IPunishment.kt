@@ -1,6 +1,8 @@
-package de.arraying.arraybot.iface
+package de.arraying.arraybot.core.iface
 
-import de.arraying.arraybot.commands.other.CommandEnvironment
+import de.arraying.arraybot.core.punishment.PunishmentType
+import net.dv8tion.jda.core.entities.Guild
+import net.dv8tion.jda.core.entities.Member
 
 /**
  * Copyright 2017 Arraying
@@ -17,23 +19,13 @@ import de.arraying.arraybot.commands.other.CommandEnvironment
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-interface ISubCommand {
+interface IPunishment {
 
     /**
-     * The name of the subcommand.
+     * Gets the punishment type.
      */
-    val subCommandName: String
+    fun getPunishmentType(): PunishmentType
 
-    /**
-     * Gets the aliases.
-     */
-    fun getAliases(): Array<String> {
-        return arrayOf()
-    }
-
-    /**
-     * What happens when the subcommand is invoked.
-     */
-    fun onSubCommand(environment: CommandEnvironment, args: Array<String>)
+    fun punish(guild: Guild, id: Long, member: Member): Boolean
 
 }

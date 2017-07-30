@@ -1,4 +1,6 @@
-package de.arraying.arraybot.iface
+package de.arraying.arraybot.core.punishment
+
+import de.arraying.arraybot.core.iface.IPunishment
 
 /**
  * Copyright 2017 Arraying
@@ -15,4 +17,4 @@ package de.arraying.arraybot.iface
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-interface ICache
+enum class Punishments(val punishment: IPunishment)

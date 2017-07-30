@@ -1,4 +1,4 @@
-package de.arraying.arraybot.iface
+package de.arraying.arraybot.core.iface
 
 import de.arraying.arraybot.commands.other.CommandEnvironment
 

@@ -1,6 +1,4 @@
-package de.arraying.arraybot.iface
-
-import net.dv8tion.jda.core.entities.TextChannel
+package de.arraying.arraybot.core.iface
 
 /**
  * Copyright 2017 Arraying
@@ -17,8 +15,4 @@ import net.dv8tion.jda.core.entities.TextChannel
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-interface IResultMessage {
-
-    fun getMessage(channel: TextChannel): String
-
-}
+interface ICache

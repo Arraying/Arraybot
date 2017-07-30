@@ -1,6 +1,6 @@
-package de.arraying.arraybot.cache.entities
+package de.arraying.arraybot.core.iface
 
-import de.arraying.arraybot.core.iface.ICache
+import net.dv8tion.jda.core.entities.TextChannel
 
 /**
  * Copyright 2017 Arraying
@@ -17,6 +17,8 @@ import de.arraying.arraybot.core.iface.ICache
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-data class CValue(val id: Long,
-                  val value: String):
-        ICache
+interface IResultMessage {
+
+    fun getMessage(channel: TextChannel): String
+
+}

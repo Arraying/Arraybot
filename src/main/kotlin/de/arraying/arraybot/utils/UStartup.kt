@@ -3,11 +3,11 @@ package de.arraying.arraybot.utils
 import de.arraying.arraybot.Arraybot
 import de.arraying.arraybot.cache.Cache
 import de.arraying.arraybot.commands.command.developer.eval.Evaluator
+import de.arraying.arraybot.core.managers.ManagerPunish
+import de.arraying.arraybot.core.managers.ManagerRegistry
+import de.arraying.arraybot.core.managers.ManagerSQL
+import de.arraying.arraybot.core.managers.ManagerScheduler
 import de.arraying.arraybot.language.Language
-import de.arraying.arraybot.managers.ManagerPunish
-import de.arraying.arraybot.managers.ManagerRegistry
-import de.arraying.arraybot.managers.ManagerSQL
-import de.arraying.arraybot.managers.ManagerScheduler
 import de.arraying.arraybot.misc.ArraybotException
 
 /**
@@ -54,6 +54,7 @@ object UStartup {
         registry.registerCommands()
         registry.registerCustomCommandTypes()
         registry.registerCustomCommandParameters()
+        registry.registerPunishmentTypes()
         arraybot.logger.info("Finished registering everything.")
     }
 

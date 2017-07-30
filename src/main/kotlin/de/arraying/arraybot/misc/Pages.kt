@@ -4,7 +4,7 @@ import de.arraying.arraybot.cache.Cache
 import de.arraying.arraybot.commands.abstraction.DefaultCommand
 import de.arraying.arraybot.commands.command.custom.CustomCommand
 import de.arraying.arraybot.commands.command.custom.entities.CustomCommandSyntax
-import de.arraying.arraybot.iface.ICommand
+import de.arraying.arraybot.core.iface.ICommand
 import de.arraying.arraybot.language.Messages
 import net.dv8tion.jda.core.entities.TextChannel
 import java.util.*

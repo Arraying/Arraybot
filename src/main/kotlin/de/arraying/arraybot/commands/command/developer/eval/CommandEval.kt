@@ -2,7 +2,7 @@ package de.arraying.arraybot.commands.command.developer.eval
 
 import de.arraying.arraybot.commands.abstraction.DefaultCommand
 import de.arraying.arraybot.commands.other.CommandEnvironment
-import de.arraying.arraybot.iface.ISubCommand
+import de.arraying.arraybot.core.iface.ISubCommand
 import de.arraying.arraybot.language.Messages
 import net.dv8tion.jda.core.Permission
 

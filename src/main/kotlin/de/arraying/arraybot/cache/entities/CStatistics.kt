@@ -1,6 +1,6 @@
 package de.arraying.arraybot.cache.entities
 
-import de.arraying.arraybot.iface.ICache
+import de.arraying.arraybot.core.iface.ICache
 
 /**
  * Copyright 2017 Arraying

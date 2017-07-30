@@ -1,4 +1,4 @@
-package de.arraying.arraybot.managers
+package de.arraying.arraybot.core.managers
 
 import de.arraying.arraybot.Arraybot
 import de.arraying.arraybot.cache.Cache

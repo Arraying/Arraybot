@@ -1,11 +1,11 @@
 package de.arraying.arraybot.commands.command.moderation.filter.subcommands
 
 import de.arraying.arraybot.commands.other.CommandEnvironment
-import de.arraying.arraybot.iface.ISubCommand
+import de.arraying.arraybot.core.iface.ISubCommand
 import de.arraying.arraybot.language.Messages
 import de.arraying.arraybot.misc.Pages
 import de.arraying.arraybot.utils.Utils
-import java.util.TreeSet
+import java.util.*
 
 /**
  * Copyright 2017 Arraying

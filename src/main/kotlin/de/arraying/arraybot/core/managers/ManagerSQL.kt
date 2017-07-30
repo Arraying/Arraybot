@@ -1,4 +1,4 @@
-package de.arraying.arraybot.managers
+package de.arraying.arraybot.core.managers
 
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
@@ -9,7 +9,7 @@ import de.arraying.arraybot.commands.command.custom.CustomCommand
 import de.arraying.arraybot.commands.command.custom.entities.CustomCommandPermission
 import de.arraying.arraybot.commands.command.custom.entities.CustomCommandSyntax
 import de.arraying.arraybot.commands.command.custom.entities.CustomCommandTypes
-import de.arraying.arraybot.iface.ICache
+import de.arraying.arraybot.core.iface.ICache
 import de.arraying.arraybot.language.Language
 import de.arraying.arraybot.misc.ArraybotException
 import de.arraying.arraybot.misc.SQLQuery
@@ -218,18 +218,22 @@ class ManagerSQL {
     /**
      * Adds a punishment.
      */
-    fun addPunishment(id: Long, punishmentId: Long, user: Long, type: String, staff: Long, expiration: Long, revoked: Boolean, reason: String): CPunishment? {
+    fun addPunishment(id: Long, punishmentId: Long, user: Long, userString: String, type: String,
+                      staff: Long, staffString: String, expiration: Long, revoked: Boolean, reason: String): CPunishment? {
         val punishment = CPunishment(id,
                 punishmentId,
                 user,
+                userString,
                 type,
                 staff,
+                staffString,
                 expiration,
                 revoked,
                 reason)
-        SQLQuery("INSERT INTO ${Table.PUNISHMENTS.tableName}(`id`, `punishment_id`, `user`, `type`, `staff`, `expiration`, `revoked`, `reason`) "+
-                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?)", dataSource)
-                .with(id, punishmentId, user, type, staff, expiration, revoked, reason)
+        SQLQuery("INSERT INTO ${Table.PUNISHMENTS.tableName}(`id`, `punishment_id`, `user`, `user_string`, `type`, " +
+                    "`staff`, `staff_string`, `expiration`, `revoked`, `reason`) "+
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", dataSource)
+                .with(id, punishmentId, user, userString, type, staff, staffString, expiration, revoked, reason)
                 .update()
         val guild = getGuild(id)?: return null
         guild.punishments.put(punishmentId, punishment)
@@ -431,8 +435,10 @@ class ManagerSQL {
                             "`id` BIGINT, " +
                             "`punishment_id` BIGINT, " +
                             "`user` BIGINT, " +
+                            "`user_string` TEXT, " +
                             "`type` TEXT, " +
                             "`staff` BIGINT, " +
+                            "`staff_string` TEXT, " +
                             "`expiration` BIGINT, " +
                             "`revoked` BOOLEAN DEFAULT FALSE, " +
                             "`reason` TEXT);",

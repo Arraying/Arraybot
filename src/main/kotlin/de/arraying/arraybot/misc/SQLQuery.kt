@@ -1,7 +1,7 @@
 package de.arraying.arraybot.misc
 
 import com.zaxxer.hikari.HikariDataSource
-import de.arraying.arraybot.iface.ICache
+import de.arraying.arraybot.core.iface.ICache
 import java.sql.PreparedStatement
 import java.sql.ResultSet
 import java.util.*

@@ -1,9 +1,8 @@
 package de.arraying.arraybot.cache.entities
 
 import de.arraying.arraybot.Arraybot
-import de.arraying.arraybot.commands.abstraction.PunishmentCommand
-import de.arraying.arraybot.iface.ICache
-import net.dv8tion.jda.core.entities.User
+import de.arraying.arraybot.core.iface.ICache
+import de.arraying.arraybot.core.punishment.PunishmentType
 
 /**
  * Copyright 2017 Arraying
@@ -23,17 +22,17 @@ import net.dv8tion.jda.core.entities.User
 class CPunishment(val id: Long,
                   val punishmentId: Long,
                   val user: Long,
+                  val userString: String,
                   rawType: String,
                   val staff: Long,
+                  val staffString: String,
                   val expiration: Long,
                   revoked: Boolean,
                   val reason: String):
         ICache {
 
     private val arraybot = Arraybot.instance
-    val type = PunishmentCommand.PunishmentType.getPunishableType(rawType)
-    var nullableUser: User? = null
-    var nullableStaff: User? = null
+    val type = PunishmentType.getPunishableType(rawType)
 
     /**
      * Marks the punishment as revoked.

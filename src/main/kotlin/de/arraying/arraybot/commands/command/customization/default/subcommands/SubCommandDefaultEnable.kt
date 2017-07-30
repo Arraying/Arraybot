@@ -3,7 +3,7 @@ package de.arraying.arraybot.commands.command.customization.default.subcommands
 import de.arraying.arraybot.Arraybot
 import de.arraying.arraybot.commands.Commands
 import de.arraying.arraybot.commands.other.CommandEnvironment
-import de.arraying.arraybot.iface.ISubCommand
+import de.arraying.arraybot.core.iface.ISubCommand
 import de.arraying.arraybot.language.Messages
 
 /**

@@ -6,7 +6,7 @@ import de.arraying.arraybot.cache.entities.CGuild
 import de.arraying.arraybot.commands.abstraction.DefaultCommand
 import de.arraying.arraybot.commands.other.CommandComparator
 import de.arraying.arraybot.commands.other.CommandEnvironment
-import de.arraying.arraybot.iface.ICommand
+import de.arraying.arraybot.core.iface.ICommand
 import net.dv8tion.jda.core.Permission
 import net.dv8tion.jda.core.entities.Member
 import net.dv8tion.jda.core.entities.TextChannel
