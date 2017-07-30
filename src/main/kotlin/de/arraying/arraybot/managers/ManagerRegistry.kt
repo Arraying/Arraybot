@@ -1,11 +1,11 @@
 package de.arraying.arraybot.managers
 
 import de.arraying.arraybot.Arraybot
-import de.arraying.arraybot.commands.other.CommandCollection
 import de.arraying.arraybot.commands.Commands
-import de.arraying.arraybot.commands.commands.custom.CustomCommands
-import de.arraying.arraybot.commands.commands.custom.collections.CustomCommandParameterCollection
-import de.arraying.arraybot.commands.commands.custom.collections.CustomCommandTypeCollection
+import de.arraying.arraybot.commands.command.custom.CustomCommands
+import de.arraying.arraybot.commands.command.custom.collections.CustomCommandParameterCollection
+import de.arraying.arraybot.commands.command.custom.collections.CustomCommandTypeCollection
+import de.arraying.arraybot.commands.other.CommandCollection
 
 /**
  * Copyright 2017 Arraying
@@ -89,7 +89,7 @@ class ManagerRegistry {
 //     */
 //    fun registerAllSubCommands() {
 //        Reflections("de.arraying.arraybot.commands.commands")
-//                .getSubTypesOf(SubCommand::class.java)
+//                .getSubTypesOf(ISubCommand::class.java)
 //                .forEach {
 //                    val subCommand = it.newInstance()
 //                    val subCommandCommandName = subCommand.commandName.toLowerCase()

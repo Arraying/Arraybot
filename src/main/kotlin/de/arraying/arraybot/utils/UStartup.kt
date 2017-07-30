@@ -2,7 +2,7 @@ package de.arraying.arraybot.utils
 
 import de.arraying.arraybot.Arraybot
 import de.arraying.arraybot.cache.Cache
-import de.arraying.arraybot.commands.commands.developer.eval.Evaluator
+import de.arraying.arraybot.commands.command.developer.eval.Evaluator
 import de.arraying.arraybot.language.Language
 import de.arraying.arraybot.managers.ManagerPunish
 import de.arraying.arraybot.managers.ManagerRegistry

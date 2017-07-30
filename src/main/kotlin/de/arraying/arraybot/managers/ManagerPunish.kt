@@ -4,17 +4,18 @@ import de.arraying.arraybot.Arraybot
 import de.arraying.arraybot.cache.Cache
 import de.arraying.arraybot.cache.entities.CGuild
 import de.arraying.arraybot.cache.entities.CPunishment
-import de.arraying.arraybot.commands.types.PunishmentCommand
+import de.arraying.arraybot.commands.abstraction.PunishmentCommand
 import de.arraying.arraybot.language.Messages
+import de.arraying.arraybot.misc.CustomEmbedBuilder
 import de.arraying.arraybot.scheduler.Scheduler
 import de.arraying.arraybot.scheduler.SchedulerTask
-import de.arraying.arraybot.utils.Utils
-import de.arraying.arraybot.misc.CustomEmbedBuilder
 import de.arraying.arraybot.utils.UTime
+import de.arraying.arraybot.utils.Utils
 import net.dv8tion.jda.core.entities.Guild
 import net.dv8tion.jda.core.entities.Member
 import net.dv8tion.jda.core.entities.User
 import net.dv8tion.jda.core.exceptions.PermissionException
+
 /**
  * Copyright 2017 Arraying
  *

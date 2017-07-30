@@ -1,8 +1,8 @@
 package de.arraying.arraybot.cache.entities
 
 import de.arraying.arraybot.Arraybot
+import de.arraying.arraybot.commands.abstraction.PunishmentCommand
 import de.arraying.arraybot.iface.ICache
-import de.arraying.arraybot.commands.types.PunishmentCommand
 import net.dv8tion.jda.core.entities.User
 
 /**

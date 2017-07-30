@@ -5,11 +5,11 @@ import com.zaxxer.hikari.HikariDataSource
 import de.arraying.arraybot.Arraybot
 import de.arraying.arraybot.cache.Cache
 import de.arraying.arraybot.cache.entities.*
+import de.arraying.arraybot.commands.command.custom.CustomCommand
+import de.arraying.arraybot.commands.command.custom.entities.CustomCommandPermission
+import de.arraying.arraybot.commands.command.custom.entities.CustomCommandSyntax
+import de.arraying.arraybot.commands.command.custom.entities.CustomCommandTypes
 import de.arraying.arraybot.iface.ICache
-import de.arraying.arraybot.commands.commands.custom.entities.CustomCommandPermission
-import de.arraying.arraybot.commands.commands.custom.entities.CustomCommandSyntax
-import de.arraying.arraybot.commands.commands.custom.entities.CustomCommandTypes
-import de.arraying.arraybot.commands.types.CustomCommand
 import de.arraying.arraybot.language.Language
 import de.arraying.arraybot.misc.ArraybotException
 import de.arraying.arraybot.misc.SQLQuery

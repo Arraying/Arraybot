@@ -1,8 +1,8 @@
 package de.arraying.arraybot.listeners
 
 import de.arraying.arraybot.cache.Cache
-import de.arraying.arraybot.commands.other.CommandEnvironment
 import de.arraying.arraybot.commands.Commands
+import de.arraying.arraybot.commands.other.CommandEnvironment
 import kotlinx.coroutines.experimental.CommonPool
 import kotlinx.coroutines.experimental.launch
 import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent
