@@ -1,8 +1,8 @@
 package de.arraying.arraybot.commands.abstraction
 
 import de.arraying.arraybot.commands.other.CommandEnvironment
+import de.arraying.arraybot.core.language.Messages
 import de.arraying.arraybot.core.punishment.PunishmentType
-import de.arraying.arraybot.language.Messages
 import de.arraying.arraybot.utils.UInput
 import de.arraying.arraybot.utils.ULimit
 import de.arraying.arraybot.utils.UPermission

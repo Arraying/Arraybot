@@ -1,4 +1,8 @@
-package de.arraying.arraybot.utils
+package de.arraying.arraybot.listeners
+
+import de.arraying.arraybot.Arraybot
+import net.dv8tion.jda.core.events.guild.GuildJoinEvent
+import net.dv8tion.jda.core.hooks.ListenerAdapter
 
 /**
  * Copyright 2017 Arraying
@@ -15,16 +19,19 @@ package de.arraying.arraybot.utils
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-enum class ULimit(val maxLength: Int) {
+class ListenerSQL:
+        ListenerAdapter() {
 
-    MESSAGE(2000),
-    PREFIX(128),
-    IDENTIFIER(128),
-    CUSTOM_COMMAND_VALUE(1900),
-    ANNOUNCEMENT(1900),
-    NICKNAME(32),
-    REASON(512),
-    FILTER_PHRASE(1000),
-    FILTER_MESSAGE(1900)
+    private val arraybot = Arraybot.instance
+
+    /**
+     * When the bot is added to a guild.
+     */
+    override fun onGuildJoin(event: GuildJoinEvent?) {
+        if(event == null) {
+            return
+        }
+        arraybot.managerSql.addGuild(event.guild.idLong)
+    }
 
 }

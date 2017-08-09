@@ -1,4 +1,10 @@
-package de.arraying.arraybot.utils
+package de.arraying.arraybot.core.punishment.types
+
+import de.arraying.arraybot.core.iface.IPunishment
+import de.arraying.arraybot.core.punishment.PunishmentType
+import de.arraying.arraybot.utils.UPunish
+import net.dv8tion.jda.core.entities.Guild
+import net.dv8tion.jda.core.entities.Member
 
 /**
  * Copyright 2017 Arraying
@@ -15,16 +21,15 @@ package de.arraying.arraybot.utils
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-enum class ULimit(val maxLength: Int) {
+class PunishmentTypeUnknown:
+        IPunishment {
 
-    MESSAGE(2000),
-    PREFIX(128),
-    IDENTIFIER(128),
-    CUSTOM_COMMAND_VALUE(1900),
-    ANNOUNCEMENT(1900),
-    NICKNAME(32),
-    REASON(512),
-    FILTER_PHRASE(1000),
-    FILTER_MESSAGE(1900)
+    /**
+     * Invokes the punishment.
+     */
+    override fun invoke(guild: Guild, id: Long, member: Member, reason: String): Boolean {
+        UPunish.invalidInvocation(PunishmentType.UNKNOWN)
+        return false
+    }
 
 }

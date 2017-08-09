@@ -1,4 +1,4 @@
-package de.arraying.arraybot.language
+package de.arraying.arraybot.core.language
 
 import de.arraying.arraybot.Arraybot
 import de.arraying.arraybot.cache.Cache

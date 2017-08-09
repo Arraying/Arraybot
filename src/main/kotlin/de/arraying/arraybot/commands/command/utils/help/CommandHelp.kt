@@ -2,7 +2,7 @@ package de.arraying.arraybot.commands.command.utils.help
 
 import de.arraying.arraybot.commands.abstraction.DefaultCommand
 import de.arraying.arraybot.commands.other.CommandEnvironment
-import de.arraying.arraybot.language.Messages
+import de.arraying.arraybot.core.language.Messages
 import de.arraying.arraybot.utils.Utils
 import net.dv8tion.jda.core.Permission
 

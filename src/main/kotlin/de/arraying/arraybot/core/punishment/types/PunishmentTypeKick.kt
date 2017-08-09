@@ -1,6 +1,8 @@
-package de.arraying.arraybot.core.punishment
+package de.arraying.arraybot.core.punishment.types
 
 import de.arraying.arraybot.core.iface.IPunishment
+import net.dv8tion.jda.core.entities.Guild
+import net.dv8tion.jda.core.entities.Member
 
 /**
  * Copyright 2017 Arraying
@@ -17,4 +19,20 @@ import de.arraying.arraybot.core.iface.IPunishment
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-enum class Punishments(val punishment: IPunishment)
+class PunishmentTypeKick:
+        IPunishment {
+
+    /**
+     * Invokes the punishment.
+     */
+    override fun invoke(guild: Guild, id: Long, member: Member, reason: String): Boolean {
+        var success = false
+        try {
+            guild.controller.kick(member, reason).queue {
+                success = true
+            }
+        } catch(exception: IllegalArgumentException) {}
+        return success
+    }
+
+}

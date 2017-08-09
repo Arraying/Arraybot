@@ -3,7 +3,7 @@ package de.arraying.arraybot.listeners
 import de.arraying.arraybot.cache.Cache
 import de.arraying.arraybot.cache.entities.CBypass
 import de.arraying.arraybot.cache.entities.CMod
-import de.arraying.arraybot.language.Messages
+import de.arraying.arraybot.core.language.Messages
 import de.arraying.arraybot.utils.UPlaceholders
 import kotlinx.coroutines.experimental.CommonPool
 import kotlinx.coroutines.experimental.launch

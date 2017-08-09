@@ -2,10 +2,7 @@ package de.arraying.arraybot.core.managers
 
 import de.arraying.arraybot.Arraybot
 import de.arraying.arraybot.cache.Cache
-import de.arraying.arraybot.listeners.ListenerCommand
-import de.arraying.arraybot.listeners.ListenerFilter
-import de.arraying.arraybot.listeners.ListenerJDA
-import de.arraying.arraybot.listeners.ListenerPunishment
+import de.arraying.arraybot.listeners.*
 import de.arraying.arraybot.misc.ArraybotException
 import kotlinx.coroutines.experimental.CommonPool
 import kotlinx.coroutines.experimental.async
@@ -40,7 +37,7 @@ class ManagerBot {
     val shards = TreeMap<Int, JDA>()
     private val arraybot = Arraybot.instance
     private val logger = arraybot.logger
-    private val eventListeners = arrayOf(ListenerCommand(), ListenerJDA(), ListenerPunishment(), ListenerFilter())
+    private val eventListeners = arrayOf(ListenerCommand(), ListenerJDA(), ListenerPunishment(), ListenerFilter(), ListenerSQL())
     private val shardTotal = arraybot.configuration.botShards
 
     /**

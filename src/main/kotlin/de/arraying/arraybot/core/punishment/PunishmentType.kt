@@ -1,5 +1,8 @@
 package de.arraying.arraybot.core.punishment
 
+import de.arraying.arraybot.core.iface.IPunishment
+import de.arraying.arraybot.core.punishment.types.*
+
 /**
  * Copyright 2017 Arraying
  *
@@ -15,17 +18,17 @@ package de.arraying.arraybot.core.punishment
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-enum class PunishmentType {
+enum class PunishmentType(val punishment: IPunishment) {
 
-    KICK,
-    TEMPMUTE,
-    UNMUTE,
-    MUTE,
-    SOFTBAN,
-    TEMPBAN,
-    UNBAN,
-    BAN,
-    UNKNOWN;
+    KICK(PunishmentTypeKick()),
+    TEMPMUTE(PunishmentTypeTempMute()),
+    UNMUTE(PunishmentTypeUnMute()),
+    MUTE(PunishmentTypeMute()),
+    SOFTBAN(PunishmentTypeSoftBan()),
+    TEMPBAN(PunishmentTypeTempBan()),
+    UNBAN(PunishmentTypeUnBan()),
+    BAN(PunishmentTypeBan()),
+    UNKNOWN(PunishmentTypeUnknown());
 
     /**
      * Whether or not the punishment type is temporary.

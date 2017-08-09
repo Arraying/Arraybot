@@ -2,7 +2,7 @@ package de.arraying.arraybot.utils
 
 import de.arraying.arraybot.Arraybot
 import de.arraying.arraybot.cache.Cache
-import de.arraying.arraybot.language.Messages
+import de.arraying.arraybot.core.language.Messages
 import de.arraying.arraybot.misc.CustomEmbedBuilder
 import net.dv8tion.jda.core.entities.Guild
 import net.dv8tion.jda.core.entities.TextChannel

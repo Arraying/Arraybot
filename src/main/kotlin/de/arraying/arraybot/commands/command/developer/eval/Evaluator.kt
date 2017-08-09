@@ -3,7 +3,7 @@ package de.arraying.arraybot.commands.command.developer.eval
 import de.arraying.arraybot.Arraybot
 import de.arraying.arraybot.cache.Cache
 import de.arraying.arraybot.commands.other.CommandEnvironment
-import de.arraying.arraybot.language.Messages
+import de.arraying.arraybot.core.language.Messages
 import de.arraying.arraybot.utils.ULimit
 import javax.script.ScriptEngineManager
 

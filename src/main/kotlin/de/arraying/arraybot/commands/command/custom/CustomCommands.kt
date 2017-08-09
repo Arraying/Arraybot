@@ -12,7 +12,7 @@ import de.arraying.arraybot.commands.command.custom.entities.CustomCommandSyntax
 import de.arraying.arraybot.commands.command.custom.entities.CustomCommandTypes
 import de.arraying.arraybot.commands.command.custom.parameters.CustomCommandParameter
 import de.arraying.arraybot.core.iface.ICustomCommandType
-import de.arraying.arraybot.language.Messages
+import de.arraying.arraybot.core.language.Messages
 import net.dv8tion.jda.core.entities.TextChannel
 import org.apache.commons.io.IOUtils
 import org.json.JSONObject

@@ -2,9 +2,9 @@ package de.arraying.arraybot.commands.command.developer.restart
 
 import de.arraying.arraybot.commands.abstraction.DefaultCommand
 import de.arraying.arraybot.commands.other.CommandEnvironment
+import de.arraying.arraybot.core.language.Messages
 import de.arraying.arraybot.core.scheduler.Scheduler
 import de.arraying.arraybot.core.scheduler.SchedulerTask
-import de.arraying.arraybot.language.Messages
 import de.arraying.arraybot.utils.Utils
 import kotlinx.coroutines.experimental.runBlocking
 import net.dv8tion.jda.core.Permission

@@ -1,6 +1,8 @@
-package de.arraying.arraybot.core.iface
+package de.arraying.arraybot.core.punishment.types
 
 import de.arraying.arraybot.cache.entities.CPunishment
+import de.arraying.arraybot.core.iface.IPunishment
+import de.arraying.arraybot.utils.UPunish
 import net.dv8tion.jda.core.entities.Guild
 import net.dv8tion.jda.core.entities.Member
 
@@ -19,20 +21,24 @@ import net.dv8tion.jda.core.entities.Member
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-interface IPunishment {
+class PunishmentTypeTempBan:
+        IPunishment {
 
     /**
      * Invokes the punishment.
-     * Returns false if unsuccessful.
      */
-    fun invoke(guild: Guild, id: Long, member: Member, reason: String): Boolean
+    override fun invoke(guild: Guild, id: Long, member: Member, reason: String): Boolean {
+        return UPunish.ban(guild, member, reason)
+    }
 
     /**
      * Revokes the punishment.
-     * Returns false if this punishment cannot be revoked.
      */
-    fun revoke(guild: Guild, punishment: CPunishment, manual: Boolean = false): Boolean {
-        return false
+    override fun revoke(guild: Guild, punishment: CPunishment, manual: Boolean): Boolean {
+        if(!manual) {
+            UPunish.unBan(guild, punishment)
+        }
+        return true
     }
 
 }

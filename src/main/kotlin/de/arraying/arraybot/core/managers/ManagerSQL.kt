@@ -10,7 +10,7 @@ import de.arraying.arraybot.commands.command.custom.entities.CustomCommandPermis
 import de.arraying.arraybot.commands.command.custom.entities.CustomCommandSyntax
 import de.arraying.arraybot.commands.command.custom.entities.CustomCommandTypes
 import de.arraying.arraybot.core.iface.ICache
-import de.arraying.arraybot.language.Language
+import de.arraying.arraybot.core.language.Language
 import de.arraying.arraybot.misc.ArraybotException
 import de.arraying.arraybot.misc.SQLQuery
 import de.arraying.arraybot.utils.Utils

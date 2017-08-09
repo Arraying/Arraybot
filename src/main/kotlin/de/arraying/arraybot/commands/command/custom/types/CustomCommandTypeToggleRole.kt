@@ -4,7 +4,7 @@ import de.arraying.arraybot.commands.command.custom.entities.CustomCommandTypes
 import de.arraying.arraybot.commands.command.custom.entities.action.CustomCommandRoleAction
 import de.arraying.arraybot.commands.other.CommandEnvironment
 import de.arraying.arraybot.core.iface.ICustomCommandType
-import de.arraying.arraybot.language.Messages
+import de.arraying.arraybot.core.language.Messages
 import net.dv8tion.jda.core.entities.TextChannel
 
 /**

@@ -1,6 +1,6 @@
-package de.arraying.arraybot.core.iface
+package de.arraying.arraybot.core.punishment.types
 
-import de.arraying.arraybot.cache.entities.CPunishment
+import de.arraying.arraybot.core.iface.IPunishment
 import net.dv8tion.jda.core.entities.Guild
 import net.dv8tion.jda.core.entities.Member
 
@@ -19,20 +19,22 @@ import net.dv8tion.jda.core.entities.Member
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-interface IPunishment {
+class PunishmentTypeSoftBan:
+        IPunishment {
 
     /**
      * Invokes the punishment.
-     * Returns false if unsuccessful.
      */
-    fun invoke(guild: Guild, id: Long, member: Member, reason: String): Boolean
-
-    /**
-     * Revokes the punishment.
-     * Returns false if this punishment cannot be revoked.
-     */
-    fun revoke(guild: Guild, punishment: CPunishment, manual: Boolean = false): Boolean {
-        return false
+    override fun invoke(guild: Guild, id: Long, member: Member, reason: String): Boolean {
+        var success = false
+        try {
+            guild.controller.ban(member.user.id, 1, reason).queue {
+                guild.controller.unban(member.user.id).queue {
+                    success = true
+                }
+            }
+        } catch(exception: IllegalArgumentException) {}
+        return success
     }
 
 }

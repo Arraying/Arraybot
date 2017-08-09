@@ -6,7 +6,6 @@ import de.arraying.arraybot.commands.command.custom.CustomCommands
 import de.arraying.arraybot.commands.command.custom.collections.CustomCommandParameterCollection
 import de.arraying.arraybot.commands.command.custom.collections.CustomCommandTypeCollection
 import de.arraying.arraybot.commands.other.CommandCollection
-import de.arraying.arraybot.core.punishment.Punishments
 
 /**
  * Copyright 2017 Arraying
@@ -59,17 +58,6 @@ class ManagerRegistry {
             val parameter = parameterEntry.parameter
             CustomCommands.parameters.put(parameter.trigger, parameter)
             logger.info("Registered the custom command parameter $parameterEntry.")
-        }
-    }
-
-    /**
-     * Registers all punishment types.
-     */
-    fun registerPunishmentTypes() {
-        for(punishmentEntry in Punishments.values()) {
-            val punishment = punishmentEntry.punishment
-            arraybot.managerPunish.punishmentTypes.put(punishment.getPunishmentType(), punishment)
-            logger.info("Registered the punishment type $punishmentEntry.")
         }
     }
 

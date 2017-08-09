@@ -4,7 +4,7 @@ import de.arraying.arraybot.commands.command.developer.eval.CommandEval
 import de.arraying.arraybot.commands.command.developer.eval.Evaluator
 import de.arraying.arraybot.commands.other.CommandEnvironment
 import de.arraying.arraybot.core.iface.ISubCommand
-import de.arraying.arraybot.language.Messages
+import de.arraying.arraybot.core.language.Messages
 
 /**
  * Copyright 2017 Arraying

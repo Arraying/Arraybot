@@ -2,20 +2,17 @@ package de.arraying.arraybot.core.managers
 
 import de.arraying.arraybot.Arraybot
 import de.arraying.arraybot.cache.Cache
-import de.arraying.arraybot.cache.entities.CGuild
 import de.arraying.arraybot.cache.entities.CPunishment
-import de.arraying.arraybot.core.iface.IPunishment
+import de.arraying.arraybot.core.language.Messages
 import de.arraying.arraybot.core.punishment.PunishmentType
 import de.arraying.arraybot.core.scheduler.Scheduler
 import de.arraying.arraybot.core.scheduler.SchedulerTask
-import de.arraying.arraybot.language.Messages
 import de.arraying.arraybot.misc.CustomEmbedBuilder
 import de.arraying.arraybot.utils.UTime
 import de.arraying.arraybot.utils.Utils
 import net.dv8tion.jda.core.entities.Guild
 import net.dv8tion.jda.core.entities.Member
 import net.dv8tion.jda.core.entities.User
-import net.dv8tion.jda.core.exceptions.PermissionException
 
 /**
  * Copyright 2017 Arraying
@@ -34,55 +31,30 @@ import net.dv8tion.jda.core.exceptions.PermissionException
  */
 class ManagerPunish {
 
-    val punishmentTypes = HashMap<PunishmentType, IPunishment>()
-
     /**
      * Punishes a user. Returns false if unsuccessful.
      */
-    fun punish(guild: Guild, punished: Long, type: PunishmentType, staff: Member, expiration: Long, reason: String): Boolean {
+    fun punish(guild: Guild, punishedId: Long, type: PunishmentType, staff: Member, expiration: Long, reason: String): Boolean {
         val cache = Cache.guilds[guild.idLong]?: return false
+        val punishedMember = guild.getMemberById(punishedId)?: return false
         val id = ++cache.mod!!.punishmentCount
-        val userString = getStringUser(punished, guild)
+        val userString = getStringUser(punishedId, guild)
         val staffString = getStringUser(staff.user)
-        val punishment = Arraybot.instance.managerSql.addPunishment(guild.idLong, id, punished, userString, type.toString(),
-                staff.user.idLong, staffString, expiration, false, reason)?: return false
-        var good = true
-        try {
-            when(type) {
-                PunishmentType.KICK -> {
-                    guild.getMemberById(punished)?: return false
-                    guild.controller.kick(punished.toString(), reason).queue({
-                        log(guild, id)
-                    }, {
-                        good = false
-                    })
-                }
-                PunishmentType.TEMPMUTE -> {
-                    val user = guild.getMemberById(punished)?: return false
-                    good = mute(guild, cache, id, user)
-                    handleTimedPunishment(guild, punishment)
-                }
-                PunishmentType.MUTE -> {
-                    val user = guild.getMemberById(punished)?: return false
-                    good = mute(guild, cache, id, user)
-                }
-                PunishmentType.SOFTBAN -> {
-                    val user = guild.getMemberById(punished)?: return false
-                    good = ban(guild, id, user.user.id, reason)
-                }
-                PunishmentType.TEMPBAN -> {
-                    good = ban(guild, id, punished.toString(), reason)
-                    handleTimedPunishment(guild, punishment)
-                }
-                PunishmentType.BAN -> {
-                    good = ban(guild, id, punished.toString(), reason)
-                }
-                else -> good = false
-            }
-        } catch(exception: PermissionException) {
-            good = false
+        val success = type.punishment.invoke(guild, punishedId, punishedMember, reason)
+        if(success) {
+            val punishment = Arraybot.instance.managerSql.addPunishment(guild.idLong,
+                    id,
+                    punishedId,
+                    userString,
+                    type.toString(),
+                    staff.user.idLong,
+                    staffString,
+                    expiration,
+                    false,
+                    reason)?: return false
+            handleTimedPunishment(guild, punishment)
         }
-        return good
+        return success
     }
 
     /**
@@ -92,30 +64,9 @@ class ManagerPunish {
         val cache = Cache.guilds[guild.idLong]?: return
         val punishment = cache.punishments[punishmentId]?: return
         punishment.revoked = true
-        if(punishment.type == PunishmentType.TEMPMUTE
-                || punishment.type == PunishmentType.MUTE) {
-            val user = guild.getMemberById(punishment.user)?: return
-            val role = guild.getRoleById(cache.mod!!.muteRole)?: return
-            if(!manual) {
-                if(!user.roles.contains(role)) {
-                    return
-                }
-                guild.controller.removeRolesFromMember(user, role).queue()
-            }
-        } else if(punishment.type == PunishmentType.TEMPBAN
-                || punishment.type == PunishmentType.BAN) {
-            if(!manual) {
-                if(!guild.bans.complete().any {
-                    it.id == punishment.user.toString()
-                }) {
-                    return
-                }
-                guild.controller.unban(punishment.user.toString()).queue()
-            }
-        } else {
-            return
+        if(punishment.type.punishment.revoke(guild, punishment, manual)) {
+            log(guild, punishmentId, true, manual)
         }
-        log(guild, punishmentId, true, manual)
     }
 
     /**
@@ -126,53 +77,47 @@ class ManagerPunish {
         val punishment = cache.punishments[punishmentId]?: return null
         val channel = guild.publicChannel
         val embed = Utils.getEmbed(channel)
-        var title = Messages.PUNISH_EMBED_TITLE.content(channel)
+        val title = Messages.PUNISH_EMBED_TITLE.content(channel)
                 .replace("{id}", punishmentId.toString())
-        if(!finish) {
-            title = title.replace("{type}", Utils.setFirstUppercase(punishment.type))
-        } else {
-            title = title.replace("{type}", Utils.setFirstUppercase(
-                    if(punishment.type == PunishmentType.TEMPMUTE
-                            || punishment.type == PunishmentType.MUTE) {
-                        PunishmentType.UNMUTE
-                    } else if(punishment.type == PunishmentType.TEMPBAN
-                            || punishment.type == PunishmentType.BAN){
-                        PunishmentType.UNBAN
+        embed.setAuthor(if(!finish) {
+                        title.replace("{type}", Utils.setFirstUppercase(punishment.type))
                     } else {
-                        PunishmentType.UNKNOWN
-                    }))
-        }
-        embed.setAuthor(title, null, null)
-        embed.addField(Messages.PUNISH_EMBED_USER.content(channel),
-                punishment.userString,
-                false)
-        val staffString: String =
-        if(!finish) {
-            punishment.staffString
-        } else {
-            if(!manual) {
-                Messages.PUNISH_EMBED_REVOCATION_AUTO.content(channel)
-            } else {
-                Messages.PUNISH_EMBED_REVOCATION_MANUAL.content(channel)
-            }
-        }
-        embed.addField(Messages.PUNISH_EMBED_STAFF.content(channel),
-                staffString,
+                        title.replace("{type}", Utils.setFirstUppercase(when(punishment.type) {
+                            PunishmentType.MUTE -> PunishmentType.UNMUTE
+                            PunishmentType.TEMPMUTE -> PunishmentType.UNMUTE
+                            PunishmentType.BAN -> PunishmentType.UNBAN
+                            PunishmentType.TEMPBAN -> PunishmentType.UNBAN
+                            else -> PunishmentType.UNKNOWN
+                        }))
+                    },
+                null, null)
+                .addField(Messages.PUNISH_EMBED_USER.content(channel),
+                    punishment.userString,
+                    false)
+                .addField(Messages.PUNISH_EMBED_STAFF.content(channel),
+                    if(!finish) {
+                        punishment.staffString
+                    } else {
+                        if(!manual) {
+                            Messages.PUNISH_EMBED_REVOCATION_AUTO.content(channel)
+                        } else {
+                            Messages.PUNISH_EMBED_REVOCATION_MANUAL.content(channel)
+                        }
+                    },
                 false)
         if(!finish) {
             embed.addField(Messages.PUNISH_EMBED_REASON.content(channel),
                     punishment.reason,
                     false)
-        }
-        if(punishment.expiration > 0
-                && !finish) {
-            try {
-                embed.addField(Messages.PUNISH_EMBED_EXPIRATION.content(channel),
-                        UTime.getDisplayableTime(guild, punishment.expiration),
-                        false)
-                embed.setFooter(Messages.PUNISH_EMBED_EXPIRATION_FOOTER.content(channel), null)
-            } catch(exception: Exception) {
-                throw IllegalArgumentException("The punishment expiration must be of an integer.")
+            if(punishment.expiration > 0) {
+                try {
+                    embed.addField(Messages.PUNISH_EMBED_EXPIRATION.content(channel),
+                            UTime.getDisplayableTime(guild, punishment.expiration),
+                            false)
+                    embed.setFooter(Messages.PUNISH_EMBED_EXPIRATION_FOOTER.content(channel), null)
+                } catch(exception: Exception) {
+                    throw IllegalArgumentException("The punishment expiration must be of an integer.")
+                }
             }
         }
         return embed
@@ -182,6 +127,10 @@ class ManagerPunish {
      * Handles the timed punishment, scheduling it if it needs to be.
      */
     fun handleTimedPunishment(guild: Guild, punishment: CPunishment) {
+        if(punishment.type != PunishmentType.TEMPMUTE
+                || punishment.type != PunishmentType.TEMPBAN) {
+            return
+        }
         val expiration = punishment.expiration
         val current = System.currentTimeMillis()
         if(expiration <= 0) {
@@ -216,33 +165,6 @@ class ManagerPunish {
                 }
                 ?.getUserById(id)?: return "${Messages.MISC_NONE.content(guild.publicChannel)} ($id)"
         return user.name + "#" + user.discriminator
-    }
-
-    /**
-     * Mutes a member. Returns false if unsuccessful.
-     */
-    private fun mute(guild: Guild, cache: CGuild, id: Long, user: Member): Boolean {
-        val role = guild.getRoleById(cache.mod!!.muteRole)?: return false
-        var good = true
-        guild.controller.addRolesToMember(user, role).queue({
-            log(guild, id)
-        }, {
-            good = false
-        })
-        return good
-    }
-
-    /**
-     * Bans a member. Returns false if unsuccessful.
-     */
-    private fun ban(guild: Guild, id: Long, user: String, reason: String): Boolean {
-        var good = true
-        guild.controller.ban(user, 0, reason).queue({
-            log(guild, id)
-        }, {
-            good = false
-        })
-        return good
     }
 
     /**
