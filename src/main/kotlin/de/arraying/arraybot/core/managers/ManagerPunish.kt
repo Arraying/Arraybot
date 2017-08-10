@@ -53,6 +53,7 @@ class ManagerPunish {
                     false,
                     reason)?: return false
             handleTimedPunishment(guild, punishment)
+            log(guild, id)
         }
         return success
     }
@@ -128,7 +129,7 @@ class ManagerPunish {
      */
     fun handleTimedPunishment(guild: Guild, punishment: CPunishment) {
         if(punishment.type != PunishmentType.TEMPMUTE
-                || punishment.type != PunishmentType.TEMPBAN) {
+                && punishment.type != PunishmentType.TEMPBAN) {
             return
         }
         val expiration = punishment.expiration

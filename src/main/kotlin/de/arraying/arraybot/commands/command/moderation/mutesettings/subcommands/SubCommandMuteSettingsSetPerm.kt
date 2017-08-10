@@ -1,12 +1,9 @@
-package de.arraying.arraybot.commands.command.customization.custom.subcommands
+package de.arraying.arraybot.commands.command.moderation.mutesettings.subcommands
 
-import de.arraying.arraybot.commands.command.custom.entities.CustomCommandPermission
 import de.arraying.arraybot.commands.other.CommandEnvironment
 import de.arraying.arraybot.core.iface.ISubCommand
 import de.arraying.arraybot.core.language.Messages
 import de.arraying.arraybot.utils.UPermission
-import de.arraying.arraybot.utils.Utils
-import net.dv8tion.jda.core.Permission
 
 /**
  * Copyright 2017 Arraying
@@ -23,7 +20,7 @@ import net.dv8tion.jda.core.Permission
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-class SubCommandCustomSetPerm: 
+class SubCommandMuteSettingsSetPerm:
         ISubCommand {
 
     /**
@@ -45,27 +42,17 @@ class SubCommandCustomSetPerm:
      */
     override fun onSubCommand(environment: CommandEnvironment, args: Array<String>) {
         val channel = environment.channel
-        val cache = environment.cache!!
         if(args.size < 3) {
-            Messages.COMMAND_CUSTOM_SPECIFY.send(channel).queue()
-            return
-        } else if(args.size < 4) {
-            Messages.COMMAND_CUSTOM_PERM_ARGUMENT.send(channel).queue()
+            Messages.COMMAND_MUTESETTINGS_SETPERM_PROVIDE.send(channel).queue()
             return
         }
-        val commandName = args[2].toLowerCase()
-        if(!cache.customCommands.containsKey(commandName)) {
-            Messages.COMMAND_CUSTOM_EXISTS.send(channel).queue()
-            return
-        }
-        val permissionName = args[3]
+        val permissionName = args[2]
         if(!UPermission.isPermission(environment.guild, permissionName)) {
-            Messages.COMMAND_CUSTOM_PERM_INVALID.send(channel).queue()
+            Messages.COMMAND_MUTESETTINGS_SETPERM_INVALID.send(channel).queue()
             return
         }
-        val permission = CustomCommandPermission(permissionName)
-        cache.customCommands[commandName]!!.permission = permission
-        Messages.COMMAND_CUSTOM_UPDATE.send(channel).queue()
+        environment.cache!!.mod!!.mutePermission = permissionName.toUpperCase()
+        Messages.COMMAND_MUTESETTINGS_SETPERM_UPDATE.send(channel).queue()
     }
 
 }

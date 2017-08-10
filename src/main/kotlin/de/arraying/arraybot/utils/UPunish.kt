@@ -6,6 +6,7 @@ import de.arraying.arraybot.cache.entities.CPunishment
 import de.arraying.arraybot.core.punishment.PunishmentType
 import net.dv8tion.jda.core.entities.Guild
 import net.dv8tion.jda.core.entities.Member
+import net.dv8tion.jda.core.exceptions.PermissionException
 
 /**
  * Copyright 2017 Arraying
@@ -33,7 +34,8 @@ object UPunish {
             guild.controller.ban(member, 0, reason).queue {
                 success = true
             }
-        } catch(exception: IllegalArgumentException) {}
+        } catch(exception: IllegalArgumentException) {
+        } catch(exception: PermissionException) {}
         return success
     }
 
@@ -48,7 +50,8 @@ object UPunish {
             guild.controller.addRolesToMember(member, role).queue({
                 success = true
             })
-        } catch(exception: IllegalArgumentException) {}
+        } catch(exception: IllegalArgumentException) {
+        } catch(exception: PermissionException) {}
         return success
     }
 

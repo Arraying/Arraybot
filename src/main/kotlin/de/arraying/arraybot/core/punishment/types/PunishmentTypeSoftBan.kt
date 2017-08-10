@@ -3,6 +3,7 @@ package de.arraying.arraybot.core.punishment.types
 import de.arraying.arraybot.core.iface.IPunishment
 import net.dv8tion.jda.core.entities.Guild
 import net.dv8tion.jda.core.entities.Member
+import net.dv8tion.jda.core.exceptions.PermissionException
 
 /**
  * Copyright 2017 Arraying
@@ -33,7 +34,8 @@ class PunishmentTypeSoftBan:
                     success = true
                 }
             }
-        } catch(exception: IllegalArgumentException) {}
+        } catch(exception: IllegalArgumentException) {
+        } catch(exception: PermissionException) {}
         return success
     }
 

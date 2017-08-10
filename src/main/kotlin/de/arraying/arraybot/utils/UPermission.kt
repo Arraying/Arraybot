@@ -1,6 +1,7 @@
 package de.arraying.arraybot.utils
 
 import net.dv8tion.jda.core.Permission
+import net.dv8tion.jda.core.entities.Guild
 import net.dv8tion.jda.core.entities.Member
 
 /**
@@ -32,6 +33,19 @@ object UPermission {
             return member.roles.any {
                 it.id == value
             }
+        }
+    }
+
+    /**
+     * Checks if the provided input string is a permission.
+     */
+    fun isPermission(guild: Guild, value: String): Boolean {
+        try {
+            Permission.valueOf(value.toUpperCase()).toString()
+            return true
+        } catch(exception: Exception) {
+            return Utils.isLong(value)
+                    && guild.getRoleById(value) != null
         }
     }
 

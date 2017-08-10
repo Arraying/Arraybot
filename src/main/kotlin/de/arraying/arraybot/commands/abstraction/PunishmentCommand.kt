@@ -47,14 +47,33 @@ abstract class PunishmentCommand(val commandName: String,
         val channel = environment.channel
         val staff = environment.member
         if((type == PunishmentType.MUTE
-                || type == PunishmentType.TEMPMUTE)
-                && !UPermission.hasPermission(staff, environment.cache!!.mod!!.mutePermission.toString())) {
-            Messages.PUNISH_COMMAND_PERMISSION.send(channel).queue()
-            return
+                || type == PunishmentType.TEMPMUTE)) {
+            val mod = environment.cache!!.mod!!
+            if(mod.mutePermission == null) {
+                Messages.PUNISH_COMMAND_MUTE_PERMISSION.send(channel).queue()
+                return
+            }
+            if(mod.muteRole == 0L) {
+                Messages.PUNISH_COMMAND_MUTE_ROLE.send(channel).queue()
+                return
+            }
+            if(!UPermission.hasPermission(staff, mod.mutePermission.toString())) {
+                Messages.PUNISH_COMMAND_PERMISSION.send(channel).queue()
+                return
+            }
         } else if(!staff.hasPermission(commandPermission)) {
             Messages.PUNISH_COMMAND_PERMISSION.send(channel).queue()
             return
         }
+//        if((type == PunishmentType.MUTE
+//                || type == PunishmentType.TEMPMUTE)
+//                && !UPermission.hasPermission(staff, environment.cache!!.mod!!.mutePermission.toString())) {
+//            Messages.PUNISH_COMMAND_PERMISSION.send(channel).queue()
+//            return
+//        } else if(!staff.hasPermission(commandPermission)) {
+//            Messages.PUNISH_COMMAND_PERMISSION.send(channel).queue()
+//            return
+//        }
         if(args.size < 2) {
             Messages.PUNISH_COMMAND_PROVIDE_USER.send(channel).queue()
             return

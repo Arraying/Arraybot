@@ -26,6 +26,9 @@ import de.arraying.arraybot.commands.command.moderation.kick.CommandKick
 import de.arraying.arraybot.commands.command.moderation.lookup.CommandLookup
 import de.arraying.arraybot.commands.command.moderation.mute.CommandMute
 import de.arraying.arraybot.commands.command.moderation.mute.CommandMuteTemp
+import de.arraying.arraybot.commands.command.moderation.mutesettings.CommandMuteSettings
+import de.arraying.arraybot.commands.command.moderation.mutesettings.subcommands.SubCommandMuteSettingsSetPerm
+import de.arraying.arraybot.commands.command.moderation.mutesettings.subcommands.SubCommandMuteSettingsSetRole
 import de.arraying.arraybot.commands.command.utils.commands.CommandCommands
 import de.arraying.arraybot.commands.command.utils.commands.subcommands.SubCommandCommandsCategory
 import de.arraying.arraybot.commands.command.utils.commands.subcommands.SubCommandCommandsInfo
@@ -108,6 +111,10 @@ enum class CommandCollection(val command: DefaultCommand) {
             SubCommandEvalKotlin(),
             SubCommandEvalJavascript()
     ))),
-    LOOKUP(CommandLookup())
-
+    LOOKUP(CommandLookup()),
+    // HISTORY
+    MUTE_SETTINGS(CommandMuteSettings(arrayOf(
+            SubCommandMuteSettingsSetPerm(),
+            SubCommandMuteSettingsSetRole()
+    )))
 }
