@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Arraybot.iml" filepath="$PROJECT_DIR$/.idea/modules/Arraybot.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Arraybot_main.iml" filepath="$PROJECT_DIR$/.idea/modules/Arraybot_main.iml" group="Arraybot" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Arraybot_test.iml" filepath="$PROJECT_DIR$/.idea/modules/Arraybot_test.iml" group="Arraybot" />
+    </modules>
+  </component>
+</project>
