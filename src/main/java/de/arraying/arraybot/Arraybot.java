@@ -1,12 +1,10 @@
 package de.arraying.arraybot;
-import de.arraying.arraybot.core.data.Configuration;
-import de.arraying.arraybot.core.manager.BotManager;
-import de.arraying.arraybot.core.misc.LogAdapter;
-import de.arraying.arraybot.core.misc.Splash;
-import de.arraying.arraybot.core.startup.Starter;
-import lombok.Getter;
+import de.arraying.arraybot.data.Configuration;
+import de.arraying.arraybot.manager.BotManager;
+import de.arraying.arraybot.misc.LogAdapter;
+import de.arraying.arraybot.misc.Splash;
+import de.arraying.arraybot.startup.Starter;
 import net.dv8tion.jda.core.JDAInfo;
-import net.dv8tion.jda.core.utils.SimpleLog;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -36,14 +34,10 @@ public class Arraybot {
 
     private static Arraybot instance;
     private static final Object mutex = new Object();
-    @Getter
     private final Logger logger = LoggerFactory.getLogger("Arraybot");
-    @Getter
     private Configuration configuration;
-    @Getter
-    private boolean initialized = false;
-    @Getter
     private BotManager botManager;
+    private boolean initialized = false;
 
     /**
      * The main method. Executed when the program runs.
@@ -91,6 +85,31 @@ public class Arraybot {
         }
         new Splash(new File("splash.txt")).print(logger, configuration.getBotVersion(), JDAInfo.VERSION, "Arraying");
         Starter.start();
+        initialized = true;
+    }
+
+    /**
+     * Gets the logger.
+     * @return The logger.
+     */
+    public Logger getLogger() {
+        return logger;
+    }
+
+    /**
+     * Gets the configuration.
+     * @return The configuration.
+     */
+    public Configuration getConfiguration() {
+        return configuration;
+    }
+
+    /**
+     * Gets the bot manager.
+     * @return The bot manager.
+     */
+    public BotManager getBotManager() {
+        return botManager;
     }
 
     /**
@@ -101,6 +120,14 @@ public class Arraybot {
         if(botManager == null) {
             botManager = manager;
         }
+    }
+
+    /**
+     * Whether or not Arraybot is initialized.
+     * @return True if it is, false otherwise.
+     */
+    public boolean isInitialized() {
+        return initialized;
     }
 
 }

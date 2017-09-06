@@ -1,7 +1,7 @@
-package de.arraying.arraybot.util;
+package de.arraying.arraybot.startup.startups;
 
-import de.arraying.arraybot.Arraybot;
-import net.dv8tion.jda.core.JDA;
+import de.arraying.arraybot.command.Commands;
+import de.arraying.arraybot.startup.StartupTask;
 
 /**
  * Copyright 2017 Arraying
@@ -18,15 +18,22 @@ import net.dv8tion.jda.core.JDA;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-public final class UShard {
+public final class StartupCommands extends StartupTask {
 
     /**
-     * Gets the shard ID for a JDA object.
-     * @param jda The JDA object.
-     * @return An integer ID.
+     * Creates the commands startup task.
      */
-    public static int getShardId(JDA jda) {
-        return jda.getShardInfo() == null ? Arraybot.SINGLE_SHARD_INDEX : jda.getShardInfo().getShardId();
+    public StartupCommands() {
+        super("Startup-Commands");
+    }
+
+    /**
+     * Runs the actual startup task.
+     * @throws Exception If an error occurs.
+     */
+    @Override
+    public void onTask() throws Exception {
+        Commands.INSTANCE.registerCommands();
     }
 
 }

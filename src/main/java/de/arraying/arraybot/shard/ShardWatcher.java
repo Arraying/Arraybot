@@ -1,7 +1,7 @@
 package de.arraying.arraybot.shard;
 
 import de.arraying.arraybot.Arraybot;
-import de.arraying.arraybot.core.manager.BotManager;
+import de.arraying.arraybot.manager.BotManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,7 +20,7 @@ import org.slf4j.LoggerFactory;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-public class ShardWatcher implements Runnable {
+public final class ShardWatcher implements Runnable {
 
     private final Logger logger = LoggerFactory.getLogger("Shard-Watcher");
     private final Thread current;

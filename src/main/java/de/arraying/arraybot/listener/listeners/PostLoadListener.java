@@ -1,7 +1,6 @@
-package de.arraying.arraybot.util;
+package de.arraying.arraybot.listener.listeners;
 
-import de.arraying.arraybot.Arraybot;
-import net.dv8tion.jda.core.JDA;
+import net.dv8tion.jda.core.hooks.ListenerAdapter;
 
 /**
  * Copyright 2017 Arraying
@@ -18,15 +17,11 @@ import net.dv8tion.jda.core.JDA;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-public final class UShard {
+public abstract class PostLoadListener extends ListenerAdapter {
 
     /**
-     * Gets the shard ID for a JDA object.
-     * @param jda The JDA object.
-     * @return An integer ID.
+     * Initializes the listener.
      */
-    public static int getShardId(JDA jda) {
-        return jda.getShardInfo() == null ? Arraybot.SINGLE_SHARD_INDEX : jda.getShardInfo().getShardId();
-    }
+    public abstract void init();
 
 }

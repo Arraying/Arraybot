@@ -1,7 +1,10 @@
-package de.arraying.arraybot.util;
+package de.arraying.arraybot.listener.listeners.preload;
 
 import de.arraying.arraybot.Arraybot;
-import net.dv8tion.jda.core.JDA;
+import de.arraying.arraybot.manager.BotManager;
+import de.arraying.arraybot.util.UShard;
+import net.dv8tion.jda.core.events.ReadyEvent;
+import net.dv8tion.jda.core.hooks.ListenerAdapter;
 
 /**
  * Copyright 2017 Arraying
@@ -18,15 +21,18 @@ import net.dv8tion.jda.core.JDA;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-public final class UShard {
+public final class ReadyListener extends ListenerAdapter {
+
+    private final BotManager manager = Arraybot.getInstance().getBotManager();
 
     /**
-     * Gets the shard ID for a JDA object.
-     * @param jda The JDA object.
-     * @return An integer ID.
+     * This event gets fired when JDA is ready and all
+     * cached objects are usable.
+     * @param event The event.
      */
-    public static int getShardId(JDA jda) {
-        return jda.getShardInfo() == null ? Arraybot.SINGLE_SHARD_INDEX : jda.getShardInfo().getShardId();
+    @Override
+    public void onReady(ReadyEvent event) {
+        manager.ready(UShard.getShardId(event.getJDA()));
     }
 
 }

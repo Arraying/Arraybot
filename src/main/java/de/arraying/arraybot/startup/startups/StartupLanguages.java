@@ -1,7 +1,7 @@
-package de.arraying.arraybot.util;
+package de.arraying.arraybot.startup.startups;
 
-import de.arraying.arraybot.Arraybot;
-import net.dv8tion.jda.core.JDA;
+import de.arraying.arraybot.language.Languages;
+import de.arraying.arraybot.startup.StartupTask;
 
 /**
  * Copyright 2017 Arraying
@@ -18,15 +18,23 @@ import net.dv8tion.jda.core.JDA;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-public final class UShard {
+public class StartupLanguages extends StartupTask {
 
     /**
-     * Gets the shard ID for a JDA object.
-     * @param jda The JDA object.
-     * @return An integer ID.
+     * Creates the language startup task.
      */
-    public static int getShardId(JDA jda) {
-        return jda.getShardInfo() == null ? Arraybot.SINGLE_SHARD_INDEX : jda.getShardInfo().getShardId();
+    public StartupLanguages() {
+        super("Startup-Languages");
+    }
+
+    /**
+     * Runs the actual startup task.
+     * @throws Exception If an error occurs.
+     */
+    @Override
+    public void onTask() throws Exception {
+        logger.info("Attempting to load in all languages...");
+        Languages.Companion.init();
     }
 
 }

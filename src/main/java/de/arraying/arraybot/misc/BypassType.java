@@ -1,7 +1,4 @@
-package de.arraying.arraybot.util;
-
-import de.arraying.arraybot.Arraybot;
-import net.dv8tion.jda.core.JDA;
+package de.arraying.arraybot.misc;
 
 /**
  * Copyright 2017 Arraying
@@ -18,15 +15,21 @@ import net.dv8tion.jda.core.JDA;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-public final class UShard {
+public enum BypassType {
 
     /**
-     * Gets the shard ID for a JDA object.
-     * @param jda The JDA object.
-     * @return An integer ID.
+     * The bypass applies in the text channel.
      */
-    public static int getShardId(JDA jda) {
-        return jda.getShardInfo() == null ? Arraybot.SINGLE_SHARD_INDEX : jda.getShardInfo().getShardId();
-    }
+    CHANNEL,
+
+    /**
+     * The bypass applies to the user.
+     */
+    USER,
+
+    /**
+     * The bypass applies to all users with the role.
+     */
+    ROLE
 
 }

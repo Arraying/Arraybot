@@ -1,7 +1,30 @@
-group "de.arraying"
+buildscript {
+    ext.kotlin_version = '1.1.4-3'
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+plugins {
+    id "java"
+    id "application"
+    id "com.github.johnrengelman.shadow" version "2.0.1"
+}
+
+group "de.arraying.arraybot"
 version "5"
+
+ext.main = "Arraybot"
+mainClassName = "de.arraying.arraybot.Arraybot"
+
 apply plugin: "java"
+apply plugin: 'kotlin'
+
 sourceCompatibility = 1.8
+
 repositories {
     jcenter()
     mavenCentral()
@@ -9,7 +32,16 @@ repositories {
 
 dependencies {
     compile "ch.qos.logback:logback-classic:1.2.3"
-    compile "net.dv8tion:JDA:3.3.0_260"
+    compile "net.dv8tion:JDA:3.3.0_261"
     compile "redis.clients:jedis:2.9.0"
-    compileOnly "org.projectlombok:lombok:1.16.18"
+    compile "commons-lang:commons-lang:2.6"
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
+    compile "org.jetbrains.kotlinx:kotlinx-coroutines-core:0.16"
+}
+
+
+kotlin {
+    experimental {
+        coroutines 'enable'
+    }
 }

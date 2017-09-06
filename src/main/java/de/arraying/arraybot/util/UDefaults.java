@@ -1,9 +1,9 @@
 package de.arraying.arraybot.util;
 
 import de.arraying.arraybot.command.custom.syntax.CustomCommandSyntax;
-import de.arraying.arraybot.command.custom.type.CustomCommandTypes;
-import de.arraying.arraybot.core.misc.BypassType;
-import de.arraying.arraybot.core.punishment.PunishmentType;
+import de.arraying.arraybot.command.custom.type.CustomCommandType;
+import de.arraying.arraybot.misc.BypassType;
+import de.arraying.arraybot.misc.PunishmentType;
 import net.dv8tion.jda.core.Permission;
 
 /**
@@ -21,7 +21,7 @@ import net.dv8tion.jda.core.Permission;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-public class UDefaults {
+public final class UDefaults {
 
     /**
      * The default for snowflakes (such as guild IDs, channel IDs, etc.).
@@ -37,6 +37,11 @@ public class UDefaults {
      * The default number to start counting from.
      */
     public static final int DEFAULT_COUNT = 0;
+
+    /**
+     * The default blacklist set ID.
+     */
+    public static final int DEFAULT_BLACKLIST = 5;
 
     /**
      * The default string. Should be language independent.
@@ -62,7 +67,7 @@ public class UDefaults {
     /**
      * The default custom command type.
      */
-    public static final CustomCommandTypes DEFAULT_CUSTOM_COMMAND_TYPE = CustomCommandTypes.MESSAGE;
+    public static final CustomCommandType DEFAULT_CUSTOM_COMMAND_TYPE = CustomCommandType.MESSAGE;
 
     /**
      * The default bypass type.

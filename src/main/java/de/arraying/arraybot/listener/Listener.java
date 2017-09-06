@@ -1,7 +1,7 @@
-package de.arraying.arraybot.util;
+package de.arraying.arraybot.listener;
 
-import de.arraying.arraybot.Arraybot;
-import net.dv8tion.jda.core.JDA;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Copyright 2017 Arraying
@@ -18,15 +18,11 @@ import net.dv8tion.jda.core.JDA;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-public final class UShard {
+public final class Listener {
 
     /**
-     * Gets the shard ID for a JDA object.
-     * @param jda The JDA object.
-     * @return An integer ID.
+     * The global listener logger.
      */
-    public static int getShardId(JDA jda) {
-        return jda.getShardInfo() == null ? Arraybot.SINGLE_SHARD_INDEX : jda.getShardInfo().getShardId();
-    }
+    public static final Logger LISTENER_LOGGER = LoggerFactory.getLogger("Listener");
 
 }

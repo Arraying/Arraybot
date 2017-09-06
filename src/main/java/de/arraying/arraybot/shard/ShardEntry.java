@@ -1,7 +1,5 @@
 package de.arraying.arraybot.shard;
 
-import lombok.Getter;
-import lombok.Setter;
 import net.dv8tion.jda.core.JDA;
 
 /**
@@ -19,12 +17,10 @@ import net.dv8tion.jda.core.JDA;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-public class ShardEntry {
+public final class ShardEntry {
 
     private final JDA jda;
-    @Getter
     private final int id;
-    @Getter @Setter
     private long lastEvent = 0;
 
     /**
@@ -43,6 +39,30 @@ public class ShardEntry {
      */
     public JDA getJDA() {
         return jda;
+    }
+
+    /**
+     * Gets the shard ID.
+     * @return The ID.
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * Gets the last event.
+     * @return The time of the last event, in ms.
+     */
+    long getLastEvent() {
+        return lastEvent;
+    }
+
+    /**
+     * Sets the last event.
+     * @param timeInMillis The time of the event, in ms.
+     */
+    public void onEvent(long timeInMillis) {
+        lastEvent = timeInMillis;
     }
 
 }
