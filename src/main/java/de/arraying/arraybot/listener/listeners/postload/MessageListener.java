@@ -6,6 +6,7 @@ import de.arraying.arraybot.data.database.Redis;
 import de.arraying.arraybot.listener.listeners.PostLoadListener;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
+import redis.clients.jedis.Jedis;
 
 /**
  * Copyright 2017 Arraying
@@ -37,7 +38,9 @@ public final class MessageListener extends PostLoadListener {
      */
     @Override
     public void onMessageReceived(MessageReceivedEvent event) {
-        Redis.getInstance().getRedis().incr("messages");
+        Jedis resource = Redis.getInstance().getJedisResource();
+        resource.incr("messages");
+        resource.close();
     }
 
     /**
@@ -48,6 +51,7 @@ public final class MessageListener extends PostLoadListener {
     @Override
     public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
         if(event != null) {
+            System.out.println("Message Event: " + System.currentTimeMillis());
             Commands.INSTANCE.executeCommand(new CommandEnvironment(event.getMessage()));
         }
     }

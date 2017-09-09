@@ -5,8 +5,8 @@ import de.arraying.arraybot.data.database.core.Entry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import redis.clients.jedis.Jedis;
-
-import java.util.LinkedHashMap;
+import redis.clients.jedis.JedisPool;
+import redis.clients.jedis.JedisPoolConfig;
 
 
 /**
@@ -28,9 +28,9 @@ public final class Redis {
 
     private static Redis instance;
     private static final Object mutex = new Object();
-    private final LinkedHashMap<Entry.Category, Entry> categories = new LinkedHashMap<>();
     private final Logger logger = LoggerFactory.getLogger("Redis");
-    private Jedis redis;
+    private Configuration configuration;
+    private JedisPool pool;
 
     /**
      * Private constructor to prevent initialization.
@@ -51,55 +51,36 @@ public final class Redis {
     }
 
     /**
-     * Gets the Jedis object.
+     * Gets the Jedis resource from the pool.
+     * This resource needs to be closed using Jedis#close upon completion.
      * @return The Jedis object.
      */
-    public Jedis getRedis() {
-        return redis;
+    public Jedis getJedisResource() {
+        Jedis resource = pool.getResource();
+        String auth = configuration.getRedisAuth();
+        if(!auth.isEmpty()) {
+            resource.auth(auth);
+        }
+        resource.select(configuration.getRedisIndex());
+        return resource;
     }
 
     /**
      * Connects to the Redis server.
      * @param configuration The configuration object.
-     * @return True if successful, false otherwise.
+     * @throws Exception If an error occurs.
      */
-    public boolean connect(Configuration configuration) {
-        if(redis != null) {
-            return false;
+    public void connect(Configuration configuration)
+            throws Exception {
+        if(pool != null) {
+            return;
         }
-        try {
-            redis = new Jedis(configuration.getRedisHost(), configuration.getRedisPort());
-            String auth = configuration.getRedisAuth();
-            if(!auth.isEmpty()) {
-                redis.auth(auth);
-            }
-            redis.select(configuration.getRedisIndex());
-        } catch(Exception exception) {
-            logger.error("An error occurred connecting to the Redis server:  {}.", exception.toString());
-            exception.printStackTrace();
-            return false;
+        this.configuration = configuration;
+        pool = new JedisPool(new JedisPoolConfig(), configuration.getRedisHost(), configuration.getRedisPort());
+        for(Entry.Category category : Entry.Category.values()) {
+            logger.info("Registered the category {} with the type {}.", category, category.getEntry().getType());
+            category.getEntry().setCategory(category);
         }
-        return true;
-    }
-
-    /**
-     * Registers a new database in the database collection.
-     * @param entries An array of entries.
-     */
-    public void newEntry(Entry... entries) {
-        for(Entry entry : entries) {
-            categories.put(entry.getCategory(), entry);
-            logger.info("Registered the Redis entry {} using the {} type.", entry.getCategory(), entry.getType());
-        }
-    }
-
-    /**
-     * Gets a database by category.
-     * @param category The category.
-     * @return A valid database, or null if the category is not registered.
-     */
-    public Entry getEntry(Entry.Category category) {
-        return categories.get(category);
     }
 
 }

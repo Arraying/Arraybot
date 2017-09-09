@@ -29,7 +29,6 @@ public final class PunishmentEntry extends HashEntry<PunishmentEntry.Fields> {
      * Creates a new punishment entry.
      */
     public PunishmentEntry() {
-        super(Category.PUNISHMENT);
         for(Fields field : Fields.values()) {
             fields.put(field, field.field);
         }

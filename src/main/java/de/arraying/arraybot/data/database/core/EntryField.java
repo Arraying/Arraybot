@@ -33,7 +33,7 @@ public final class EntryField {
 
     /**
      * Gets the Redis key.
-     * @return
+     * @return The key.
      */
     public String getRedisKey() {
         return redisKey;
@@ -41,7 +41,7 @@ public final class EntryField {
 
     /**
      * Gets the default value.
-     * @return
+     * @return The default value.
      */
     public Object getDefaultValue() {
         return defaultValue;

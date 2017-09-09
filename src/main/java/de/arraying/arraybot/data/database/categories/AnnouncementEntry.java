@@ -26,10 +26,9 @@ public final class AnnouncementEntry extends HashEntry<AnnouncementEntry.Fields>
     private final HashMap<Fields, EntryField> fields = new HashMap<>();
 
     /**
-     * Creates a new announcement database.
+     * Creates a new announcement entry.
      */
     public AnnouncementEntry() {
-        super(Category.ANNOUNCEMENT);
         for(Fields field : Fields.values()) {
             fields.put(field, field.field);
         }

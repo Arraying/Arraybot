@@ -112,7 +112,9 @@ abstract class DefaultCommand(val name: String,
         val channel = environment.channel
         val author = environment.author
         logger.info("${author.idLong} executed the command in the guild ${channel.guild.idLong}.")
-        Redis.getInstance().redis.incr("commands")
+        val resource = Redis.getInstance().jedisResource
+        resource.incr("commands")
+        resource.close()
         status?.let {
             if(!it.isEmpty()
                     && it.length <= Limits.MESSAGE.limit) {

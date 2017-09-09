@@ -30,7 +30,6 @@ public final class GuildEntry extends HashEntry<GuildEntry.Fields> {
      * Creates a new guild entry.
      */
     public GuildEntry() {
-        super(Category.GUILD);
         for(Fields field : Fields.values()) {
             fields.put(field, field.field);
         }

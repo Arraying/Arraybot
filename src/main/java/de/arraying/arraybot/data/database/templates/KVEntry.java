@@ -3,6 +3,7 @@ package de.arraying.arraybot.data.database.templates;
 import de.arraying.arraybot.data.database.Redis;
 import de.arraying.arraybot.data.database.core.Entry;
 import de.arraying.arraybot.util.UDatabase;
+import redis.clients.jedis.Jedis;
 
 /**
  * Copyright 2017 Arraying
@@ -22,14 +23,12 @@ import de.arraying.arraybot.util.UDatabase;
 public final class KVEntry implements Entry {
 
     private final Redis redis;
-    private final Category category;
+    private Category category;
 
     /**
      * Creates a new key/value entry.
-     * @param category The category.
      */
-    public KVEntry(Category category) {
-        this.category = category;
+    public KVEntry() {
         this.redis = Redis.getInstance();
     }
 
@@ -43,12 +42,24 @@ public final class KVEntry implements Entry {
     }
 
     /**
+     * Sets the category.
+     * @param category The category.
+     */
+    @Override
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    /**
      * Gets a value from Redis.
      * @param key The key.
      * @return The value, can be null.
      */
     public String get(String key) {
-        return redis.getRedis().get(UDatabase.getKey(category, key));
+        Jedis resource = redis.getJedisResource();
+        String result = resource.get(UDatabase.getKey(category, key));
+        resource.close();
+        return result;
     }
 
     /**
@@ -57,16 +68,9 @@ public final class KVEntry implements Entry {
      * @param value The value. Cannot be null.
      */
     public void set(String key, Object value) {
-        redis.getRedis().set(UDatabase.getKey(category, key), value.toString());
-    }
-
-    /**
-     * Gets the category.
-     * @return The category.
-     */
-    @Override
-    public Category getCategory() {
-        return category;
+        Jedis resource = redis.getJedisResource();
+        resource.set(UDatabase.getKey(category, key), value.toString());
+        resource.close();
     }
 
 }

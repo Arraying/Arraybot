@@ -2,10 +2,6 @@ package de.arraying.arraybot.startup.startups;
 
 import de.arraying.arraybot.Arraybot;
 import de.arraying.arraybot.data.database.Redis;
-import de.arraying.arraybot.data.database.categories.*;
-import de.arraying.arraybot.data.database.core.Entry;
-import de.arraying.arraybot.data.database.templates.KVEntry;
-import de.arraying.arraybot.data.database.templates.SetEntry;
 import de.arraying.arraybot.startup.StartupTask;
 
 /**
@@ -42,26 +38,9 @@ public final class StartupRedis extends StartupTask {
     public void onTask() throws Exception {
         logger.info("Attempting to start up Redis...");
         Redis redis = Redis.getInstance();
-        if(!redis.connect(arraybot.getConfiguration())) {
-            return;
-        }
+        redis.connect(arraybot.getConfiguration());
         logger.info("Successfully connected to the Redis server.");
         logger.info("Registering all Redis entries...");
-        redis.newEntry(new SetEntry(Entry.Category.ANNOUNCEMENT_IDS),
-                new AnnouncementEntry(),
-                new SetEntry(Entry.Category.BLACKLIST),
-                new SetEntry(Entry.Category.CUSTOM_COMMAND_NAMES),
-                new CustomCommandEntry(),
-                new SetEntry(Entry.Category.DISABLED_COMMAND),
-                new SetEntry(Entry.Category.FILTER_IDS),
-                new SetEntry(Entry.Category.FILTER),
-                new SetEntry(Entry.Category.FILTER_BYPASS_IDS),
-                new FilterBypassEntry(),
-                new GuildEntry(),
-                new SetEntry(Entry.Category.PUNISHMENT_IDS),
-                new PunishmentEntry(),
-                new KVEntry(Entry.Category.MISC)
-        );
         logger.info("All Redis entries have been registered.");
     }
 

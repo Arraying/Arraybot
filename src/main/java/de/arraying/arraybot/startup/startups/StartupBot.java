@@ -2,8 +2,8 @@ package de.arraying.arraybot.startup.startups;
 
 import de.arraying.arraybot.Arraybot;
 import de.arraying.arraybot.manager.BotManager;
-import de.arraying.arraybot.startup.StartupTask;
 import de.arraying.arraybot.shard.ShardWatcher;
+import de.arraying.arraybot.startup.StartupTask;
 
 /**
  * Copyright 2017 Arraying

@@ -1,6 +1,10 @@
 package de.arraying.arraybot.data.database.core;
 
 
+import de.arraying.arraybot.data.database.categories.*;
+import de.arraying.arraybot.data.database.templates.KVEntry;
+import de.arraying.arraybot.data.database.templates.SetEntry;
+
 /**
  * Copyright 2017 Arraying
  * <p>
@@ -25,10 +29,11 @@ public interface Entry {
     Type getType();
 
     /**
-     * Gets the entry category.
-     * @return A field in the Category enumeration.
+     * Sets the category.
+     * This cannot be done in the constructor otherwise the category would be null.
+     * @param category The category.
      */
-    Category getCategory();
+    void setCategory(Category category);
 
     enum Type {
 
@@ -56,94 +61,97 @@ public interface Entry {
          * A collection of all announcement IDs for a guild.
          * Set.
          */
-        ANNOUNCEMENT_IDS("ai"),
+        ANNOUNCEMENT_IDS("ai", new SetEntry()),
 
         /**
          * An announcement for a specific guild.
          * Hash.
          */
-        ANNOUNCEMENT("a"),
+        ANNOUNCEMENT("a", new AnnouncementEntry()),
 
         /**
          * A collection of all blacklisted user IDs.
          * Set.
          */
-        BLACKLIST("b"),
+        BLACKLIST("b", new SetEntry()),
 
         /**
          * A collection of all custom command names in a guild.
          * Set.
          */
-        CUSTOM_COMMAND_NAMES("cn"),
+        CUSTOM_COMMAND_NAMES("cn", new SetEntry()),
 
         /**
          * A custom command for a specific guild.
          * Hash.
          */
-        CUSTOM_COMMAND("c"),
+        CUSTOM_COMMAND("c", new CustomCommandEntry()),
 
         /**
          * A disabled command name for a specific guild.
          * Set.
          */
-        DISABLED_COMMAND("d"),
+        DISABLED_COMMAND("d", new SetEntry()),
 
         /**
          * A collection of all filtered phrase IDs.
          * Set.
          */
-        FILTER_IDS("fi"),
+        FILTER_IDS("fi", new SetEntry()),
 
         /**
          * A collection of filtered phrases.
          * Set.
          */
-        FILTER("f"),
+        FILTER("f", new SetEntry()),
 
         /**
          * A collection of all filter bypass IDs.
          * Set.
          */
-        FILTER_BYPASS_IDS("fbi"),
+        FILTER_BYPASS_IDS("fbi", new SetEntry()),
 
         /**
          * A filter bypass for a specific guild.
          * Hash.
          */
-        FILTER_BYPASS("fb"),
+        FILTER_BYPASS("fb", new FilterBypassEntry()),
 
         /**
          * A specific guild containing all properties.
          * Hash.
          */
-        GUILD("g"),
+        GUILD("g", new GuildEntry()),
 
         /**
          * A collection of punishment IDs.
          * Set.
          */
-        PUNISHMENT_IDS("pi"),
+        PUNISHMENT_IDS("pi", new SetEntry()),
 
         /**
          * A punishment for a specific guild.
          * Hash.
          */
-        PUNISHMENT("p"),
+        PUNISHMENT("p", new PunishmentEntry()),
 
         /**
          * Any misc. things that need to be stored.
          * KV.
          */
-        MISC("m");
+        MISC("m", new KVEntry());
 
         private final String prefix;
+        private final Entry entry;
 
         /**
          * Sets the prefix for the category.
          * @param prefix The prefix.
+         * @param entry The entry to use.
          */
-        Category(String prefix) {
+        Category(String prefix, Entry entry) {
             this.prefix = prefix;
+            this.entry = entry;
         }
 
         /**
@@ -153,6 +161,16 @@ public interface Entry {
         public String getPrefix() {
             return prefix;
         }
+
+
+        /**
+         * Gets the entry.
+         * @return The entry.
+         */
+        public Entry getEntry() {
+            return entry;
+        }
+
     }
 
 

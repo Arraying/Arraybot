@@ -1,6 +1,5 @@
 package de.arraying.arraybot.language
 
-import de.arraying.arraybot.data.database.Redis
 import de.arraying.arraybot.data.database.categories.GuildEntry
 import de.arraying.arraybot.data.database.core.Entry
 import net.dv8tion.jda.core.entities.TextChannel
@@ -72,10 +71,10 @@ enum class Message {
          * Replaces common placeholders.
          */
         fun replace(input: String, id: Long): String {
-            val entry = Redis.getInstance().getEntry(Entry.Category.GUILD) as? GuildEntry?:
-                    throw IllegalStateException("Expected guild entry to be instanceof GuildEntry.")
+            //val entry = Entry.Category.GUILD.entry as? GuildEntry?:
+                    //throw IllegalStateException("Expected guild entry to be instanceof GuildEntry.")
             return input
-                    .replace("{prefix}", entry.fetch(entry.getField(GuildEntry.Fields.PREFIX), id, null))
+                    //.replace("{prefix}", entry.fetch(entry.getField(GuildEntry.Fields.PREFIX), id, null))
                     .replace("{github}", githubBase)
                     .replace("{zwsp}", "​")
                     .replace("-", "    **-**")

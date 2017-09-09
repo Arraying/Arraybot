@@ -3,8 +3,8 @@ package de.arraying.arraybot.data.database.templates;
 import de.arraying.arraybot.data.database.Redis;
 import de.arraying.arraybot.data.database.core.Entry;
 import de.arraying.arraybot.util.UDatabase;
+import redis.clients.jedis.Jedis;
 
-import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -25,14 +25,12 @@ import java.util.Set;
 public final class SetEntry implements Entry {
 
     private final Redis redis;
-    private final Category category;
+    private Category category;
 
     /**
      * Creates a new set entry.
-     * @param category The category.
      */
-    public SetEntry(Category category) {
-        this.category = category;
+    public SetEntry() {
         this.redis = Redis.getInstance();
     }
 
@@ -46,13 +44,24 @@ public final class SetEntry implements Entry {
     }
 
     /**
+     * Sets the category.
+     * @param category The category.
+     */
+    @Override
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    /**
      * Gets the entries of the set.
      * @param id The snowflake identifier ID.
      * @return A set of entries. Cannot be null.
      */
     public Set<String> values(long id) {
-        return redis.getRedis().smembers("i");
-        //return redis.getRedis().smembers(UDatabase.getKey(category, id));
+        Jedis resource = redis.getJedisResource();
+        Set<String> members = resource.smembers(UDatabase.getKey(category, id));
+        resource.close();
+        return members;
     }
 
     /**
@@ -61,7 +70,9 @@ public final class SetEntry implements Entry {
      * @param entry The entry. Cannot be null.
      */
     public void add(long id, Object entry) {
-        redis.getRedis().sadd(UDatabase.getKey(category, id), entry.toString());
+        Jedis resource = redis.getJedisResource();
+        resource.sadd(UDatabase.getKey(category, id), entry.toString());
+        resource.close();
     }
 
     /**
@@ -70,16 +81,9 @@ public final class SetEntry implements Entry {
      * @param entry The entry. Cannot be null.
      */
     public void remove(long id, Object entry) {
-        redis.getRedis().srem(UDatabase.getKey(category, id), entry.toString());
-    }
-
-    /**
-     * Gets the category.
-     * @return The category.
-     */
-    @Override
-    public Category getCategory() {
-        return category;
+        Jedis resource = redis.getJedisResource();
+        resource.srem(UDatabase.getKey(category, id), entry.toString());
+        resource.close();
     }
 
 }

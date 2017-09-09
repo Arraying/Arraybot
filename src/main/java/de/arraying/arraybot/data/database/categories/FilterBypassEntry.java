@@ -26,10 +26,9 @@ public final class FilterBypassEntry extends HashEntry<FilterBypassEntry.Fields>
     private final HashMap<Fields, EntryField> fields = new HashMap<>();
 
     /**
-     * Creates a new announcement entry.
+     * Creates a new filter bypass entry.
      */
     public FilterBypassEntry() {
-        super(Category.FILTER_BYPASS);
         for(Fields field : Fields.values()) {
             fields.put(field, field.field);
         }

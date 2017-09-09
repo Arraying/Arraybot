@@ -29,7 +29,6 @@ public final class CustomCommandEntry extends HashEntry<CustomCommandEntry.Field
      * Creates a new announcement entry.
      */
     public CustomCommandEntry() {
-        super(Category.CUSTOM_COMMAND);
         for(Fields field : Fields.values()) {
             fields.put(field, field.field);
         }

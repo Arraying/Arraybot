@@ -5,7 +5,6 @@ import de.arraying.arraybot.command.abstraction.DefaultCommand
 import de.arraying.arraybot.command.other.CommandCollection
 import de.arraying.arraybot.command.other.CommandCompatator
 import de.arraying.arraybot.command.other.CommandEnvironment
-import de.arraying.arraybot.data.database.Redis
 import de.arraying.arraybot.data.database.categories.GuildEntry
 import de.arraying.arraybot.data.database.core.Entry
 import de.arraying.arraybot.data.database.templates.SetEntry
@@ -15,7 +14,7 @@ import kotlinx.coroutines.experimental.launch
 import net.dv8tion.jda.core.Permission
 import net.dv8tion.jda.core.utils.PermissionUtil
 import org.slf4j.LoggerFactory
-import java.util.TreeSet
+import java.util.*
 
 /**
  * Copyright 2017 Arraying
@@ -65,6 +64,7 @@ object Commands {
      * Executes the command in a new coroutine.
      */
     fun executeCommand(environment: CommandEnvironment) {
+        println("Pre coroutine: " + System.currentTimeMillis())
         launch(CommonPool) {
             execute(environment)
         }
@@ -74,33 +74,33 @@ object Commands {
      * Starts the command executor.
      */
     suspend private fun execute(environment: CommandEnvironment) {
+        println("Inside coroutine: " + System.currentTimeMillis())
         val guild = environment.guild
         val channel = environment.channel
         val author = environment.author
-        val blacklist = Redis.getInstance().getEntry(Entry.Category.BLACKLIST) as? SetEntry ?: return
+        //val blacklist = Entry.Category.BLACKLIST.entry as? SetEntry ?: return
         if(!PermissionUtil.checkPermission(channel, guild.selfMember, Permission.MESSAGE_WRITE)
                 || author.isBot
-                || blacklist.values(UDefaults.DEFAULT_BLACKLIST.toLong()).contains(author.id)) {
+                /*|| blacklist.values(UDefaults.DEFAULT_BLACKLIST.toLong()).contains(author.id)*/) {
             return
         }
-        val prefixEntry = Redis.getInstance().getEntry(Entry.Category.GUILD) as? GuildEntry ?: return
-        val guildPrefix = prefixEntry.fetch(prefixEntry.getField(GuildEntry.Fields.PREFIX), guild.idLong, null)
+        //val prefixEntry = Entry.Category.GUILD.entry as? GuildEntry ?: return
+        //val guildPrefix = prefixEntry.fetch(prefixEntry.getField(GuildEntry.Fields.PREFIX), guild.idLong, null)
         var message = environment.message.rawContent.replace(" +".toRegex(), " ").trim()
-        if(message.startsWith(defaultPrefix, true)) {
-            message = message.substring(defaultPrefix.length)
-        } else if(message.startsWith(guildPrefix, true)) {
-            message = message.substring(guildPrefix.length)
-        } else {
-            return
+        message = when {
+            message.startsWith(defaultPrefix, true) -> message.substring(defaultPrefix.length)
+            //message.startsWith(guildPrefix, true) -> message.substring(guildPrefix.length)
+            else -> return
         }
         val args = message.split(" ")
         val commandName = args[0].toLowerCase()
-        val command = commands.filter {
+        val command = commands.firstOrNull {
             it.name == commandName
-            || it.aliases.any {
+                    || it.aliases.any {
                 alias -> alias == commandName
             }
-        } .firstOrNull()
+        }
+        println("Pre invocation: " + System.currentTimeMillis())
         command?.invoke(environment, args)
     }
 
