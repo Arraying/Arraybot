@@ -36,7 +36,7 @@ class CustomEmbedBuilder : EmbedBuilder() {
         /**
          * The overall maximum length of the embed.
          */
-        val MAX_LENGTH = 4000
+        val MAX_LENGTH = 6000
 
     }
 
@@ -51,7 +51,7 @@ class CustomEmbedBuilder : EmbedBuilder() {
     }
 
     /**
-     * Adds a filed to the embed.
+     * Adds a field to the embed.
      */
     override fun addField(name: String?, value: String?, inline: Boolean): CustomEmbedBuilder {
         val localName = if(name == null) getCorrectTitle("null") else getCorrectTitle(name)
