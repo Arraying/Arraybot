@@ -78,18 +78,18 @@ object Commands {
         val guild = environment.guild
         val channel = environment.channel
         val author = environment.author
-        //val blacklist = Entry.Category.BLACKLIST.entry as? SetEntry ?: return
+        val blacklist = Entry.Category.BLACKLIST.entry as? SetEntry ?: return
         if(!PermissionUtil.checkPermission(channel, guild.selfMember, Permission.MESSAGE_WRITE)
                 || author.isBot
-                /*|| blacklist.values(UDefaults.DEFAULT_BLACKLIST.toLong()).contains(author.id)*/) {
+                || blacklist.values(UDefaults.DEFAULT_BLACKLIST.toLong()).contains(author.id)) {
             return
         }
-        //val prefixEntry = Entry.Category.GUILD.entry as? GuildEntry ?: return
-        //val guildPrefix = prefixEntry.fetch(prefixEntry.getField(GuildEntry.Fields.PREFIX), guild.idLong, null)
+        val prefixEntry = Entry.Category.GUILD.entry as? GuildEntry ?: return
+        val guildPrefix = prefixEntry.fetch(prefixEntry.getField(GuildEntry.Fields.PREFIX), guild.idLong, null)
         var message = environment.message.rawContent.replace(" +".toRegex(), " ").trim()
         message = when {
             message.startsWith(defaultPrefix, true) -> message.substring(defaultPrefix.length)
-            //message.startsWith(guildPrefix, true) -> message.substring(guildPrefix.length)
+            message.startsWith(guildPrefix, true) -> message.substring(guildPrefix.length)
             else -> return
         }
         val args = message.split(" ")

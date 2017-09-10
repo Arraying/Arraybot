@@ -56,10 +56,13 @@ public final class KVEntry implements Entry {
      * @return The value, can be null.
      */
     public String get(String key) {
-        Jedis resource = redis.getJedisResource();
-        String result = resource.get(UDatabase.getKey(category, key));
-        resource.close();
-        return result;
+        try(Jedis resource = redis.getJedisResource()) {
+            return resource.get(UDatabase.getKey(category, key));
+        }
+//        Jedis resource = redis.getJedisResource();
+//        String result = resource.get(UDatabase.getKey(category, key));
+//        redis.finish(resource);
+//        return result;
     }
 
     /**
@@ -68,9 +71,12 @@ public final class KVEntry implements Entry {
      * @param value The value. Cannot be null.
      */
     public void set(String key, Object value) {
-        Jedis resource = redis.getJedisResource();
-        resource.set(UDatabase.getKey(category, key), value.toString());
-        resource.close();
+        try(Jedis resource = redis.getJedisResource()) {
+            resource.set(UDatabase.getKey(category, key), value.toString());
+        }
+//        Jedis resource = redis.getJedisResource();
+//        resource.set(UDatabase.getKey(category, key), value.toString());
+//        redis.finish(resource);
     }
 
 }

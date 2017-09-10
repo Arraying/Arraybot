@@ -71,10 +71,10 @@ enum class Message {
          * Replaces common placeholders.
          */
         fun replace(input: String, id: Long): String {
-            //val entry = Entry.Category.GUILD.entry as? GuildEntry?:
-                    //throw IllegalStateException("Expected guild entry to be instanceof GuildEntry.")
+            val entry = Entry.Category.GUILD.entry as? GuildEntry?:
+                    throw IllegalStateException("Expected guild entry to be instanceof GuildEntry.")
             return input
-                    //.replace("{prefix}", entry.fetch(entry.getField(GuildEntry.Fields.PREFIX), id, null))
+                    .replace("{prefix}", entry.fetch(entry.getField(GuildEntry.Fields.PREFIX), id, null))
                     .replace("{github}", githubBase)
                     .replace("{zwsp}", "​")
                     .replace("-", "    **-**")

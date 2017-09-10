@@ -58,10 +58,13 @@ public final class SetEntry implements Entry {
      * @return A set of entries. Cannot be null.
      */
     public Set<String> values(long id) {
-        Jedis resource = redis.getJedisResource();
-        Set<String> members = resource.smembers(UDatabase.getKey(category, id));
-        resource.close();
-        return members;
+        try(Jedis resource = redis.getJedisResource()) {
+            return resource.smembers(UDatabase.getKey(category, id));
+        }
+//        Jedis resource = redis.getJedisResource();
+//        Set<String> members = resource.smembers(UDatabase.getKey(category, id));
+//        redis.finish(resource);
+//        return members;
     }
 
     /**
@@ -70,9 +73,12 @@ public final class SetEntry implements Entry {
      * @param entry The entry. Cannot be null.
      */
     public void add(long id, Object entry) {
-        Jedis resource = redis.getJedisResource();
-        resource.sadd(UDatabase.getKey(category, id), entry.toString());
-        resource.close();
+        try(Jedis resource = redis.getJedisResource()) {
+            resource.sadd(UDatabase.getKey(category, id), entry.toString());
+        }
+//        Jedis resource = redis.getJedisResource();
+//        resource.sadd(UDatabase.getKey(category, id), entry.toString());
+//        redis.finish(resource);
     }
 
     /**
@@ -81,9 +87,12 @@ public final class SetEntry implements Entry {
      * @param entry The entry. Cannot be null.
      */
     public void remove(long id, Object entry) {
-        Jedis resource = redis.getJedisResource();
-        resource.srem(UDatabase.getKey(category, id), entry.toString());
-        resource.close();
+        try(Jedis resource = redis.getJedisResource()) {
+            resource.srem(UDatabase.getKey(category, id), entry.toString());
+        }
+//        Jedis resource = redis.getJedisResource();
+//        resource.srem(UDatabase.getKey(category, id), entry.toString());
+//        redis.finish(resource);
     }
 
 }

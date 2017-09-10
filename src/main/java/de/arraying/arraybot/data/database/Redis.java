@@ -56,12 +56,14 @@ public final class Redis {
      * @return The Jedis object.
      */
     public Jedis getJedisResource() {
+        System.out.println(">> ASking to get a Jedis pool @  " + System.currentTimeMillis());
         Jedis resource = pool.getResource();
         String auth = configuration.getRedisAuth();
         if(!auth.isEmpty()) {
             resource.auth(auth);
         }
         resource.select(configuration.getRedisIndex());
+        System.out.println(">> Got a Jedis pool @ " + System.currentTimeMillis());
         return resource;
     }
 
@@ -76,11 +78,32 @@ public final class Redis {
             return;
         }
         this.configuration = configuration;
-        pool = new JedisPool(new JedisPoolConfig(), configuration.getRedisHost(), configuration.getRedisPort());
+        JedisPoolConfig config = new JedisPoolConfig();
+        config.setMinIdle(500);
+        config.setTestOnBorrow(false);
+        config.setTestOnCreate(false);
+        config.setTestOnReturn(false);
+        config.setTestWhileIdle(false);
+        pool = new JedisPool(config, configuration.getRedisHost(), configuration.getRedisPort());
         for(Entry.Category category : Entry.Category.values()) {
             logger.info("Registered the category {} with the type {}.", category, category.getEntry().getType());
             category.getEntry().setCategory(category);
         }
+    }
+
+    /**
+     * Marks a Jedis instance as finished and ready to be returned to the pool.
+     * @param jedis The Jedis instance.
+     */
+    public void finish(Jedis jedis) {
+        pool.returnResource(jedis);
+    }
+
+    /**
+     * Destroys the pool.
+     */
+    public void destory() {
+        pool.destroy();
     }
 
 }

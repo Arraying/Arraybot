@@ -66,11 +66,15 @@ public abstract class HashEntry<T> implements Entry {
      * @return The value. It is never null.
      */
     public String fetch(EntryField field, long id, Object secondaryKey) {
-        Jedis resource = redis.getJedisResource();
-        String redisResult = resource.hget(UDatabase.getKey(category, id, secondaryKey), field.getRedisKey());
-        String result = redisResult == null ? setDefault(field, id, secondaryKey) : redisResult;
-        resource.close();
-        return result;
+        try(Jedis resource = redis.getJedisResource()) {
+            String redisResult = resource.hget(UDatabase.getKey(category, id, secondaryKey), field.getRedisKey());
+            return redisResult == null ? setDefault(field, id, secondaryKey) : redisResult;
+        }
+//        Jedis resource = redis.getJedisResource();
+//        String redisResult = resource.hget(UDatabase.getKey(category, id, secondaryKey), field.getRedisKey());
+//        String result = redisResult == null ? setDefault(field, id, secondaryKey) : redisResult;
+//        redis.finish(resource);
+//        return result;
     }
 
     /**
@@ -81,9 +85,12 @@ public abstract class HashEntry<T> implements Entry {
      * @param value The value.
      */
     public void push(EntryField field, long id, Object secondaryKey, Object value) {
-        Jedis resource = redis.getJedisResource();
-        resource.hset(UDatabase.getKey(category, id, secondaryKey), field.getRedisKey(), value.toString());
-        resource.close();
+        try(Jedis resource = redis.getJedisResource()) {
+            resource.hset(UDatabase.getKey(category, id, secondaryKey), field.getRedisKey(), value.toString());
+        }
+//        Jedis resource = redis.getJedisResource();
+//        resource.hset(UDatabase.getKey(category, id, secondaryKey), field.getRedisKey(), value.toString());
+//        redis.finish(resource);
     }
 
     /**
