@@ -38,9 +38,9 @@ public final class MessageListener extends PostLoadListener {
      */
     @Override
     public void onMessageReceived(MessageReceivedEvent event) {
-        try(Jedis resource = Redis.getInstance().getJedisResource()) {
-            resource.incr("messages");
-        }
+//        try(Jedis resource = Redis.getInstance().getJedisResource()) { //todo re enable
+//            resource.incr("messages");
+//        }
 //        Jedis resource = Redis.getInstance().getJedisResource();
 //        resource.incr("messages");
 //        Redis.getInstance().finish(resource);

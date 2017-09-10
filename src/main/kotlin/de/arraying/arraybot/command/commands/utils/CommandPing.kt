@@ -35,7 +35,7 @@ class CommandPing: DefaultCommand("ping",
 //        })
         val message = Message.COMMANDS_PING_PING.content(channel)
         println("Post message: " + System.currentTimeMillis())
-        channel.sendMessage(Message.COMMANDS_PING_PING.content(channel)
+        channel.sendMessage(message
                 .replace("{ping}", channel.jda.ping.toString()))
                 .queue({
                     println("Sent: " + System.currentTimeMillis())

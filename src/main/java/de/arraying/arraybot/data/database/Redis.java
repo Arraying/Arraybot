@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
+import redis.clients.jedis.Protocol;
 
 
 /**
@@ -44,7 +45,9 @@ public final class Redis {
     public static Redis getInstance() {
         if(instance == null) {
             synchronized(mutex) {
-                instance = new Redis();
+                if(instance == null) {
+                    instance = new Redis();
+                }
             }
         }
         return instance;
@@ -56,14 +59,15 @@ public final class Redis {
      * @return The Jedis object.
      */
     public Jedis getJedisResource() {
-        System.out.println(">> ASking to get a Jedis pool @  " + System.currentTimeMillis());
+//        System.out.println(">> Asking to get a Jedis pool @  " + System.currentTimeMillis());
         Jedis resource = pool.getResource();
-        String auth = configuration.getRedisAuth();
-        if(!auth.isEmpty()) {
-            resource.auth(auth);
-        }
-        resource.select(configuration.getRedisIndex());
-        System.out.println(">> Got a Jedis pool @ " + System.currentTimeMillis());
+//        System.out.println(">> Got the resource @ " + System.currentTimeMillis());
+//        String auth = configuration.getRedisAuth();
+//        if(!auth.isEmpty()) {
+//            resource.auth(auth);
+//        }
+//        resource.select(configuration.getRedisIndex());
+//        System.out.println(">> Got a Jedis pool @ " + System.currentTimeMillis());
         return resource;
     }
 
@@ -84,7 +88,8 @@ public final class Redis {
         config.setTestOnCreate(false);
         config.setTestOnReturn(false);
         config.setTestWhileIdle(false);
-        pool = new JedisPool(config, configuration.getRedisHost(), configuration.getRedisPort());
+        pool = new JedisPool(config, configuration.getRedisHost(), configuration.getRedisPort(),
+                Protocol.DEFAULT_TIMEOUT, configuration.getRedisAuth(), configuration.getRedisIndex(), "Arraybot");
         for(Entry.Category category : Entry.Category.values()) {
             logger.info("Registered the category {} with the type {}.", category, category.getEntry().getType());
             category.getEntry().setCategory(category);

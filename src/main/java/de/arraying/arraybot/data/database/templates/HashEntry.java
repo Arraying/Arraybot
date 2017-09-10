@@ -66,6 +66,7 @@ public abstract class HashEntry<T> implements Entry {
      * @return The value. It is never null.
      */
     public String fetch(EntryField field, long id, Object secondaryKey) {
+        System.out.println("Fetch request: " + System.currentTimeMillis());
         try(Jedis resource = redis.getJedisResource()) {
             String redisResult = resource.hget(UDatabase.getKey(category, id, secondaryKey), field.getRedisKey());
             return redisResult == null ? setDefault(field, id, secondaryKey) : redisResult;

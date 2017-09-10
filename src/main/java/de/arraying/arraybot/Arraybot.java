@@ -60,7 +60,9 @@ public class Arraybot {
     public static Arraybot getInstance() {
         if(instance == null) {
             synchronized(mutex) {
-                instance = new Arraybot();
+                if(instance == null) {
+                    instance = new Arraybot();
+                }
             }
         }
         return instance;
