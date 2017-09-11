@@ -1,12 +1,12 @@
 package de.arraying.arraybot.listener.listeners.postload;
 
+import com.lambdaworks.redis.api.sync.RedisCommands;
 import de.arraying.arraybot.command.Commands;
 import de.arraying.arraybot.command.other.CommandEnvironment;
 import de.arraying.arraybot.data.database.Redis;
 import de.arraying.arraybot.listener.listeners.PostLoadListener;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
-import redis.clients.jedis.Jedis;
 
 /**
  * Copyright 2017 Arraying
@@ -29,31 +29,34 @@ public final class MessageListener extends PostLoadListener {
      * Does not need initialization.
      */
     @Override
-    public void init() {}
+    public void init() {
+    }
 
     /**
      * When a message occurs.
      * Used to log the amount of messages.
+     *
      * @param event The event.
      */
     @Override
     public void onMessageReceived(MessageReceivedEvent event) {
-//        try(Jedis resource = Redis.getInstance().getJedisResource()) { //todo re enable
-//            resource.incr("messages");
-//        }
-//        Jedis resource = Redis.getInstance().getJedisResource();
-//        resource.incr("messages");
-//        Redis.getInstance().finish(resource);
+        RedisCommands resource = Redis.getInstance().getResource();
+        resource.incr("messages");
+        resource.incr("messages");
     }
 
     /**
      * When a guild message occurs.
      * Used to invoke the command executor.
+     *
      * @param event The event.
      */
     @Override
     public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
-        if(event != null) {
+        if (event != null) {
+            if(event.getMember().getUser().isBot() || event.getMember().getUser().isFake()) {
+                return; // Saves time.
+            }
             System.out.println("Message Event: " + System.currentTimeMillis());
             Commands.INSTANCE.executeCommand(new CommandEnvironment(event.getMessage()));
         }

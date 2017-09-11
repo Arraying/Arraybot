@@ -1,13 +1,12 @@
 package de.arraying.arraybot.data.database;
 
+import com.lambdaworks.redis.RedisClient;
+import com.lambdaworks.redis.api.StatefulRedisConnection;
+import com.lambdaworks.redis.api.sync.RedisCommands;
 import de.arraying.arraybot.data.Configuration;
 import de.arraying.arraybot.data.database.core.Entry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import redis.clients.jedis.Jedis;
-import redis.clients.jedis.JedisPool;
-import redis.clients.jedis.JedisPoolConfig;
-import redis.clients.jedis.Protocol;
 
 
 /**
@@ -31,21 +30,27 @@ public final class Redis {
     private static final Object mutex = new Object();
     private final Logger logger = LoggerFactory.getLogger("Redis");
     private Configuration configuration;
-    private JedisPool pool;
+    private RedisClient client;
+    private StatefulRedisConnection<String, String> connection;
+    private RedisCommands sync;
+
 
     /**
      * Private constructor to prevent initialization.
      */
-    private Redis() {}
+    private Redis() {
+
+    }
 
     /**
      * The singleton getter. Thread safe.
+     *
      * @return The singleton instance.
      */
     public static Redis getInstance() {
-        if(instance == null) {
-            synchronized(mutex) {
-                if(instance == null) {
+        if (instance == null) {
+            synchronized (mutex) {
+                if (instance == null) {
                     instance = new Redis();
                 }
             }
@@ -56,59 +61,31 @@ public final class Redis {
     /**
      * Gets the Jedis resource from the pool.
      * This resource needs to be closed using Jedis#close upon completion.
+     *
      * @return The Jedis object.
      */
-    public Jedis getJedisResource() {
-//        System.out.println(">> Asking to get a Jedis pool @  " + System.currentTimeMillis());
-        Jedis resource = pool.getResource();
-//        System.out.println(">> Got the resource @ " + System.currentTimeMillis());
-//        String auth = configuration.getRedisAuth();
-//        if(!auth.isEmpty()) {
-//            resource.auth(auth);
-//        }
-//        resource.select(configuration.getRedisIndex());
-//        System.out.println(">> Got a Jedis pool @ " + System.currentTimeMillis());
-        return resource;
+    public RedisCommands getResource() {
+        return sync;
     }
 
     /**
      * Connects to the Redis server.
+     *
      * @param configuration The configuration object.
      * @throws Exception If an error occurs.
      */
     public void connect(Configuration configuration)
             throws Exception {
-        if(pool != null) {
+        if (sync != null) {
             return;
         }
-        this.configuration = configuration;
-        JedisPoolConfig config = new JedisPoolConfig();
-        config.setMinIdle(500);
-        config.setTestOnBorrow(false);
-        config.setTestOnCreate(false);
-        config.setTestOnReturn(false);
-        config.setTestWhileIdle(false);
-        pool = new JedisPool(config, configuration.getRedisHost(), configuration.getRedisPort(),
-                Protocol.DEFAULT_TIMEOUT, configuration.getRedisAuth(), configuration.getRedisIndex(), "Arraybot");
-        for(Entry.Category category : Entry.Category.values()) {
+        client = RedisClient.create(String.format("redis://%s@%s:%s/0", configuration.getRedisAuth(), configuration.getRedisHost(), configuration.getRedisPort() + ""));
+        connection = client.connect();
+        sync = connection.sync();
+        for (Entry.Category category : Entry.Category.values()) {
             logger.info("Registered the category {} with the type {}.", category, category.getEntry().getType());
             category.getEntry().setCategory(category);
         }
-    }
-
-    /**
-     * Marks a Jedis instance as finished and ready to be returned to the pool.
-     * @param jedis The Jedis instance.
-     */
-    public void finish(Jedis jedis) {
-        pool.returnResource(jedis);
-    }
-
-    /**
-     * Destroys the pool.
-     */
-    public void destory() {
-        pool.destroy();
     }
 
 }

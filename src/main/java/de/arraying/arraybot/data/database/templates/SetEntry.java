@@ -1,9 +1,9 @@
 package de.arraying.arraybot.data.database.templates;
 
+import com.lambdaworks.redis.api.sync.RedisCommands;
 import de.arraying.arraybot.data.database.Redis;
 import de.arraying.arraybot.data.database.core.Entry;
 import de.arraying.arraybot.util.UDatabase;
-import redis.clients.jedis.Jedis;
 
 import java.util.Set;
 
@@ -36,6 +36,7 @@ public final class SetEntry implements Entry {
 
     /**
      * Gets the entry type.
+     *
      * @return The type.
      */
     @Override
@@ -45,6 +46,7 @@ public final class SetEntry implements Entry {
 
     /**
      * Sets the category.
+     *
      * @param category The category.
      */
     @Override
@@ -54,13 +56,14 @@ public final class SetEntry implements Entry {
 
     /**
      * Gets the entries of the set.
+     *
      * @param id The snowflake identifier ID.
      * @return A set of entries. Cannot be null.
      */
     public Set<String> values(long id) {
-        try(Jedis resource = redis.getJedisResource()) {
-            return resource.smembers(UDatabase.getKey(category, id));
-        }
+        RedisCommands resource = redis.getResource();
+        return resource.smembers(UDatabase.getKey(category, id));
+
 //        Jedis resource = redis.getJedisResource();
 //        Set<String> members = resource.smembers(UDatabase.getKey(category, id));
 //        redis.finish(resource);
@@ -69,13 +72,14 @@ public final class SetEntry implements Entry {
 
     /**
      * Adds a member to the set.
-     * @param id The snowflake identifier ID.
+     *
+     * @param id    The snowflake identifier ID.
      * @param entry The entry. Cannot be null.
      */
     public void add(long id, Object entry) {
-        try(Jedis resource = redis.getJedisResource()) {
-            resource.sadd(UDatabase.getKey(category, id), entry.toString());
-        }
+        RedisCommands resource = redis.getResource();
+        resource.sadd(UDatabase.getKey(category, id), entry.toString());
+
 //        Jedis resource = redis.getJedisResource();
 //        resource.sadd(UDatabase.getKey(category, id), entry.toString());
 //        redis.finish(resource);
@@ -83,13 +87,14 @@ public final class SetEntry implements Entry {
 
     /**
      * Removes an entry from the set,
-     * @param id The snowflake identifier ID.
+     *
+     * @param id    The snowflake identifier ID.
      * @param entry The entry. Cannot be null.
      */
     public void remove(long id, Object entry) {
-        try(Jedis resource = redis.getJedisResource()) {
-            resource.srem(UDatabase.getKey(category, id), entry.toString());
-        }
+        RedisCommands resource = redis.getResource();
+        resource.srem(UDatabase.getKey(category, id), entry.toString());
+
 //        Jedis resource = redis.getJedisResource();
 //        resource.srem(UDatabase.getKey(category, id), entry.toString());
 //        redis.finish(resource);

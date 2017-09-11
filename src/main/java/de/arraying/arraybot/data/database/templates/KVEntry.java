@@ -1,9 +1,9 @@
 package de.arraying.arraybot.data.database.templates;
 
+import com.lambdaworks.redis.api.sync.RedisCommands;
 import de.arraying.arraybot.data.database.Redis;
 import de.arraying.arraybot.data.database.core.Entry;
 import de.arraying.arraybot.util.UDatabase;
-import redis.clients.jedis.Jedis;
 
 /**
  * Copyright 2017 Arraying
@@ -34,6 +34,7 @@ public final class KVEntry implements Entry {
 
     /**
      * Gets the entry type.
+     *
      * @return The type.
      */
     @Override
@@ -43,6 +44,7 @@ public final class KVEntry implements Entry {
 
     /**
      * Sets the category.
+     *
      * @param category The category.
      */
     @Override
@@ -52,13 +54,15 @@ public final class KVEntry implements Entry {
 
     /**
      * Gets a value from Redis.
+     *
      * @param key The key.
      * @return The value, can be null.
      */
     public String get(String key) {
-        try(Jedis resource = redis.getJedisResource()) {
-            return resource.get(UDatabase.getKey(category, key));
-        }
+        RedisCommands resource = redis.getResource();
+        Object o = resource.get(UDatabase.getKey(category, key));
+        return o == null ? null : o.toString();
+
 //        Jedis resource = redis.getJedisResource();
 //        String result = resource.get(UDatabase.getKey(category, key));
 //        redis.finish(resource);
@@ -67,13 +71,14 @@ public final class KVEntry implements Entry {
 
     /**
      * Sets a value in Redis.
-     * @param key The key.
+     *
+     * @param key   The key.
      * @param value The value. Cannot be null.
      */
     public void set(String key, Object value) {
-        try(Jedis resource = redis.getJedisResource()) {
-            resource.set(UDatabase.getKey(category, key), value.toString());
-        }
+        RedisCommands resource = redis.getResource();
+        resource.set(UDatabase.getKey(category, key), value.toString());
+
 //        Jedis resource = redis.getJedisResource();
 //        resource.set(UDatabase.getKey(category, key), value.toString());
 //        redis.finish(resource);

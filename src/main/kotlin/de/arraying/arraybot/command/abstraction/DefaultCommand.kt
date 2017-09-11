@@ -28,11 +28,11 @@ import org.slf4j.LoggerFactory
  * limitations under the License.
  */
 abstract class DefaultCommand(val name: String,
-                     val category: CommandCategory,
-                     val permission: Permission,
-                     open val subCommands: Array<SubCommand> = arrayOf(),
-                     val aliases: Array<String> = arrayOf(),
-                     protected val customPermissionChecking: Boolean = false) {
+                              val category: CommandCategory,
+                              val permission: Permission,
+                              open val subCommands: Array<SubCommand> = arrayOf(),
+                              val aliases: Array<String> = arrayOf(),
+                              protected val customPermissionChecking: Boolean = false) {
 
     protected val arraybot = Arraybot.getInstance()!!
     private val logger = LoggerFactory.getLogger("Command-${WordUtils.capitalize(name)}")
@@ -49,11 +49,11 @@ abstract class DefaultCommand(val name: String,
      * Internal command checks.
      */
     internal fun checks() {
-        if((!Languages.contains(descriptionPath)
+        if ((!Languages.contains(descriptionPath)
                 || !Languages.contains(syntaxPath))
                 && Commands.commands.any {
-                    it.name == name
-                }) {
+            it.name == name
+        }) {
             Commands.unregisterCommand(name)
             logger.error("The command has been unregistered disabled as it does not have a description or syntax defined.")
         }
@@ -113,47 +113,46 @@ abstract class DefaultCommand(val name: String,
         val channel = environment.channel
         val author = environment.author
         logger.info("${author.idLong} executed the command in the guild ${channel.guild.idLong}.")
-        val resource = Redis.getInstance().jedisResource
+        val resource = Redis.getInstance().resource
         resource.incr("commands")
-        resource.close()
         println("Command incrementation: " + System.currentTimeMillis())
         status?.let {
-            if(!it.isEmpty()
+            if (!it.isEmpty()
                     && it.length <= Limits.MESSAGE.limit) {
                 channel.sendMessage(it).queue()
             }
         }
         println("Disabled check: " + System.currentTimeMillis())
-        if(category == CommandCategory.DEVELOPER
+        if (category == CommandCategory.DEVELOPER
                 && !arraybot.configuration.botAuthors.any {
-                    it == author.idLong
-                }) {
+            it == author.idLong
+        }) {
             Message.COMMAND_UNAVAILABLE_DEVELOPER.send(channel).queue()
             return
         }
         println("Developer check: " + System.currentTimeMillis())
-        if(!PermissionUtil.checkPermission(channel, channel.guild.selfMember, Permission.MESSAGE_EMBED_LINKS)) {
+        if (!PermissionUtil.checkPermission(channel, channel.guild.selfMember, Permission.MESSAGE_EMBED_LINKS)) {
             Message.COMMAND_UNAVAILABLE_EMBED.send(channel).queue()
             return
         }
         println("Permission check: " + System.currentTimeMillis())
-        if(!PermissionUtil.checkPermission(channel, environment.member, permission)
+        if (!PermissionUtil.checkPermission(channel, environment.member, permission)
                 && !customPermissionChecking) {
             val message = Message.COMMAND_PERMISSION.content(channel)
                     .replace("{permission}", permission.getName())
             channel.sendMessage(message).queue()
             return
         }
-        if(!subCommands.isEmpty()
+        if (!subCommands.isEmpty()
                 && args.size >= 2) {
             val subCommandName = args[1].toLowerCase()
             val subCommand = subCommands.filter {
                 it.name == subCommandName
-                || it.aliases.any {
-                    alias -> alias == subCommandName
+                        || it.aliases.any { alias ->
+                    alias == subCommandName
                 }
-            } .firstOrNull()
-            if(subCommand == null) {
+            }.firstOrNull()
+            if (subCommand == null) {
                 Message.COMMAND_SUBCOMMAND_UNKNOWN.send(channel).queue()
             } else {
                 subCommand.onSubCommand(environment, args)

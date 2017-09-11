@@ -31,9 +31,9 @@ repositories {
 }
 
 dependencies {
-    compile "ch.qos.logback:logback-classic:1.2.3"
-    compile "net.dv8tion:JDA:3.3.0_263"
-    compile "redis.clients:jedis:2.9.0"
+    compile "ch.qos.logback:logback-classic:1.2.3" // Logging
+    compile "net.dv8tion:JDA:3.3.0_263" // Discord
+    compile 'biz.paluch.redis:lettuce:5.0.0.Beta1' // Database
     compile "commons-lang:commons-lang:2.6"
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
     compile "org.jetbrains.kotlinx:kotlinx-coroutines-core:0.16"

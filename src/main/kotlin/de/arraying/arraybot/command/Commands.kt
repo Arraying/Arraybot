@@ -34,13 +34,14 @@ import java.util.*
 object Commands {
 
     val commands = TreeSet<DefaultCommand>(CommandCompatator())
+    private val regex = " +".toRegex()
     private val logger = LoggerFactory.getLogger("Command-Manager")
     private val defaultPrefix = Arraybot.getInstance().configuration.botPrefix
     /**
      * Registers all commands.
      */
     fun registerCommands() {
-        for(collectedCommand in CommandCollection.values()) {
+        for (collectedCommand in CommandCollection.values()) {
             val command = collectedCommand.command
             commands.add(command)
             logger.info("Registered the command \"${command.name}\".")
@@ -54,7 +55,7 @@ object Commands {
     fun unregisterCommand(name: String) {
         commands.filter {
             it.name == name
-        } .forEach {
+        }.forEach {
             commands.remove(it)
             logger.info("Unregistered the command \"${it.name}\".")
         }
@@ -70,19 +71,19 @@ object Commands {
         val author = environment.author
         println("Pre blacklist: " + System.currentTimeMillis())
         val blacklist = Entry.Category.BLACKLIST.entry as? SetEntry ?: return
-        if(!PermissionUtil.checkPermission(channel, guild.selfMember, Permission.MESSAGE_WRITE)
+        if (!PermissionUtil.checkPermission(channel, guild.selfMember, Permission.MESSAGE_WRITE)
                 || author.isBot
-                /*|| blacklist.values(UDefaults.DEFAULT_BLACKLIST.toLong()).contains(author.id)*/) {
+                || blacklist.values(UDefaults.DEFAULT_BLACKLIST.toLong()).contains(author.id)) {
             return
         }
         println("Pre prefix: " + System.currentTimeMillis())
-        //val prefixEntry = Entry.Category.GUILD.entry as? GuildEntry ?: return
-        //val guildPrefix = prefixEntry.fetch(prefixEntry.getField(GuildEntry.Fields.PREFIX), guild.idLong, null)
-        var message = environment.message.rawContent.replace(" +".toRegex(), " ").trim()
+        val prefixEntry = Entry.Category.GUILD.entry as? GuildEntry ?: return
+        val guildPrefix = prefixEntry.fetch(prefixEntry.getField(GuildEntry.Fields.PREFIX), guild.idLong, null)
+        var message = environment.message.rawContent.replace(regex, " ").trim()
         println("Pre prefix matching: " + System.currentTimeMillis())
         message = when {
             message.startsWith(defaultPrefix, true) -> message.substring(defaultPrefix.length)
-            //message.startsWith(guildPrefix, true) -> message.substring(guildPrefix.length)
+            message.startsWith(guildPrefix, true) -> message.substring(guildPrefix.length)
             else -> return
         }
         println("Got message: " + System.currentTimeMillis())
@@ -90,8 +91,8 @@ object Commands {
         val commandName = args[0].toLowerCase()
         val command = commands.firstOrNull {
             it.name == commandName
-                    || it.aliases.any {
-                alias -> alias == commandName
+                    || it.aliases.any { alias ->
+                alias == commandName
             }
         }
         println("Fetched command: " + System.currentTimeMillis())

@@ -1,4 +1,5 @@
 package de.arraying.arraybot;
+
 import de.arraying.arraybot.data.Configuration;
 import de.arraying.arraybot.manager.BotManager;
 import de.arraying.arraybot.misc.LogAdapter;

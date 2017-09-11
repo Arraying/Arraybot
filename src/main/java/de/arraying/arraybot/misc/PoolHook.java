@@ -1,7 +1,5 @@
 package de.arraying.arraybot.misc;
 
-import de.arraying.arraybot.data.database.Redis;
-
 /**
  * Copyright 2017 Arraying
  * <p>
@@ -24,7 +22,6 @@ public class PoolHook implements Runnable {
      */
     @Override
     public void run() {
-        Redis.getInstance().destory();
     }
 
 }

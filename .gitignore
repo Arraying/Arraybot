@@ -60,6 +60,3 @@ fabric.properties
 
 src/test/
 .gradle/
-/logs/
-/config.json
-/gradle/wrapper
