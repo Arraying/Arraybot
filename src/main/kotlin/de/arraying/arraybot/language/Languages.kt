@@ -88,8 +88,8 @@ class Languages {
             //val entry = Entry.Category.GUILD.entry as? GuildEntry ?:
               //      throw IllegalStateException("Expected guild entry to be instanceof GuildEntry.")
             //val guildLanguage = entry.fetch(entry.getField(GuildEntry.Fields.LANGUAGE), id, null).toLowerCase()
-            val locale = if(languages.containsKey("")) {
-                    ""
+            val locale = if(languages.containsKey("")/*languages.containsKey(guildLanguage)*/) {
+                    ""/*guildLanguage*/
                 } else {
                     defaultLanguage
                 }

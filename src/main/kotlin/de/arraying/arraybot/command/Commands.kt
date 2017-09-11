@@ -61,37 +61,31 @@ object Commands {
     }
 
     /**
-     * Executes the command in a new coroutine.
-     */
-    fun executeCommand(environment: CommandEnvironment) {
-        println("Pre coroutine: " + System.currentTimeMillis())
-        launch(CommonPool) {
-            execute(environment)
-        }
-    }
-
-    /**
      * Starts the command executor.
      */
-    suspend private fun execute(environment: CommandEnvironment) {
-        println("Inside coroutine: " + System.currentTimeMillis())
+    fun executeCommand(environment: CommandEnvironment) {
+        println("Inside execution: " + System.currentTimeMillis())
         val guild = environment.guild
         val channel = environment.channel
         val author = environment.author
-        //val blacklist = Entry.Category.BLACKLIST.entry as? SetEntry ?: return
+        println("Pre blacklist: " + System.currentTimeMillis())
+        val blacklist = Entry.Category.BLACKLIST.entry as? SetEntry ?: return
         if(!PermissionUtil.checkPermission(channel, guild.selfMember, Permission.MESSAGE_WRITE)
                 || author.isBot
                 /*|| blacklist.values(UDefaults.DEFAULT_BLACKLIST.toLong()).contains(author.id)*/) {
             return
         }
+        println("Pre prefix: " + System.currentTimeMillis())
         //val prefixEntry = Entry.Category.GUILD.entry as? GuildEntry ?: return
         //val guildPrefix = prefixEntry.fetch(prefixEntry.getField(GuildEntry.Fields.PREFIX), guild.idLong, null)
         var message = environment.message.rawContent.replace(" +".toRegex(), " ").trim()
+        println("Pre prefix matching: " + System.currentTimeMillis())
         message = when {
             message.startsWith(defaultPrefix, true) -> message.substring(defaultPrefix.length)
             //message.startsWith(guildPrefix, true) -> message.substring(guildPrefix.length)
             else -> return
         }
+        println("Got message: " + System.currentTimeMillis())
         val args = message.split(" ")
         val commandName = args[0].toLowerCase()
         val command = commands.firstOrNull {
@@ -100,8 +94,11 @@ object Commands {
                 alias -> alias == commandName
             }
         }
-        println("Pre invocation: " + System.currentTimeMillis())
-        command?.invoke(environment, args)
+        println("Fetched command: " + System.currentTimeMillis())
+        launch(CommonPool) {
+            println("Pre invocation: " + System.currentTimeMillis())
+            command?.invoke(environment, args)
+        }
     }
 
 }
