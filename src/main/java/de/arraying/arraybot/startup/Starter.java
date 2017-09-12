@@ -22,12 +22,7 @@ import de.arraying.arraybot.startup.startups.StartupRedis;
  */
 public final class Starter {
 
-    private static final StartupTask[] tasks = new StartupTask[] {
-            new StartupBot(),
-            new StartupCommands(),
-            new StartupLanguages(),
-            new StartupRedis(),
-    };
+    private static final StartupTask[] tasks = new StartupTask[] {new StartupBot(), new StartupCommands(), new StartupLanguages(), new StartupRedis()};
 
     /**
      * Starts all startup tasks.

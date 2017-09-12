@@ -18,7 +18,7 @@ import de.arraying.arraybot.command.other.CommandEnvironment
  * limitations under the License.
  */
 abstract class SubCommand(val name: String,
-                 val aliases: Array<String> = arrayOf()) {
+                          val aliases: Array<String> = arrayOf()) {
 
     /**
      * Executes the subcommand.

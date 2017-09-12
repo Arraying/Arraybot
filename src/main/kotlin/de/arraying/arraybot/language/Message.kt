@@ -31,22 +31,22 @@ enum class Message {
     /**
      * Sends the message to the channel.
      */
-    fun send(channel: TextChannel): RestAction<net.dv8tion.jda.core.entities.Message> {
-        return channel.sendMessage(content(channel.guild.idLong))
+    fun send(channel: TextChannel, replacePrefix: Boolean = false): RestAction<net.dv8tion.jda.core.entities.Message> {
+        return channel.sendMessage(content(channel.guild.idLong, replacePrefix))
     }
 
     /**
      * Gets the message content.
      */
-    fun content(channel: TextChannel): String {
-        return content(channel.guild.idLong)
+    fun content(channel: TextChannel, replacePrefix: Boolean = false): String {
+        return content(channel.guild.idLong, replacePrefix)
     }
 
     /**
      * Gets the message content.
      */
-    fun content(id: Long): String {
-        return replace(Languages.get(id, name.toLowerCase().replace("_", ".")), id)
+    fun content(id: Long, replaceBoolean: Boolean = false): String {
+        return replace(Languages.get(id, name.toLowerCase().replace("_", ".")), id, replaceBoolean)
     }
 
     companion object {
@@ -56,28 +56,31 @@ enum class Message {
         /**
          * Gets a random message.
          */
-        fun getMessage(channel: TextChannel, message: String): String {
-            return replace(Languages.get(channel.guild, message), channel)
+        fun getMessage(channel: TextChannel, message: String, replacePrefix: Boolean = false): String {
+            return replace(Languages.get(channel.guild, message), channel, replacePrefix)
         }
 
         /**
          * Replaces common placeholders.
          */
-        private fun replace(input: String, channel: TextChannel): String {
-            return replace(input, channel.guild.idLong)
+        private fun replace(input: String, channel: TextChannel, replacePrefix: Boolean = false): String {
+            return replace(input, channel.guild.idLong, replacePrefix)
         }
 
         /**
          * Replaces common placeholders.
          */
-        fun replace(input: String, id: Long): String {
-            //val entry = Entry.Category.GUILD.entry as? GuildEntry?:
-                   // throw IllegalStateException("Expected guild entry to be instanceof GuildEntry.")
-            return input
-                    //.replace("{prefix}", entry.fetch(entry.getField(GuildEntry.Fields.PREFIX), id, null))
+        fun replace(input: String, id: Long, replacePrefix: Boolean = false): String {
+            var output = input
                     .replace("{github}", githubBase)
                     .replace("{zwsp}", "​")
                     .replace("-", "    **-**")
+            if(replacePrefix) {
+                val entry = Entry.Category.GUILD.entry as? GuildEntry ?:
+                        throw IllegalStateException("Expected guild entry to be instanceof GuildEntry.")
+               output = output.replace("{prefix}", entry.fetch(entry.getField(GuildEntry.Fields.PREFIX), id, null))
+            }
+            return output
         }
     }
 

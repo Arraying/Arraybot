@@ -54,8 +54,8 @@ class CustomEmbedBuilder : EmbedBuilder() {
      * Adds a field to the embed.
      */
     override fun addField(name: String?, value: String?, inline: Boolean): CustomEmbedBuilder {
-        val localName = if(name == null) getCorrectTitle("null") else getCorrectTitle(name)
-        val localValue = if(value == null) getCorrectText("null") else getCorrectText(value)
+        val localName = if (name == null) getCorrectTitle("null") else getCorrectTitle(name)
+        val localValue = if (value == null) getCorrectText("null") else getCorrectText(value)
         super.addField(localName, localValue, inline)
         return this
     }
@@ -71,7 +71,7 @@ class CustomEmbedBuilder : EmbedBuilder() {
      * Sets the author.
      */
     override fun setAuthor(name: String?, url: String?, iconUrl: String?): CustomEmbedBuilder {
-        val localName = if(name == null) getCorrectTitle("null") else getCorrectTitle(name)
+        val localName = if (name == null) getCorrectTitle("null") else getCorrectTitle(name)
         super.setAuthor(localName, url, iconUrl)
         return this
     }
@@ -89,7 +89,7 @@ class CustomEmbedBuilder : EmbedBuilder() {
      * Sets the description.
      */
     override fun setDescription(description: CharSequence?): CustomEmbedBuilder {
-        val localDescription = if(description == null) getCorrectText("null") else getCorrectText(description.toString())
+        val localDescription = if (description == null) getCorrectText("null") else getCorrectText(description.toString())
         super.setDescription(localDescription)
         return this
     }
@@ -105,7 +105,7 @@ class CustomEmbedBuilder : EmbedBuilder() {
      * Sets the title.
      */
     override fun setTitle(title: String?, url: String?): CustomEmbedBuilder {
-        val localTitle = if(title == null) getCorrectTitle("null") else getCorrectTitle(title)
+        val localTitle = if (title == null) getCorrectTitle("null") else getCorrectTitle(title)
         super.setTitle(localTitle, url)
         return this
     }
@@ -114,7 +114,7 @@ class CustomEmbedBuilder : EmbedBuilder() {
      * Sets the footer.
      */
     override fun setFooter(text: String?, iconUrl: String?): CustomEmbedBuilder {
-        val localText = if(text == null) getCorrectText("null") else getCorrectText(text)
+        val localText = if (text == null) getCorrectText("null") else getCorrectText(text)
         super.setFooter(localText, iconUrl)
         return this
     }
@@ -124,15 +124,15 @@ class CustomEmbedBuilder : EmbedBuilder() {
      */
     private fun getCorrectTitle(title: String): String {
         var localTitle =
-                if(title.length > TITLE_MAX_LENGTH)
-                    title.substring(0, TITLE_MAX_LENGTH -lengthPlaceholder.length) + lengthPlaceholder
+                if (title.length > TITLE_MAX_LENGTH)
+                    title.substring(0, TITLE_MAX_LENGTH - lengthPlaceholder.length) + lengthPlaceholder
                 else
                     title
-        if(totalLength + localTitle.length > MAX_LENGTH) {
-            localTitle = localTitle.substring(0, MAX_LENGTH -lengthPlaceholder.length) + lengthPlaceholder
+        if (totalLength + localTitle.length > MAX_LENGTH) {
+            localTitle = localTitle.substring(0, MAX_LENGTH - lengthPlaceholder.length) + lengthPlaceholder
         }
         totalLength += localTitle.length
-        if(totalLength >= MAX_LENGTH) {
+        if (totalLength >= MAX_LENGTH) {
             val difference = totalLength - MAX_LENGTH
             localTitle = localTitle.substring(0, difference)
         }
@@ -144,15 +144,15 @@ class CustomEmbedBuilder : EmbedBuilder() {
      */
     private fun getCorrectText(value: String): String {
         var localValue =
-                if(value.length > TEXT_MAX_LENGTH)
-                    value.substring(0, TEXT_MAX_LENGTH -lengthPlaceholder.length) + lengthPlaceholder
+                if (value.length > TEXT_MAX_LENGTH)
+                    value.substring(0, TEXT_MAX_LENGTH - lengthPlaceholder.length) + lengthPlaceholder
                 else
                     value
-        if(totalLength + localValue.length > MAX_LENGTH) {
-            localValue = localValue.substring(0, MAX_LENGTH -lengthPlaceholder.length) + lengthPlaceholder
+        if (totalLength + localValue.length > MAX_LENGTH) {
+            localValue = localValue.substring(0, MAX_LENGTH - lengthPlaceholder.length) + lengthPlaceholder
         }
         totalLength += localValue.length
-        if(totalLength >= MAX_LENGTH) {
+        if (totalLength >= MAX_LENGTH) {
             val difference = totalLength - MAX_LENGTH
             localValue = localValue.substring(0, difference)
         }

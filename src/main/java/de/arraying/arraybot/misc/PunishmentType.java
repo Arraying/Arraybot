@@ -15,7 +15,7 @@ package de.arraying.arraybot.misc;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-public enum  PunishmentType {
+public enum PunishmentType {
 
     /**
      * When a user is kicked.

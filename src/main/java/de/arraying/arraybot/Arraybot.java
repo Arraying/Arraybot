@@ -52,7 +52,8 @@ public class Arraybot {
     /**
      * Private constructor to prevent initialization.
      */
-    private Arraybot() {}
+    private Arraybot() {
+    }
 
     /**
      * The singleton getter. Thread safe.

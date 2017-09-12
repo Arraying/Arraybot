@@ -34,6 +34,7 @@ public final class GuildEntry extends HashEntry<GuildEntry.Fields> {
             fields.put(field, field.field);
         }
     }
+
     /**
      * Gets a field by key.
      * @param key The key.
@@ -167,7 +168,7 @@ public final class GuildEntry extends HashEntry<GuildEntry.Fields> {
          * The incrementing latest punishment ID.
          */
         COUNT_PUNISHMENT(new EntryField("count_punishment", UDefaults.DEFAULT_COUNT));
-        
+
         private final EntryField field;
 
         /**
@@ -177,7 +178,7 @@ public final class GuildEntry extends HashEntry<GuildEntry.Fields> {
         Fields(EntryField field) {
             this.field = field;
         }
-        
+
     }
-    
+
 }

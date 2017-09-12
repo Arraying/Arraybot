@@ -7,6 +7,8 @@ import de.arraying.arraybot.data.database.Redis
 import de.arraying.arraybot.language.Languages
 import de.arraying.arraybot.language.Message
 import de.arraying.arraybot.misc.Limits
+import kotlinx.coroutines.experimental.CommonPool
+import kotlinx.coroutines.experimental.launch
 import net.dv8tion.jda.core.Permission
 import net.dv8tion.jda.core.utils.PermissionUtil
 import org.apache.commons.lang.WordUtils
@@ -32,7 +34,7 @@ abstract class DefaultCommand(val name: String,
                               val permission: Permission,
                               open val subCommands: Array<SubCommand> = arrayOf(),
                               val aliases: Array<String> = arrayOf(),
-                              protected val customPermissionChecking: Boolean = false) {
+                              private val customPermissionChecking: Boolean = false) {
 
     protected val arraybot = Arraybot.getInstance()!!
     private val logger = LoggerFactory.getLogger("Command-${WordUtils.capitalize(name)}")
@@ -51,9 +53,7 @@ abstract class DefaultCommand(val name: String,
     internal fun checks() {
         if ((!Languages.contains(descriptionPath)
                 || !Languages.contains(syntaxPath))
-                && Commands.commands.any {
-            it.name == name
-        }) {
+                && Commands.commands.containsKey(name)) {
             Commands.unregisterCommand(name)
             logger.error("The command has been unregistered disabled as it does not have a description or syntax defined.")
         }
@@ -112,10 +112,12 @@ abstract class DefaultCommand(val name: String,
         println("Invoke method: " + System.currentTimeMillis())
         val channel = environment.channel
         val author = environment.author
-        logger.info("${author.idLong} executed the command in the guild ${channel.guild.idLong}.")
-        val resource = Redis.getInstance().resource
-        resource.incr("commands")
-        println("Command incrementation: " + System.currentTimeMillis())
+        launch(CommonPool) {
+            logger.info("${author.idLong} executed the command in the guild ${channel.guild.idLong}.")
+            val resource = Redis.getInstance().resource
+            resource.incr("commands")
+            println("Command incrementation: " + System.currentTimeMillis())
+        }
         status?.let {
             if (!it.isEmpty()
                     && it.length <= Limits.MESSAGE.limit) {

@@ -34,7 +34,6 @@ public final class KVEntry implements Entry {
 
     /**
      * Gets the entry type.
-     *
      * @return The type.
      */
     @Override
@@ -44,7 +43,6 @@ public final class KVEntry implements Entry {
 
     /**
      * Sets the category.
-     *
      * @param category The category.
      */
     @Override
@@ -54,7 +52,6 @@ public final class KVEntry implements Entry {
 
     /**
      * Gets a value from Redis.
-     *
      * @param key The key.
      * @return The value, can be null.
      */
@@ -63,25 +60,24 @@ public final class KVEntry implements Entry {
         Object o = resource.get(UDatabase.getKey(category, key));
         return o == null ? null : o.toString();
 
-//        Jedis resource = redis.getJedisResource();
-//        String result = resource.get(UDatabase.getKey(category, key));
-//        redis.finish(resource);
-//        return result;
+        //        Jedis resource = redis.getJedisResource();
+        //        String result = resource.get(UDatabase.getKey(category, key));
+        //        redis.finish(resource);
+        //        return result;
     }
 
     /**
      * Sets a value in Redis.
-     *
-     * @param key   The key.
+     * @param key The key.
      * @param value The value. Cannot be null.
      */
     public void set(String key, Object value) {
         RedisCommands resource = redis.getResource();
         resource.set(UDatabase.getKey(category, key), value.toString());
 
-//        Jedis resource = redis.getJedisResource();
-//        resource.set(UDatabase.getKey(category, key), value.toString());
-//        redis.finish(resource);
+        //        Jedis resource = redis.getJedisResource();
+        //        resource.set(UDatabase.getKey(category, key), value.toString());
+        //        redis.finish(resource);
     }
 
 }

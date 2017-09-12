@@ -1,8 +1,6 @@
 package de.arraying.arraybot.language
 
 import de.arraying.arraybot.Arraybot
-import de.arraying.arraybot.data.database.categories.GuildEntry
-import de.arraying.arraybot.data.database.core.Entry
 import net.dv8tion.jda.core.entities.Guild
 import org.slf4j.LoggerFactory
 import java.io.File
@@ -52,30 +50,30 @@ class Languages {
          */
         @Throws(Exception::class)
         fun init() {
-            if(done) {
+            if (done) {
                 throw IllegalStateException("The languages have already been initialized.")
             }
             val directory = File("languages")
-            if(!directory.exists()) {
+            if (!directory.exists()) {
                 directory.mkdirs()
                 throw IllegalArgumentException("The language directory did not exist, hence it has been created.")
             }
             val urls = arrayOf(directory.toURI().toURL())
             val classLoader = URLClassLoader(urls)
-            for(file in directory.listFiles()) {
+            for (file in directory.listFiles()) {
                 var name = file.name
                 val matcher = filePattern.matcher(name)
-                if(!matcher.find()) {
+                if (!matcher.find()) {
                     continue
                 }
                 name = name.substring(name.indexOf("_") + 1, name.indexOf(".properties"))
                 languages.put(name, ResourceBundle.getBundle("Language", Locale(name), classLoader))
                 logger.info("Registered the language \"$name\".")
             }
-            if(languages.isEmpty()) {
+            if (languages.isEmpty()) {
                 throw IllegalArgumentException("No valid language were found.")
             }
-            if(!languages.containsKey(Arraybot.getInstance().configuration.botLanguage)) {
+            if (!languages.containsKey(Arraybot.getInstance().configuration.botLanguage)) {
                 throw IllegalArgumentException("The default language specified does not exist.")
             }
             done = true
@@ -86,23 +84,23 @@ class Languages {
          */
         fun get(id: Long, message: String): String {
             //val entry = Entry.Category.GUILD.entry as? GuildEntry ?:
-              //      throw IllegalStateException("Expected guild entry to be instanceof GuildEntry.")
+            //      throw IllegalStateException("Expected guild entry to be instanceof GuildEntry.")
             //val guildLanguage = entry.fetch(entry.getField(GuildEntry.Fields.LANGUAGE), id, null).toLowerCase()
-            val locale = if(languages.containsKey("")/*languages.containsKey(guildLanguage)*/) {
-                    ""/*guildLanguage*/
-                } else {
-                    defaultLanguage
-                }
+            val locale = if (languages.containsKey("")/*languages.containsKey(guildLanguage)*/) {
+                ""/*guildLanguage*/
+            } else {
+                defaultLanguage
+            }
             return try {
                 if (locale.equals("de", true)) {
                     languages["de"]!!.getString(message)
                 } else {
                     java.lang.String(languages[locale]!!.getString(message).toByteArray(charset("ISO-8859-1")), "UTF-8").toString()
                 }
-            } catch(exception: Exception) {
+            } catch (exception: Exception) {
                 try {
                     languages[defaultLanguage]!!.getString(message)
-                } catch(exception: Exception) {
+                } catch (exception: Exception) {
                     "Unknown string contact a developer if you see this message."
                 }
             }

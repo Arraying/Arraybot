@@ -20,7 +20,7 @@ import net.dv8tion.jda.core.Permission
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-class CommandPing: DefaultCommand("ping",
+class CommandPing : DefaultCommand("ping",
         CommandCategory.UTILS,
         Permission.MESSAGE_WRITE) {
 
@@ -33,7 +33,7 @@ class CommandPing: DefaultCommand("ping",
 //        channel.sendMessage("pinq").queue({
 //            println((System.currentTimeMillis() - i))
 //        })
-        val message = Message.COMMANDS_PING_PING.content(channel)
+        val message = Message.COMMANDS_PING_PING.content(channel, true)
         println("Post message: " + System.currentTimeMillis())
         channel.sendMessage(message
                 .replace("{ping}", channel.jda.ping.toString()))

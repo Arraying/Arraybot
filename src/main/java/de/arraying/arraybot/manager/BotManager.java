@@ -41,10 +41,7 @@ public final class BotManager {
     private final Configuration configuration = Arraybot.getInstance().getConfiguration();
     private final Logger logger = LoggerFactory.getLogger("Bot-Manager");
     private final SessionReconnectQueue reconnectQueue = new SessionReconnectQueue();
-    private final PostLoadListener[] listeners = new PostLoadListener[] {
-            new DeathListener(),
-            new MessageListener()
-    };
+    private final PostLoadListener[] listeners = new PostLoadListener[] {new DeathListener(), new MessageListener()};
 
     /**
      * Gets all the shards.
@@ -58,8 +55,7 @@ public final class BotManager {
      * Starts the bot.
      * @throws Exception If an error occurs.
      */
-    public synchronized void start()
-            throws Exception {
+    public synchronized void start() throws Exception {
         int shardTotal = configuration.getBotShards();
         logger.info("Logging in a total of {} shards.", shardTotal);
         if(shardTotal < 1) {
@@ -124,8 +120,7 @@ public final class BotManager {
      * @param total The shard total.
      * @throws Exception In case an error occurs.
      */
-    private synchronized void load(int shard, int total)
-            throws Exception {
+    private synchronized void load(int shard, int total) throws Exception {
         if(total == 1) {
             logger.info("Asynchronously firing the JDA instance login, using index {}.", Arraybot.SINGLE_SHARD_INDEX);
             JDA jda = getBuilder().buildAsync();
@@ -143,11 +138,7 @@ public final class BotManager {
      * @return A JDABuilder.
      */
     private JDABuilder getBuilder() {
-        return new JDABuilder(AccountType.BOT)
-                .setToken(configuration.isBotBeta() ? configuration.getBotBetaToken() : configuration.getBotToken())
-                .setStatus(OnlineStatus.DO_NOT_DISTURB)
-                .addEventListener(new ReadyListener())
-                .setGame(Game.of(configuration.getBotPrefix() + "help || v" + configuration.getBotVersion()));
+        return new JDABuilder(AccountType.BOT).setToken(configuration.isBotBeta() ? configuration.getBotBetaToken() : configuration.getBotToken()).setStatus(OnlineStatus.DO_NOT_DISTURB).addEventListener(new ReadyListener()).setGame(Game.of(configuration.getBotPrefix() + "help || v" + configuration.getBotVersion()));
     }
 
     /**
@@ -157,8 +148,7 @@ public final class BotManager {
      * @return A JDA builder.
      */
     private JDABuilder getShardedBuilder(int shard, int total) {
-        return getBuilder().useSharding(shard, total)
-                .setReconnectQueue(reconnectQueue);
+        return getBuilder().useSharding(shard, total).setReconnectQueue(reconnectQueue);
     }
 
 }

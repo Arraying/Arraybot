@@ -35,7 +35,6 @@ public abstract class HashEntry<T> implements Entry {
 
     /**
      * Gets a entry field via key.
-     *
      * @param key The key.
      * @return The entry field.
      */
@@ -43,7 +42,6 @@ public abstract class HashEntry<T> implements Entry {
 
     /**
      * Gets the entry type.
-     *
      * @return The type.
      */
     @Override
@@ -53,7 +51,6 @@ public abstract class HashEntry<T> implements Entry {
 
     /**
      * Sets the category,
-     *
      * @param category The category.
      */
     @Override
@@ -63,9 +60,8 @@ public abstract class HashEntry<T> implements Entry {
 
     /**
      * Gets a hash value.
-     *
-     * @param field        The field.
-     * @param id           The primary key.
+     * @param field The field.
+     * @param id The primary key.
      * @param secondaryKey The secondary key.
      * @return The value. It is never null.
      */
@@ -74,40 +70,38 @@ public abstract class HashEntry<T> implements Entry {
         RedisCommands resource = redis.getResource();
         Object redisResult = resource.hget(UDatabase.getKey(category, id, secondaryKey), field.getRedisKey());
         return redisResult == null ? setDefault(field, id, secondaryKey) : redisResult.toString();
-//        Jedis resource = redis.getJedisResource();
-//        String redisResult = resource.hget(UDatabase.getKey(category, id, secondaryKey), field.getRedisKey());
-//        String result = redisResult == null ? setDefault(field, id, secondaryKey) : redisResult;
-//        redis.finish(resource);
-//        return result;
+        //        Jedis resource = redis.getJedisResource();
+        //        String redisResult = resource.hget(UDatabase.getKey(category, id, secondaryKey), field.getRedisKey());
+        //        String result = redisResult == null ? setDefault(field, id, secondaryKey) : redisResult;
+        //        redis.finish(resource);
+        //        return result;
     }
 
     /**
      * Sets a hash value.
-     *
-     * @param field        The field.
-     * @param id           The primary key.
+     * @param field The field.
+     * @param id The primary key.
      * @param secondaryKey The secondary key.
-     * @param value        The value.
+     * @param value The value.
      */
 
     public void push(EntryField field, long id, Object secondaryKey, Object value) {
         RedisCommands resource = redis.getResource();
         resource.hset(UDatabase.getKey(category, id, secondaryKey), field.getRedisKey(), value.toString());
-//        Jedis resource = redis.getJedisResource();
-//        resource.hset(UDatabase.getKey(category, id, secondaryKey), field.getRedisKey(), value.toString());
-//        redis.finish(resource);
+        //        Jedis resource = redis.getJedisResource();
+        //        resource.hset(UDatabase.getKey(category, id, secondaryKey), field.getRedisKey(), value.toString());
+        //        redis.finish(resource);
     }
 
     /**
      * Sets a field to its default value.
-     *
-     * @param field        The field.
-     * @param id           The primary key.
+     * @param field The field.
+     * @param id The primary key.
      * @param secondaryKey The secondary key.
      * @return The value.
      */
     private String setDefault(EntryField field, long id, Object secondaryKey) {
-        if (field == null) {
+        if(field == null) {
             throw new IllegalArgumentException("The provided field is null.");
         }
         push(field, id, secondaryKey, field.getDefaultValue());

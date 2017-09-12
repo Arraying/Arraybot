@@ -36,7 +36,6 @@ public final class SetEntry implements Entry {
 
     /**
      * Gets the entry type.
-     *
      * @return The type.
      */
     @Override
@@ -46,7 +45,6 @@ public final class SetEntry implements Entry {
 
     /**
      * Sets the category.
-     *
      * @param category The category.
      */
     @Override
@@ -56,7 +54,6 @@ public final class SetEntry implements Entry {
 
     /**
      * Gets the entries of the set.
-     *
      * @param id The snowflake identifier ID.
      * @return A set of entries. Cannot be null.
      */
@@ -64,40 +61,38 @@ public final class SetEntry implements Entry {
         RedisCommands resource = redis.getResource();
         return resource.smembers(UDatabase.getKey(category, id));
 
-//        Jedis resource = redis.getJedisResource();
-//        Set<String> members = resource.smembers(UDatabase.getKey(category, id));
-//        redis.finish(resource);
-//        return members;
+        //        Jedis resource = redis.getJedisResource();
+        //        Set<String> members = resource.smembers(UDatabase.getKey(category, id));
+        //        redis.finish(resource);
+        //        return members;
     }
 
     /**
      * Adds a member to the set.
-     *
-     * @param id    The snowflake identifier ID.
+     * @param id The snowflake identifier ID.
      * @param entry The entry. Cannot be null.
      */
     public void add(long id, Object entry) {
         RedisCommands resource = redis.getResource();
         resource.sadd(UDatabase.getKey(category, id), entry.toString());
 
-//        Jedis resource = redis.getJedisResource();
-//        resource.sadd(UDatabase.getKey(category, id), entry.toString());
-//        redis.finish(resource);
+        //        Jedis resource = redis.getJedisResource();
+        //        resource.sadd(UDatabase.getKey(category, id), entry.toString());
+        //        redis.finish(resource);
     }
 
     /**
      * Removes an entry from the set,
-     *
-     * @param id    The snowflake identifier ID.
+     * @param id The snowflake identifier ID.
      * @param entry The entry. Cannot be null.
      */
     public void remove(long id, Object entry) {
         RedisCommands resource = redis.getResource();
         resource.srem(UDatabase.getKey(category, id), entry.toString());
 
-//        Jedis resource = redis.getJedisResource();
-//        resource.srem(UDatabase.getKey(category, id), entry.toString());
-//        redis.finish(resource);
+        //        Jedis resource = redis.getJedisResource();
+        //        resource.srem(UDatabase.getKey(category, id), entry.toString());
+        //        redis.finish(resource);
     }
 
 }

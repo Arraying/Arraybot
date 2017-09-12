@@ -56,29 +56,15 @@ public final class Configuration {
      * @param botPrefix The default prefix.
      * @param botVersion The bot version.
      * @param botBeta Whether or not to use the beta bot.
-     *                True = Use beta.
+     * True = Use beta.
      * @param botLanguage The default language to use for the bot.
      * @param redisHost The Redis hostname/IP.
      * @param redisPort The Redis port.
      * @param redisAuth The Redis authentication string.
-     *                  Can be empty.
+     * Can be empty.
      * @param redisIndex The Redis index to use.
      */
-    private Configuration(String botToken,
-                          String botBetaToken,
-                          int botShards,
-                          long[] botAuthors,
-                          String botPrefix,
-                          String botVersion,
-                          String botLanguage,
-                          boolean botBeta,
-                          String redisHost,
-                          int redisPort,
-                          String redisAuth,
-                          int redisIndex,
-                          String keyCarbonitex,
-                          String keyDiscordOrg,
-                          String keyDiscordPw) {
+    private Configuration(String botToken, String botBetaToken, int botShards, long[] botAuthors, String botPrefix, String botVersion, String botLanguage, boolean botBeta, String redisHost, int redisPort, String redisAuth, int redisIndex, String keyCarbonitex, String keyDiscordOrg, String keyDiscordPw) {
         this.botToken = botToken;
         this.botBetaToken = botBetaToken;
         this.botShards = botShards;
@@ -101,8 +87,7 @@ public final class Configuration {
      * @param file The configuration file.
      * @throws ConfigurationException If an exception occurs.
      */
-    public static Configuration getConfiguration(File file)
-            throws ConfigurationException {
+    public static Configuration getConfiguration(File file) throws ConfigurationException {
         if(file.exists()) {
             return load(file);
         } else {
@@ -117,8 +102,7 @@ public final class Configuration {
      * @return Returns a data configuration.
      * @throws ConfigurationException If an exception occurs.
      */
-    private static Configuration load(File file)
-            throws ConfigurationException {
+    private static Configuration load(File file) throws ConfigurationException {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(file));
             StringBuilder stringBuilder = new StringBuilder();
@@ -162,8 +146,7 @@ public final class Configuration {
                 } else {
                     Object defaultValue = entry.defaultValue;
                     entryObject = entry.type == ConfigEntry.ConfigEntryType.ARRAY_LONG ? new long[] {} : defaultValue;
-                    logger.error("Could not find the entry for the key \"{}" +
-                            "\", thus using the default value \"{}\".", entry.jsonKey, entry.defaultValue);
+                    logger.error("Could not find the entry for the key \"{}" + "\", thus using the default value \"{}\".", entry.jsonKey, entry.defaultValue);
                 }
                 constructorParameters.add(entryObject);
             }
@@ -186,8 +169,7 @@ public final class Configuration {
      * @param file The file to use as a configuration file.
      * @throws ConfigurationException If an I/O error occurs.
      */
-    private static void create(File file)
-            throws ConfigurationException {
+    private static void create(File file) throws ConfigurationException {
         JSONObject jsonObject = new JSONObject();
         for(ConfigEntry entry : ConfigEntry.values()) {
             jsonObject.put(entry.jsonKey, entry.defaultValue);
@@ -206,15 +188,7 @@ public final class Configuration {
      * @return True if it is valid, else false.
      */
     private boolean isValid() {
-        return ((botBeta && !botBetaToken.isEmpty()) || (!botBeta && !botToken.isEmpty()))
-                && botShards > 0
-                && botAuthors.length > 0
-                && !botPrefix.isEmpty()
-                && !botVersion.isEmpty()
-                && !botLanguage.isEmpty()
-                && !redisHost.isEmpty()
-                && (redisPort > 1024 && redisPort < 49151)
-                && (redisIndex >= 0 && redisIndex <= 16);
+        return ((botBeta && !botBetaToken.isEmpty()) || (!botBeta && !botToken.isEmpty())) && botShards > 0 && botAuthors.length > 0 && !botPrefix.isEmpty() && !botVersion.isEmpty() && !botLanguage.isEmpty() && !redisHost.isEmpty() && (redisPort > 1024 && redisPort < 49151) && (redisIndex >= 0 && redisIndex <= 16);
     }
 
     /**
@@ -340,21 +314,7 @@ public final class Configuration {
     @SuppressWarnings("unused")
     private enum ConfigEntry {
 
-        BOT_TOKEN("bot-token", ConfigEntry.ConfigEntryType.STRING, ""),
-        BOT_BETA_TOKEN("bot-beta-token", ConfigEntry.ConfigEntryType.STRING, ""),
-        BOT_SHARDS("bot-shards", ConfigEntry.ConfigEntryType.INT, 1),
-        BOT_AUTHORS("bot-authors", ConfigEntry.ConfigEntryType.ARRAY_LONG, new JSONArray()),
-        BOT_PREFIX("bot-prefix", ConfigEntry.ConfigEntryType.STRING, "//"),
-        BOT_VERSION("bot-version", ConfigEntry.ConfigEntryType.STRING, "0.0.0"),
-        BOT_LANGUAGE("bot-language", ConfigEntry.ConfigEntryType.STRING, "en"),
-        BOT_BETA("bot-beta", ConfigEntry.ConfigEntryType.BOOLEAN, true),
-        REDIS_HOST("redis-host", ConfigEntry.ConfigEntryType.STRING, "localhost"),
-        REDIS_PORT("redis-port", ConfigEntry.ConfigEntryType.INT, 6379),
-        REDIS_AUTH("redis-auth", ConfigEntry.ConfigEntryType.STRING, ""),
-        REDIS_INDEX("redis-index", ConfigEntry.ConfigEntryType.INT, 5),
-        KEY_CARBONITEX("key-carbonitex", ConfigEntryType.STRING, ""),
-        KEY_DISCORD_ORG("key-discord-org", ConfigEntryType.STRING, ""),
-        KEY_DISCORD_PW("key-discord-pw", ConfigEntryType.STRING, "");
+        BOT_TOKEN("bot-token", ConfigEntry.ConfigEntryType.STRING, ""), BOT_BETA_TOKEN("bot-beta-token", ConfigEntry.ConfigEntryType.STRING, ""), BOT_SHARDS("bot-shards", ConfigEntry.ConfigEntryType.INT, 1), BOT_AUTHORS("bot-authors", ConfigEntry.ConfigEntryType.ARRAY_LONG, new JSONArray()), BOT_PREFIX("bot-prefix", ConfigEntry.ConfigEntryType.STRING, "//"), BOT_VERSION("bot-version", ConfigEntry.ConfigEntryType.STRING, "0.0.0"), BOT_LANGUAGE("bot-language", ConfigEntry.ConfigEntryType.STRING, "en"), BOT_BETA("bot-beta", ConfigEntry.ConfigEntryType.BOOLEAN, true), REDIS_HOST("redis-host", ConfigEntry.ConfigEntryType.STRING, "localhost"), REDIS_PORT("redis-port", ConfigEntry.ConfigEntryType.INT, 6379), REDIS_AUTH("redis-auth", ConfigEntry.ConfigEntryType.STRING, ""), REDIS_INDEX("redis-index", ConfigEntry.ConfigEntryType.INT, 5), KEY_CARBONITEX("key-carbonitex", ConfigEntryType.STRING, ""), KEY_DISCORD_ORG("key-discord-org", ConfigEntryType.STRING, ""), KEY_DISCORD_PW("key-discord-pw", ConfigEntryType.STRING, "");
 
         private final String jsonKey;
         private final ConfigEntry.ConfigEntryType type;
@@ -374,11 +334,7 @@ public final class Configuration {
 
         private enum ConfigEntryType {
 
-            STRING,
-            INT,
-            LONG,
-            BOOLEAN,
-            ARRAY_LONG,
+            STRING, INT, LONG, BOOLEAN, ARRAY_LONG,
 
         }
 
