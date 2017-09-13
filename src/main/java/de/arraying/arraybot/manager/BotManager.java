@@ -4,7 +4,6 @@ import de.arraying.arraybot.Arraybot;
 import de.arraying.arraybot.data.Configuration;
 import de.arraying.arraybot.listener.listeners.PostLoadListener;
 import de.arraying.arraybot.listener.listeners.postload.DeathListener;
-import de.arraying.arraybot.listener.listeners.postload.GuildListener;
 import de.arraying.arraybot.listener.listeners.postload.MessageListener;
 import de.arraying.arraybot.listener.listeners.preload.ReadyListener;
 import de.arraying.arraybot.shard.ShardEntry;
@@ -42,7 +41,7 @@ public final class BotManager {
     private final Configuration configuration = Arraybot.getInstance().getConfiguration();
     private final Logger logger = LoggerFactory.getLogger("Bot-Manager");
     private final SessionReconnectQueue reconnectQueue = new SessionReconnectQueue();
-    private final PostLoadListener[] listeners = new PostLoadListener[] {new DeathListener(), new GuildListener(), new MessageListener()};
+    private final PostLoadListener[] listeners = new PostLoadListener[] {new DeathListener(), new MessageListener()};
 
     /**
      * Gets all the shards.
@@ -139,11 +138,7 @@ public final class BotManager {
      * @return A JDABuilder.
      */
     private JDABuilder getBuilder() {
-        return new JDABuilder(AccountType.BOT)
-                .setToken(configuration.isBotBeta() ? configuration.getBotBetaToken() : configuration.getBotToken())
-                .setStatus(OnlineStatus.DO_NOT_DISTURB)
-                .addEventListener(new ReadyListener())
-                .setGame(Game.of(configuration.getBotPrefix() + "help || v" + configuration.getBotVersion()));
+        return new JDABuilder(AccountType.BOT).setToken(configuration.isBotBeta() ? configuration.getBotBetaToken() : configuration.getBotToken()).setStatus(OnlineStatus.DO_NOT_DISTURB).addEventListener(new ReadyListener()).setGame(Game.of(configuration.getBotPrefix() + "help || v" + configuration.getBotVersion()));
     }
 
     /**

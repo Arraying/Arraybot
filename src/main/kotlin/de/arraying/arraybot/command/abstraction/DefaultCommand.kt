@@ -109,12 +109,14 @@ abstract class DefaultCommand(val name: String,
      * Invokes the command.
      */
     suspend fun invoke(environment: CommandEnvironment, args: List<String>) {
+        println("Invoke method: " + System.currentTimeMillis())
         val channel = environment.channel
         val author = environment.author
         launch(CommonPool) {
             logger.info("${author.idLong} executed the command in the guild ${channel.guild.idLong}.")
             val resource = Redis.getInstance().resource
             resource.incr("commands")
+            println("Command incrementation: " + System.currentTimeMillis())
         }
         status?.let {
             if (!it.isEmpty()
@@ -122,6 +124,7 @@ abstract class DefaultCommand(val name: String,
                 channel.sendMessage(it).queue()
             }
         }
+        println("Disabled check: " + System.currentTimeMillis())
         if (category == CommandCategory.DEVELOPER
                 && !arraybot.configuration.botAuthors.any {
             it == author.idLong
@@ -129,10 +132,12 @@ abstract class DefaultCommand(val name: String,
             Message.COMMAND_UNAVAILABLE_DEVELOPER.send(channel).queue()
             return
         }
+        println("Developer check: " + System.currentTimeMillis())
         if (!PermissionUtil.checkPermission(channel, channel.guild.selfMember, Permission.MESSAGE_EMBED_LINKS)) {
             Message.COMMAND_UNAVAILABLE_EMBED.send(channel).queue()
             return
         }
+        println("Permission check: " + System.currentTimeMillis())
         if (!PermissionUtil.checkPermission(channel, environment.member, permission)
                 && !customPermissionChecking) {
             val message = Message.COMMAND_PERMISSION.content(channel)
@@ -156,6 +161,7 @@ abstract class DefaultCommand(val name: String,
             }
             return
         }
+        println("Subcommand check: " + System.currentTimeMillis())
         onCommand(environment, args)
     }
 

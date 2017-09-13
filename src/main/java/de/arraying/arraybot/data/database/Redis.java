@@ -86,12 +86,4 @@ public final class Redis {
         }
     }
 
-    /**
-     * Purges all information related to the guild with that ID.
-     * @param id The ID.
-     */
-    public void purge(long id) {
-        //TODO Set up a purge.
-    }
-
 }

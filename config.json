@@ -1,0 +1,19 @@
+{
+  "bot-version": "5dev",
+  "bot-language": "en",
+  "bot-shards": 1,
+  "bot-authors": [
+    123
+  ],
+  "bot-prefix": "ab5 ",
+  "bot-beta": true,
+  "redis-port": 6379,
+  "redis-auth": "sexybeast",
+  "redis-index": 5,
+  "redis-host": "5.196.125.134",
+  "bot-token": "123",
+  "bot-beta-token": "MjE2ODU5ODk1MTY3ODQ0MzU0.DI2y3w.Vfx-eTwexoDRdbJprpK78uNprmg",
+  "key-carbonitex": "",
+  "key-discord-org": "",
+  "key-discord-pw": ""
+}

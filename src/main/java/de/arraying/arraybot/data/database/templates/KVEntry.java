@@ -20,7 +20,6 @@ import de.arraying.arraybot.util.UDatabase;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-@SuppressWarnings("unchecked")
 public final class KVEntry implements Entry {
 
     private final Redis redis;
@@ -58,8 +57,13 @@ public final class KVEntry implements Entry {
      */
     public String get(String key) {
         RedisCommands resource = redis.getResource();
-        Object result = resource.get(UDatabase.getKey(category, key));
-        return result == null ? null : result.toString();
+        Object o = resource.get(UDatabase.getKey(category, key));
+        return o == null ? null : o.toString();
+
+        //        Jedis resource = redis.getJedisResource();
+        //        String result = resource.get(UDatabase.getKey(category, key));
+        //        redis.finish(resource);
+        //        return result;
     }
 
     /**
@@ -70,6 +74,10 @@ public final class KVEntry implements Entry {
     public void set(String key, Object value) {
         RedisCommands resource = redis.getResource();
         resource.set(UDatabase.getKey(category, key), value.toString());
+
+        //        Jedis resource = redis.getJedisResource();
+        //        resource.set(UDatabase.getKey(category, key), value.toString());
+        //        redis.finish(resource);
     }
 
 }

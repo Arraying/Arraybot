@@ -120,7 +120,7 @@ public class Arraybot {
      * Sets the bot manager.
      * @param manager The manager.
      */
-    public synchronized void setBotManager(BotManager manager) {
+    public void setBotManager(BotManager manager) {
         if(botManager == null) {
             botManager = manager;
         }

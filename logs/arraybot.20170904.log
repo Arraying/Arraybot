@@ -1,0 +1,126 @@
+[17:15:39] [main/INFO] [Arraybot]: Starting up Arraybot...
+[17:15:39] [main/INFO] [Arraybot]: Loading in the configuration...
+[17:15:39] [main/INFO] [Arraybot]: The configuration has been loaded. Using bot version 5dev.
+[17:15:39] [main/INFO] [Arraybot]: Attempting to start up Redis...
+[17:15:39] [main/INFO] [Arraybot]: Successfully connected to the Redis server.
+[17:15:39] [main/INFO] [Arraybot]: Registering all Redis entries...
+[17:15:39] [main/INFO] [Redis]: Registered the Redis entry ANNOUNCEMENT_IDS using the SET type.
+[17:15:39] [main/INFO] [Redis]: Registered the Redis entry ANNOUNCEMENT using the HASH type.
+[17:15:39] [main/INFO] [Redis]: Registered the Redis entry BLACKLIST using the SET type.
+[17:15:39] [main/INFO] [Redis]: Registered the Redis entry CUSTOM_COMMAND_NAMES using the SET type.
+[17:15:39] [main/INFO] [Redis]: Registered the Redis entry CUSTOM_COMMAND using the HASH type.
+[17:15:39] [main/INFO] [Redis]: Registered the Redis entry DISABLED_COMMAND using the SET type.
+[17:15:39] [main/INFO] [Redis]: Registered the Redis entry FILTER_IDS using the SET type.
+[17:15:39] [main/INFO] [Redis]: Registered the Redis entry FILTER using the SET type.
+[17:15:39] [main/INFO] [Redis]: Registered the Redis entry FILTER_BYPASS_IDS using the SET type.
+[17:15:39] [main/INFO] [Redis]: Registered the Redis entry FILTER_BYPASS using the HASH type.
+[17:15:39] [main/INFO] [Redis]: Registered the Redis entry GUILD using the HASH type.
+[17:15:39] [main/INFO] [Redis]: Registered the Redis entry PUNISHMENT_IDS using the SET type.
+[17:15:39] [main/INFO] [Redis]: Registered the Redis entry PUNISHMENT using the HASH type.
+[17:15:39] [main/INFO] [Redis]: Registered the Redis entry MISC using the KV type.
+[17:15:39] [main/INFO] [Arraybot]: All Redis entries have been registered.
+[17:17:41] [Arraybot/INFO] [Arraybot]: Starting up Arraybot...
+[17:17:41] [Arraybot/INFO] [Arraybot]: Loading in the configuration...
+[17:17:41] [Arraybot/INFO] [Arraybot]: The configuration has been loaded. Using bot version 5dev.
+[17:17:41] [Arraybot/INFO] [Arraybot]: Attempting to start up Redis...
+[17:17:41] [Arraybot/INFO] [Arraybot]: Successfully connected to the Redis server.
+[17:17:41] [Arraybot/INFO] [Arraybot]: Registering all Redis entries...
+[17:17:41] [Arraybot/INFO] [Redis]: Registered the Redis entry ANNOUNCEMENT_IDS using the SET type.
+[17:17:41] [Arraybot/INFO] [Redis]: Registered the Redis entry ANNOUNCEMENT using the HASH type.
+[17:17:41] [Arraybot/INFO] [Redis]: Registered the Redis entry BLACKLIST using the SET type.
+[17:17:41] [Arraybot/INFO] [Redis]: Registered the Redis entry CUSTOM_COMMAND_NAMES using the SET type.
+[17:17:41] [Arraybot/INFO] [Redis]: Registered the Redis entry CUSTOM_COMMAND using the HASH type.
+[17:17:41] [Arraybot/INFO] [Redis]: Registered the Redis entry DISABLED_COMMAND using the SET type.
+[17:17:41] [Arraybot/INFO] [Redis]: Registered the Redis entry FILTER_IDS using the SET type.
+[17:17:41] [Arraybot/INFO] [Redis]: Registered the Redis entry FILTER using the SET type.
+[17:17:41] [Arraybot/INFO] [Redis]: Registered the Redis entry FILTER_BYPASS_IDS using the SET type.
+[17:17:41] [Arraybot/INFO] [Redis]: Registered the Redis entry FILTER_BYPASS using the HASH type.
+[17:17:41] [Arraybot/INFO] [Redis]: Registered the Redis entry GUILD using the HASH type.
+[17:17:41] [Arraybot/INFO] [Redis]: Registered the Redis entry PUNISHMENT_IDS using the SET type.
+[17:17:41] [Arraybot/INFO] [Redis]: Registered the Redis entry PUNISHMENT using the HASH type.
+[17:17:41] [Arraybot/INFO] [Redis]: Registered the Redis entry MISC using the KV type.
+[17:17:41] [Arraybot/INFO] [Arraybot]: All Redis entries have been registered.
+[17:17:50] [Main/INFO] [Arraybot]: Starting up Arraybot...
+[17:17:50] [Main/INFO] [Arraybot]: Loading in the configuration...
+[17:17:50] [Main/INFO] [Arraybot]: The configuration has been loaded. Using bot version 5dev.
+[17:17:50] [Main/INFO] [Arraybot]: Attempting to start up Redis...
+[17:17:50] [Main/INFO] [Arraybot]: Successfully connected to the Redis server.
+[17:17:50] [Main/INFO] [Arraybot]: Registering all Redis entries...
+[17:17:50] [Main/INFO] [Redis]: Registered the Redis entry ANNOUNCEMENT_IDS using the SET type.
+[17:17:50] [Main/INFO] [Redis]: Registered the Redis entry ANNOUNCEMENT using the HASH type.
+[17:17:50] [Main/INFO] [Redis]: Registered the Redis entry BLACKLIST using the SET type.
+[17:17:50] [Main/INFO] [Redis]: Registered the Redis entry CUSTOM_COMMAND_NAMES using the SET type.
+[17:17:50] [Main/INFO] [Redis]: Registered the Redis entry CUSTOM_COMMAND using the HASH type.
+[17:17:50] [Main/INFO] [Redis]: Registered the Redis entry DISABLED_COMMAND using the SET type.
+[17:17:50] [Main/INFO] [Redis]: Registered the Redis entry FILTER_IDS using the SET type.
+[17:17:50] [Main/INFO] [Redis]: Registered the Redis entry FILTER using the SET type.
+[17:17:50] [Main/INFO] [Redis]: Registered the Redis entry FILTER_BYPASS_IDS using the SET type.
+[17:17:50] [Main/INFO] [Redis]: Registered the Redis entry FILTER_BYPASS using the HASH type.
+[17:17:50] [Main/INFO] [Redis]: Registered the Redis entry GUILD using the HASH type.
+[17:17:50] [Main/INFO] [Redis]: Registered the Redis entry PUNISHMENT_IDS using the SET type.
+[17:17:50] [Main/INFO] [Redis]: Registered the Redis entry PUNISHMENT using the HASH type.
+[17:17:50] [Main/INFO] [Redis]: Registered the Redis entry MISC using the KV type.
+[17:17:50] [Main/INFO] [Arraybot]: All Redis entries have been registered.
+[17:21:31] [Main/INFO] [Arraybot]: Starting up Arraybot...
+[17:21:31] [Main/INFO] [Arraybot]: Loading in the configuration...
+[17:21:31] [Main/INFO] [Arraybot]: The configuration has been loaded. Using bot version 5dev.
+[17:21:31] [Main/INFO] [Arraybot]: Attempting to start up Redis...
+[17:21:31] [Main/INFO] [Arraybot]: Successfully connected to the Redis server.
+[17:21:31] [Main/INFO] [Arraybot]: Registering all Redis entries...
+[17:21:31] [Main/INFO] [Redis]: Registered the Redis entry ANNOUNCEMENT_IDS using the SET type.
+[17:21:31] [Main/INFO] [Redis]: Registered the Redis entry ANNOUNCEMENT using the HASH type.
+[17:21:31] [Main/INFO] [Redis]: Registered the Redis entry BLACKLIST using the SET type.
+[17:21:31] [Main/INFO] [Redis]: Registered the Redis entry CUSTOM_COMMAND_NAMES using the SET type.
+[17:21:31] [Main/INFO] [Redis]: Registered the Redis entry CUSTOM_COMMAND using the HASH type.
+[17:21:31] [Main/INFO] [Redis]: Registered the Redis entry DISABLED_COMMAND using the SET type.
+[17:21:31] [Main/INFO] [Redis]: Registered the Redis entry FILTER_IDS using the SET type.
+[17:21:31] [Main/INFO] [Redis]: Registered the Redis entry FILTER using the SET type.
+[17:21:31] [Main/INFO] [Redis]: Registered the Redis entry FILTER_BYPASS_IDS using the SET type.
+[17:21:31] [Main/INFO] [Redis]: Registered the Redis entry FILTER_BYPASS using the HASH type.
+[17:21:31] [Main/INFO] [Redis]: Registered the Redis entry GUILD using the HASH type.
+[17:21:31] [Main/INFO] [Redis]: Registered the Redis entry PUNISHMENT_IDS using the SET type.
+[17:21:31] [Main/INFO] [Redis]: Registered the Redis entry PUNISHMENT using the HASH type.
+[17:21:31] [Main/INFO] [Redis]: Registered the Redis entry MISC using the KV type.
+[17:21:31] [Main/INFO] [Arraybot]: All Redis entries have been registered.
+[17:21:49] [Main/INFO] [Arraybot]: Starting up Arraybot...
+[17:21:49] [Main/INFO] [Arraybot]: Loading in the configuration...
+[17:21:49] [Main/INFO] [Arraybot]: The configuration has been loaded. Using bot version 5dev.
+[17:21:49] [Redis-Startup/INFO] [Redis-Startup]: Attempting to start up Redis...
+[17:21:49] [Redis-Startup/INFO] [Redis-Startup]: Successfully connected to the Redis server.
+[17:21:49] [Redis-Startup/INFO] [Redis-Startup]: Registering all Redis entries...
+[17:21:49] [Redis-Startup/INFO] [Redis]: Registered the Redis entry ANNOUNCEMENT_IDS using the SET type.
+[17:21:49] [Redis-Startup/INFO] [Redis]: Registered the Redis entry ANNOUNCEMENT using the HASH type.
+[17:21:49] [Redis-Startup/INFO] [Redis]: Registered the Redis entry BLACKLIST using the SET type.
+[17:21:49] [Redis-Startup/INFO] [Redis]: Registered the Redis entry CUSTOM_COMMAND_NAMES using the SET type.
+[17:21:49] [Redis-Startup/INFO] [Redis]: Registered the Redis entry CUSTOM_COMMAND using the HASH type.
+[17:21:49] [Redis-Startup/INFO] [Redis]: Registered the Redis entry DISABLED_COMMAND using the SET type.
+[17:21:49] [Redis-Startup/INFO] [Redis]: Registered the Redis entry FILTER_IDS using the SET type.
+[17:21:49] [Redis-Startup/INFO] [Redis]: Registered the Redis entry FILTER using the SET type.
+[17:21:49] [Redis-Startup/INFO] [Redis]: Registered the Redis entry FILTER_BYPASS_IDS using the SET type.
+[17:21:49] [Redis-Startup/INFO] [Redis]: Registered the Redis entry FILTER_BYPASS using the HASH type.
+[17:21:49] [Redis-Startup/INFO] [Redis]: Registered the Redis entry GUILD using the HASH type.
+[17:21:49] [Redis-Startup/INFO] [Redis]: Registered the Redis entry PUNISHMENT_IDS using the SET type.
+[17:21:49] [Redis-Startup/INFO] [Redis]: Registered the Redis entry PUNISHMENT using the HASH type.
+[17:21:49] [Redis-Startup/INFO] [Redis]: Registered the Redis entry MISC using the KV type.
+[17:21:49] [Redis-Startup/INFO] [Redis-Startup]: All Redis entries have been registered.
+[17:45:23] [Main/INFO] [Arraybot]: Starting up Arraybot...
+[17:45:23] [Main/INFO] [Arraybot]: Loading in the configuration...
+[17:45:23] [Main/INFO] [Arraybot]: The configuration has been loaded. Using bot version 5dev.
+[17:45:23] [Redis-Startup/INFO] [Redis-Startup]: Attempting to start up Redis...
+[17:45:23] [Redis-Startup/INFO] [Redis-Startup]: Successfully connected to the Redis server.
+[17:45:23] [Redis-Startup/INFO] [Redis-Startup]: Registering all Redis entries...
+[17:45:23] [Redis-Startup/INFO] [Redis]: Registered the Redis entry ANNOUNCEMENT_IDS using the SET type.
+[17:45:23] [Redis-Startup/INFO] [Redis]: Registered the Redis entry ANNOUNCEMENT using the HASH type.
+[17:45:23] [Redis-Startup/INFO] [Redis]: Registered the Redis entry BLACKLIST using the SET type.
+[17:45:23] [Redis-Startup/INFO] [Redis]: Registered the Redis entry CUSTOM_COMMAND_NAMES using the SET type.
+[17:45:23] [Redis-Startup/INFO] [Redis]: Registered the Redis entry CUSTOM_COMMAND using the HASH type.
+[17:45:23] [Redis-Startup/INFO] [Redis]: Registered the Redis entry DISABLED_COMMAND using the SET type.
+[17:45:23] [Redis-Startup/INFO] [Redis]: Registered the Redis entry FILTER_IDS using the SET type.
+[17:45:23] [Redis-Startup/INFO] [Redis]: Registered the Redis entry FILTER using the SET type.
+[17:45:23] [Redis-Startup/INFO] [Redis]: Registered the Redis entry FILTER_BYPASS_IDS using the SET type.
+[17:45:23] [Redis-Startup/INFO] [Redis]: Registered the Redis entry FILTER_BYPASS using the HASH type.
+[17:45:23] [Redis-Startup/INFO] [Redis]: Registered the Redis entry GUILD using the HASH type.
+[17:45:23] [Redis-Startup/INFO] [Redis]: Registered the Redis entry PUNISHMENT_IDS using the SET type.
+[17:45:23] [Redis-Startup/INFO] [Redis]: Registered the Redis entry PUNISHMENT using the HASH type.
+[17:45:23] [Redis-Startup/INFO] [Redis]: Registered the Redis entry MISC using the KV type.
+[17:45:23] [Redis-Startup/INFO] [Redis-Startup]: All Redis entries have been registered.

@@ -21,7 +21,6 @@ import de.arraying.arraybot.util.UDatabase;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-@SuppressWarnings("unchecked")
 public abstract class HashEntry<T> implements Entry {
 
     private final Redis redis;
@@ -30,7 +29,6 @@ public abstract class HashEntry<T> implements Entry {
     /**
      * Creates a new hash entry.
      */
-    @SuppressWarnings("WeakerAccess")
     public HashEntry() {
         this.redis = Redis.getInstance();
     }
@@ -68,9 +66,15 @@ public abstract class HashEntry<T> implements Entry {
      * @return The value. It is never null.
      */
     public String fetch(EntryField field, long id, Object secondaryKey) {
+        System.out.println("Fetch request: " + System.currentTimeMillis());
         RedisCommands resource = redis.getResource();
         Object redisResult = resource.hget(UDatabase.getKey(category, id, secondaryKey), field.getRedisKey());
         return redisResult == null ? setDefault(field, id, secondaryKey) : redisResult.toString();
+        //        Jedis resource = redis.getJedisResource();
+        //        String redisResult = resource.hget(UDatabase.getKey(category, id, secondaryKey), field.getRedisKey());
+        //        String result = redisResult == null ? setDefault(field, id, secondaryKey) : redisResult;
+        //        redis.finish(resource);
+        //        return result;
     }
 
     /**
@@ -84,6 +88,9 @@ public abstract class HashEntry<T> implements Entry {
     public void push(EntryField field, long id, Object secondaryKey, Object value) {
         RedisCommands resource = redis.getResource();
         resource.hset(UDatabase.getKey(category, id, secondaryKey), field.getRedisKey(), value.toString());
+        //        Jedis resource = redis.getJedisResource();
+        //        resource.hset(UDatabase.getKey(category, id, secondaryKey), field.getRedisKey(), value.toString());
+        //        redis.finish(resource);
     }
 
     /**

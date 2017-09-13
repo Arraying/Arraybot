@@ -1,0 +1,1092 @@
+[18:50:21] [Main/INFO] [Arraybot]: Starting up Arraybot...
+[18:50:22] [Main/INFO] [Arraybot]: Loading in the configuration...
+[18:50:22] [Main/INFO] [Arraybot]: The configuration has been loaded.
+[18:50:22] [Main/INFO] [Arraybot]: 
+[18:50:22] [Main/INFO] [Arraybot]: 
+[18:50:22] [Main/INFO] [Arraybot]: 
+[18:50:22] [Main/INFO] [Arraybot]:  _______  ______    ______    _______  __   __  _______  _______  _______
+[18:50:22] [Main/INFO] [Arraybot]: |   _   ||    _ |  |    _ |  |   _   ||  | |  ||  _    ||       ||       |
+[18:50:22] [Main/INFO] [Arraybot]: |  |_|  ||   | ||  |   | ||  |  |_|  ||  |_|  || |_|   ||   _   ||_     _|
+[18:50:22] [Main/INFO] [Arraybot]: |       ||   |_||_ |   |_||_ |       ||       ||       ||  | |  |  |   |
+[18:50:22] [Main/INFO] [Arraybot]: |       ||    __  ||    __  ||       ||_     _||  _   | |  |_|  |  |   |
+[18:50:22] [Main/INFO] [Arraybot]: |   _   ||   |  | ||   |  | ||   _   |  |   |  | |_|   ||       |  |   |
+[18:50:22] [Main/INFO] [Arraybot]: |__| |__||___|  |_||___|  |_||__| |__|  |___|  |_______||_______|  |___|
+[18:50:22] [Main/INFO] [Arraybot]: 
+[18:50:22] [Main/INFO] [Arraybot]: >> Arraybot v5dev || Running JDA 3.3.0_263 || Developed by Arraying <<
+[18:50:22] [Main/INFO] [Arraybot]: 
+[18:50:22] [Main/INFO] [Arraybot]: 
+[18:50:22] [Main/INFO] [Arraybot]: 
+[18:50:22] [Startup-Bot/INFO] [Startup-Bot]: Creating the bot manager...
+[18:50:22] [Startup-Languages/INFO] [Startup-Languages]: Attempting to load in all languages...
+[18:50:22] [Redis-Startup/INFO] [Redis-Startup]: Attempting to start up Redis...
+[18:50:22] [Startup-Bot/INFO] [Startup-Bot]: Starting the bot manager...
+[18:50:22] [Startup-Bot/INFO] [Bot-Manager]: Logging in a total of 1 shards.
+[18:50:22] [Startup-Bot/INFO] [Bot-Manager]: Asynchronously firing the JDA instance login, using index 0.
+[18:50:22] [Startup-Languages/INFO] [Languages]: Registered the language "en".
+[18:50:22] [Startup-Commands/INFO] [Command-Manager]: Registered the command "ping".
+[18:50:23] [Startup-Bot/INFO] [JDA]: Login Successful!
+[18:50:23] [Redis-Startup/INFO] [Redis]: Registered the category ANNOUNCEMENT_IDS with the type SET.
+[18:50:23] [Redis-Startup/INFO] [Redis]: Registered the category ANNOUNCEMENT with the type HASH.
+[18:50:23] [Redis-Startup/INFO] [Redis]: Registered the category BLACKLIST with the type SET.
+[18:50:23] [Redis-Startup/INFO] [Redis]: Registered the category CUSTOM_COMMAND_NAMES with the type SET.
+[18:50:23] [Redis-Startup/INFO] [Redis]: Registered the category CUSTOM_COMMAND with the type HASH.
+[18:50:23] [Redis-Startup/INFO] [Redis]: Registered the category DISABLED_COMMAND with the type SET.
+[18:50:23] [Redis-Startup/INFO] [Redis]: Registered the category FILTER_IDS with the type SET.
+[18:50:23] [Redis-Startup/INFO] [Redis]: Registered the category FILTER with the type SET.
+[18:50:23] [Redis-Startup/INFO] [Redis]: Registered the category FILTER_BYPASS_IDS with the type SET.
+[18:50:23] [Redis-Startup/INFO] [Redis]: Registered the category FILTER_BYPASS with the type HASH.
+[18:50:23] [Redis-Startup/INFO] [Redis]: Registered the category GUILD with the type HASH.
+[18:50:23] [Redis-Startup/INFO] [Redis]: Registered the category PUNISHMENT_IDS with the type SET.
+[18:50:23] [Redis-Startup/INFO] [Redis]: Registered the category PUNISHMENT with the type HASH.
+[18:50:23] [Redis-Startup/INFO] [Redis]: Registered the category MISC with the type KV.
+[18:50:23] [Redis-Startup/INFO] [Redis-Startup]: Successfully connected to the Redis server.
+[18:50:23] [Redis-Startup/INFO] [Redis-Startup]: All Redis entries have been registered.
+[18:50:23] [JDA MainWS-ReadThread/INFO] [JDASocket]: Connected to WebSocket
+[18:50:23] [Startup-Bot/INFO] [Startup-Bot]: Finished starting the shards, they should be loading asynchronously if they are not loaded yet.
+[18:50:23] [Shard-Watcher/INFO] [Shard-Watcher]: Starting shard monitoring...
+[18:50:24] [JDA MainWS-ReadThread/INFO] [JDA]: Finished Loading!
+[18:50:24] [JDA MainWS-ReadThread/INFO] [Bot-Manager]: The shard 0 has been flagged as ready and is commencing with event receiving.
+[18:51:23] [ForkJoinPool.commonPool-worker-1/INFO] [Command-Ping]: 115134128717955080 executed the command in the guild 215520016706174977.
+[19:25:34] [Main/INFO] [Arraybot]: Starting up Arraybot...
+[19:25:34] [Main/INFO] [Arraybot]: Loading in the configuration...
+[19:25:34] [Main/INFO] [Arraybot]: The configuration has been loaded.
+[19:25:34] [Main/INFO] [Arraybot]: 
+[19:25:34] [Main/INFO] [Arraybot]: 
+[19:25:34] [Main/INFO] [Arraybot]: 
+[19:25:34] [Main/INFO] [Arraybot]:  _______  ______    ______    _______  __   __  _______  _______  _______
+[19:25:34] [Main/INFO] [Arraybot]: |   _   ||    _ |  |    _ |  |   _   ||  | |  ||  _    ||       ||       |
+[19:25:34] [Main/INFO] [Arraybot]: |  |_|  ||   | ||  |   | ||  |  |_|  ||  |_|  || |_|   ||   _   ||_     _|
+[19:25:34] [Main/INFO] [Arraybot]: |       ||   |_||_ |   |_||_ |       ||       ||       ||  | |  |  |   |
+[19:25:34] [Main/INFO] [Arraybot]: |       ||    __  ||    __  ||       ||_     _||  _   | |  |_|  |  |   |
+[19:25:34] [Main/INFO] [Arraybot]: |   _   ||   |  | ||   |  | ||   _   |  |   |  | |_|   ||       |  |   |
+[19:25:34] [Main/INFO] [Arraybot]: |__| |__||___|  |_||___|  |_||__| |__|  |___|  |_______||_______|  |___|
+[19:25:34] [Main/INFO] [Arraybot]: 
+[19:25:34] [Main/INFO] [Arraybot]: >> Arraybot v5dev || Running JDA 3.3.0_263 || Developed by Arraying <<
+[19:25:34] [Main/INFO] [Arraybot]: 
+[19:25:34] [Main/INFO] [Arraybot]: 
+[19:25:34] [Main/INFO] [Arraybot]: 
+[19:25:34] [Startup-Bot/INFO] [Startup-Bot]: Creating the bot manager...
+[19:25:34] [Redis-Startup/INFO] [Redis-Startup]: Attempting to start up Redis...
+[19:25:34] [Startup-Languages/INFO] [Startup-Languages]: Attempting to load in all languages...
+[19:25:34] [Startup-Languages/INFO] [Languages]: Registered the language "en".
+[19:25:34] [Startup-Bot/INFO] [Startup-Bot]: Starting the bot manager...
+[19:25:34] [Startup-Bot/INFO] [Bot-Manager]: Logging in a total of 1 shards.
+[19:25:34] [Startup-Bot/INFO] [Bot-Manager]: Asynchronously firing the JDA instance login, using index 0.
+[19:25:34] [Startup-Commands/INFO] [Command-Manager]: Registered the command "ping".
+[19:25:35] [Startup-Bot/INFO] [JDA]: Login Successful!
+[19:25:35] [Redis-Startup/INFO] [Redis]: Registered the category ANNOUNCEMENT_IDS with the type SET.
+[19:25:35] [Redis-Startup/INFO] [Redis]: Registered the category ANNOUNCEMENT with the type HASH.
+[19:25:35] [Redis-Startup/INFO] [Redis]: Registered the category BLACKLIST with the type SET.
+[19:25:35] [Redis-Startup/INFO] [Redis]: Registered the category CUSTOM_COMMAND_NAMES with the type SET.
+[19:25:35] [Redis-Startup/INFO] [Redis]: Registered the category CUSTOM_COMMAND with the type HASH.
+[19:25:35] [Redis-Startup/INFO] [Redis]: Registered the category DISABLED_COMMAND with the type SET.
+[19:25:35] [Redis-Startup/INFO] [Redis]: Registered the category FILTER_IDS with the type SET.
+[19:25:35] [Redis-Startup/INFO] [Redis]: Registered the category FILTER with the type SET.
+[19:25:35] [Redis-Startup/INFO] [Redis]: Registered the category FILTER_BYPASS_IDS with the type SET.
+[19:25:35] [Redis-Startup/INFO] [Redis]: Registered the category FILTER_BYPASS with the type HASH.
+[19:25:35] [Redis-Startup/INFO] [Redis]: Registered the category GUILD with the type HASH.
+[19:25:35] [Redis-Startup/INFO] [Redis]: Registered the category PUNISHMENT_IDS with the type SET.
+[19:25:35] [Redis-Startup/INFO] [Redis]: Registered the category PUNISHMENT with the type HASH.
+[19:25:35] [Redis-Startup/INFO] [Redis]: Registered the category MISC with the type KV.
+[19:25:35] [Redis-Startup/INFO] [Redis-Startup]: Successfully connected to the Redis server.
+[19:25:35] [Redis-Startup/INFO] [Redis-Startup]: All Redis entries have been registered.
+[19:25:36] [JDA MainWS-ReadThread/INFO] [JDASocket]: Connected to WebSocket
+[19:25:36] [Startup-Bot/INFO] [Startup-Bot]: Finished starting the shards, they should be loading asynchronously if they are not loaded yet.
+[19:25:36] [Shard-Watcher/INFO] [Shard-Watcher]: Starting shard monitoring...
+[19:25:36] [JDA MainWS-ReadThread/INFO] [JDA]: Finished Loading!
+[19:25:36] [JDA MainWS-ReadThread/INFO] [Bot-Manager]: The shard 0 has been flagged as ready and is commencing with event receiving.
+[19:25:53] [ForkJoinPool.commonPool-worker-1/INFO] [Command-Ping]: 115134128717955080 executed the command in the guild 215520016706174977.
+[19:26:52] [ForkJoinPool.commonPool-worker-2/INFO] [Command-Ping]: 115134128717955080 executed the command in the guild 215520016706174977.
+[19:27:36] [Shard-Watcher/INFO] [Shard-Watcher]: The shard 0 is running healthily with a ping of 127.
+[19:28:51] [ForkJoinPool.commonPool-worker-3/INFO] [Command-Ping]: 115134128717955080 executed the command in the guild 215520016706174977.
+[19:29:32] [Main/INFO] [Arraybot]: Starting up Arraybot...
+[19:29:32] [Main/INFO] [Arraybot]: Loading in the configuration...
+[19:29:32] [Main/INFO] [Arraybot]: The configuration has been loaded.
+[19:29:32] [Main/INFO] [Arraybot]: 
+[19:29:32] [Main/INFO] [Arraybot]: 
+[19:29:32] [Main/INFO] [Arraybot]: 
+[19:29:32] [Main/INFO] [Arraybot]:  _______  ______    ______    _______  __   __  _______  _______  _______
+[19:29:32] [Main/INFO] [Arraybot]: |   _   ||    _ |  |    _ |  |   _   ||  | |  ||  _    ||       ||       |
+[19:29:32] [Main/INFO] [Arraybot]: |  |_|  ||   | ||  |   | ||  |  |_|  ||  |_|  || |_|   ||   _   ||_     _|
+[19:29:32] [Main/INFO] [Arraybot]: |       ||   |_||_ |   |_||_ |       ||       ||       ||  | |  |  |   |
+[19:29:32] [Main/INFO] [Arraybot]: |       ||    __  ||    __  ||       ||_     _||  _   | |  |_|  |  |   |
+[19:29:32] [Main/INFO] [Arraybot]: |   _   ||   |  | ||   |  | ||   _   |  |   |  | |_|   ||       |  |   |
+[19:29:32] [Main/INFO] [Arraybot]: |__| |__||___|  |_||___|  |_||__| |__|  |___|  |_______||_______|  |___|
+[19:29:32] [Main/INFO] [Arraybot]: 
+[19:29:32] [Main/INFO] [Arraybot]: >> Arraybot v5dev || Running JDA 3.3.0_263 || Developed by Arraying <<
+[19:29:32] [Main/INFO] [Arraybot]: 
+[19:29:32] [Main/INFO] [Arraybot]: 
+[19:29:32] [Main/INFO] [Arraybot]: 
+[19:29:32] [Startup-Languages/INFO] [Startup-Languages]: Attempting to load in all languages...
+[19:29:32] [Startup-Bot/INFO] [Startup-Bot]: Creating the bot manager...
+[19:29:32] [Redis-Startup/INFO] [Redis-Startup]: Attempting to start up Redis...
+[19:29:32] [Startup-Bot/INFO] [Startup-Bot]: Starting the bot manager...
+[19:29:32] [Startup-Bot/INFO] [Bot-Manager]: Logging in a total of 1 shards.
+[19:29:32] [Startup-Bot/INFO] [Bot-Manager]: Asynchronously firing the JDA instance login, using index 0.
+[19:29:32] [Startup-Languages/INFO] [Languages]: Registered the language "en".
+[19:29:32] [Startup-Commands/INFO] [Command-Manager]: Registered the command "ping".
+[19:29:33] [Startup-Bot/INFO] [JDA]: Login Successful!
+[19:29:34] [Redis-Startup/INFO] [Redis]: Registered the category ANNOUNCEMENT_IDS with the type SET.
+[19:29:34] [Redis-Startup/INFO] [Redis]: Registered the category ANNOUNCEMENT with the type HASH.
+[19:29:34] [Redis-Startup/INFO] [Redis]: Registered the category BLACKLIST with the type SET.
+[19:29:34] [Redis-Startup/INFO] [Redis]: Registered the category CUSTOM_COMMAND_NAMES with the type SET.
+[19:29:34] [Redis-Startup/INFO] [Redis]: Registered the category CUSTOM_COMMAND with the type HASH.
+[19:29:34] [Redis-Startup/INFO] [Redis]: Registered the category DISABLED_COMMAND with the type SET.
+[19:29:34] [Redis-Startup/INFO] [Redis]: Registered the category FILTER_IDS with the type SET.
+[19:29:34] [Redis-Startup/INFO] [Redis]: Registered the category FILTER with the type SET.
+[19:29:34] [Redis-Startup/INFO] [Redis]: Registered the category FILTER_BYPASS_IDS with the type SET.
+[19:29:34] [Redis-Startup/INFO] [Redis]: Registered the category FILTER_BYPASS with the type HASH.
+[19:29:34] [Redis-Startup/INFO] [Redis]: Registered the category GUILD with the type HASH.
+[19:29:34] [Redis-Startup/INFO] [Redis]: Registered the category PUNISHMENT_IDS with the type SET.
+[19:29:34] [Redis-Startup/INFO] [Redis]: Registered the category PUNISHMENT with the type HASH.
+[19:29:34] [Redis-Startup/INFO] [Redis]: Registered the category MISC with the type KV.
+[19:29:34] [Redis-Startup/INFO] [Redis-Startup]: Successfully connected to the Redis server.
+[19:29:34] [Redis-Startup/INFO] [Redis-Startup]: All Redis entries have been registered.
+[19:29:34] [JDA MainWS-ReadThread/INFO] [JDASocket]: Connected to WebSocket
+[19:29:34] [Startup-Bot/INFO] [Startup-Bot]: Finished starting the shards, they should be loading asynchronously if they are not loaded yet.
+[19:29:34] [Shard-Watcher/INFO] [Shard-Watcher]: Starting shard monitoring...
+[19:29:34] [JDA MainWS-ReadThread/INFO] [JDA]: Finished Loading!
+[19:29:34] [JDA MainWS-ReadThread/INFO] [Bot-Manager]: The shard 0 has been flagged as ready and is commencing with event receiving.
+[19:31:34] [Shard-Watcher/INFO] [Shard-Watcher]: The shard 0 is running healthily with a ping of 129.
+[19:33:34] [Shard-Watcher/INFO] [Shard-Watcher]: The shard 0 is running healthily with a ping of 123.
+[19:35:14] [Main/INFO] [Arraybot]: Starting up Arraybot...
+[19:35:14] [Main/INFO] [Arraybot]: Loading in the configuration...
+[19:35:14] [Main/INFO] [Arraybot]: The configuration has been loaded.
+[19:35:14] [Main/INFO] [Arraybot]: 
+[19:35:14] [Main/INFO] [Arraybot]: 
+[19:35:14] [Main/INFO] [Arraybot]: 
+[19:35:14] [Main/INFO] [Arraybot]:  _______  ______    ______    _______  __   __  _______  _______  _______
+[19:35:14] [Main/INFO] [Arraybot]: |   _   ||    _ |  |    _ |  |   _   ||  | |  ||  _    ||       ||       |
+[19:35:14] [Main/INFO] [Arraybot]: |  |_|  ||   | ||  |   | ||  |  |_|  ||  |_|  || |_|   ||   _   ||_     _|
+[19:35:14] [Main/INFO] [Arraybot]: |       ||   |_||_ |   |_||_ |       ||       ||       ||  | |  |  |   |
+[19:35:14] [Main/INFO] [Arraybot]: |       ||    __  ||    __  ||       ||_     _||  _   | |  |_|  |  |   |
+[19:35:14] [Main/INFO] [Arraybot]: |   _   ||   |  | ||   |  | ||   _   |  |   |  | |_|   ||       |  |   |
+[19:35:14] [Main/INFO] [Arraybot]: |__| |__||___|  |_||___|  |_||__| |__|  |___|  |_______||_______|  |___|
+[19:35:14] [Main/INFO] [Arraybot]: 
+[19:35:14] [Main/INFO] [Arraybot]: >> Arraybot v5dev || Running JDA 3.3.0_263 || Developed by Arraying <<
+[19:35:14] [Main/INFO] [Arraybot]: 
+[19:35:14] [Main/INFO] [Arraybot]: 
+[19:35:14] [Main/INFO] [Arraybot]: 
+[19:35:14] [Startup-Languages/INFO] [Startup-Languages]: Attempting to load in all languages...
+[19:35:14] [Startup-Bot/INFO] [Startup-Bot]: Creating the bot manager...
+[19:35:14] [Redis-Startup/INFO] [Redis-Startup]: Attempting to start up Redis...
+[19:35:14] [Startup-Bot/INFO] [Startup-Bot]: Starting the bot manager...
+[19:35:14] [Startup-Bot/INFO] [Bot-Manager]: Logging in a total of 1 shards.
+[19:35:14] [Startup-Bot/INFO] [Bot-Manager]: Asynchronously firing the JDA instance login, using index 0.
+[19:35:14] [Startup-Languages/INFO] [Languages]: Registered the language "en".
+[19:35:14] [Startup-Commands/INFO] [Command-Manager]: Registered the command "ping".
+[19:35:16] [Startup-Bot/INFO] [JDA]: Login Successful!
+[19:35:16] [Redis-Startup/INFO] [Redis]: Registered the category ANNOUNCEMENT_IDS with the type SET.
+[19:35:16] [Redis-Startup/INFO] [Redis]: Registered the category ANNOUNCEMENT with the type HASH.
+[19:35:16] [Redis-Startup/INFO] [Redis]: Registered the category BLACKLIST with the type SET.
+[19:35:16] [Redis-Startup/INFO] [Redis]: Registered the category CUSTOM_COMMAND_NAMES with the type SET.
+[19:35:16] [Redis-Startup/INFO] [Redis]: Registered the category CUSTOM_COMMAND with the type HASH.
+[19:35:16] [Redis-Startup/INFO] [Redis]: Registered the category DISABLED_COMMAND with the type SET.
+[19:35:16] [Redis-Startup/INFO] [Redis]: Registered the category FILTER_IDS with the type SET.
+[19:35:16] [Redis-Startup/INFO] [Redis]: Registered the category FILTER with the type SET.
+[19:35:16] [Redis-Startup/INFO] [Redis]: Registered the category FILTER_BYPASS_IDS with the type SET.
+[19:35:16] [Redis-Startup/INFO] [Redis]: Registered the category FILTER_BYPASS with the type HASH.
+[19:35:16] [Redis-Startup/INFO] [Redis]: Registered the category GUILD with the type HASH.
+[19:35:16] [Redis-Startup/INFO] [Redis]: Registered the category PUNISHMENT_IDS with the type SET.
+[19:35:16] [Redis-Startup/INFO] [Redis]: Registered the category PUNISHMENT with the type HASH.
+[19:35:16] [Redis-Startup/INFO] [Redis]: Registered the category MISC with the type KV.
+[19:35:16] [Redis-Startup/INFO] [Redis-Startup]: Successfully connected to the Redis server.
+[19:35:16] [Redis-Startup/INFO] [Redis-Startup]: All Redis entries have been registered.
+[19:35:16] [JDA MainWS-ReadThread/INFO] [JDASocket]: Connected to WebSocket
+[19:35:16] [Startup-Bot/INFO] [Startup-Bot]: Finished starting the shards, they should be loading asynchronously if they are not loaded yet.
+[19:35:16] [Shard-Watcher/INFO] [Shard-Watcher]: Starting shard monitoring...
+[19:35:17] [JDA MainWS-ReadThread/INFO] [JDA]: Finished Loading!
+[19:35:17] [JDA MainWS-ReadThread/INFO] [Bot-Manager]: The shard 0 has been flagged as ready and is commencing with event receiving.
+[19:35:35] [Main/INFO] [Arraybot]: Starting up Arraybot...
+[19:35:36] [Main/INFO] [Arraybot]: Loading in the configuration...
+[19:35:36] [Main/INFO] [Arraybot]: The configuration has been loaded.
+[19:35:36] [Main/INFO] [Arraybot]: 
+[19:35:36] [Main/INFO] [Arraybot]: 
+[19:35:36] [Main/INFO] [Arraybot]: 
+[19:35:36] [Main/INFO] [Arraybot]:  _______  ______    ______    _______  __   __  _______  _______  _______
+[19:35:36] [Main/INFO] [Arraybot]: |   _   ||    _ |  |    _ |  |   _   ||  | |  ||  _    ||       ||       |
+[19:35:36] [Main/INFO] [Arraybot]: |  |_|  ||   | ||  |   | ||  |  |_|  ||  |_|  || |_|   ||   _   ||_     _|
+[19:35:36] [Main/INFO] [Arraybot]: |       ||   |_||_ |   |_||_ |       ||       ||       ||  | |  |  |   |
+[19:35:36] [Main/INFO] [Arraybot]: |       ||    __  ||    __  ||       ||_     _||  _   | |  |_|  |  |   |
+[19:35:36] [Main/INFO] [Arraybot]: |   _   ||   |  | ||   |  | ||   _   |  |   |  | |_|   ||       |  |   |
+[19:35:36] [Main/INFO] [Arraybot]: |__| |__||___|  |_||___|  |_||__| |__|  |___|  |_______||_______|  |___|
+[19:35:36] [Main/INFO] [Arraybot]: 
+[19:35:36] [Main/INFO] [Arraybot]: >> Arraybot v5dev || Running JDA 3.3.0_263 || Developed by Arraying <<
+[19:35:36] [Main/INFO] [Arraybot]: 
+[19:35:36] [Main/INFO] [Arraybot]: 
+[19:35:36] [Main/INFO] [Arraybot]: 
+[19:35:36] [Startup-Bot/INFO] [Startup-Bot]: Creating the bot manager...
+[19:35:36] [Startup-Languages/INFO] [Startup-Languages]: Attempting to load in all languages...
+[19:35:36] [Redis-Startup/INFO] [Redis-Startup]: Attempting to start up Redis...
+[19:35:36] [Startup-Bot/INFO] [Startup-Bot]: Starting the bot manager...
+[19:35:36] [Startup-Bot/INFO] [Bot-Manager]: Logging in a total of 1 shards.
+[19:35:36] [Startup-Bot/INFO] [Bot-Manager]: Asynchronously firing the JDA instance login, using index 0.
+[19:35:36] [Startup-Languages/INFO] [Languages]: Registered the language "en".
+[19:35:36] [Startup-Commands/INFO] [Command-Manager]: Registered the command "ping".
+[19:35:37] [Startup-Bot/INFO] [JDA]: Login Successful!
+[19:35:37] [Redis-Startup/INFO] [Redis]: Registered the category ANNOUNCEMENT_IDS with the type SET.
+[19:35:37] [Redis-Startup/INFO] [Redis]: Registered the category ANNOUNCEMENT with the type HASH.
+[19:35:37] [Redis-Startup/INFO] [Redis]: Registered the category BLACKLIST with the type SET.
+[19:35:37] [Redis-Startup/INFO] [Redis]: Registered the category CUSTOM_COMMAND_NAMES with the type SET.
+[19:35:37] [Redis-Startup/INFO] [Redis]: Registered the category CUSTOM_COMMAND with the type HASH.
+[19:35:37] [Redis-Startup/INFO] [Redis]: Registered the category DISABLED_COMMAND with the type SET.
+[19:35:37] [Redis-Startup/INFO] [Redis]: Registered the category FILTER_IDS with the type SET.
+[19:35:37] [Redis-Startup/INFO] [Redis]: Registered the category FILTER with the type SET.
+[19:35:37] [Redis-Startup/INFO] [Redis]: Registered the category FILTER_BYPASS_IDS with the type SET.
+[19:35:37] [Redis-Startup/INFO] [Redis]: Registered the category FILTER_BYPASS with the type HASH.
+[19:35:37] [Redis-Startup/INFO] [Redis]: Registered the category GUILD with the type HASH.
+[19:35:37] [Redis-Startup/INFO] [Redis]: Registered the category PUNISHMENT_IDS with the type SET.
+[19:35:37] [Redis-Startup/INFO] [Redis]: Registered the category PUNISHMENT with the type HASH.
+[19:35:37] [Redis-Startup/INFO] [Redis]: Registered the category MISC with the type KV.
+[19:35:37] [Redis-Startup/INFO] [Redis-Startup]: Successfully connected to the Redis server.
+[19:35:37] [Redis-Startup/INFO] [Redis-Startup]: All Redis entries have been registered.
+[19:35:37] [JDA MainWS-ReadThread/INFO] [JDASocket]: Connected to WebSocket
+[19:35:37] [Startup-Bot/INFO] [Startup-Bot]: Finished starting the shards, they should be loading asynchronously if they are not loaded yet.
+[19:35:37] [Shard-Watcher/INFO] [Shard-Watcher]: Starting shard monitoring...
+[19:35:37] [JDA MainWS-ReadThread/INFO] [JDA]: Finished Loading!
+[19:35:37] [JDA MainWS-ReadThread/INFO] [Bot-Manager]: The shard 0 has been flagged as ready and is commencing with event receiving.
+[19:35:41] [JDA MainWS-ReadThread/ERROR] [JDA]: One of the EventListeners had an uncaught exception
+[19:35:41] [JDA MainWS-ReadThread/ERROR] [JDA]: An error occurred: 
+java.lang.NullPointerException: null
+	at java.util.concurrent.ConcurrentHashMap.get(ConcurrentHashMap.java:936)
+	at de.arraying.arraybot.misc.MultiKeyMap.getByKeyOrAlias(MultiKeyMap.java:46)
+	at de.arraying.arraybot.command.Commands.executeCommand(Commands.kt:88)
+	at de.arraying.arraybot.listener.listeners.postload.MessageListener.onGuildMessageReceived(MessageListener.java:59)
+	at net.dv8tion.jda.core.hooks.ListenerAdapter.onEvent(ListenerAdapter.java:370)
+	at net.dv8tion.jda.core.hooks.InterfacedEventManager.handle(InterfacedEventManager.java:84)
+	at net.dv8tion.jda.core.handle.MessageCreateHandler.handleDefaultMessage(MessageCreateHandler.java:96)
+	at net.dv8tion.jda.core.handle.MessageCreateHandler.handleInternally(MessageCreateHandler.java:49)
+	at net.dv8tion.jda.core.handle.SocketHandler.handle(SocketHandler.java:37)
+	at net.dv8tion.jda.core.requests.WebSocketClient.handleEvent(WebSocketClient.java:885)
+	at net.dv8tion.jda.core.requests.WebSocketClient.onTextMessage(WebSocketClient.java:578)
+	at com.neovisionaries.ws.client.ListenerManager.callOnTextMessage(ListenerManager.java:352)
+	at com.neovisionaries.ws.client.ReadingThread.callOnTextMessage(ReadingThread.java:260)
+	at com.neovisionaries.ws.client.ReadingThread.callOnTextMessage(ReadingThread.java:238)
+	at com.neovisionaries.ws.client.ReadingThread.handleTextFrame(ReadingThread.java:963)
+	at com.neovisionaries.ws.client.ReadingThread.handleFrame(ReadingThread.java:746)
+	at com.neovisionaries.ws.client.ReadingThread.main(ReadingThread.java:108)
+	at com.neovisionaries.ws.client.ReadingThread.runMain(ReadingThread.java:64)
+	at com.neovisionaries.ws.client.WebSocketThread.run(WebSocketThread.java:45)
+[19:35:41] [JDA MainWS-ReadThread/ERROR] [JDA]: Encountered an exception:
+[19:35:41] [JDA MainWS-ReadThread/ERROR] [JDA]: java.lang.NullPointerException
+	at java.util.concurrent.ConcurrentHashMap.get(ConcurrentHashMap.java:936)
+	at de.arraying.arraybot.misc.MultiKeyMap.getByKeyOrAlias(MultiKeyMap.java:46)
+	at de.arraying.arraybot.command.Commands.executeCommand(Commands.kt:88)
+	at de.arraying.arraybot.listener.listeners.postload.MessageListener.onGuildMessageReceived(MessageListener.java:59)
+	at net.dv8tion.jda.core.hooks.ListenerAdapter.onEvent(ListenerAdapter.java:370)
+	at net.dv8tion.jda.core.hooks.InterfacedEventManager.handle(InterfacedEventManager.java:84)
+	at net.dv8tion.jda.core.handle.MessageCreateHandler.handleDefaultMessage(MessageCreateHandler.java:96)
+	at net.dv8tion.jda.core.handle.MessageCreateHandler.handleInternally(MessageCreateHandler.java:49)
+	at net.dv8tion.jda.core.handle.SocketHandler.handle(SocketHandler.java:37)
+	at net.dv8tion.jda.core.requests.WebSocketClient.handleEvent(WebSocketClient.java:885)
+	at net.dv8tion.jda.core.requests.WebSocketClient.onTextMessage(WebSocketClient.java:578)
+	at com.neovisionaries.ws.client.ListenerManager.callOnTextMessage(ListenerManager.java:352)
+	at com.neovisionaries.ws.client.ReadingThread.callOnTextMessage(ReadingThread.java:260)
+	at com.neovisionaries.ws.client.ReadingThread.callOnTextMessage(ReadingThread.java:238)
+	at com.neovisionaries.ws.client.ReadingThread.handleTextFrame(ReadingThread.java:963)
+	at com.neovisionaries.ws.client.ReadingThread.handleFrame(ReadingThread.java:746)
+	at com.neovisionaries.ws.client.ReadingThread.main(ReadingThread.java:108)
+	at com.neovisionaries.ws.client.ReadingThread.runMain(ReadingThread.java:64)
+	at com.neovisionaries.ws.client.WebSocketThread.run(WebSocketThread.java:45)
+
+[19:37:37] [Shard-Watcher/INFO] [Shard-Watcher]: The shard 0 is running healthily with a ping of 124.
+[19:39:37] [Shard-Watcher/INFO] [Shard-Watcher]: The shard 0 is running healthily with a ping of 122.
+[19:40:24] [Main/INFO] [Arraybot]: Starting up Arraybot...
+[19:40:24] [Main/INFO] [Arraybot]: Loading in the configuration...
+[19:40:24] [Main/INFO] [Arraybot]: The configuration has been loaded.
+[19:40:24] [Main/INFO] [Arraybot]: 
+[19:40:24] [Main/INFO] [Arraybot]: 
+[19:40:24] [Main/INFO] [Arraybot]: 
+[19:40:24] [Main/INFO] [Arraybot]:  _______  ______    ______    _______  __   __  _______  _______  _______
+[19:40:24] [Main/INFO] [Arraybot]: |   _   ||    _ |  |    _ |  |   _   ||  | |  ||  _    ||       ||       |
+[19:40:24] [Main/INFO] [Arraybot]: |  |_|  ||   | ||  |   | ||  |  |_|  ||  |_|  || |_|   ||   _   ||_     _|
+[19:40:24] [Main/INFO] [Arraybot]: |       ||   |_||_ |   |_||_ |       ||       ||       ||  | |  |  |   |
+[19:40:24] [Main/INFO] [Arraybot]: |       ||    __  ||    __  ||       ||_     _||  _   | |  |_|  |  |   |
+[19:40:24] [Main/INFO] [Arraybot]: |   _   ||   |  | ||   |  | ||   _   |  |   |  | |_|   ||       |  |   |
+[19:40:24] [Main/INFO] [Arraybot]: |__| |__||___|  |_||___|  |_||__| |__|  |___|  |_______||_______|  |___|
+[19:40:24] [Main/INFO] [Arraybot]: 
+[19:40:24] [Main/INFO] [Arraybot]: >> Arraybot v5dev || Running JDA 3.3.0_263 || Developed by Arraying <<
+[19:40:24] [Main/INFO] [Arraybot]: 
+[19:40:24] [Main/INFO] [Arraybot]: 
+[19:40:24] [Main/INFO] [Arraybot]: 
+[19:40:24] [Startup-Bot/INFO] [Startup-Bot]: Creating the bot manager...
+[19:40:24] [Startup-Languages/INFO] [Startup-Languages]: Attempting to load in all languages...
+[19:40:24] [Redis-Startup/INFO] [Redis-Startup]: Attempting to start up Redis...
+[19:40:24] [Startup-Bot/INFO] [Startup-Bot]: Starting the bot manager...
+[19:40:24] [Startup-Bot/INFO] [Bot-Manager]: Logging in a total of 1 shards.
+[19:40:24] [Startup-Bot/INFO] [Bot-Manager]: Asynchronously firing the JDA instance login, using index 0.
+[19:40:24] [Startup-Languages/INFO] [Languages]: Registered the language "en".
+[19:40:24] [Startup-Commands/INFO] [Command-Manager]: Registered the command "ping".
+[19:40:25] [Startup-Bot/INFO] [JDA]: Login Successful!
+[19:40:26] [Redis-Startup/INFO] [Redis]: Registered the category ANNOUNCEMENT_IDS with the type SET.
+[19:40:26] [Redis-Startup/INFO] [Redis]: Registered the category ANNOUNCEMENT with the type HASH.
+[19:40:26] [Redis-Startup/INFO] [Redis]: Registered the category BLACKLIST with the type SET.
+[19:40:26] [Redis-Startup/INFO] [Redis]: Registered the category CUSTOM_COMMAND_NAMES with the type SET.
+[19:40:26] [Redis-Startup/INFO] [Redis]: Registered the category CUSTOM_COMMAND with the type HASH.
+[19:40:26] [Redis-Startup/INFO] [Redis]: Registered the category DISABLED_COMMAND with the type SET.
+[19:40:26] [Redis-Startup/INFO] [Redis]: Registered the category FILTER_IDS with the type SET.
+[19:40:26] [Redis-Startup/INFO] [Redis]: Registered the category FILTER with the type SET.
+[19:40:26] [Redis-Startup/INFO] [Redis]: Registered the category FILTER_BYPASS_IDS with the type SET.
+[19:40:26] [Redis-Startup/INFO] [Redis]: Registered the category FILTER_BYPASS with the type HASH.
+[19:40:26] [Redis-Startup/INFO] [Redis]: Registered the category GUILD with the type HASH.
+[19:40:26] [Redis-Startup/INFO] [Redis]: Registered the category PUNISHMENT_IDS with the type SET.
+[19:40:26] [Redis-Startup/INFO] [Redis]: Registered the category PUNISHMENT with the type HASH.
+[19:40:26] [Redis-Startup/INFO] [Redis]: Registered the category MISC with the type KV.
+[19:40:26] [Redis-Startup/INFO] [Redis-Startup]: Successfully connected to the Redis server.
+[19:40:26] [Redis-Startup/INFO] [Redis-Startup]: All Redis entries have been registered.
+[19:40:26] [JDA MainWS-ReadThread/INFO] [JDASocket]: Connected to WebSocket
+[19:40:26] [Startup-Bot/INFO] [Startup-Bot]: Finished starting the shards, they should be loading asynchronously if they are not loaded yet.
+[19:40:26] [Shard-Watcher/INFO] [Shard-Watcher]: Starting shard monitoring...
+[19:40:26] [JDA MainWS-ReadThread/INFO] [JDA]: Finished Loading!
+[19:40:26] [JDA MainWS-ReadThread/INFO] [Bot-Manager]: The shard 0 has been flagged as ready and is commencing with event receiving.
+[19:40:36] [JDA MainWS-ReadThread/ERROR] [JDA]: One of the EventListeners had an uncaught exception
+[19:40:36] [JDA MainWS-ReadThread/ERROR] [JDA]: An error occurred: 
+java.lang.NullPointerException: null
+	at java.util.concurrent.ConcurrentHashMap.get(ConcurrentHashMap.java:936)
+	at de.arraying.arraybot.misc.MultiKeyMap.getByKeyOrAlias(MultiKeyMap.java:47)
+	at de.arraying.arraybot.command.Commands.executeCommand(Commands.kt:89)
+	at de.arraying.arraybot.listener.listeners.postload.MessageListener.onGuildMessageReceived(MessageListener.java:61)
+	at net.dv8tion.jda.core.hooks.ListenerAdapter.onEvent(ListenerAdapter.java:370)
+	at net.dv8tion.jda.core.hooks.InterfacedEventManager.handle(InterfacedEventManager.java:84)
+	at net.dv8tion.jda.core.handle.MessageCreateHandler.handleDefaultMessage(MessageCreateHandler.java:96)
+	at net.dv8tion.jda.core.handle.MessageCreateHandler.handleInternally(MessageCreateHandler.java:49)
+	at net.dv8tion.jda.core.handle.SocketHandler.handle(SocketHandler.java:37)
+	at net.dv8tion.jda.core.requests.WebSocketClient.handleEvent(WebSocketClient.java:885)
+	at net.dv8tion.jda.core.requests.WebSocketClient.onTextMessage(WebSocketClient.java:578)
+	at com.neovisionaries.ws.client.ListenerManager.callOnTextMessage(ListenerManager.java:352)
+	at com.neovisionaries.ws.client.ReadingThread.callOnTextMessage(ReadingThread.java:260)
+	at com.neovisionaries.ws.client.ReadingThread.callOnTextMessage(ReadingThread.java:238)
+	at com.neovisionaries.ws.client.ReadingThread.handleTextFrame(ReadingThread.java:963)
+	at com.neovisionaries.ws.client.ReadingThread.handleFrame(ReadingThread.java:746)
+	at com.neovisionaries.ws.client.ReadingThread.main(ReadingThread.java:108)
+	at com.neovisionaries.ws.client.ReadingThread.runMain(ReadingThread.java:64)
+	at com.neovisionaries.ws.client.WebSocketThread.run(WebSocketThread.java:45)
+[19:40:36] [JDA MainWS-ReadThread/ERROR] [JDA]: Encountered an exception:
+[19:40:36] [JDA MainWS-ReadThread/ERROR] [JDA]: java.lang.NullPointerException
+	at java.util.concurrent.ConcurrentHashMap.get(ConcurrentHashMap.java:936)
+	at de.arraying.arraybot.misc.MultiKeyMap.getByKeyOrAlias(MultiKeyMap.java:47)
+	at de.arraying.arraybot.command.Commands.executeCommand(Commands.kt:89)
+	at de.arraying.arraybot.listener.listeners.postload.MessageListener.onGuildMessageReceived(MessageListener.java:61)
+	at net.dv8tion.jda.core.hooks.ListenerAdapter.onEvent(ListenerAdapter.java:370)
+	at net.dv8tion.jda.core.hooks.InterfacedEventManager.handle(InterfacedEventManager.java:84)
+	at net.dv8tion.jda.core.handle.MessageCreateHandler.handleDefaultMessage(MessageCreateHandler.java:96)
+	at net.dv8tion.jda.core.handle.MessageCreateHandler.handleInternally(MessageCreateHandler.java:49)
+	at net.dv8tion.jda.core.handle.SocketHandler.handle(SocketHandler.java:37)
+	at net.dv8tion.jda.core.requests.WebSocketClient.handleEvent(WebSocketClient.java:885)
+	at net.dv8tion.jda.core.requests.WebSocketClient.onTextMessage(WebSocketClient.java:578)
+	at com.neovisionaries.ws.client.ListenerManager.callOnTextMessage(ListenerManager.java:352)
+	at com.neovisionaries.ws.client.ReadingThread.callOnTextMessage(ReadingThread.java:260)
+	at com.neovisionaries.ws.client.ReadingThread.callOnTextMessage(ReadingThread.java:238)
+	at com.neovisionaries.ws.client.ReadingThread.handleTextFrame(ReadingThread.java:963)
+	at com.neovisionaries.ws.client.ReadingThread.handleFrame(ReadingThread.java:746)
+	at com.neovisionaries.ws.client.ReadingThread.main(ReadingThread.java:108)
+	at com.neovisionaries.ws.client.ReadingThread.runMain(ReadingThread.java:64)
+	at com.neovisionaries.ws.client.WebSocketThread.run(WebSocketThread.java:45)
+
+[19:41:40] [Main/INFO] [Arraybot]: Starting up Arraybot...
+[19:41:40] [Main/INFO] [Arraybot]: Loading in the configuration...
+[19:41:40] [Main/INFO] [Arraybot]: The configuration has been loaded.
+[19:41:40] [Main/INFO] [Arraybot]: 
+[19:41:40] [Main/INFO] [Arraybot]: 
+[19:41:40] [Main/INFO] [Arraybot]: 
+[19:41:40] [Main/INFO] [Arraybot]:  _______  ______    ______    _______  __   __  _______  _______  _______
+[19:41:40] [Main/INFO] [Arraybot]: |   _   ||    _ |  |    _ |  |   _   ||  | |  ||  _    ||       ||       |
+[19:41:40] [Main/INFO] [Arraybot]: |  |_|  ||   | ||  |   | ||  |  |_|  ||  |_|  || |_|   ||   _   ||_     _|
+[19:41:40] [Main/INFO] [Arraybot]: |       ||   |_||_ |   |_||_ |       ||       ||       ||  | |  |  |   |
+[19:41:40] [Main/INFO] [Arraybot]: |       ||    __  ||    __  ||       ||_     _||  _   | |  |_|  |  |   |
+[19:41:40] [Main/INFO] [Arraybot]: |   _   ||   |  | ||   |  | ||   _   |  |   |  | |_|   ||       |  |   |
+[19:41:40] [Main/INFO] [Arraybot]: |__| |__||___|  |_||___|  |_||__| |__|  |___|  |_______||_______|  |___|
+[19:41:40] [Main/INFO] [Arraybot]: 
+[19:41:40] [Main/INFO] [Arraybot]: >> Arraybot v5dev || Running JDA 3.3.0_263 || Developed by Arraying <<
+[19:41:40] [Main/INFO] [Arraybot]: 
+[19:41:40] [Main/INFO] [Arraybot]: 
+[19:41:40] [Main/INFO] [Arraybot]: 
+[19:41:40] [Startup-Bot/INFO] [Startup-Bot]: Creating the bot manager...
+[19:41:40] [Redis-Startup/INFO] [Redis-Startup]: Attempting to start up Redis...
+[19:41:40] [Startup-Languages/INFO] [Startup-Languages]: Attempting to load in all languages...
+[19:41:40] [Startup-Bot/INFO] [Startup-Bot]: Starting the bot manager...
+[19:41:40] [Startup-Bot/INFO] [Bot-Manager]: Logging in a total of 1 shards.
+[19:41:40] [Startup-Bot/INFO] [Bot-Manager]: Asynchronously firing the JDA instance login, using index 0.
+[19:41:40] [Startup-Languages/INFO] [Languages]: Registered the language "en".
+[19:41:40] [Startup-Commands/INFO] [Command-Manager]: Registered the command "ping".
+[19:41:41] [Startup-Bot/INFO] [JDA]: Login Successful!
+[19:41:41] [Redis-Startup/INFO] [Redis]: Registered the category ANNOUNCEMENT_IDS with the type SET.
+[19:41:41] [Redis-Startup/INFO] [Redis]: Registered the category ANNOUNCEMENT with the type HASH.
+[19:41:41] [Redis-Startup/INFO] [Redis]: Registered the category BLACKLIST with the type SET.
+[19:41:41] [Redis-Startup/INFO] [Redis]: Registered the category CUSTOM_COMMAND_NAMES with the type SET.
+[19:41:41] [Redis-Startup/INFO] [Redis]: Registered the category CUSTOM_COMMAND with the type HASH.
+[19:41:41] [Redis-Startup/INFO] [Redis]: Registered the category DISABLED_COMMAND with the type SET.
+[19:41:41] [Redis-Startup/INFO] [Redis]: Registered the category FILTER_IDS with the type SET.
+[19:41:41] [Redis-Startup/INFO] [Redis]: Registered the category FILTER with the type SET.
+[19:41:41] [Redis-Startup/INFO] [Redis]: Registered the category FILTER_BYPASS_IDS with the type SET.
+[19:41:41] [Redis-Startup/INFO] [Redis]: Registered the category FILTER_BYPASS with the type HASH.
+[19:41:41] [Redis-Startup/INFO] [Redis]: Registered the category GUILD with the type HASH.
+[19:41:41] [Redis-Startup/INFO] [Redis]: Registered the category PUNISHMENT_IDS with the type SET.
+[19:41:41] [Redis-Startup/INFO] [Redis]: Registered the category PUNISHMENT with the type HASH.
+[19:41:41] [Redis-Startup/INFO] [Redis]: Registered the category MISC with the type KV.
+[19:41:41] [Redis-Startup/INFO] [Redis-Startup]: Successfully connected to the Redis server.
+[19:41:41] [Redis-Startup/INFO] [Redis-Startup]: All Redis entries have been registered.
+[19:41:41] [JDA MainWS-ReadThread/INFO] [JDASocket]: Connected to WebSocket
+[19:41:41] [Startup-Bot/INFO] [Startup-Bot]: Finished starting the shards, they should be loading asynchronously if they are not loaded yet.
+[19:41:41] [Shard-Watcher/INFO] [Shard-Watcher]: Starting shard monitoring...
+[19:41:42] [JDA MainWS-ReadThread/INFO] [JDA]: Finished Loading!
+[19:41:42] [JDA MainWS-ReadThread/INFO] [Bot-Manager]: The shard 0 has been flagged as ready and is commencing with event receiving.
+[19:41:45] [JDA MainWS-ReadThread/ERROR] [JDA]: One of the EventListeners had an uncaught exception
+[19:41:45] [JDA MainWS-ReadThread/ERROR] [JDA]: An error occurred: 
+java.lang.NullPointerException: null
+	at java.util.concurrent.ConcurrentHashMap.get(ConcurrentHashMap.java:936)
+	at de.arraying.arraybot.misc.MultiKeyMap.getByKeyOrAlias(MultiKeyMap.java:48)
+	at de.arraying.arraybot.command.Commands.executeCommand(Commands.kt:89)
+	at de.arraying.arraybot.listener.listeners.postload.MessageListener.onGuildMessageReceived(MessageListener.java:61)
+	at net.dv8tion.jda.core.hooks.ListenerAdapter.onEvent(ListenerAdapter.java:370)
+	at net.dv8tion.jda.core.hooks.InterfacedEventManager.handle(InterfacedEventManager.java:84)
+	at net.dv8tion.jda.core.handle.MessageCreateHandler.handleDefaultMessage(MessageCreateHandler.java:96)
+	at net.dv8tion.jda.core.handle.MessageCreateHandler.handleInternally(MessageCreateHandler.java:49)
+	at net.dv8tion.jda.core.handle.SocketHandler.handle(SocketHandler.java:37)
+	at net.dv8tion.jda.core.requests.WebSocketClient.handleEvent(WebSocketClient.java:885)
+	at net.dv8tion.jda.core.requests.WebSocketClient.onTextMessage(WebSocketClient.java:578)
+	at com.neovisionaries.ws.client.ListenerManager.callOnTextMessage(ListenerManager.java:352)
+	at com.neovisionaries.ws.client.ReadingThread.callOnTextMessage(ReadingThread.java:260)
+	at com.neovisionaries.ws.client.ReadingThread.callOnTextMessage(ReadingThread.java:238)
+	at com.neovisionaries.ws.client.ReadingThread.handleTextFrame(ReadingThread.java:963)
+	at com.neovisionaries.ws.client.ReadingThread.handleFrame(ReadingThread.java:746)
+	at com.neovisionaries.ws.client.ReadingThread.main(ReadingThread.java:108)
+	at com.neovisionaries.ws.client.ReadingThread.runMain(ReadingThread.java:64)
+	at com.neovisionaries.ws.client.WebSocketThread.run(WebSocketThread.java:45)
+[19:41:45] [JDA MainWS-ReadThread/ERROR] [JDA]: Encountered an exception:
+[19:41:45] [JDA MainWS-ReadThread/ERROR] [JDA]: java.lang.NullPointerException
+	at java.util.concurrent.ConcurrentHashMap.get(ConcurrentHashMap.java:936)
+	at de.arraying.arraybot.misc.MultiKeyMap.getByKeyOrAlias(MultiKeyMap.java:48)
+	at de.arraying.arraybot.command.Commands.executeCommand(Commands.kt:89)
+	at de.arraying.arraybot.listener.listeners.postload.MessageListener.onGuildMessageReceived(MessageListener.java:61)
+	at net.dv8tion.jda.core.hooks.ListenerAdapter.onEvent(ListenerAdapter.java:370)
+	at net.dv8tion.jda.core.hooks.InterfacedEventManager.handle(InterfacedEventManager.java:84)
+	at net.dv8tion.jda.core.handle.MessageCreateHandler.handleDefaultMessage(MessageCreateHandler.java:96)
+	at net.dv8tion.jda.core.handle.MessageCreateHandler.handleInternally(MessageCreateHandler.java:49)
+	at net.dv8tion.jda.core.handle.SocketHandler.handle(SocketHandler.java:37)
+	at net.dv8tion.jda.core.requests.WebSocketClient.handleEvent(WebSocketClient.java:885)
+	at net.dv8tion.jda.core.requests.WebSocketClient.onTextMessage(WebSocketClient.java:578)
+	at com.neovisionaries.ws.client.ListenerManager.callOnTextMessage(ListenerManager.java:352)
+	at com.neovisionaries.ws.client.ReadingThread.callOnTextMessage(ReadingThread.java:260)
+	at com.neovisionaries.ws.client.ReadingThread.callOnTextMessage(ReadingThread.java:238)
+	at com.neovisionaries.ws.client.ReadingThread.handleTextFrame(ReadingThread.java:963)
+	at com.neovisionaries.ws.client.ReadingThread.handleFrame(ReadingThread.java:746)
+	at com.neovisionaries.ws.client.ReadingThread.main(ReadingThread.java:108)
+	at com.neovisionaries.ws.client.ReadingThread.runMain(ReadingThread.java:64)
+	at com.neovisionaries.ws.client.WebSocketThread.run(WebSocketThread.java:45)
+
+[19:42:22] [Main/INFO] [Arraybot]: Starting up Arraybot...
+[19:42:22] [Main/INFO] [Arraybot]: Loading in the configuration...
+[19:42:22] [Main/INFO] [Arraybot]: The configuration has been loaded.
+[19:42:22] [Main/INFO] [Arraybot]: 
+[19:42:22] [Main/INFO] [Arraybot]: 
+[19:42:22] [Main/INFO] [Arraybot]: 
+[19:42:22] [Main/INFO] [Arraybot]:  _______  ______    ______    _______  __   __  _______  _______  _______
+[19:42:22] [Main/INFO] [Arraybot]: |   _   ||    _ |  |    _ |  |   _   ||  | |  ||  _    ||       ||       |
+[19:42:22] [Main/INFO] [Arraybot]: |  |_|  ||   | ||  |   | ||  |  |_|  ||  |_|  || |_|   ||   _   ||_     _|
+[19:42:22] [Main/INFO] [Arraybot]: |       ||   |_||_ |   |_||_ |       ||       ||       ||  | |  |  |   |
+[19:42:22] [Main/INFO] [Arraybot]: |       ||    __  ||    __  ||       ||_     _||  _   | |  |_|  |  |   |
+[19:42:22] [Main/INFO] [Arraybot]: |   _   ||   |  | ||   |  | ||   _   |  |   |  | |_|   ||       |  |   |
+[19:42:22] [Main/INFO] [Arraybot]: |__| |__||___|  |_||___|  |_||__| |__|  |___|  |_______||_______|  |___|
+[19:42:22] [Main/INFO] [Arraybot]: 
+[19:42:22] [Main/INFO] [Arraybot]: >> Arraybot v5dev || Running JDA 3.3.0_263 || Developed by Arraying <<
+[19:42:22] [Main/INFO] [Arraybot]: 
+[19:42:22] [Main/INFO] [Arraybot]: 
+[19:42:22] [Main/INFO] [Arraybot]: 
+[19:42:22] [Startup-Bot/INFO] [Startup-Bot]: Creating the bot manager...
+[19:42:22] [Startup-Languages/INFO] [Startup-Languages]: Attempting to load in all languages...
+[19:42:22] [Redis-Startup/INFO] [Redis-Startup]: Attempting to start up Redis...
+[19:42:22] [Startup-Bot/INFO] [Startup-Bot]: Starting the bot manager...
+[19:42:22] [Startup-Bot/INFO] [Bot-Manager]: Logging in a total of 1 shards.
+[19:42:22] [Startup-Bot/INFO] [Bot-Manager]: Asynchronously firing the JDA instance login, using index 0.
+[19:42:22] [Startup-Languages/INFO] [Languages]: Registered the language "en".
+[19:42:22] [Startup-Commands/INFO] [Command-Manager]: Registered the command "ping".
+[19:42:23] [Startup-Bot/INFO] [JDA]: Login Successful!
+[19:42:23] [Redis-Startup/INFO] [Redis]: Registered the category ANNOUNCEMENT_IDS with the type SET.
+[19:42:23] [Redis-Startup/INFO] [Redis]: Registered the category ANNOUNCEMENT with the type HASH.
+[19:42:23] [Redis-Startup/INFO] [Redis]: Registered the category BLACKLIST with the type SET.
+[19:42:23] [Redis-Startup/INFO] [Redis]: Registered the category CUSTOM_COMMAND_NAMES with the type SET.
+[19:42:23] [Redis-Startup/INFO] [Redis]: Registered the category CUSTOM_COMMAND with the type HASH.
+[19:42:23] [Redis-Startup/INFO] [Redis]: Registered the category DISABLED_COMMAND with the type SET.
+[19:42:23] [Redis-Startup/INFO] [Redis]: Registered the category FILTER_IDS with the type SET.
+[19:42:23] [Redis-Startup/INFO] [Redis]: Registered the category FILTER with the type SET.
+[19:42:23] [Redis-Startup/INFO] [Redis]: Registered the category FILTER_BYPASS_IDS with the type SET.
+[19:42:23] [Redis-Startup/INFO] [Redis]: Registered the category FILTER_BYPASS with the type HASH.
+[19:42:23] [Redis-Startup/INFO] [Redis]: Registered the category GUILD with the type HASH.
+[19:42:23] [Redis-Startup/INFO] [Redis]: Registered the category PUNISHMENT_IDS with the type SET.
+[19:42:23] [Redis-Startup/INFO] [Redis]: Registered the category PUNISHMENT with the type HASH.
+[19:42:23] [Redis-Startup/INFO] [Redis]: Registered the category MISC with the type KV.
+[19:42:23] [Redis-Startup/INFO] [Redis-Startup]: Successfully connected to the Redis server.
+[19:42:23] [Redis-Startup/INFO] [Redis-Startup]: All Redis entries have been registered.
+[19:42:24] [JDA MainWS-ReadThread/INFO] [JDASocket]: Connected to WebSocket
+[19:42:24] [Startup-Bot/INFO] [Startup-Bot]: Finished starting the shards, they should be loading asynchronously if they are not loaded yet.
+[19:42:24] [Shard-Watcher/INFO] [Shard-Watcher]: Starting shard monitoring...
+[19:42:24] [JDA MainWS-ReadThread/INFO] [JDA]: Finished Loading!
+[19:42:24] [JDA MainWS-ReadThread/INFO] [Bot-Manager]: The shard 0 has been flagged as ready and is commencing with event receiving.
+[19:42:29] [ForkJoinPool.commonPool-worker-1/INFO] [Command-Ping]: 115134128717955080 executed the command in the guild 215520016706174977.
+[19:42:31] [ForkJoinPool.commonPool-worker-1/INFO] [Command-Ping]: 115134128717955080 executed the command in the guild 215520016706174977.
+[19:42:39] [Main/INFO] [Arraybot]: Starting up Arraybot...
+[19:42:39] [Main/INFO] [Arraybot]: Loading in the configuration...
+[19:42:39] [Main/INFO] [Arraybot]: The configuration has been loaded.
+[19:42:39] [Main/INFO] [Arraybot]: 
+[19:42:39] [Main/INFO] [Arraybot]: 
+[19:42:39] [Main/INFO] [Arraybot]: 
+[19:42:39] [Main/INFO] [Arraybot]:  _______  ______    ______    _______  __   __  _______  _______  _______
+[19:42:39] [Main/INFO] [Arraybot]: |   _   ||    _ |  |    _ |  |   _   ||  | |  ||  _    ||       ||       |
+[19:42:39] [Main/INFO] [Arraybot]: |  |_|  ||   | ||  |   | ||  |  |_|  ||  |_|  || |_|   ||   _   ||_     _|
+[19:42:39] [Main/INFO] [Arraybot]: |       ||   |_||_ |   |_||_ |       ||       ||       ||  | |  |  |   |
+[19:42:39] [Main/INFO] [Arraybot]: |       ||    __  ||    __  ||       ||_     _||  _   | |  |_|  |  |   |
+[19:42:39] [Main/INFO] [Arraybot]: |   _   ||   |  | ||   |  | ||   _   |  |   |  | |_|   ||       |  |   |
+[19:42:39] [Main/INFO] [Arraybot]: |__| |__||___|  |_||___|  |_||__| |__|  |___|  |_______||_______|  |___|
+[19:42:39] [Main/INFO] [Arraybot]: 
+[19:42:39] [Main/INFO] [Arraybot]: >> Arraybot v5dev || Running JDA 3.3.0_263 || Developed by Arraying <<
+[19:42:39] [Main/INFO] [Arraybot]: 
+[19:42:39] [Main/INFO] [Arraybot]: 
+[19:42:39] [Main/INFO] [Arraybot]: 
+[19:42:40] [Startup-Bot/INFO] [Startup-Bot]: Creating the bot manager...
+[19:42:40] [Startup-Languages/INFO] [Startup-Languages]: Attempting to load in all languages...
+[19:42:40] [Redis-Startup/INFO] [Redis-Startup]: Attempting to start up Redis...
+[19:42:40] [Startup-Bot/INFO] [Startup-Bot]: Starting the bot manager...
+[19:42:40] [Startup-Bot/INFO] [Bot-Manager]: Logging in a total of 1 shards.
+[19:42:40] [Startup-Bot/INFO] [Bot-Manager]: Asynchronously firing the JDA instance login, using index 0.
+[19:42:40] [Startup-Languages/INFO] [Languages]: Registered the language "en".
+[19:42:40] [Startup-Commands/INFO] [Command-Manager]: Registered the command "ping".
+[19:42:41] [Startup-Bot/INFO] [JDA]: Login Successful!
+[19:42:41] [Redis-Startup/INFO] [Redis]: Registered the category ANNOUNCEMENT_IDS with the type SET.
+[19:42:41] [Redis-Startup/INFO] [Redis]: Registered the category ANNOUNCEMENT with the type HASH.
+[19:42:41] [Redis-Startup/INFO] [Redis]: Registered the category BLACKLIST with the type SET.
+[19:42:41] [Redis-Startup/INFO] [Redis]: Registered the category CUSTOM_COMMAND_NAMES with the type SET.
+[19:42:41] [Redis-Startup/INFO] [Redis]: Registered the category CUSTOM_COMMAND with the type HASH.
+[19:42:41] [Redis-Startup/INFO] [Redis]: Registered the category DISABLED_COMMAND with the type SET.
+[19:42:41] [Redis-Startup/INFO] [Redis]: Registered the category FILTER_IDS with the type SET.
+[19:42:41] [Redis-Startup/INFO] [Redis]: Registered the category FILTER with the type SET.
+[19:42:41] [Redis-Startup/INFO] [Redis]: Registered the category FILTER_BYPASS_IDS with the type SET.
+[19:42:41] [Redis-Startup/INFO] [Redis]: Registered the category FILTER_BYPASS with the type HASH.
+[19:42:41] [Redis-Startup/INFO] [Redis]: Registered the category GUILD with the type HASH.
+[19:42:41] [Redis-Startup/INFO] [Redis]: Registered the category PUNISHMENT_IDS with the type SET.
+[19:42:41] [Redis-Startup/INFO] [Redis]: Registered the category PUNISHMENT with the type HASH.
+[19:42:41] [Redis-Startup/INFO] [Redis]: Registered the category MISC with the type KV.
+[19:42:41] [Redis-Startup/INFO] [Redis-Startup]: Successfully connected to the Redis server.
+[19:42:41] [Redis-Startup/INFO] [Redis-Startup]: All Redis entries have been registered.
+[19:42:41] [JDA MainWS-ReadThread/INFO] [JDASocket]: Connected to WebSocket
+[19:42:41] [Startup-Bot/INFO] [Startup-Bot]: Finished starting the shards, they should be loading asynchronously if they are not loaded yet.
+[19:42:41] [Shard-Watcher/INFO] [Shard-Watcher]: Starting shard monitoring...
+[19:42:41] [JDA MainWS-ReadThread/INFO] [JDA]: Finished Loading!
+[19:42:41] [JDA MainWS-ReadThread/INFO] [Bot-Manager]: The shard 0 has been flagged as ready and is commencing with event receiving.
+[19:42:42] [ForkJoinPool.commonPool-worker-1/INFO] [Command-Ping]: 115134128717955080 executed the command in the guild 215520016706174977.
+[19:45:21] [Main/INFO] [Arraybot]: Starting up Arraybot...
+[19:45:21] [Main/INFO] [Arraybot]: Loading in the configuration...
+[19:45:21] [Main/INFO] [Arraybot]: The configuration has been loaded.
+[19:45:21] [Main/INFO] [Arraybot]: 
+[19:45:21] [Main/INFO] [Arraybot]: 
+[19:45:21] [Main/INFO] [Arraybot]: 
+[19:45:21] [Main/INFO] [Arraybot]:  _______  ______    ______    _______  __   __  _______  _______  _______
+[19:45:21] [Main/INFO] [Arraybot]: |   _   ||    _ |  |    _ |  |   _   ||  | |  ||  _    ||       ||       |
+[19:45:21] [Main/INFO] [Arraybot]: |  |_|  ||   | ||  |   | ||  |  |_|  ||  |_|  || |_|   ||   _   ||_     _|
+[19:45:21] [Main/INFO] [Arraybot]: |       ||   |_||_ |   |_||_ |       ||       ||       ||  | |  |  |   |
+[19:45:21] [Main/INFO] [Arraybot]: |       ||    __  ||    __  ||       ||_     _||  _   | |  |_|  |  |   |
+[19:45:21] [Main/INFO] [Arraybot]: |   _   ||   |  | ||   |  | ||   _   |  |   |  | |_|   ||       |  |   |
+[19:45:21] [Main/INFO] [Arraybot]: |__| |__||___|  |_||___|  |_||__| |__|  |___|  |_______||_______|  |___|
+[19:45:21] [Main/INFO] [Arraybot]: 
+[19:45:21] [Main/INFO] [Arraybot]: >> Arraybot v5dev || Running JDA 3.3.0_263 || Developed by Arraying <<
+[19:45:21] [Main/INFO] [Arraybot]: 
+[19:45:21] [Main/INFO] [Arraybot]: 
+[19:45:21] [Main/INFO] [Arraybot]: 
+[19:45:21] [Startup-Bot/INFO] [Startup-Bot]: Creating the bot manager...
+[19:45:21] [Startup-Languages/INFO] [Startup-Languages]: Attempting to load in all languages...
+[19:45:21] [Redis-Startup/INFO] [Redis-Startup]: Attempting to start up Redis...
+[19:45:21] [Startup-Bot/INFO] [Startup-Bot]: Starting the bot manager...
+[19:45:21] [Startup-Bot/INFO] [Bot-Manager]: Logging in a total of 1 shards.
+[19:45:21] [Startup-Bot/INFO] [Bot-Manager]: Asynchronously firing the JDA instance login, using index 0.
+[19:45:21] [Startup-Languages/INFO] [Languages]: Registered the language "en".
+[19:45:21] [Startup-Commands/INFO] [Command-Manager]: Registered the command "ping".
+[19:45:22] [Startup-Bot/INFO] [JDA]: Login Successful!
+[19:45:23] [Redis-Startup/INFO] [Redis]: Registered the category ANNOUNCEMENT_IDS with the type SET.
+[19:45:23] [Redis-Startup/INFO] [Redis]: Registered the category ANNOUNCEMENT with the type HASH.
+[19:45:23] [Redis-Startup/INFO] [Redis]: Registered the category BLACKLIST with the type SET.
+[19:45:23] [Redis-Startup/INFO] [Redis]: Registered the category CUSTOM_COMMAND_NAMES with the type SET.
+[19:45:23] [Redis-Startup/INFO] [Redis]: Registered the category CUSTOM_COMMAND with the type HASH.
+[19:45:23] [Redis-Startup/INFO] [Redis]: Registered the category DISABLED_COMMAND with the type SET.
+[19:45:23] [Redis-Startup/INFO] [Redis]: Registered the category FILTER_IDS with the type SET.
+[19:45:23] [Redis-Startup/INFO] [Redis]: Registered the category FILTER with the type SET.
+[19:45:23] [Redis-Startup/INFO] [Redis]: Registered the category FILTER_BYPASS_IDS with the type SET.
+[19:45:23] [Redis-Startup/INFO] [Redis]: Registered the category FILTER_BYPASS with the type HASH.
+[19:45:23] [Redis-Startup/INFO] [Redis]: Registered the category GUILD with the type HASH.
+[19:45:23] [Redis-Startup/INFO] [Redis]: Registered the category PUNISHMENT_IDS with the type SET.
+[19:45:23] [Redis-Startup/INFO] [Redis]: Registered the category PUNISHMENT with the type HASH.
+[19:45:23] [Redis-Startup/INFO] [Redis]: Registered the category MISC with the type KV.
+[19:45:23] [Redis-Startup/INFO] [Redis-Startup]: Successfully connected to the Redis server.
+[19:45:23] [Redis-Startup/INFO] [Redis-Startup]: All Redis entries have been registered.
+[19:45:23] [JDA MainWS-ReadThread/INFO] [JDASocket]: Connected to WebSocket
+[19:45:23] [Startup-Bot/INFO] [Startup-Bot]: Finished starting the shards, they should be loading asynchronously if they are not loaded yet.
+[19:45:23] [Shard-Watcher/INFO] [Shard-Watcher]: Starting shard monitoring...
+[19:45:23] [JDA MainWS-ReadThread/INFO] [JDA]: Finished Loading!
+[19:45:23] [JDA MainWS-ReadThread/INFO] [Bot-Manager]: The shard 0 has been flagged as ready and is commencing with event receiving.
+[19:45:25] [ForkJoinPool.commonPool-worker-1/INFO] [Command-Ping]: 115134128717955080 executed the command in the guild 215520016706174977.
+[19:47:13] [Main/INFO] [Arraybot]: Starting up Arraybot...
+[19:47:13] [Main/INFO] [Arraybot]: Loading in the configuration...
+[19:47:13] [Main/INFO] [Arraybot]: The configuration has been loaded.
+[19:47:13] [Main/INFO] [Arraybot]: 
+[19:47:13] [Main/INFO] [Arraybot]: 
+[19:47:13] [Main/INFO] [Arraybot]: 
+[19:47:13] [Main/INFO] [Arraybot]:  _______  ______    ______    _______  __   __  _______  _______  _______
+[19:47:13] [Main/INFO] [Arraybot]: |   _   ||    _ |  |    _ |  |   _   ||  | |  ||  _    ||       ||       |
+[19:47:13] [Main/INFO] [Arraybot]: |  |_|  ||   | ||  |   | ||  |  |_|  ||  |_|  || |_|   ||   _   ||_     _|
+[19:47:13] [Main/INFO] [Arraybot]: |       ||   |_||_ |   |_||_ |       ||       ||       ||  | |  |  |   |
+[19:47:13] [Main/INFO] [Arraybot]: |       ||    __  ||    __  ||       ||_     _||  _   | |  |_|  |  |   |
+[19:47:13] [Main/INFO] [Arraybot]: |   _   ||   |  | ||   |  | ||   _   |  |   |  | |_|   ||       |  |   |
+[19:47:13] [Main/INFO] [Arraybot]: |__| |__||___|  |_||___|  |_||__| |__|  |___|  |_______||_______|  |___|
+[19:47:13] [Main/INFO] [Arraybot]: 
+[19:47:13] [Main/INFO] [Arraybot]: >> Arraybot v5dev || Running JDA 3.3.0_263 || Developed by Arraying <<
+[19:47:13] [Main/INFO] [Arraybot]: 
+[19:47:13] [Main/INFO] [Arraybot]: 
+[19:47:13] [Main/INFO] [Arraybot]: 
+[19:47:13] [Startup-Bot/INFO] [Startup-Bot]: Creating the bot manager...
+[19:47:13] [Startup-Languages/INFO] [Startup-Languages]: Attempting to load in all languages...
+[19:47:13] [Redis-Startup/INFO] [Redis-Startup]: Attempting to start up Redis...
+[19:47:13] [Startup-Bot/INFO] [Startup-Bot]: Starting the bot manager...
+[19:47:13] [Startup-Bot/INFO] [Bot-Manager]: Logging in a total of 1 shards.
+[19:47:13] [Startup-Bot/INFO] [Bot-Manager]: Asynchronously firing the JDA instance login, using index 0.
+[19:47:13] [Startup-Languages/INFO] [Languages]: Registered the language "en".
+[19:47:13] [Startup-Commands/INFO] [Command-Manager]: Registered the command "ping".
+[19:47:14] [Startup-Bot/INFO] [JDA]: Login Successful!
+[19:47:14] [Redis-Startup/INFO] [Redis]: Registered the category ANNOUNCEMENT_IDS with the type SET.
+[19:47:14] [Redis-Startup/INFO] [Redis]: Registered the category ANNOUNCEMENT with the type HASH.
+[19:47:14] [Redis-Startup/INFO] [Redis]: Registered the category BLACKLIST with the type SET.
+[19:47:14] [Redis-Startup/INFO] [Redis]: Registered the category CUSTOM_COMMAND_NAMES with the type SET.
+[19:47:14] [Redis-Startup/INFO] [Redis]: Registered the category CUSTOM_COMMAND with the type HASH.
+[19:47:14] [Redis-Startup/INFO] [Redis]: Registered the category DISABLED_COMMAND with the type SET.
+[19:47:14] [Redis-Startup/INFO] [Redis]: Registered the category FILTER_IDS with the type SET.
+[19:47:14] [Redis-Startup/INFO] [Redis]: Registered the category FILTER with the type SET.
+[19:47:14] [Redis-Startup/INFO] [Redis]: Registered the category FILTER_BYPASS_IDS with the type SET.
+[19:47:14] [Redis-Startup/INFO] [Redis]: Registered the category FILTER_BYPASS with the type HASH.
+[19:47:14] [Redis-Startup/INFO] [Redis]: Registered the category GUILD with the type HASH.
+[19:47:14] [Redis-Startup/INFO] [Redis]: Registered the category PUNISHMENT_IDS with the type SET.
+[19:47:14] [Redis-Startup/INFO] [Redis]: Registered the category PUNISHMENT with the type HASH.
+[19:47:14] [Redis-Startup/INFO] [Redis]: Registered the category MISC with the type KV.
+[19:47:14] [Redis-Startup/INFO] [Redis-Startup]: Successfully connected to the Redis server.
+[19:47:14] [Redis-Startup/INFO] [Redis-Startup]: All Redis entries have been registered.
+[19:47:15] [JDA MainWS-ReadThread/INFO] [JDASocket]: Connected to WebSocket
+[19:47:15] [Startup-Bot/INFO] [Startup-Bot]: Finished starting the shards, they should be loading asynchronously if they are not loaded yet.
+[19:47:15] [Shard-Watcher/INFO] [Shard-Watcher]: Starting shard monitoring...
+[19:47:15] [JDA MainWS-ReadThread/INFO] [JDA]: Finished Loading!
+[19:47:15] [JDA MainWS-ReadThread/INFO] [Bot-Manager]: The shard 0 has been flagged as ready and is commencing with event receiving.
+[19:47:16] [JDA MainWS-ReadThread/INFO] [Command-Ping]: 115134128717955080 executed the command in the guild 215520016706174977.
+[19:48:03] [Main/INFO] [Arraybot]: Starting up Arraybot...
+[19:48:03] [Main/INFO] [Arraybot]: Loading in the configuration...
+[19:48:03] [Main/INFO] [Arraybot]: The configuration has been loaded.
+[19:48:03] [Main/INFO] [Arraybot]: 
+[19:48:03] [Main/INFO] [Arraybot]: 
+[19:48:03] [Main/INFO] [Arraybot]: 
+[19:48:03] [Main/INFO] [Arraybot]:  _______  ______    ______    _______  __   __  _______  _______  _______
+[19:48:03] [Main/INFO] [Arraybot]: |   _   ||    _ |  |    _ |  |   _   ||  | |  ||  _    ||       ||       |
+[19:48:03] [Main/INFO] [Arraybot]: |  |_|  ||   | ||  |   | ||  |  |_|  ||  |_|  || |_|   ||   _   ||_     _|
+[19:48:03] [Main/INFO] [Arraybot]: |       ||   |_||_ |   |_||_ |       ||       ||       ||  | |  |  |   |
+[19:48:03] [Main/INFO] [Arraybot]: |       ||    __  ||    __  ||       ||_     _||  _   | |  |_|  |  |   |
+[19:48:03] [Main/INFO] [Arraybot]: |   _   ||   |  | ||   |  | ||   _   |  |   |  | |_|   ||       |  |   |
+[19:48:03] [Main/INFO] [Arraybot]: |__| |__||___|  |_||___|  |_||__| |__|  |___|  |_______||_______|  |___|
+[19:48:03] [Main/INFO] [Arraybot]: 
+[19:48:03] [Main/INFO] [Arraybot]: >> Arraybot v5dev || Running JDA 3.3.0_263 || Developed by Arraying <<
+[19:48:03] [Main/INFO] [Arraybot]: 
+[19:48:03] [Main/INFO] [Arraybot]: 
+[19:48:03] [Main/INFO] [Arraybot]: 
+[19:48:03] [Startup-Bot/INFO] [Startup-Bot]: Creating the bot manager...
+[19:48:03] [Startup-Languages/INFO] [Startup-Languages]: Attempting to load in all languages...
+[19:48:03] [Redis-Startup/INFO] [Redis-Startup]: Attempting to start up Redis...
+[19:48:03] [Startup-Bot/INFO] [Startup-Bot]: Starting the bot manager...
+[19:48:03] [Startup-Bot/INFO] [Bot-Manager]: Logging in a total of 1 shards.
+[19:48:03] [Startup-Bot/INFO] [Bot-Manager]: Asynchronously firing the JDA instance login, using index 0.
+[19:48:03] [Startup-Languages/INFO] [Languages]: Registered the language "en".
+[19:48:03] [Startup-Commands/INFO] [Command-Manager]: Registered the command "ping".
+[19:48:04] [Startup-Bot/INFO] [JDA]: Login Successful!
+[19:48:04] [Redis-Startup/INFO] [Redis]: Registered the category ANNOUNCEMENT_IDS with the type SET.
+[19:48:04] [Redis-Startup/INFO] [Redis]: Registered the category ANNOUNCEMENT with the type HASH.
+[19:48:04] [Redis-Startup/INFO] [Redis]: Registered the category BLACKLIST with the type SET.
+[19:48:04] [Redis-Startup/INFO] [Redis]: Registered the category CUSTOM_COMMAND_NAMES with the type SET.
+[19:48:04] [Redis-Startup/INFO] [Redis]: Registered the category CUSTOM_COMMAND with the type HASH.
+[19:48:04] [Redis-Startup/INFO] [Redis]: Registered the category DISABLED_COMMAND with the type SET.
+[19:48:04] [Redis-Startup/INFO] [Redis]: Registered the category FILTER_IDS with the type SET.
+[19:48:04] [Redis-Startup/INFO] [Redis]: Registered the category FILTER with the type SET.
+[19:48:04] [Redis-Startup/INFO] [Redis]: Registered the category FILTER_BYPASS_IDS with the type SET.
+[19:48:04] [Redis-Startup/INFO] [Redis]: Registered the category FILTER_BYPASS with the type HASH.
+[19:48:04] [Redis-Startup/INFO] [Redis]: Registered the category GUILD with the type HASH.
+[19:48:04] [Redis-Startup/INFO] [Redis]: Registered the category PUNISHMENT_IDS with the type SET.
+[19:48:04] [Redis-Startup/INFO] [Redis]: Registered the category PUNISHMENT with the type HASH.
+[19:48:04] [Redis-Startup/INFO] [Redis]: Registered the category MISC with the type KV.
+[19:48:04] [Redis-Startup/INFO] [Redis-Startup]: Successfully connected to the Redis server.
+[19:48:04] [Redis-Startup/INFO] [Redis-Startup]: All Redis entries have been registered.
+[19:48:04] [JDA MainWS-ReadThread/INFO] [JDASocket]: Connected to WebSocket
+[19:48:04] [Startup-Bot/INFO] [Startup-Bot]: Finished starting the shards, they should be loading asynchronously if they are not loaded yet.
+[19:48:04] [Shard-Watcher/INFO] [Shard-Watcher]: Starting shard monitoring...
+[19:48:05] [JDA MainWS-ReadThread/INFO] [JDA]: Finished Loading!
+[19:48:05] [JDA MainWS-ReadThread/INFO] [Bot-Manager]: The shard 0 has been flagged as ready and is commencing with event receiving.
+[19:48:09] [JDA MainWS-ReadThread/INFO] [Command-Ping]: 115134128717955080 executed the command in the guild 215520016706174977.
+[19:48:12] [JDA MainWS-ReadThread/INFO] [Command-Ping]: 115134128717955080 executed the command in the guild 215520016706174977.
+[19:50:04] [Shard-Watcher/INFO] [Shard-Watcher]: The shard 0 is running healthily with a ping of 135.
+[19:52:04] [Shard-Watcher/INFO] [Shard-Watcher]: The shard 0 is running healthily with a ping of 129.
+[19:54:03] [Main/INFO] [Arraybot]: Starting up Arraybot...
+[19:54:03] [Main/INFO] [Arraybot]: Loading in the configuration...
+[19:54:03] [Main/INFO] [Arraybot]: The configuration has been loaded.
+[19:54:03] [Main/INFO] [Arraybot]: 
+[19:54:03] [Main/INFO] [Arraybot]: 
+[19:54:03] [Main/INFO] [Arraybot]: 
+[19:54:03] [Main/INFO] [Arraybot]:  _______  ______    ______    _______  __   __  _______  _______  _______
+[19:54:03] [Main/INFO] [Arraybot]: |   _   ||    _ |  |    _ |  |   _   ||  | |  ||  _    ||       ||       |
+[19:54:03] [Main/INFO] [Arraybot]: |  |_|  ||   | ||  |   | ||  |  |_|  ||  |_|  || |_|   ||   _   ||_     _|
+[19:54:03] [Main/INFO] [Arraybot]: |       ||   |_||_ |   |_||_ |       ||       ||       ||  | |  |  |   |
+[19:54:03] [Main/INFO] [Arraybot]: |       ||    __  ||    __  ||       ||_     _||  _   | |  |_|  |  |   |
+[19:54:03] [Main/INFO] [Arraybot]: |   _   ||   |  | ||   |  | ||   _   |  |   |  | |_|   ||       |  |   |
+[19:54:03] [Main/INFO] [Arraybot]: |__| |__||___|  |_||___|  |_||__| |__|  |___|  |_______||_______|  |___|
+[19:54:03] [Main/INFO] [Arraybot]: 
+[19:54:03] [Main/INFO] [Arraybot]: >> Arraybot v5dev || Running JDA 3.3.0_263 || Developed by Arraying <<
+[19:54:03] [Main/INFO] [Arraybot]: 
+[19:54:03] [Main/INFO] [Arraybot]: 
+[19:54:03] [Main/INFO] [Arraybot]: 
+[19:54:03] [Startup-Bot/INFO] [Startup-Bot]: Creating the bot manager...
+[19:54:03] [Startup-Languages/INFO] [Startup-Languages]: Attempting to load in all languages...
+[19:54:03] [Redis-Startup/INFO] [Redis-Startup]: Attempting to start up Redis...
+[19:54:03] [Startup-Bot/INFO] [Startup-Bot]: Starting the bot manager...
+[19:54:03] [Startup-Bot/INFO] [Bot-Manager]: Logging in a total of 1 shards.
+[19:54:03] [Startup-Bot/INFO] [Bot-Manager]: Asynchronously firing the JDA instance login, using index 0.
+[19:54:03] [Startup-Languages/INFO] [Languages]: Registered the language "en".
+[19:54:03] [Startup-Commands/INFO] [Command-Manager]: Registered the command "ping".
+[19:54:04] [Startup-Bot/INFO] [JDA]: Login Successful!
+[19:54:04] [Redis-Startup/INFO] [Redis]: Registered the category ANNOUNCEMENT_IDS with the type SET.
+[19:54:04] [Redis-Startup/INFO] [Redis]: Registered the category ANNOUNCEMENT with the type HASH.
+[19:54:04] [Redis-Startup/INFO] [Redis]: Registered the category BLACKLIST with the type SET.
+[19:54:04] [Redis-Startup/INFO] [Redis]: Registered the category CUSTOM_COMMAND_NAMES with the type SET.
+[19:54:04] [Redis-Startup/INFO] [Redis]: Registered the category CUSTOM_COMMAND with the type HASH.
+[19:54:04] [Redis-Startup/INFO] [Redis]: Registered the category DISABLED_COMMAND with the type SET.
+[19:54:04] [Redis-Startup/INFO] [Redis]: Registered the category FILTER_IDS with the type SET.
+[19:54:04] [Redis-Startup/INFO] [Redis]: Registered the category FILTER with the type SET.
+[19:54:04] [Redis-Startup/INFO] [Redis]: Registered the category FILTER_BYPASS_IDS with the type SET.
+[19:54:04] [Redis-Startup/INFO] [Redis]: Registered the category FILTER_BYPASS with the type HASH.
+[19:54:04] [Redis-Startup/INFO] [Redis]: Registered the category GUILD with the type HASH.
+[19:54:04] [Redis-Startup/INFO] [Redis]: Registered the category PUNISHMENT_IDS with the type SET.
+[19:54:04] [Redis-Startup/INFO] [Redis]: Registered the category PUNISHMENT with the type HASH.
+[19:54:04] [Redis-Startup/INFO] [Redis]: Registered the category MISC with the type KV.
+[19:54:04] [Redis-Startup/INFO] [Redis-Startup]: Successfully connected to the Redis server.
+[19:54:04] [Redis-Startup/INFO] [Redis-Startup]: All Redis entries have been registered.
+[19:54:04] [JDA MainWS-ReadThread/INFO] [JDASocket]: Connected to WebSocket
+[19:54:04] [Startup-Bot/INFO] [Startup-Bot]: Finished starting the shards, they should be loading asynchronously if they are not loaded yet.
+[19:54:04] [Shard-Watcher/INFO] [Shard-Watcher]: Starting shard monitoring...
+[19:54:05] [JDA MainWS-ReadThread/INFO] [JDA]: Finished Loading!
+[19:54:05] [JDA MainWS-ReadThread/INFO] [Bot-Manager]: The shard 0 has been flagged as ready and is commencing with event receiving.
+[19:54:07] [ForkJoinPool.commonPool-worker-1/INFO] [Command-Ping]: 115134128717955080 executed the command in the guild 215520016706174977.
+[19:54:09] [ForkJoinPool.commonPool-worker-1/INFO] [Command-Ping]: 115134128717955080 executed the command in the guild 215520016706174977.
+[19:54:35] [ForkJoinPool.commonPool-worker-2/INFO] [Command-Ping]: 115134128717955080 executed the command in the guild 215520016706174977.
+[19:54:39] [ForkJoinPool.commonPool-worker-2/INFO] [Command-Ping]: 115134128717955080 executed the command in the guild 215520016706174977.
+[19:54:44] [ForkJoinPool.commonPool-worker-2/INFO] [Command-Ping]: 115134128717955080 executed the command in the guild 215520016706174977.
+[19:54:51] [ForkJoinPool.commonPool-worker-2/INFO] [Command-Ping]: 115134128717955080 executed the command in the guild 215520016706174977.
+[19:56:04] [Shard-Watcher/INFO] [Shard-Watcher]: The shard 0 is running healthily with a ping of 121.
+[19:58:04] [Shard-Watcher/INFO] [Shard-Watcher]: The shard 0 is running healthily with a ping of 136.
+[19:59:25] [Main/INFO] [Arraybot]: Starting up Arraybot...
+[19:59:25] [Main/INFO] [Arraybot]: Loading in the configuration...
+[19:59:25] [Main/INFO] [Arraybot]: The configuration has been loaded.
+[19:59:25] [Main/INFO] [Arraybot]: 
+[19:59:25] [Main/INFO] [Arraybot]: 
+[19:59:25] [Main/INFO] [Arraybot]: 
+[19:59:25] [Main/INFO] [Arraybot]:  _______  ______    ______    _______  __   __  _______  _______  _______
+[19:59:25] [Main/INFO] [Arraybot]: |   _   ||    _ |  |    _ |  |   _   ||  | |  ||  _    ||       ||       |
+[19:59:25] [Main/INFO] [Arraybot]: |  |_|  ||   | ||  |   | ||  |  |_|  ||  |_|  || |_|   ||   _   ||_     _|
+[19:59:25] [Main/INFO] [Arraybot]: |       ||   |_||_ |   |_||_ |       ||       ||       ||  | |  |  |   |
+[19:59:25] [Main/INFO] [Arraybot]: |       ||    __  ||    __  ||       ||_     _||  _   | |  |_|  |  |   |
+[19:59:25] [Main/INFO] [Arraybot]: |   _   ||   |  | ||   |  | ||   _   |  |   |  | |_|   ||       |  |   |
+[19:59:25] [Main/INFO] [Arraybot]: |__| |__||___|  |_||___|  |_||__| |__|  |___|  |_______||_______|  |___|
+[19:59:25] [Main/INFO] [Arraybot]: 
+[19:59:25] [Main/INFO] [Arraybot]: >> Arraybot v5dev || Running JDA 3.3.0_263 || Developed by Arraying <<
+[19:59:25] [Main/INFO] [Arraybot]: 
+[19:59:25] [Main/INFO] [Arraybot]: 
+[19:59:25] [Main/INFO] [Arraybot]: 
+[19:59:25] [Startup-Bot/INFO] [Startup-Bot]: Creating the bot manager...
+[19:59:25] [Startup-Languages/INFO] [Startup-Languages]: Attempting to load in all languages...
+[19:59:25] [Redis-Startup/INFO] [Redis-Startup]: Attempting to start up Redis...
+[19:59:25] [Startup-Bot/INFO] [Startup-Bot]: Starting the bot manager...
+[19:59:25] [Startup-Bot/INFO] [Bot-Manager]: Logging in a total of 1 shards.
+[19:59:25] [Startup-Bot/INFO] [Bot-Manager]: Asynchronously firing the JDA instance login, using index 0.
+[19:59:25] [Startup-Languages/INFO] [Languages]: Registered the language "en".
+[19:59:25] [Startup-Commands/INFO] [Command-Manager]: Registered the command "ping".
+[19:59:26] [Startup-Bot/INFO] [JDA]: Login Successful!
+[19:59:27] [Redis-Startup/INFO] [Redis]: Registered the category ANNOUNCEMENT_IDS with the type SET.
+[19:59:27] [Redis-Startup/INFO] [Redis]: Registered the category ANNOUNCEMENT with the type HASH.
+[19:59:27] [Redis-Startup/INFO] [Redis]: Registered the category BLACKLIST with the type SET.
+[19:59:27] [Redis-Startup/INFO] [Redis]: Registered the category CUSTOM_COMMAND_NAMES with the type SET.
+[19:59:27] [Redis-Startup/INFO] [Redis]: Registered the category CUSTOM_COMMAND with the type HASH.
+[19:59:27] [Redis-Startup/INFO] [Redis]: Registered the category DISABLED_COMMAND with the type SET.
+[19:59:27] [Redis-Startup/INFO] [Redis]: Registered the category FILTER_IDS with the type SET.
+[19:59:27] [Redis-Startup/INFO] [Redis]: Registered the category FILTER with the type SET.
+[19:59:27] [Redis-Startup/INFO] [Redis]: Registered the category FILTER_BYPASS_IDS with the type SET.
+[19:59:27] [Redis-Startup/INFO] [Redis]: Registered the category FILTER_BYPASS with the type HASH.
+[19:59:27] [Redis-Startup/INFO] [Redis]: Registered the category GUILD with the type HASH.
+[19:59:27] [Redis-Startup/INFO] [Redis]: Registered the category PUNISHMENT_IDS with the type SET.
+[19:59:27] [Redis-Startup/INFO] [Redis]: Registered the category PUNISHMENT with the type HASH.
+[19:59:27] [Redis-Startup/INFO] [Redis]: Registered the category MISC with the type KV.
+[19:59:27] [Redis-Startup/INFO] [Redis-Startup]: Successfully connected to the Redis server.
+[19:59:27] [Redis-Startup/INFO] [Redis-Startup]: All Redis entries have been registered.
+[19:59:27] [JDA MainWS-ReadThread/INFO] [JDASocket]: Connected to WebSocket
+[19:59:27] [Startup-Bot/INFO] [Startup-Bot]: Finished starting the shards, they should be loading asynchronously if they are not loaded yet.
+[19:59:27] [Shard-Watcher/INFO] [Shard-Watcher]: Starting shard monitoring...
+[19:59:27] [JDA MainWS-ReadThread/INFO] [JDA]: Finished Loading!
+[19:59:27] [JDA MainWS-ReadThread/INFO] [Bot-Manager]: The shard 0 has been flagged as ready and is commencing with event receiving.
+[19:59:50] [Main/INFO] [Arraybot]: Starting up Arraybot...
+[19:59:50] [Main/INFO] [Arraybot]: Loading in the configuration...
+[19:59:50] [Main/INFO] [Arraybot]: The configuration has been loaded.
+[19:59:50] [Main/INFO] [Arraybot]: 
+[19:59:50] [Main/INFO] [Arraybot]: 
+[19:59:50] [Main/INFO] [Arraybot]: 
+[19:59:50] [Main/INFO] [Arraybot]:  _______  ______    ______    _______  __   __  _______  _______  _______
+[19:59:50] [Main/INFO] [Arraybot]: |   _   ||    _ |  |    _ |  |   _   ||  | |  ||  _    ||       ||       |
+[19:59:50] [Main/INFO] [Arraybot]: |  |_|  ||   | ||  |   | ||  |  |_|  ||  |_|  || |_|   ||   _   ||_     _|
+[19:59:50] [Main/INFO] [Arraybot]: |       ||   |_||_ |   |_||_ |       ||       ||       ||  | |  |  |   |
+[19:59:50] [Main/INFO] [Arraybot]: |       ||    __  ||    __  ||       ||_     _||  _   | |  |_|  |  |   |
+[19:59:50] [Main/INFO] [Arraybot]: |   _   ||   |  | ||   |  | ||   _   |  |   |  | |_|   ||       |  |   |
+[19:59:50] [Main/INFO] [Arraybot]: |__| |__||___|  |_||___|  |_||__| |__|  |___|  |_______||_______|  |___|
+[19:59:50] [Main/INFO] [Arraybot]: 
+[19:59:50] [Main/INFO] [Arraybot]: >> Arraybot v5dev || Running JDA 3.3.0_263 || Developed by Arraying <<
+[19:59:50] [Main/INFO] [Arraybot]: 
+[19:59:50] [Main/INFO] [Arraybot]: 
+[19:59:50] [Main/INFO] [Arraybot]: 
+[19:59:50] [Startup-Bot/INFO] [Startup-Bot]: Creating the bot manager...
+[19:59:50] [Startup-Languages/INFO] [Startup-Languages]: Attempting to load in all languages...
+[19:59:50] [Redis-Startup/INFO] [Redis-Startup]: Attempting to start up Redis...
+[19:59:50] [Startup-Bot/INFO] [Startup-Bot]: Starting the bot manager...
+[19:59:50] [Startup-Bot/INFO] [Bot-Manager]: Logging in a total of 1 shards.
+[19:59:50] [Startup-Bot/INFO] [Bot-Manager]: Asynchronously firing the JDA instance login, using index 0.
+[19:59:50] [Startup-Languages/INFO] [Languages]: Registered the language "en".
+[19:59:50] [Startup-Commands/INFO] [Command-Manager]: Registered the command "ping".
+[19:59:51] [Startup-Bot/INFO] [JDA]: Login Successful!
+[19:59:52] [Redis-Startup/INFO] [Redis]: Registered the category ANNOUNCEMENT_IDS with the type SET.
+[19:59:52] [Redis-Startup/INFO] [Redis]: Registered the category ANNOUNCEMENT with the type HASH.
+[19:59:52] [Redis-Startup/INFO] [Redis]: Registered the category BLACKLIST with the type SET.
+[19:59:52] [Redis-Startup/INFO] [Redis]: Registered the category CUSTOM_COMMAND_NAMES with the type SET.
+[19:59:52] [Redis-Startup/INFO] [Redis]: Registered the category CUSTOM_COMMAND with the type HASH.
+[19:59:52] [Redis-Startup/INFO] [Redis]: Registered the category DISABLED_COMMAND with the type SET.
+[19:59:52] [Redis-Startup/INFO] [Redis]: Registered the category FILTER_IDS with the type SET.
+[19:59:52] [Redis-Startup/INFO] [Redis]: Registered the category FILTER with the type SET.
+[19:59:52] [Redis-Startup/INFO] [Redis]: Registered the category FILTER_BYPASS_IDS with the type SET.
+[19:59:52] [Redis-Startup/INFO] [Redis]: Registered the category FILTER_BYPASS with the type HASH.
+[19:59:52] [Redis-Startup/INFO] [Redis]: Registered the category GUILD with the type HASH.
+[19:59:52] [Redis-Startup/INFO] [Redis]: Registered the category PUNISHMENT_IDS with the type SET.
+[19:59:52] [Redis-Startup/INFO] [Redis]: Registered the category PUNISHMENT with the type HASH.
+[19:59:52] [Redis-Startup/INFO] [Redis]: Registered the category MISC with the type KV.
+[19:59:52] [Redis-Startup/INFO] [Redis-Startup]: Successfully connected to the Redis server.
+[19:59:52] [Redis-Startup/INFO] [Redis-Startup]: All Redis entries have been registered.
+[19:59:52] [JDA MainWS-ReadThread/INFO] [JDASocket]: Connected to WebSocket
+[19:59:52] [Startup-Bot/INFO] [Startup-Bot]: Finished starting the shards, they should be loading asynchronously if they are not loaded yet.
+[19:59:52] [Shard-Watcher/INFO] [Shard-Watcher]: Starting shard monitoring...
+[19:59:52] [JDA MainWS-ReadThread/INFO] [JDA]: Finished Loading!
+[19:59:52] [JDA MainWS-ReadThread/INFO] [Bot-Manager]: The shard 0 has been flagged as ready and is commencing with event receiving.
+[20:00:00] [ForkJoinPool.commonPool-worker-1/INFO] [Command-Ping]: 115134128717955080 executed the command in the guild 215520016706174977.
+[20:00:40] [Main/INFO] [Arraybot]: Starting up Arraybot...
+[20:00:40] [Main/INFO] [Arraybot]: Loading in the configuration...
+[20:00:40] [Main/INFO] [Arraybot]: The configuration has been loaded.
+[20:00:40] [Main/INFO] [Arraybot]: 
+[20:00:40] [Main/INFO] [Arraybot]: 
+[20:00:40] [Main/INFO] [Arraybot]: 
+[20:00:40] [Main/INFO] [Arraybot]:  _______  ______    ______    _______  __   __  _______  _______  _______
+[20:00:40] [Main/INFO] [Arraybot]: |   _   ||    _ |  |    _ |  |   _   ||  | |  ||  _    ||       ||       |
+[20:00:40] [Main/INFO] [Arraybot]: |  |_|  ||   | ||  |   | ||  |  |_|  ||  |_|  || |_|   ||   _   ||_     _|
+[20:00:40] [Main/INFO] [Arraybot]: |       ||   |_||_ |   |_||_ |       ||       ||       ||  | |  |  |   |
+[20:00:40] [Main/INFO] [Arraybot]: |       ||    __  ||    __  ||       ||_     _||  _   | |  |_|  |  |   |
+[20:00:40] [Main/INFO] [Arraybot]: |   _   ||   |  | ||   |  | ||   _   |  |   |  | |_|   ||       |  |   |
+[20:00:40] [Main/INFO] [Arraybot]: |__| |__||___|  |_||___|  |_||__| |__|  |___|  |_______||_______|  |___|
+[20:00:40] [Main/INFO] [Arraybot]: 
+[20:00:40] [Main/INFO] [Arraybot]: >> Arraybot v5dev || Running JDA 3.3.0_263 || Developed by Arraying <<
+[20:00:40] [Main/INFO] [Arraybot]: 
+[20:00:40] [Main/INFO] [Arraybot]: 
+[20:00:40] [Main/INFO] [Arraybot]: 
+[20:00:40] [Startup-Bot/INFO] [Startup-Bot]: Creating the bot manager...
+[20:00:40] [Startup-Languages/INFO] [Startup-Languages]: Attempting to load in all languages...
+[20:00:40] [Redis-Startup/INFO] [Redis-Startup]: Attempting to start up Redis...
+[20:00:40] [Startup-Bot/INFO] [Startup-Bot]: Starting the bot manager...
+[20:00:40] [Startup-Bot/INFO] [Bot-Manager]: Logging in a total of 1 shards.
+[20:00:40] [Startup-Bot/INFO] [Bot-Manager]: Asynchronously firing the JDA instance login, using index 0.
+[20:00:40] [Startup-Languages/INFO] [Languages]: Registered the language "en".
+[20:00:40] [Startup-Commands/INFO] [Command-Manager]: Registered the command "ping".
+[20:00:41] [Startup-Bot/INFO] [JDA]: Login Successful!
+[20:00:41] [Redis-Startup/INFO] [Redis]: Registered the category ANNOUNCEMENT_IDS with the type SET.
+[20:00:41] [Redis-Startup/INFO] [Redis]: Registered the category ANNOUNCEMENT with the type HASH.
+[20:00:41] [Redis-Startup/INFO] [Redis]: Registered the category BLACKLIST with the type SET.
+[20:00:41] [Redis-Startup/INFO] [Redis]: Registered the category CUSTOM_COMMAND_NAMES with the type SET.
+[20:00:41] [Redis-Startup/INFO] [Redis]: Registered the category CUSTOM_COMMAND with the type HASH.
+[20:00:41] [Redis-Startup/INFO] [Redis]: Registered the category DISABLED_COMMAND with the type SET.
+[20:00:41] [Redis-Startup/INFO] [Redis]: Registered the category FILTER_IDS with the type SET.
+[20:00:41] [Redis-Startup/INFO] [Redis]: Registered the category FILTER with the type SET.
+[20:00:41] [Redis-Startup/INFO] [Redis]: Registered the category FILTER_BYPASS_IDS with the type SET.
+[20:00:41] [Redis-Startup/INFO] [Redis]: Registered the category FILTER_BYPASS with the type HASH.
+[20:00:41] [Redis-Startup/INFO] [Redis]: Registered the category GUILD with the type HASH.
+[20:00:41] [Redis-Startup/INFO] [Redis]: Registered the category PUNISHMENT_IDS with the type SET.
+[20:00:41] [Redis-Startup/INFO] [Redis]: Registered the category PUNISHMENT with the type HASH.
+[20:00:41] [Redis-Startup/INFO] [Redis]: Registered the category MISC with the type KV.
+[20:00:41] [Redis-Startup/INFO] [Redis-Startup]: Successfully connected to the Redis server.
+[20:00:41] [Redis-Startup/INFO] [Redis-Startup]: All Redis entries have been registered.
+[20:00:41] [JDA MainWS-ReadThread/INFO] [JDASocket]: Connected to WebSocket
+[20:00:41] [Startup-Bot/INFO] [Startup-Bot]: Finished starting the shards, they should be loading asynchronously if they are not loaded yet.
+[20:00:41] [Shard-Watcher/INFO] [Shard-Watcher]: Starting shard monitoring...
+[20:00:42] [JDA MainWS-ReadThread/INFO] [JDA]: Finished Loading!
+[20:00:42] [JDA MainWS-ReadThread/INFO] [Bot-Manager]: The shard 0 has been flagged as ready and is commencing with event receiving.
+[20:00:45] [ForkJoinPool.commonPool-worker-1/INFO] [Command-Ping]: 115134128717955080 executed the command in the guild 215520016706174977.
+[20:02:41] [Shard-Watcher/INFO] [Shard-Watcher]: The shard 0 is running healthily with a ping of 121.
+[20:03:44] [Main/INFO] [Arraybot]: Starting up Arraybot...
+[20:03:44] [Main/INFO] [Arraybot]: Loading in the configuration...
+[20:03:44] [Main/INFO] [Arraybot]: The configuration has been loaded.
+[20:03:44] [Main/INFO] [Arraybot]: 
+[20:03:44] [Main/INFO] [Arraybot]: 
+[20:03:44] [Main/INFO] [Arraybot]: 
+[20:03:44] [Main/INFO] [Arraybot]:  _______  ______    ______    _______  __   __  _______  _______  _______
+[20:03:44] [Main/INFO] [Arraybot]: |   _   ||    _ |  |    _ |  |   _   ||  | |  ||  _    ||       ||       |
+[20:03:44] [Main/INFO] [Arraybot]: |  |_|  ||   | ||  |   | ||  |  |_|  ||  |_|  || |_|   ||   _   ||_     _|
+[20:03:44] [Main/INFO] [Arraybot]: |       ||   |_||_ |   |_||_ |       ||       ||       ||  | |  |  |   |
+[20:03:44] [Main/INFO] [Arraybot]: |       ||    __  ||    __  ||       ||_     _||  _   | |  |_|  |  |   |
+[20:03:44] [Main/INFO] [Arraybot]: |   _   ||   |  | ||   |  | ||   _   |  |   |  | |_|   ||       |  |   |
+[20:03:44] [Main/INFO] [Arraybot]: |__| |__||___|  |_||___|  |_||__| |__|  |___|  |_______||_______|  |___|
+[20:03:44] [Main/INFO] [Arraybot]: 
+[20:03:44] [Main/INFO] [Arraybot]: >> Arraybot v5dev || Running JDA 3.3.0_263 || Developed by Arraying <<
+[20:03:44] [Main/INFO] [Arraybot]: 
+[20:03:44] [Main/INFO] [Arraybot]: 
+[20:03:44] [Main/INFO] [Arraybot]: 
+[20:03:44] [Startup-Languages/INFO] [Startup-Languages]: Attempting to load in all languages...
+[20:03:44] [Redis-Startup/INFO] [Redis-Startup]: Attempting to start up Redis...
+[20:03:44] [Startup-Bot/INFO] [Startup-Bot]: Creating the bot manager...
+[20:03:44] [Startup-Bot/INFO] [Startup-Bot]: Starting the bot manager...
+[20:03:44] [Startup-Bot/INFO] [Bot-Manager]: Logging in a total of 1 shards.
+[20:03:44] [Startup-Bot/INFO] [Bot-Manager]: Asynchronously firing the JDA instance login, using index 0.
+[20:03:44] [Startup-Languages/INFO] [Languages]: Registered the language "en".
+[20:03:44] [Startup-Commands/INFO] [Command-Manager]: Registered the command "ping".
+[20:03:45] [Redis-Startup/INFO] [Redis]: Registered the category ANNOUNCEMENT_IDS with the type SET.
+[20:03:45] [Redis-Startup/INFO] [Redis]: Registered the category ANNOUNCEMENT with the type HASH.
+[20:03:45] [Redis-Startup/INFO] [Redis]: Registered the category BLACKLIST with the type SET.
+[20:03:45] [Redis-Startup/INFO] [Redis]: Registered the category CUSTOM_COMMAND_NAMES with the type SET.
+[20:03:45] [Redis-Startup/INFO] [Redis]: Registered the category CUSTOM_COMMAND with the type HASH.
+[20:03:45] [Redis-Startup/INFO] [Redis]: Registered the category DISABLED_COMMAND with the type SET.
+[20:03:45] [Redis-Startup/INFO] [Redis]: Registered the category FILTER_IDS with the type SET.
+[20:03:45] [Redis-Startup/INFO] [Redis]: Registered the category FILTER with the type SET.
+[20:03:45] [Redis-Startup/INFO] [Redis]: Registered the category FILTER_BYPASS_IDS with the type SET.
+[20:03:45] [Redis-Startup/INFO] [Redis]: Registered the category FILTER_BYPASS with the type HASH.
+[20:03:45] [Redis-Startup/INFO] [Redis]: Registered the category GUILD with the type HASH.
+[20:03:45] [Redis-Startup/INFO] [Redis]: Registered the category PUNISHMENT_IDS with the type SET.
+[20:03:45] [Redis-Startup/INFO] [Redis]: Registered the category PUNISHMENT with the type HASH.
+[20:03:45] [Redis-Startup/INFO] [Redis]: Registered the category MISC with the type KV.
+[20:03:45] [Redis-Startup/INFO] [Redis-Startup]: Successfully connected to the Redis server.
+[20:03:45] [Redis-Startup/INFO] [Redis-Startup]: All Redis entries have been registered.
+[20:03:46] [Startup-Bot/INFO] [JDA]: Login Successful!
+[20:03:46] [JDA MainWS-ReadThread/INFO] [JDASocket]: Connected to WebSocket
+[20:03:46] [Startup-Bot/INFO] [Startup-Bot]: Finished starting the shards, they should be loading asynchronously if they are not loaded yet.
+[20:03:46] [Shard-Watcher/INFO] [Shard-Watcher]: Starting shard monitoring...
+[20:03:46] [JDA MainWS-ReadThread/INFO] [JDA]: Finished Loading!
+[20:03:46] [JDA MainWS-ReadThread/INFO] [Bot-Manager]: The shard 0 has been flagged as ready and is commencing with event receiving.
+[20:04:34] [ForkJoinPool.commonPool-worker-2/INFO] [Command-Ping]: 115134128717955080 executed the command in the guild 215520016706174977.
+[20:04:37] [ForkJoinPool.commonPool-worker-2/INFO] [Command-Ping]: 115134128717955080 executed the command in the guild 215520016706174977.
+[20:04:40] [ForkJoinPool.commonPool-worker-2/INFO] [Command-Ping]: 115134128717955080 executed the command in the guild 215520016706174977.
+[20:04:53] [Main/INFO] [Arraybot]: Starting up Arraybot...
+[20:04:53] [Main/INFO] [Arraybot]: Loading in the configuration...
+[20:04:53] [Main/INFO] [Arraybot]: The configuration has been loaded.
+[20:04:53] [Main/INFO] [Arraybot]: 
+[20:04:53] [Main/INFO] [Arraybot]: 
+[20:04:53] [Main/INFO] [Arraybot]: 
+[20:04:53] [Main/INFO] [Arraybot]:  _______  ______    ______    _______  __   __  _______  _______  _______
+[20:04:53] [Main/INFO] [Arraybot]: |   _   ||    _ |  |    _ |  |   _   ||  | |  ||  _    ||       ||       |
+[20:04:53] [Main/INFO] [Arraybot]: |  |_|  ||   | ||  |   | ||  |  |_|  ||  |_|  || |_|   ||   _   ||_     _|
+[20:04:53] [Main/INFO] [Arraybot]: |       ||   |_||_ |   |_||_ |       ||       ||       ||  | |  |  |   |
+[20:04:53] [Main/INFO] [Arraybot]: |       ||    __  ||    __  ||       ||_     _||  _   | |  |_|  |  |   |
+[20:04:53] [Main/INFO] [Arraybot]: |   _   ||   |  | ||   |  | ||   _   |  |   |  | |_|   ||       |  |   |
+[20:04:53] [Main/INFO] [Arraybot]: |__| |__||___|  |_||___|  |_||__| |__|  |___|  |_______||_______|  |___|
+[20:04:53] [Main/INFO] [Arraybot]: 
+[20:04:53] [Main/INFO] [Arraybot]: >> Arraybot v5dev || Running JDA 3.3.0_263 || Developed by Arraying <<
+[20:04:53] [Main/INFO] [Arraybot]: 
+[20:04:53] [Main/INFO] [Arraybot]: 
+[20:04:53] [Main/INFO] [Arraybot]: 
+[20:04:53] [Startup-Languages/INFO] [Startup-Languages]: Attempting to load in all languages...
+[20:04:53] [Startup-Bot/INFO] [Startup-Bot]: Creating the bot manager...
+[20:04:53] [Redis-Startup/INFO] [Redis-Startup]: Attempting to start up Redis...
+[20:04:53] [Startup-Languages/INFO] [Languages]: Registered the language "en".
+[20:04:53] [Startup-Bot/INFO] [Startup-Bot]: Starting the bot manager...
+[20:04:53] [Startup-Bot/INFO] [Bot-Manager]: Logging in a total of 1 shards.
+[20:04:53] [Startup-Bot/INFO] [Bot-Manager]: Asynchronously firing the JDA instance login, using index 0.
+[20:04:53] [Startup-Commands/INFO] [Command-Manager]: Registered the command "ping".
+[20:04:54] [Startup-Bot/INFO] [JDA]: Login Successful!
+[20:04:55] [Redis-Startup/INFO] [Redis]: Registered the category ANNOUNCEMENT_IDS with the type SET.
+[20:04:55] [Redis-Startup/INFO] [Redis]: Registered the category ANNOUNCEMENT with the type HASH.
+[20:04:55] [Redis-Startup/INFO] [Redis]: Registered the category BLACKLIST with the type SET.
+[20:04:55] [Redis-Startup/INFO] [Redis]: Registered the category CUSTOM_COMMAND_NAMES with the type SET.
+[20:04:55] [Redis-Startup/INFO] [Redis]: Registered the category CUSTOM_COMMAND with the type HASH.
+[20:04:55] [Redis-Startup/INFO] [Redis]: Registered the category DISABLED_COMMAND with the type SET.
+[20:04:55] [Redis-Startup/INFO] [Redis]: Registered the category FILTER_IDS with the type SET.
+[20:04:55] [Redis-Startup/INFO] [Redis]: Registered the category FILTER with the type SET.
+[20:04:55] [Redis-Startup/INFO] [Redis]: Registered the category FILTER_BYPASS_IDS with the type SET.
+[20:04:55] [Redis-Startup/INFO] [Redis]: Registered the category FILTER_BYPASS with the type HASH.
+[20:04:55] [Redis-Startup/INFO] [Redis]: Registered the category GUILD with the type HASH.
+[20:04:55] [Redis-Startup/INFO] [Redis]: Registered the category PUNISHMENT_IDS with the type SET.
+[20:04:55] [Redis-Startup/INFO] [Redis]: Registered the category PUNISHMENT with the type HASH.
+[20:04:55] [Redis-Startup/INFO] [Redis]: Registered the category MISC with the type KV.
+[20:04:55] [Redis-Startup/INFO] [Redis-Startup]: Successfully connected to the Redis server.
+[20:04:55] [Redis-Startup/INFO] [Redis-Startup]: All Redis entries have been registered.
+[20:04:55] [Startup-Bot/INFO] [Startup-Bot]: Finished starting the shards, they should be loading asynchronously if they are not loaded yet.
+[20:04:55] [JDA MainWS-ReadThread/INFO] [JDASocket]: Connected to WebSocket
+[20:04:55] [Shard-Watcher/INFO] [Shard-Watcher]: Starting shard monitoring...
+[20:04:55] [JDA MainWS-ReadThread/INFO] [JDA]: Finished Loading!
+[20:04:55] [JDA MainWS-ReadThread/INFO] [Bot-Manager]: The shard 0 has been flagged as ready and is commencing with event receiving.
+[20:04:57] [ForkJoinPool.commonPool-worker-2/INFO] [Command-Ping]: 115134128717955080 executed the command in the guild 215520016706174977.
+[20:05:02] [ForkJoinPool.commonPool-worker-2/INFO] [Command-Ping]: 115134128717955080 executed the command in the guild 215520016706174977.
+[20:06:08] [Main/INFO] [Arraybot]: Starting up Arraybot...
+[20:06:08] [Main/INFO] [Arraybot]: Loading in the configuration...
+[20:06:08] [Main/INFO] [Arraybot]: The configuration has been loaded.
+[20:06:08] [Main/INFO] [Arraybot]: 
+[20:06:08] [Main/INFO] [Arraybot]: 
+[20:06:08] [Main/INFO] [Arraybot]: 
+[20:06:08] [Main/INFO] [Arraybot]:  _______  ______    ______    _______  __   __  _______  _______  _______
+[20:06:08] [Main/INFO] [Arraybot]: |   _   ||    _ |  |    _ |  |   _   ||  | |  ||  _    ||       ||       |
+[20:06:08] [Main/INFO] [Arraybot]: |  |_|  ||   | ||  |   | ||  |  |_|  ||  |_|  || |_|   ||   _   ||_     _|
+[20:06:08] [Main/INFO] [Arraybot]: |       ||   |_||_ |   |_||_ |       ||       ||       ||  | |  |  |   |
+[20:06:08] [Main/INFO] [Arraybot]: |       ||    __  ||    __  ||       ||_     _||  _   | |  |_|  |  |   |
+[20:06:08] [Main/INFO] [Arraybot]: |   _   ||   |  | ||   |  | ||   _   |  |   |  | |_|   ||       |  |   |
+[20:06:08] [Main/INFO] [Arraybot]: |__| |__||___|  |_||___|  |_||__| |__|  |___|  |_______||_______|  |___|
+[20:06:08] [Main/INFO] [Arraybot]: 
+[20:06:08] [Main/INFO] [Arraybot]: >> Arraybot v5dev || Running JDA 3.3.0_263 || Developed by Arraying <<
+[20:06:08] [Main/INFO] [Arraybot]: 
+[20:06:08] [Main/INFO] [Arraybot]: 
+[20:06:08] [Main/INFO] [Arraybot]: 
+[20:06:08] [Startup-Languages/INFO] [Startup-Languages]: Attempting to load in all languages...
+[20:06:08] [Startup-Bot/INFO] [Startup-Bot]: Creating the bot manager...
+[20:06:08] [Redis-Startup/INFO] [Redis-Startup]: Attempting to start up Redis...
+[20:06:08] [Startup-Bot/INFO] [Startup-Bot]: Starting the bot manager...
+[20:06:08] [Startup-Bot/INFO] [Bot-Manager]: Logging in a total of 1 shards.
+[20:06:08] [Startup-Bot/INFO] [Bot-Manager]: Asynchronously firing the JDA instance login, using index 0.
+[20:06:08] [Startup-Languages/INFO] [Languages]: Registered the language "en".
+[20:06:08] [Startup-Commands/INFO] [Command-Manager]: Registered the command "ping".
+[20:06:09] [Startup-Bot/INFO] [JDA]: Login Successful!
+[20:06:10] [Redis-Startup/INFO] [Redis]: Registered the category ANNOUNCEMENT_IDS with the type SET.
+[20:06:10] [Redis-Startup/INFO] [Redis]: Registered the category ANNOUNCEMENT with the type HASH.
+[20:06:10] [Redis-Startup/INFO] [Redis]: Registered the category BLACKLIST with the type SET.
+[20:06:10] [Redis-Startup/INFO] [Redis]: Registered the category CUSTOM_COMMAND_NAMES with the type SET.
+[20:06:10] [Redis-Startup/INFO] [Redis]: Registered the category CUSTOM_COMMAND with the type HASH.
+[20:06:10] [Redis-Startup/INFO] [Redis]: Registered the category DISABLED_COMMAND with the type SET.
+[20:06:10] [Redis-Startup/INFO] [Redis]: Registered the category FILTER_IDS with the type SET.
+[20:06:10] [Redis-Startup/INFO] [Redis]: Registered the category FILTER with the type SET.
+[20:06:10] [Redis-Startup/INFO] [Redis]: Registered the category FILTER_BYPASS_IDS with the type SET.
+[20:06:10] [Redis-Startup/INFO] [Redis]: Registered the category FILTER_BYPASS with the type HASH.
+[20:06:10] [Redis-Startup/INFO] [Redis]: Registered the category GUILD with the type HASH.
+[20:06:10] [Redis-Startup/INFO] [Redis]: Registered the category PUNISHMENT_IDS with the type SET.
+[20:06:10] [Redis-Startup/INFO] [Redis]: Registered the category PUNISHMENT with the type HASH.
+[20:06:10] [Redis-Startup/INFO] [Redis]: Registered the category MISC with the type KV.
+[20:06:10] [Redis-Startup/INFO] [Redis-Startup]: Successfully connected to the Redis server.
+[20:06:10] [Redis-Startup/INFO] [Redis-Startup]: All Redis entries have been registered.
+[20:06:10] [JDA MainWS-ReadThread/INFO] [JDASocket]: Connected to WebSocket
+[20:06:10] [Startup-Bot/INFO] [Startup-Bot]: Finished starting the shards, they should be loading asynchronously if they are not loaded yet.
+[20:06:10] [Shard-Watcher/INFO] [Shard-Watcher]: Starting shard monitoring...
+[20:06:10] [JDA MainWS-ReadThread/INFO] [JDA]: Finished Loading!
+[20:06:10] [JDA MainWS-ReadThread/INFO] [Bot-Manager]: The shard 0 has been flagged as ready and is commencing with event receiving.
+[20:06:17] [ForkJoinPool.commonPool-worker-2/INFO] [Command-Ping]: 115134128717955080 executed the command in the guild 215520016706174977.
+[20:06:20] [ForkJoinPool.commonPool-worker-2/INFO] [Command-Ping]: 115134128717955080 executed the command in the guild 215520016706174977.
+[20:08:10] [Shard-Watcher/INFO] [Shard-Watcher]: The shard 0 is running healthily with a ping of 121.
+[20:08:17] [ForkJoinPool.commonPool-worker-4/INFO] [Command-Ping]: 115134128717955080 executed the command in the guild 215520016706174977.
+[20:08:18] [ForkJoinPool.commonPool-worker-4/INFO] [Command-Ping]: 115134128717955080 executed the command in the guild 215520016706174977.
+[20:08:21] [ForkJoinPool.commonPool-worker-4/INFO] [Command-Ping]: 115134128717955080 executed the command in the guild 215520016706174977.
+[20:08:25] [ForkJoinPool.commonPool-worker-4/INFO] [Command-Ping]: 115134128717955080 executed the command in the guild 215520016706174977.
+[20:08:27] [ForkJoinPool.commonPool-worker-4/INFO] [Command-Ping]: 115134128717955080 executed the command in the guild 215520016706174977.
+[20:08:35] [ForkJoinPool.commonPool-worker-4/INFO] [Command-Ping]: 115134128717955080 executed the command in the guild 215520016706174977.
+[20:08:37] [ForkJoinPool.commonPool-worker-4/INFO] [Command-Ping]: 115134128717955080 executed the command in the guild 215520016706174977.
+[20:09:07] [ForkJoinPool.commonPool-worker-6/INFO] [Command-Ping]: 115134128717955080 executed the command in the guild 215520016706174977.
+[20:09:11] [ForkJoinPool.commonPool-worker-6/INFO] [Command-Ping]: 115134128717955080 executed the command in the guild 215520016706174977.
+[20:09:13] [ForkJoinPool.commonPool-worker-6/INFO] [Command-Ping]: 115134128717955080 executed the command in the guild 215520016706174977.
+[20:10:10] [Shard-Watcher/INFO] [Shard-Watcher]: The shard 0 is running healthily with a ping of 123.

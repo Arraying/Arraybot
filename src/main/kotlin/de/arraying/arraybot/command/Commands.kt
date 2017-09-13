@@ -59,28 +59,35 @@ object Commands {
      * Starts the command executor.
      */
     fun executeCommand(environment: CommandEnvironment) {
+        println("Inside execution: " + System.currentTimeMillis())
         val guild = environment.guild
         val channel = environment.channel
         val author = environment.author
         if (!PermissionUtil.checkPermission(channel, guild.selfMember, Permission.MESSAGE_WRITE)) {
             return
         }
+        println("Pre prefix: " + System.currentTimeMillis())
         val prefixEntry = Entry.Category.GUILD.entry as? GuildEntry ?: return
         val guildPrefix = prefixEntry.fetch(prefixEntry.getField(GuildEntry.Fields.PREFIX), guild.idLong, null)
         var message = environment.message.rawContent.replace(" +".toRegex(), " ").trim()
+        println("Pre prefix matching: " + System.currentTimeMillis())
         message = when {
             message.startsWith(defaultPrefix, true) -> message.substring(defaultPrefix.length)
             message.startsWith(guildPrefix, true) -> message.substring(guildPrefix.length)
             else -> return
         }
+        println("Pre blacklist: " + System.currentTimeMillis())
         val blacklist = Entry.Category.BLACKLIST.entry as? SetEntry ?: return
         if(blacklist.values(UDefaults.DEFAULT_BLACKLIST.toLong()).contains(author.id)) {
             return
         }
+        println("Pre message: " + System.currentTimeMillis())
         val args = message.split(" ")
         val commandName = args[0].toLowerCase()
         val command = commands.getByKeyOrAlias(commandName)
+        println("Fetched command: " + System.currentTimeMillis())
         launch(CommonPool) {
+            println("Pre invocation: " + System.currentTimeMillis())
             command?.invoke(environment, args)
         }
     }

@@ -15,7 +15,7 @@ plugins {
 }
 
 group "de.arraying.arraybot"
-version "5dev"
+version "5"
 
 ext.main = "Arraybot"
 mainClassName = "de.arraying.arraybot.Arraybot"
@@ -34,9 +34,9 @@ dependencies {
     compile "ch.qos.logback:logback-classic:1.2.3" // Logging
     compile "net.dv8tion:JDA:3.3.0_263" // Discord
     compile 'biz.paluch.redis:lettuce:5.0.0.Beta1' // Database
-    compile "commons-lang:commons-lang:2.6" // Utils
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version" // Kotlin
-    compile "org.jetbrains.kotlinx:kotlinx-coroutines-core:0.16" // Kotlin coroutines (experimental)
+    compile "commons-lang:commons-lang:2.6"
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
+    compile "org.jetbrains.kotlinx:kotlinx-coroutines-core:0.16"
 }
 
 
