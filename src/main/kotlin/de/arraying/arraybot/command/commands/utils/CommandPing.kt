@@ -29,17 +29,10 @@ class CommandPing : DefaultCommand("ping",
      */
     override fun onCommand(environment: CommandEnvironment, args: List<String>) {
         val channel = environment.channel
-        println("Pre message: " + System.currentTimeMillis())
-//        channel.sendMessage("pinq").queue({
-//            println((System.currentTimeMillis() - i))
-//        })
         val message = Message.COMMANDS_PING_PING.content(channel, true)
-        println("Post message: " + System.currentTimeMillis())
         channel.sendMessage(message
                 .replace("{ping}", channel.jda.ping.toString()))
-                .queue({
-                    println("Sent: " + System.currentTimeMillis())
-                })
+                .queue()
     }
 
 }

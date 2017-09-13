@@ -56,7 +56,6 @@ public final class MessageListener extends PostLoadListener {
                     || event.getMember().getUser().isFake()) {
                 return;
             }
-            System.out.println("Message Event: " + System.currentTimeMillis());
             Commands.INSTANCE.executeCommand(new CommandEnvironment(event.getMessage()));
         }
     }

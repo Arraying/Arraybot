@@ -18,7 +18,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-public class MultiKeyMap<K, V> extends ConcurrentHashMap<K, V> {
+public final class MultiKeyMap<K, V> extends ConcurrentHashMap<K, V> {
 
     private final Map<K, K> keys = new ConcurrentHashMap<>();
 
