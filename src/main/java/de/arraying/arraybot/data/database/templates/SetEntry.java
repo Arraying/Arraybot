@@ -22,6 +22,7 @@ import java.util.Set;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+@SuppressWarnings("unchecked")
 public final class SetEntry implements Entry {
 
     private final Redis redis;
@@ -60,11 +61,6 @@ public final class SetEntry implements Entry {
     public Set<String> values(long id) {
         RedisCommands resource = redis.getResource();
         return resource.smembers(UDatabase.getKey(category, id));
-
-        //        Jedis resource = redis.getJedisResource();
-        //        Set<String> members = resource.smembers(UDatabase.getKey(category, id));
-        //        redis.finish(resource);
-        //        return members;
     }
 
     /**
@@ -75,10 +71,6 @@ public final class SetEntry implements Entry {
     public void add(long id, Object entry) {
         RedisCommands resource = redis.getResource();
         resource.sadd(UDatabase.getKey(category, id), entry.toString());
-
-        //        Jedis resource = redis.getJedisResource();
-        //        resource.sadd(UDatabase.getKey(category, id), entry.toString());
-        //        redis.finish(resource);
     }
 
     /**
@@ -89,10 +81,6 @@ public final class SetEntry implements Entry {
     public void remove(long id, Object entry) {
         RedisCommands resource = redis.getResource();
         resource.srem(UDatabase.getKey(category, id), entry.toString());
-
-        //        Jedis resource = redis.getJedisResource();
-        //        resource.srem(UDatabase.getKey(category, id), entry.toString());
-        //        redis.finish(resource);
     }
 
 }

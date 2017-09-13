@@ -2,8 +2,7 @@ package de.arraying.arraybot.shard;
 
 import de.arraying.arraybot.Arraybot;
 import de.arraying.arraybot.manager.BotManager;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import de.arraying.arraybot.misc.AbstractWatcher;
 
 /**
  * Copyright 2017 Arraying
@@ -20,54 +19,38 @@ import org.slf4j.LoggerFactory;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-public final class ShardWatcher implements Runnable {
+public final class ShardWatcher extends AbstractWatcher {
 
-    private final Logger logger = LoggerFactory.getLogger("Shard-Watcher");
-    private final Thread current;
-    private final int waitDuration;
     private final long maxInactivityThreshold;
 
     /**
      * Creates a new shard watcher.
-     * @param waitDuration The duration between death checks, in ms.
+     * @param maxInactivityThreshold The maximum time the last event can be before the shard is automatically restarted.
      */
-    public ShardWatcher(int waitDuration, long maxInactivityThreshold) {
-        Thread thread = new Thread(this);
-        thread.setName(logger.getName());
-        thread.start();
-        current = thread;
-        this.waitDuration = waitDuration;
+    public ShardWatcher(long maxInactivityThreshold) {
+        super("Shard-Watcher", 120000);
         this.maxInactivityThreshold = maxInactivityThreshold;
     }
 
     /**
-     * Runs the watcher.
+     * Executes the task.
      */
     @Override
-    public void run() {
-        logger.info("Starting shard monitoring...");
-        while(!current.isInterrupted()) {
-            try {
-                Thread.sleep(waitDuration);
-                BotManager manager = Arraybot.getInstance().getBotManager();
-                for(ShardEntry shard : manager.getShards().values()) {
-                    long difference = System.currentTimeMillis() - shard.getLastEvent();
-                    if(difference > maxInactivityThreshold) {
-                        logger.info("The shard {} is suspected to be dead. Executing a restart.", shard.getId());
-                        if(!manager.restartShard(shard.getId())) {
-                            logger.error("Failed the restart of shard {}.", shard.getId());
-                        }
-                    }
-                    long ping = shard.getJDA().getPing();
-                    if(ping > 500) {
-                        logger.info("The shard {} is has a high ping ({}), may be slow/unresponsive.", shard.getId(), ping);
-                    } else {
-                        logger.info("The shard {} is running healthily with a ping of {}.", shard.getId(), ping);
-                    }
+    public void onTask() {
+        BotManager manager = Arraybot.getInstance().getBotManager();
+        for(ShardEntry shard : manager.getShards().values()) {
+            long difference = System.currentTimeMillis() - shard.getLastEvent();
+            if(difference > maxInactivityThreshold) {
+                logger.info("The shard {} is suspected to be dead. Executing a restart.", shard.getId());
+                if(!manager.restartShard(shard.getId())) {
+                    logger.error("Failed the restart of shard {}.", shard.getId());
                 }
-            } catch(InterruptedException exception) {
-                logger.info("Hit an interrupted exception.");
-                exception.printStackTrace();
+            }
+            long ping = shard.getJDA().getPing();
+            if(ping > 500) {
+                logger.info("The shard {} is has a high ping ({}), may be slow/unresponsive.", shard.getId(), ping);
+            } else {
+                logger.info("The shard {} is running healthily with a ping of {}.", shard.getId(), ping);
             }
         }
     }

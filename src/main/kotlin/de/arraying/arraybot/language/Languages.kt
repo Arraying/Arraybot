@@ -1,6 +1,8 @@
 package de.arraying.arraybot.language
 
 import de.arraying.arraybot.Arraybot
+import de.arraying.arraybot.data.database.categories.GuildEntry
+import de.arraying.arraybot.data.database.core.Entry
 import net.dv8tion.jda.core.entities.Guild
 import org.slf4j.LoggerFactory
 import java.io.File
@@ -83,11 +85,11 @@ class Languages {
          * Gets the correct language message for the guild.
          */
         fun get(id: Long, message: String): String {
-            //val entry = Entry.Category.GUILD.entry as? GuildEntry ?:
-            //      throw IllegalStateException("Expected guild entry to be instanceof GuildEntry.")
-            //val guildLanguage = entry.fetch(entry.getField(GuildEntry.Fields.LANGUAGE), id, null).toLowerCase()
-            val locale = if (languages.containsKey("")/*languages.containsKey(guildLanguage)*/) {
-                ""/*guildLanguage*/
+            val entry = Entry.Category.GUILD.entry as? GuildEntry ?:
+                  throw IllegalStateException("Expected guild entry to be instanceof GuildEntry.")
+            val guildLanguage = entry.fetch(entry.getField(GuildEntry.Fields.LANGUAGE), id, null).toLowerCase()
+            val locale = if (languages.containsKey(guildLanguage)) {
+                guildLanguage
             } else {
                 defaultLanguage
             }

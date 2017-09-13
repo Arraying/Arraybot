@@ -2,7 +2,6 @@ package de.arraying.arraybot.startup.startups;
 
 import de.arraying.arraybot.Arraybot;
 import de.arraying.arraybot.data.database.Redis;
-import de.arraying.arraybot.misc.PoolHook;
 import de.arraying.arraybot.startup.StartupTask;
 
 /**
@@ -41,7 +40,6 @@ public final class StartupRedis extends StartupTask {
         Redis redis = Redis.getInstance();
         redis.connect(arraybot.getConfiguration());
         logger.info("Successfully connected to the Redis server.");
-        Runtime.getRuntime().addShutdownHook(new Thread(new PoolHook()));
         logger.info("All Redis entries have been registered.");
     }
 

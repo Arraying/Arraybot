@@ -1,4 +1,8 @@
-package de.arraying.arraybot.misc;
+package de.arraying.arraybot.listener.listeners.postload;
+
+import de.arraying.arraybot.data.database.Redis;
+import de.arraying.arraybot.listener.listeners.PostLoadListener;
+import net.dv8tion.jda.core.events.guild.GuildLeaveEvent;
 
 /**
  * Copyright 2017 Arraying
@@ -15,13 +19,22 @@ package de.arraying.arraybot.misc;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-public class PoolHook implements Runnable {
+public class GuildListener extends PostLoadListener {
 
     /**
-     * Runs the shutdown hook.
+     * Does not need initialization.
      */
     @Override
-    public void run() {
+    public void init() {
+    }
+
+    /**
+     * When the bot is removed from a guild.
+     * @param event The event.
+     */
+    @Override
+    public void onGuildLeave(GuildLeaveEvent event) {
+        Redis.getInstance().purge(event.getGuild().getIdLong());
     }
 
 }
