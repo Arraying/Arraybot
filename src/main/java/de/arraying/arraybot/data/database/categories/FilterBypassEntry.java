@@ -44,6 +44,15 @@ public final class FilterBypassEntry extends HashEntry<FilterBypassEntry.Fields>
         return fields.get(key);
     }
 
+    /**
+     * Gets the parent.
+     * @return The parent category,
+     */
+    @Override
+    public Category getParent() {
+        return Category.FILTER_BYPASS_IDS;
+    }
+
     public enum Fields {
 
         /**

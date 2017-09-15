@@ -43,6 +43,12 @@ public abstract class HashEntry<T> implements Entry {
     public abstract EntryField getField(T key);
 
     /**
+     * Gets the parent category.
+     * @return The parent category is a set containing all secondary keys.
+     */
+    public abstract Category getParent();
+
+    /**
      * Gets the entry type.
      * @return The type.
      */
@@ -58,6 +64,24 @@ public abstract class HashEntry<T> implements Entry {
     @Override
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    /**
+     * Deletes everything corresponding to the ID.
+     * @param id The ID.
+     */
+    @Override
+    public void delete(long id) {
+        Category parentCategory = getParent();
+        if(parentCategory == null) {
+            return;
+        }
+        RedisCommands resource = redis.getResource();
+        SetEntry parent = (SetEntry) parentCategory.getEntry();
+        for(String key : parent.values(id)) {
+            resource.del(UDatabase.getKey(category, id, key));
+        }
+        parent.delete(id);
     }
 
     /**

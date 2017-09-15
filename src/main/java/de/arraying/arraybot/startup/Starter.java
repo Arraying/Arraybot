@@ -29,9 +29,7 @@ public final class Starter {
      */
     public static void start() {
         for(StartupTask task : tasks) {
-            Thread thread = new Thread(task);
-            thread.setName(task.getName());
-            thread.start();
+            task.create();
         }
     }
 

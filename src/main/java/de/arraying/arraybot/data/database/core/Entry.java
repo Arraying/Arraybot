@@ -35,6 +35,12 @@ public interface Entry {
      */
     void setCategory(Category category);
 
+    /**
+     * Deletes everything corresponding to the ID.
+     * @param id The ID.
+     */
+    void delete(long id);
+
     enum Type {
 
         /**
@@ -92,12 +98,6 @@ public interface Entry {
          * Set.
          */
         DISABLED_COMMAND("d", new SetEntry()),
-
-        /**
-         * A collection of all filtered phrase IDs.
-         * Set.
-         */
-        FILTER_IDS("fi", new SetEntry()),
 
         /**
          * A collection of filtered phrases.

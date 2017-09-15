@@ -44,6 +44,15 @@ public final class AnnouncementEntry extends HashEntry<AnnouncementEntry.Fields>
         return fields.get(key);
     }
 
+    /**
+     * Gets the parent.
+     * @return The parent category.
+     */
+    @Override
+    public Category getParent() {
+        return Category.ANNOUNCEMENT_IDS;
+    }
+
     public enum Fields {
 
         /**

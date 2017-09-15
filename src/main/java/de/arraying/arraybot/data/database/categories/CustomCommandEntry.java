@@ -44,6 +44,15 @@ public final class CustomCommandEntry extends HashEntry<CustomCommandEntry.Field
         return fields.get(key);
     }
 
+    /**
+     * Gets the parent.
+     * @return The parent category.
+     */
+    @Override
+    public Category getParent() {
+        return Category.CUSTOM_COMMAND_NAMES;
+    }
+
     public enum Fields {
 
         /**

@@ -2,7 +2,6 @@ package de.arraying.arraybot.startup.startups;
 
 import de.arraying.arraybot.Arraybot;
 import de.arraying.arraybot.manager.BotManager;
-import de.arraying.arraybot.misc.GuildWatcher;
 import de.arraying.arraybot.shard.ShardWatcher;
 import de.arraying.arraybot.startup.StartupTask;
 
@@ -43,7 +42,6 @@ public final class StartupBot extends StartupTask {
         manager.start();
         logger.info("Finished starting the shards, they should be loading asynchronously if they are not loaded yet.");
         new ShardWatcher(30000).create();
-        new GuildWatcher().create();
     }
 
 }

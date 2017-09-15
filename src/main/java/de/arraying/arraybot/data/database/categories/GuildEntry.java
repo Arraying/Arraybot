@@ -45,6 +45,15 @@ public final class GuildEntry extends HashEntry<GuildEntry.Fields> {
         return fields.get(key);
     }
 
+    /**
+     * Gets the parent.
+     * @return The parent category.
+     */
+    @Override
+    public Category getParent() {
+        return null;
+    }
+
     public enum Fields {
 
         /**

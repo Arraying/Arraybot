@@ -44,6 +44,15 @@ public final class PunishmentEntry extends HashEntry<PunishmentEntry.Fields> {
         return fields.get(key);
     }
 
+    /**
+     * Gets the parent.
+     * @return The parent category.
+     */
+    @Override
+    public Category getParent() {
+        return null;
+    }
+
     public enum Fields {
 
         /**

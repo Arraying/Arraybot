@@ -2,10 +2,8 @@ package de.arraying.arraybot.manager;
 
 import de.arraying.arraybot.Arraybot;
 import de.arraying.arraybot.data.Configuration;
+import de.arraying.arraybot.listener.Listener;
 import de.arraying.arraybot.listener.listeners.PostLoadListener;
-import de.arraying.arraybot.listener.listeners.postload.DeathListener;
-import de.arraying.arraybot.listener.listeners.postload.GuildListener;
-import de.arraying.arraybot.listener.listeners.postload.MessageListener;
 import de.arraying.arraybot.listener.listeners.preload.ReadyListener;
 import de.arraying.arraybot.shard.ShardEntry;
 import net.dv8tion.jda.core.AccountType;
@@ -42,7 +40,6 @@ public final class BotManager {
     private final Configuration configuration = Arraybot.getInstance().getConfiguration();
     private final Logger logger = LoggerFactory.getLogger("Bot-Manager");
     private final SessionReconnectQueue reconnectQueue = new SessionReconnectQueue();
-    private final PostLoadListener[] listeners = new PostLoadListener[] {new DeathListener(), new GuildListener(), new MessageListener()};
 
     /**
      * Gets all the shards.
@@ -109,10 +106,11 @@ public final class BotManager {
         }
         logger.info("The shard {} has been flagged as ready and is commencing with event receiving.", shard);
         entry.onEvent(System.currentTimeMillis());
-        for(PostLoadListener listener : listeners) {
+        for(PostLoadListener listener : Listener.POST_LOAD_LISTENERS) {
             listener.init();
         }
-        entry.getJDA().addEventListener((Object[]) listeners);
+        entry.getJDA().addEventListener((Object[]) Listener.POST_LOAD_LISTENERS);
+        new Listener.Updater(entry.getJDA()).create();
     }
 
     /**

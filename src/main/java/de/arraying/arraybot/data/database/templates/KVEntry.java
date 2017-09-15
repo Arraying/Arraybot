@@ -52,6 +52,14 @@ public final class KVEntry implements Entry {
     }
 
     /**
+     * Does nothing.
+     * @param id The ID.
+     */
+    @Override
+    public void delete(long id) {
+    }
+
+    /**
      * Gets a value from Redis.
      * @param key The key.
      * @return The value, can be null.

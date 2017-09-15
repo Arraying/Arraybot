@@ -1,4 +1,4 @@
-package de.arraying.arraybot.misc;
+package de.arraying.arraybot.threadding;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,53 +18,42 @@ import org.slf4j.LoggerFactory;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-public abstract class AbstractWatcher implements Runnable {
+public abstract class AbstractTask implements Runnable {
 
     private final String name;
-    private final int waitDuration;
     protected final Logger logger;
-    private Thread current;
+    Thread current;
 
     /**
-     * Creates a new abstract watcher.
-     * @param name The name of the watcher. Spaces should be replaced by hyphens.
-     * @param waitDuration The duration, in milliseconds, between each task.
+     * Creates a new abstract task
+     * @param name The name of the task.
      */
-    public AbstractWatcher(String name, int waitDuration) {
+    public AbstractTask(String name) {
         this.name = name;
-        this.waitDuration = waitDuration;
         this.logger = LoggerFactory.getLogger(name);
     }
 
     /**
-     * Creates the watcher.
+     * Creates the task.
      */
     public void create() {
         Thread current = new Thread(this);
         current.setName(name);
         current.start();
         this.current = current;
-        logger.info("Starting the watching process. I got my eyes on you.");
     }
 
     /**
-     * When the task is run.
+     * Runs the task.
      */
     @Override
     public void run() {
-        while(!current.isInterrupted()) {
-            try {
-                Thread.sleep(waitDuration);
-                onTask();
-            } catch(InterruptedException exception) {
-                logger.error("Fatally hit an interrupted execption.", exception);
-            }
-        }
+        onExecution();
     }
 
     /**
-     * The task itself.
+     * The method that is invoked when the task is executed.
      */
-    public abstract void onTask();
+    public abstract void onExecution();
 
 }

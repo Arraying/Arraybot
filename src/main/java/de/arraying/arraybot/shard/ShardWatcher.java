@@ -2,7 +2,7 @@ package de.arraying.arraybot.shard;
 
 import de.arraying.arraybot.Arraybot;
 import de.arraying.arraybot.manager.BotManager;
-import de.arraying.arraybot.misc.AbstractWatcher;
+import de.arraying.arraybot.threadding.AbstractWatcher;
 
 /**
  * Copyright 2017 Arraying

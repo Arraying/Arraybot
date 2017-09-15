@@ -3,7 +3,7 @@ package de.arraying.arraybot.util;
 import de.arraying.arraybot.command.custom.syntax.CustomCommandSyntax;
 import de.arraying.arraybot.command.custom.type.CustomCommandType;
 import de.arraying.arraybot.misc.BypassType;
-import de.arraying.arraybot.misc.PunishmentType;
+import de.arraying.arraybot.punishment.PunishmentType;
 import net.dv8tion.jda.core.Permission;
 
 /**

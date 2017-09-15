@@ -1,7 +1,11 @@
 package de.arraying.arraybot.listener.listeners.postload;
 
 import de.arraying.arraybot.data.database.Redis;
+import de.arraying.arraybot.listener.Listener;
 import de.arraying.arraybot.listener.listeners.PostLoadListener;
+import de.arraying.arraybot.threadding.AbstractTask;
+import net.dv8tion.jda.core.JDA;
+import net.dv8tion.jda.core.events.guild.GuildJoinEvent;
 import net.dv8tion.jda.core.events.guild.GuildLeaveEvent;
 
 /**
@@ -19,7 +23,7 @@ import net.dv8tion.jda.core.events.guild.GuildLeaveEvent;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-public class GuildListener extends PostLoadListener {
+public final class GuildListener extends PostLoadListener {
 
     /**
      * Does not need initialization.
@@ -29,12 +33,55 @@ public class GuildListener extends PostLoadListener {
     }
 
     /**
+     * When the bot is added to a guild.
+     * This may be triggered due to downtime.
+     * @param event The event.
+     */
+    @Override
+    public void onGuildJoin(GuildJoinEvent event) {
+        update(event.getJDA());
+    }
+
+    /**
      * When the bot is removed from a guild.
      * @param event The event.
      */
     @Override
     public void onGuildLeave(GuildLeaveEvent event) {
-        Redis.getInstance().purge(event.getGuild().getIdLong());
+        new Remover(event.getGuild().getIdLong()).create();
+        update(event.getJDA());
+    }
+
+    /**
+     * Updates the server count on the bot lists.
+     * @param shard The shard.
+     */
+    private void update(JDA shard) {
+        new Listener.Updater(shard).create();
+    }
+
+    private class Remover extends AbstractTask {
+
+        private long id;
+
+        /**
+         * Creates a new guild remover.
+         * @param id The ID of the guild.
+         */
+        private Remover(long id) {
+            super("Guild-Remover");
+            this.id = id;
+        }
+
+
+        /**
+         * Removes the guild.
+         */
+        @Override
+        public void onExecution() {
+            Redis.getInstance().purge(id);
+        }
+
     }
 
 }

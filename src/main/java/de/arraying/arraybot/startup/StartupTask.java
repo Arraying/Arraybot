@@ -1,7 +1,6 @@
 package de.arraying.arraybot.startup;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import de.arraying.arraybot.threadding.AbstractTask;
 
 /**
  * Copyright 2017 Arraying
@@ -18,25 +17,21 @@ import org.slf4j.LoggerFactory;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-public abstract class StartupTask implements Runnable {
-
-    private final String name;
-    protected final Logger logger;
+public abstract class StartupTask extends AbstractTask {
 
     /**
      * Creates a new startup task.
      * @param name The name of the task.
      */
     public StartupTask(String name) {
-        this.name = name;
-        this.logger = LoggerFactory.getLogger(name);
+        super(name);
     }
 
     /**
-     * Runs the task.
+     * When the startup task is started.
      */
     @Override
-    public void run() {
+    public void onExecution() {
         try {
             onTask();
         } catch(Exception exception) {
@@ -46,13 +41,5 @@ public abstract class StartupTask implements Runnable {
     }
 
     public abstract void onTask() throws Exception;
-
-    /**
-     * Gets the name of the startup task.
-     * @return The name.
-     */
-    String getName() {
-        return name;
-    }
 
 }

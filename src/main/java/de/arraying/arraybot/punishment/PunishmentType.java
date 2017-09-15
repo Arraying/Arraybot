@@ -1,4 +1,4 @@
-package de.arraying.arraybot.misc;
+package de.arraying.arraybot.punishment;
 
 /**
  * Copyright 2017 Arraying

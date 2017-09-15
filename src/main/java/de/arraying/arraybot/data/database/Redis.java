@@ -6,6 +6,7 @@ import com.lambdaworks.redis.api.StatefulRedisConnection;
 import com.lambdaworks.redis.api.sync.RedisCommands;
 import de.arraying.arraybot.data.Configuration;
 import de.arraying.arraybot.data.database.core.Entry;
+import de.arraying.arraybot.data.database.templates.HashEntry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -77,7 +78,6 @@ public final class Redis {
             uri.withPassword(configuration.getRedisAuth());
         }
         RedisClient client = RedisClient.create(uri.build());
-        //RedisClient client = RedisClient.create(String.format("redis://%s@%s:%s/0", configuration.getRedisAuth(), configuration.getRedisHost(), configuration.getRedisPort() + ""));
         StatefulRedisConnection<String, String> connection = client.connect();
         sync = connection.sync();
         for(Entry.Category category : Entry.Category.values()) {
@@ -91,7 +91,12 @@ public final class Redis {
      * @param id The ID.
      */
     public void purge(long id) {
-        //TODO Set up a purge.
+        for(Entry.Category category : Entry.Category.values()) {
+            Entry entry = category.getEntry();
+            if(entry instanceof HashEntry) {
+                entry.delete(id);
+            }
+        }
     }
 
 }

@@ -54,6 +54,16 @@ public final class SetEntry implements Entry {
     }
 
     /**
+     * Deletes everything corresponding to the ID.
+     * @param id The ID.
+     */
+    @Override
+    public void delete(long id) {
+        RedisCommands resource = redis.getResource();
+        resource.del(UDatabase.getKey(category, id));
+    }
+
+    /**
      * Gets the entries of the set.
      * @param id The snowflake identifier ID.
      * @return A set of entries. Cannot be null.
