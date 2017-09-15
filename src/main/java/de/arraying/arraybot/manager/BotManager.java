@@ -88,7 +88,7 @@ public final class BotManager {
             load(shard, configuration.getBotShards());
             Thread.sleep(5000);
         } catch(Exception exception) {
-            exception.printStackTrace();
+            logger.error("There was an error restarting the shard.", exception);
             return false;
         }
         return true;

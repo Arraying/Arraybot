@@ -51,8 +51,7 @@ public final class Splash {
             bufferedReader.close();
             printBlank(logger);
         } catch(IOException exception) {
-            logger.info("An error occurred showing the splash.");
-            exception.printStackTrace();
+            logger.error("An error occurred showing the splash.", exception);
         }
     }
 

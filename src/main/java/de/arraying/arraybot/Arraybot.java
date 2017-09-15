@@ -84,7 +84,7 @@ public class Arraybot {
             configuration = Configuration.getConfiguration(new File("config.json"));
             logger.info("The configuration has been loaded.");
         } catch(Configuration.ConfigurationException exception) {
-            exception.printStackTrace();
+            logger.error("There was an error loading/creating the configuration.", exception);
             return;
         }
         new Splash(new File("splash.txt")).print(logger, configuration.getBotVersion(), JDAInfo.VERSION, "Arraying");
