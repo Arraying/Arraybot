@@ -1,6 +1,6 @@
-package de.arraying.arraybot.startup;
+package de.arraying.arraybot.script.method;
 
-import de.arraying.arraybot.startup.startups.*;
+import de.arraying.arraybot.command.other.CommandEnvironment;
 
 /**
  * Copyright 2017 Arraying
@@ -17,17 +17,16 @@ import de.arraying.arraybot.startup.startups.*;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-public final class Starter {
+public class Methods {
 
-    private static final StartupTask[] tasks = new StartupTask[] {new StartupBot(), new StartupCommands(), new StartupLanguages(), new StartupRedis(), new StartupScripting()};
+    protected final CommandEnvironment environment;
 
     /**
-     * Starts all startup tasks.
+     * Creates a new method collection object.
+     * @param environment The command environment.
      */
-    public static void start() {
-        for(StartupTask task : tasks) {
-            task.create();
-        }
+    public Methods(CommandEnvironment environment) {
+        this.environment = environment;
     }
 
 }

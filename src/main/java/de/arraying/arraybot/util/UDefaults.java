@@ -3,6 +3,7 @@ package de.arraying.arraybot.util;
 import de.arraying.arraybot.command.custom.syntax.CustomCommandSyntax;
 import de.arraying.arraybot.command.custom.type.CustomCommandType;
 import de.arraying.arraybot.misc.BypassType;
+import de.arraying.arraybot.pagination.PageBuilder;
 import de.arraying.arraybot.punishment.PunishmentType;
 import net.dv8tion.jda.core.Permission;
 
@@ -83,5 +84,30 @@ public final class UDefaults {
      * The default permission required to mute people.
      */
     public static final Permission DEFAULT_MUTE_PERMISSION = Permission.KICK_MEMBERS;
+
+    /**
+     * The default page type.
+     */
+    public static final PageBuilder.Type DEFAULT_PAGE_TYPE = PageBuilder.Type.LIST;
+
+    /**
+     * The default embed builder to use in a page.
+     */
+    public static final CustomEmbedBuilder DEFAULT_PAGE_EMBED = new CustomEmbedBuilder();
+
+    /**
+     * The default number of entries to use per page.
+     */
+    public static final int DEFAULT_PAGE_TOTAL = 1;
+
+    /**
+     * The default entries to use.
+     */
+    public static final Object[] DEFAULT_PAGE_ENTRIES = { DEFAULT_STRING };
+
+    /**
+     * The default page title.
+     */
+    public static final String DEFAULT_PAGE_TITLE = DEFAULT_STRING;
 
 }

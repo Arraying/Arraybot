@@ -23,8 +23,28 @@ enum class CustomCommandSyntax {
     EQUALS,
 
     /**
-     * If there is supposed to eb any input.
+     * If there is supposed to be any input.
      */
-    STARTS_WITH
+    STARTS_WITH,
+
+    /**
+     * If the syntax is unknown.
+     */
+    UNKNOWN;
+
+    companion object {
+
+        /**
+         * Gets the syntax from the string.
+         */
+        fun fromString(value: String): CustomCommandSyntax {
+            return try {
+                    CustomCommandSyntax.valueOf(value.toUpperCase())
+                } catch(exception: Exception) {
+                    UNKNOWN
+                }
+        }
+
+    }
 
 }

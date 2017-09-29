@@ -1,6 +1,9 @@
-package de.arraying.arraybot.command.abstraction
+package de.arraying.arraybot.command.commands.utils
 
 import de.arraying.arraybot.command.other.CommandEnvironment
+import de.arraying.arraybot.command.templates.DefaultCommand
+import de.arraying.arraybot.script.ScriptRuntime
+import net.dv8tion.jda.core.Permission
 
 /**
  * Copyright 2017 Arraying
@@ -17,12 +20,18 @@ import de.arraying.arraybot.command.other.CommandEnvironment
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-abstract class SubCommand(val name: String,
-                          val aliases: Array<String> = arrayOf()) {
+class TestCommand : DefaultCommand("test",
+        CommandCategory.UTILS,
+        Permission.MESSAGE_WRITE) {
+
+    private val code = arrayOf("const x = longAss()",
+            "message_channel(x)")
 
     /**
-     * Executes the subcommand.
+     * When the command is executed.
      */
-    abstract fun onSubCommand(environment: CommandEnvironment, args: List<String>);
+    override fun onCommand(environment: CommandEnvironment, args: List<String>) {
+        ScriptRuntime(environment, code).create()
+    }
 
 }

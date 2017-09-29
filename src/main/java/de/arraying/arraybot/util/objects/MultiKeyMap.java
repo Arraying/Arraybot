@@ -1,4 +1,4 @@
-package de.arraying.arraybot.misc;
+package de.arraying.arraybot.util.objects;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;

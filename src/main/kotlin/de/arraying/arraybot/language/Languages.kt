@@ -85,8 +85,7 @@ class Languages {
          * Gets the correct language message for the guild.
          */
         fun get(id: Long, message: String): String {
-            val entry = Entry.Category.GUILD.entry as? GuildEntry ?:
-                  throw IllegalStateException("Expected guild entry to be instanceof GuildEntry.")
+            val entry = Entry.Category.GUILD.entry as GuildEntry
             val guildLanguage = entry.fetch(entry.getField(GuildEntry.Fields.LANGUAGE), id, null).toLowerCase()
             val locale = if (languages.containsKey(guildLanguage)) {
                 guildLanguage

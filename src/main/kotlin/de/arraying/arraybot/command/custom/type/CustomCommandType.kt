@@ -1,5 +1,7 @@
 package de.arraying.arraybot.command.custom.type
 
+import de.arraying.arraybot.command.custom.syntax.CustomCommandSyntax
+
 /**
  * Copyright 2017 Arraying
  *
@@ -47,6 +49,26 @@ enum class CustomCommandType {
      * If the member has the role, it will remove it.
      * Else, it will add it.
      */
-    TOGGLE_ROLE
+    TOGGLE_ROLE,
+
+    /**
+     * If the type is unknown.
+     */
+    UNKNOWN;
+
+    companion object {
+
+        /**
+         * Gets the type from the string.
+         */
+        fun fromString(value: String): CustomCommandType {
+            return try {
+                CustomCommandType.valueOf(value.toUpperCase())
+            } catch(exception: Exception) {
+                UNKNOWN
+            }
+        }
+
+    }
 
 }

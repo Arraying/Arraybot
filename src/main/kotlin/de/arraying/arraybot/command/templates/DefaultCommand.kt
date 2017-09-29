@@ -1,12 +1,15 @@
-package de.arraying.arraybot.command.abstraction
+package de.arraying.arraybot.command.templates
 
 import de.arraying.arraybot.Arraybot
+import de.arraying.arraybot.command.Command
 import de.arraying.arraybot.command.Commands
 import de.arraying.arraybot.command.other.CommandEnvironment
 import de.arraying.arraybot.data.database.Redis
+import de.arraying.arraybot.data.database.categories.GuildEntry
+import de.arraying.arraybot.data.database.core.Entry
 import de.arraying.arraybot.language.Languages
 import de.arraying.arraybot.language.Message
-import de.arraying.arraybot.misc.Limits
+import de.arraying.arraybot.util.Limits
 import kotlinx.coroutines.experimental.CommonPool
 import kotlinx.coroutines.experimental.launch
 import net.dv8tion.jda.core.Permission
@@ -34,7 +37,7 @@ abstract class DefaultCommand(val name: String,
                               val permission: Permission,
                               open val subCommands: Array<SubCommand> = arrayOf(),
                               val aliases: Array<String> = arrayOf(),
-                              private val customPermissionChecking: Boolean = false) {
+                              private val customPermissionChecking: Boolean = false): Command {
 
     protected val arraybot = Arraybot.getInstance()!!
     private val logger = LoggerFactory.getLogger("Command-${WordUtils.capitalize(name)}")
@@ -108,7 +111,7 @@ abstract class DefaultCommand(val name: String,
     /**
      * Invokes the command.
      */
-    suspend fun invoke(environment: CommandEnvironment, args: List<String>) {
+    override suspend fun invoke(environment: CommandEnvironment, args: List<String>) {
         val channel = environment.channel
         val author = environment.author
         launch(CommonPool) {
@@ -157,6 +160,21 @@ abstract class DefaultCommand(val name: String,
             return
         }
         onCommand(environment, args)
+    }
+
+    /**
+     * Gets the description for the command.
+     */
+    fun getDescription(guild: Long): String {
+        return Languages.get(guild, descriptionPath);
+    }
+
+    /**
+     * Gets the syntax for the command.
+     */
+    fun getSyntax(guild: Long): String {
+        val entry = Entry.Category.GUILD.entry as GuildEntry
+        return entry.fetch(entry.getField(GuildEntry.Fields.PREFIX), guild, null) + name + " " + Languages.get(guild, syntaxPath)
     }
 
 }

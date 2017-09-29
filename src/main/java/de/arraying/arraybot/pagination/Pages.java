@@ -1,6 +1,7 @@
-package de.arraying.arraybot.startup;
+package de.arraying.arraybot.pagination;
 
-import de.arraying.arraybot.startup.startups.*;
+import de.arraying.arraybot.util.CustomEmbedBuilder;
+import net.dv8tion.jda.core.entities.TextChannel;
 
 /**
  * Copyright 2017 Arraying
@@ -17,17 +18,20 @@ import de.arraying.arraybot.startup.startups.*;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-public final class Starter {
-
-    private static final StartupTask[] tasks = new StartupTask[] {new StartupBot(), new StartupCommands(), new StartupLanguages(), new StartupRedis(), new StartupScripting()};
+public interface Pages {
 
     /**
-     * Starts all startup tasks.
+     * Gets a page.
+     * @param pageNumber The page number. 1 based indexing.
+     * @param channel The text channel. Used for language manipulation.
+     * @return The embed for the correct page.
      */
-    public static void start() {
-        for(StartupTask task : tasks) {
-            task.create();
-        }
-    }
+    CustomEmbedBuilder getPage(int pageNumber, TextChannel channel);
+
+    /**
+     * Gets the total number of pages.
+     * @return The number of pages.
+     */
+    int getTotalPages();
 
 }

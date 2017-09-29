@@ -2,8 +2,8 @@ package de.arraying.arraybot;
 
 import de.arraying.arraybot.data.Configuration;
 import de.arraying.arraybot.manager.BotManager;
-import de.arraying.arraybot.misc.LogAdapter;
-import de.arraying.arraybot.misc.Splash;
+import de.arraying.arraybot.manager.ScriptManager;
+import de.arraying.arraybot.util.objects.Splash;
 import de.arraying.arraybot.startup.Starter;
 import net.dv8tion.jda.core.JDAInfo;
 import org.slf4j.Logger;
@@ -26,7 +26,7 @@ import java.io.File;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-public class Arraybot {
+public final class Arraybot {
 
     /**
      * Gets the default single shard (running 1 total shards) index.
@@ -38,6 +38,7 @@ public class Arraybot {
     private final Logger logger = LoggerFactory.getLogger("Arraybot");
     private Configuration configuration;
     private BotManager botManager;
+    private ScriptManager scriptManager;
     private boolean initialized = false;
 
     /**
@@ -77,7 +78,6 @@ public class Arraybot {
         if(initialized) {
             throw new IllegalStateException("The program has already been initialized.");
         }
-        LogAdapter.init();
         logger.info("Starting up Arraybot...");
         logger.info("Loading in the configuration...");
         try {
@@ -117,12 +117,30 @@ public class Arraybot {
     }
 
     /**
+     * Gets the script manager.
+     * @return The script manager.
+     */
+    public ScriptManager getScriptManager() {
+        return scriptManager;
+    }
+
+    /**
      * Sets the bot manager.
      * @param manager The manager.
      */
     public synchronized void setBotManager(BotManager manager) {
         if(botManager == null) {
             botManager = manager;
+        }
+    }
+
+    /**
+     * Sets the script manager.
+     * @param manager The manager.
+     */
+    public synchronized void setScriptManager(ScriptManager manager) {
+        if(scriptManager == null) {
+            this.scriptManager = manager;
         }
     }
 

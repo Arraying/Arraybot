@@ -33,7 +33,7 @@ public abstract class AbstractWatcher extends AbstractTask {
      * When the watcher is executed for the fist time.
      */
     @Override
-    public void onExecution() {
+    public final void onExecution() {
         while(!current.isInterrupted()) {
             try {
                 Thread.sleep(waitDuration);

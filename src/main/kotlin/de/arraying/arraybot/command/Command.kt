@@ -1,4 +1,6 @@
-package de.arraying.arraybot.misc
+package de.arraying.arraybot.command
+
+import de.arraying.arraybot.command.other.CommandEnvironment
 
 /**
  * Copyright 2017 Arraying
@@ -15,11 +17,11 @@ package de.arraying.arraybot.misc
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-enum class Limits(val limit: Int) {
+interface Command {
 
     /**
-     * The maximum amount of characters for any message.
+     * Invokes the command.
      */
-    MESSAGE(2000)
+    suspend fun invoke(environment: CommandEnvironment, args: List<String>)
 
 }

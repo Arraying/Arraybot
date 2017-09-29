@@ -26,7 +26,26 @@ enum class Message {
     COMMAND_UNAVAILABLE_EMBED,
     COMMAND_PERMISSION,
     COMMAND_SUBCOMMAND_UNKNOWN,
-    COMMANDS_PING_PING;
+    COMMANDS_FIBONACCI_EMBED_DESCRIPTION,
+    COMMANDS_FIBONACCI_EMBED_TITLE,
+    COMMANDS_PING_PING,
+    COMMANDS_SCRIPT_ERROR_LINK,
+    COMMANDS_SCRIPT_EXECUTED,
+    COMMANDS_SCRIPT_PROVIDE,
+    CUSTOM_DESCRIPTION,
+    EMBED_FOOTER,
+    PAGE_FOOTER,
+    PAGE_COMMAND_UNKNOWN,
+    PERMISSION_PERMISSION,
+    PERMISSION_ROLE,
+    PERMISSION_INVALID,
+    ZEUS_ERROR,
+    ZEUS_ERROR_ARGUMENTS_INDEX,
+    ZEUS_ERROR_NICKNAME_LENGTH,
+    ZEUS_ERROR_NICKNAME_PERMISSION,
+    ZEUS_ERROR_MESSAGE_PIN_BOOLEAN,
+    ZEUS_ERROR_MESSAGE_PIN_PERMISSION,
+    ZEUS_ERROR_PROVIDED;
 
     /**
      * Sends the message to the channel.
@@ -76,8 +95,7 @@ enum class Message {
                     .replace("{zwsp}", "​")
                     .replace("-", "    **-**")
             if(replacePrefix) {
-                val entry = Entry.Category.GUILD.entry as? GuildEntry ?:
-                        throw IllegalStateException("Expected guild entry to be instanceof GuildEntry.")
+                val entry = Entry.Category.GUILD.entry as GuildEntry
                output = output.replace("{prefix}", entry.fetch(entry.getField(GuildEntry.Fields.PREFIX), id, null))
             }
             return output

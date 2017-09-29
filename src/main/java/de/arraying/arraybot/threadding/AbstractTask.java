@@ -36,7 +36,7 @@ public abstract class AbstractTask implements Runnable {
     /**
      * Creates the task.
      */
-    public void create() {
+    public final void create() {
         Thread current = new Thread(this);
         current.setName(name);
         current.start();
@@ -47,7 +47,7 @@ public abstract class AbstractTask implements Runnable {
      * Runs the task.
      */
     @Override
-    public void run() {
+    public final void run() {
         onExecution();
     }
 

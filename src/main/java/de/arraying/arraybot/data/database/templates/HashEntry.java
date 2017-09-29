@@ -111,6 +111,18 @@ public abstract class HashEntry<T> implements Entry {
     }
 
     /**
+     * Checks whether or not a field exists.
+     * @param field The field.
+     * @param id The primary key.
+     * @param secondaryKey The secondary key.
+     * @return The value.
+     */
+    public boolean exists(EntryField field, long id, Object secondaryKey) {
+        RedisCommands resource = redis.getResource();
+        return resource.hexists(UDatabase.getKey(category, id, secondaryKey), field.getRedisKey());
+    }
+
+    /**
      * Sets a field to its default value.
      * @param field The field.
      * @param id The primary key.

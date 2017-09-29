@@ -1,6 +1,7 @@
 package de.arraying.arraybot.manager;
 
 import de.arraying.arraybot.Arraybot;
+import de.arraying.arraybot.data.Cache;
 import de.arraying.arraybot.data.Configuration;
 import de.arraying.arraybot.listener.Listener;
 import de.arraying.arraybot.listener.listeners.PostLoadListener;
@@ -11,6 +12,7 @@ import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
 import net.dv8tion.jda.core.OnlineStatus;
 import net.dv8tion.jda.core.entities.Game;
+import net.dv8tion.jda.core.entities.User;
 import net.dv8tion.jda.core.requests.SessionReconnectQueue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -111,6 +113,7 @@ public final class BotManager {
         }
         entry.getJDA().addEventListener((Object[]) Listener.POST_LOAD_LISTENERS);
         new Listener.Updater(entry.getJDA()).create();
+        setAuthorUrl(entry.getJDA());
     }
 
     /**
@@ -152,6 +155,17 @@ public final class BotManager {
      */
     private JDABuilder getShardedBuilder(int shard, int total) {
         return getBuilder().useSharding(shard, total).setReconnectQueue(reconnectQueue);
+    }
+
+    /**
+     * Sets the author's URL.
+     * @param shard The shard.
+     */
+    private void setAuthorUrl(JDA shard) {
+        User author = shard.getUserById(configuration.getBotAuthors()[0]);
+        if(author != null) {
+            Cache.getInstance().setAuthorIconUrl(author.getAvatarUrl());
+        }
     }
 
 }

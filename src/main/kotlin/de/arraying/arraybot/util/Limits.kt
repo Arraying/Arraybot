@@ -1,33 +1,25 @@
-package de.arraying.arraybot.startup;
-
-import de.arraying.arraybot.startup.startups.*;
+package de.arraying.arraybot.util
 
 /**
  * Copyright 2017 Arraying
- * <p>
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p>
- * http://www.apache.org/licenses/LICENSE-2.0
- * <p>
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-public final class Starter {
-
-    private static final StartupTask[] tasks = new StartupTask[] {new StartupBot(), new StartupCommands(), new StartupLanguages(), new StartupRedis(), new StartupScripting()};
+enum class Limits(val limit: Int) {
 
     /**
-     * Starts all startup tasks.
+     * The maximum amount of characters for any message.
      */
-    public static void start() {
-        for(StartupTask task : tasks) {
-            task.create();
-        }
-    }
+    MESSAGE(2000)
 
 }

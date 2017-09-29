@@ -1,7 +1,10 @@
 package de.arraying.arraybot.command.other
 
-import de.arraying.arraybot.command.abstraction.DefaultCommand
-import de.arraying.arraybot.command.commands.utils.CommandPing
+import de.arraying.arraybot.command.commands.developer.script.ScriptCommand
+import de.arraying.arraybot.command.commands.utils.FibonacciCommand
+import de.arraying.arraybot.command.templates.DefaultCommand
+import de.arraying.arraybot.command.commands.utils.ping.PingCommand
+import de.arraying.arraybot.command.commands.utils.TestCommand
 
 /**
  * Copyright 2017 Arraying
@@ -20,6 +23,9 @@ import de.arraying.arraybot.command.commands.utils.CommandPing
  */
 enum class CommandCollection(val command: DefaultCommand) {
 
-    PING(CommandPing())
+    FIBONACCI(FibonacciCommand()),
+    PING(PingCommand()),
+    SCRIPT(ScriptCommand()),
+    TEST(TestCommand()),
 
 }

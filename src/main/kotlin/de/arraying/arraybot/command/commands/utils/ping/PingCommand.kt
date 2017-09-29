@@ -1,6 +1,6 @@
-package de.arraying.arraybot.command.commands.utils
+package de.arraying.arraybot.command.commands.utils.ping
 
-import de.arraying.arraybot.command.abstraction.DefaultCommand
+import de.arraying.arraybot.command.templates.DefaultCommand
 import de.arraying.arraybot.command.other.CommandEnvironment
 import de.arraying.arraybot.language.Message
 import net.dv8tion.jda.core.Permission
@@ -20,7 +20,7 @@ import net.dv8tion.jda.core.Permission
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-class CommandPing : DefaultCommand("ping",
+class PingCommand : DefaultCommand("ping",
         CommandCategory.UTILS,
         Permission.MESSAGE_WRITE) {
 

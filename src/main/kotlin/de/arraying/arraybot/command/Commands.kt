@@ -1,13 +1,13 @@
 package de.arraying.arraybot.command
 
 import de.arraying.arraybot.Arraybot
-import de.arraying.arraybot.command.abstraction.DefaultCommand
+import de.arraying.arraybot.command.templates.DefaultCommand
 import de.arraying.arraybot.command.other.CommandCollection
 import de.arraying.arraybot.command.other.CommandEnvironment
 import de.arraying.arraybot.data.database.categories.GuildEntry
 import de.arraying.arraybot.data.database.core.Entry
 import de.arraying.arraybot.data.database.templates.SetEntry
-import de.arraying.arraybot.misc.MultiKeyMap
+import de.arraying.arraybot.util.objects.MultiKeyMap
 import de.arraying.arraybot.util.UDefaults
 import kotlinx.coroutines.experimental.CommonPool
 import kotlinx.coroutines.experimental.launch

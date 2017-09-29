@@ -1,4 +1,4 @@
-package de.arraying.arraybot.misc
+package de.arraying.arraybot.util
 
 import net.dv8tion.jda.core.EmbedBuilder
 import net.dv8tion.jda.core.entities.MessageEmbed

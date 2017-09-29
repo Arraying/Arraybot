@@ -1,6 +1,8 @@
-package de.arraying.arraybot.startup;
+package de.arraying.arraybot.startup.startups;
 
-import de.arraying.arraybot.startup.startups.*;
+import de.arraying.arraybot.Arraybot;
+import de.arraying.arraybot.manager.ScriptManager;
+import de.arraying.arraybot.startup.StartupTask;
 
 /**
  * Copyright 2017 Arraying
@@ -17,17 +19,23 @@ import de.arraying.arraybot.startup.startups.*;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-public final class Starter {
-
-    private static final StartupTask[] tasks = new StartupTask[] {new StartupBot(), new StartupCommands(), new StartupLanguages(), new StartupRedis(), new StartupScripting()};
+public class StartupScripting extends StartupTask {
 
     /**
-     * Starts all startup tasks.
+     * Creates a new startup task.
      */
-    public static void start() {
-        for(StartupTask task : tasks) {
-            task.create();
-        }
+    public StartupScripting() {
+        super("Startup-Scripting");
+    }
+
+    /**
+     * Runs the actual startup task.
+     * @throws Exception If an error occurs.
+     */
+    @Override
+    public void onTask() throws Exception {
+        logger.info("Creating the script manager...");
+        Arraybot.getInstance().setScriptManager(new ScriptManager());
     }
 
 }

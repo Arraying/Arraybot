@@ -136,6 +136,11 @@ public interface Entry {
         PUNISHMENT("p", new PunishmentEntry()),
 
         /**
+         * A variable storage for a specific guild.
+         */
+        VARIABLES("vs", new VariablesEntry()),
+
+        /**
          * Any misc. things that need to be stored.
          * KV.
          */
