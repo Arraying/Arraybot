@@ -24,11 +24,9 @@ import javax.script.ScriptEngineManager
 class JSREngine(private val mode: Mode): EvalEngine {
 
     private val scriptEngineManager = ScriptEngineManager()
-    private val kotlinEngine = scriptEngineManager.getEngineByExtension("kts")!!
     private val javaScriptEngine = scriptEngineManager.getEngineByName("nashorn")!!
 
     init {
-        kotlinEngine.put("arraybot", Arraybot.getInstance())
         javaScriptEngine.put("arraybot", Arraybot.getInstance())
         javaScriptEngine.eval("var imports = new JavaImporter(java.io, java.lang, java.util, java.net, " +
                 "Packages.net.dv8tion.jda.core, Packages.net.dv8tion.jda.core.entities, Packages.net.dv8tion.jda.core.managers);")
@@ -40,7 +38,6 @@ class JSREngine(private val mode: Mode): EvalEngine {
     override fun evaluate(environment: CommandEnvironment, code: String): String {
         val channel = environment.channel
         val engine = when(mode) {
-            Mode.KOTLIN -> kotlinEngine
             Mode.JAVASCRIPT -> javaScriptEngine
         }
         engine.put("jda", environment.guild.jda)
@@ -48,7 +45,6 @@ class JSREngine(private val mode: Mode): EvalEngine {
         engine.put("environment", environment)
         var output: Any? = try {
             when(mode) {
-                Mode.KOTLIN -> engine.eval(code)
                 Mode.JAVASCRIPT -> engine.eval("(function() { with (imports) {\n$code\n} })();")
             }
         } catch(exception: Exception) {
@@ -62,15 +58,9 @@ class JSREngine(private val mode: Mode): EvalEngine {
     }
 
     /**
-     * All eval modes for JSE.
+     * All eval modes for JSR-223.
      */
     enum class Mode {
-
-        /**
-         * Evaluates Kotlin code.
-         */
-        KOTLIN,
-
 
         /**
          * Evaluates JS code using the Nashorn interpreter.

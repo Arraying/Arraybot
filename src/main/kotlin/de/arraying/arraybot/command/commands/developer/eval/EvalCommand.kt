@@ -34,7 +34,6 @@ class EvalCommand: DefaultCommand("eval",
 
     init {
         engines.add(ZeusEngine(), "zeus", arrayOf("z"))
-        engines.add(JSREngine(JSREngine.Mode.KOTLIN), "kotlin", arrayOf("kt"))
         engines.add(JSREngine(JSREngine.Mode.JAVASCRIPT), "javascript", arrayOf("js", "javashit"))
     }
 

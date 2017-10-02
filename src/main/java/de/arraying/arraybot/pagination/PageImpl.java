@@ -114,7 +114,6 @@ public abstract class PageImpl implements Pages {
                 newPage(currentPage);
             }
         }
-        System.out.println(entries.length + " || " + pages.size());
     }
 
     /**
