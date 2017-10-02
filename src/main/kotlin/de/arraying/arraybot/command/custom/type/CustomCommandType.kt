@@ -1,6 +1,6 @@
 package de.arraying.arraybot.command.custom.type
 
-import de.arraying.arraybot.command.custom.syntax.CustomCommandSyntax
+import de.arraying.arraybot.command.custom.type.actions.*
 
 /**
  * Copyright 2017 Arraying
@@ -17,44 +17,44 @@ import de.arraying.arraybot.command.custom.syntax.CustomCommandSyntax
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-enum class CustomCommandType {
+enum class CustomCommandType(val action: CustomCommandAction?) {
 
     /**
      * Adds a role to a member.
      */
-    ADD_ROLE,
+    ADD_ROLE(AddRoleAction()),
 
     /**
      * Messages the channel the command was invoked in.
      */
-    MESSAGE,
-
-    /**
-     * Changes the nickname of a member.
-     */
-    NICKNAME,
+    MESSAGE(MessageAction()),
 
     /**
      * Private messages the command executor.
      */
-    PRIVATE_MESSAGE,
+    PRIVATE_MESSAGE(PrivateMessageAction()),
 
     /**
      * Removes a role from a member.
      */
-    REMOVE_ROLE,
+    REMOVE_ROLE(RemoveRoleAction()),
+
+    /**
+     * Executes a piece of Zeus script.
+     */
+    SCRIPT(ScriptAction()),
 
     /**
      * Toggles the role of a member.
      * If the member has the role, it will remove it.
      * Else, it will add it.
      */
-    TOGGLE_ROLE,
+    TOGGLE_ROLE(ToggleRoleAction()),
 
     /**
      * If the type is unknown.
      */
-    UNKNOWN;
+    UNKNOWN(null);
 
     companion object {
 

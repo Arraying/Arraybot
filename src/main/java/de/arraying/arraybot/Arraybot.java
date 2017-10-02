@@ -3,8 +3,8 @@ package de.arraying.arraybot;
 import de.arraying.arraybot.data.Configuration;
 import de.arraying.arraybot.manager.BotManager;
 import de.arraying.arraybot.manager.ScriptManager;
-import de.arraying.arraybot.util.objects.Splash;
 import de.arraying.arraybot.startup.Starter;
+import de.arraying.arraybot.util.objects.Splash;
 import net.dv8tion.jda.core.JDAInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -87,7 +87,7 @@ public final class Arraybot {
             logger.error("There was an error loading/creating the configuration.", exception);
             return;
         }
-        new Splash(new File("splash.txt")).print(logger, configuration.getBotVersion(), JDAInfo.VERSION, "Arraying");
+        new Splash(new File("splash.txt")).print(logger, configuration.getBotVersion(), JDAInfo.VERSION, "Arraying, xaanit");
         Starter.start();
         initialized = true;
     }

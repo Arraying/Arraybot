@@ -1,6 +1,5 @@
 package de.arraying.arraybot.command.custom.permission
 
-import com.sun.org.apache.xpath.internal.operations.Bool
 import de.arraying.arraybot.language.Message
 import de.arraying.arraybot.util.UDatatypes
 import net.dv8tion.jda.core.Permission

@@ -1,10 +1,11 @@
 package de.arraying.arraybot.command.other
 
+import de.arraying.arraybot.command.commands.customization.custom.CustomCommand
+import de.arraying.arraybot.command.commands.developer.eval.EvalCommand
 import de.arraying.arraybot.command.commands.developer.script.ScriptCommand
-import de.arraying.arraybot.command.commands.utils.FibonacciCommand
-import de.arraying.arraybot.command.templates.DefaultCommand
-import de.arraying.arraybot.command.commands.utils.ping.PingCommand
 import de.arraying.arraybot.command.commands.utils.TestCommand
+import de.arraying.arraybot.command.commands.utils.ping.PingCommand
+import de.arraying.arraybot.command.templates.DefaultCommand
 
 /**
  * Copyright 2017 Arraying
@@ -23,9 +24,29 @@ import de.arraying.arraybot.command.commands.utils.TestCommand
  */
 enum class CommandCollection(val command: DefaultCommand) {
 
-    FIBONACCI(FibonacciCommand()),
+    /**
+     * The custom command management command.
+     */
+    CUSTOM(CustomCommand()),
+
+    /**
+     * The command to evaluate code.
+     */
+    EVAL(EvalCommand()),
+
+    /**
+     * The command to check the WebSocket ping.
+     */
     PING(PingCommand()),
+
+    /**
+     * The command to use to quickly evaluate a long Zeus script.
+     */
     SCRIPT(ScriptCommand()),
-    TEST(TestCommand()),
+
+    /**
+     * A test command.
+     */
+    TEST(TestCommand());
 
 }

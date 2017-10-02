@@ -2,7 +2,6 @@ package de.arraying.arraybot.script;
 
 import de.arraying.arraybot.script.variable.VariableCollections;
 import de.arraying.arraybot.script.variable.VariableUpdate;
-import de.arraying.arraybot.util.UZeus;
 import de.arraying.zeus.event.ZeusEventListener;
 import de.arraying.zeus.event.events.VariableReassignEvent;
 

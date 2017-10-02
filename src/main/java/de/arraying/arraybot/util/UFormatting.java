@@ -17,7 +17,7 @@ import org.apache.commons.lang.WordUtils;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-public class UFormatting {
+public final class UFormatting {
 
     /**
      * An array of all markup characters.

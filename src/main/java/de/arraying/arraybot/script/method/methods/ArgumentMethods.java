@@ -1,15 +1,10 @@
 package de.arraying.arraybot.script.method.methods;
 
 import de.arraying.arraybot.command.other.CommandEnvironment;
-import de.arraying.arraybot.language.Message;
-import de.arraying.arraybot.script.method.Methods;
+import de.arraying.arraybot.script.method.templates.CollectionManagementMethods;
 import de.arraying.arraybot.util.UZeus;
 import de.arraying.zeus.backend.ZeusException;
 import de.arraying.zeus.backend.annotations.ZeusMethod;
-import net.dv8tion.jda.core.entities.TextChannel;
-
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Copyright 2017 Arraying
@@ -27,17 +22,14 @@ import java.util.concurrent.ConcurrentHashMap;
  * limitations under the License.
  */
 @SuppressWarnings("unused")
-public final class ArgumentMethods extends Methods {
-
-    private final Map<String, String[]> arguments = new ConcurrentHashMap<>();
-    private int argumentIndex = -1;
+public final class ArgumentMethods extends CollectionManagementMethods<String[]> {
 
     /**
      * Creates a new method collection object.
      * @param environment The command environment.
      */
     public ArgumentMethods(CommandEnvironment environment) {
-        super(environment);
+        super(environment, "arguments");
     }
 
     /**
@@ -48,9 +40,7 @@ public final class ArgumentMethods extends Methods {
      */
     @ZeusMethod
     public String args_new(String input, String regex) {
-        String id = UZeus.createId("arguments", environment.getMessage().getIdLong(), newArgumentIndex());
-        arguments.put(id, input.split(regex));
-        return id;
+        return internalNew(input.split(regex));
     }
 
     /**
@@ -60,7 +50,7 @@ public final class ArgumentMethods extends Methods {
      */
     @ZeusMethod
     public Integer args_length(String argumentId) {
-        String[] argument = arguments.get(argumentId);
+        String[] argument = collection.get(argumentId);
         if(argument != null) {
             return argument.length;
         }
@@ -79,7 +69,7 @@ public final class ArgumentMethods extends Methods {
             throws ZeusException {
         String error;
         try {
-            String[] arguments = this.arguments.get(argumentId);
+            String[] arguments = this.collection.get(argumentId);
             if(arguments == null) {
                 error = "That argument ID does not exist.";
             } else {
@@ -90,14 +80,6 @@ public final class ArgumentMethods extends Methods {
             error = "Index out of bounds (0 based indexing).";
         }
         throw new ZeusException(error);
-    }
-
-    /**
-     * Gets a new unique arguments ID.
-     * @return An integer.
-     */
-    private int newArgumentIndex() {
-        return ++argumentIndex;
     }
 
 }

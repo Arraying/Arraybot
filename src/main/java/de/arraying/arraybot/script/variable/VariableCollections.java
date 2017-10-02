@@ -1,5 +1,6 @@
 package de.arraying.arraybot.script.variable;
 
+import de.arraying.arraybot.script.variable.variables.ChannelVariables;
 import de.arraying.arraybot.script.variable.variables.MessageVariables;
 import de.arraying.arraybot.script.variable.variables.UserVariables;
 
@@ -20,6 +21,7 @@ import de.arraying.arraybot.script.variable.variables.UserVariables;
  */
 public enum VariableCollections {
 
+    CHANNEL(new ChannelVariables()),
     MESSAGE(new MessageVariables()),
     USER(new UserVariables());
 

@@ -2,23 +2,16 @@ package de.arraying.arraybot.script;
 
 import de.arraying.arraybot.command.other.CommandEnvironment;
 import de.arraying.arraybot.language.Message;
-import de.arraying.arraybot.script.method.methods.ArgumentMethods;
-import de.arraying.arraybot.script.method.methods.EmbedMethods;
-import de.arraying.arraybot.script.method.methods.MessageMethods;
-import de.arraying.arraybot.script.method.methods.StorageMethods;
+import de.arraying.arraybot.script.method.methods.*;
 import de.arraying.arraybot.script.variable.VariableCollections;
-import de.arraying.arraybot.script.variable.Variables;
 import de.arraying.arraybot.threadding.AbstractTask;
 import de.arraying.arraybot.util.UZeus;
 import de.arraying.zeus.backend.ZeusException;
 import de.arraying.zeus.runtime.ZeusRuntime;
 import de.arraying.zeus.runtime.ZeusRuntimeBuilder;
-import net.dv8tion.jda.core.EmbedBuilder;
-import org.slf4j.Logger;
+import de.arraying.zeus.variable.ZeusVariable;
 
 import java.lang.reflect.Method;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Copyright 2017 Arraying
@@ -39,17 +32,19 @@ public final class ScriptRuntime extends AbstractTask {
 
     private final CommandEnvironment environment;
     private final String[] code;
-
+    private final ZeusVariable[] variables;
 
     /**
      * Creates a new script runtime.
      * @param environment The environment.
      * @param code The code.
+     * @param variables An array of predefined variables.
      */
-    public ScriptRuntime(CommandEnvironment environment, String[] code) {
+    public ScriptRuntime(CommandEnvironment environment, String[] code, ZeusVariable... variables) {
         super("Script-" + environment.getMessage().getIdLong());
         this.environment = environment;
         this.code = code;
+        this.variables = variables;
     }
 
     /**
@@ -63,11 +58,18 @@ public final class ScriptRuntime extends AbstractTask {
                 builder.withoutMethods(method);
             }
             EmbedMethods embedMethods = new EmbedMethods(environment);
+            StringListMethods stringListMethods = new StringListMethods(environment);
             builder.withEventListeners(new ScriptListener(this))
+                    .withVariables(variables)
                     .withMethods(new ArgumentMethods(environment),
+                            new ChannelMethods(environment),
+                            new CommandMethods(environment, stringListMethods),
                             embedMethods,
                             new MessageMethods(environment, embedMethods),
-                            new StorageMethods(environment));
+                            new RoleMethods(environment),
+                            new StorageMethods(environment),
+                            stringListMethods,
+                            new UserMethods(environment));
             for(VariableCollections variables : VariableCollections.values()) {
                 builder = variables.getVariables().registerVariables(builder, environment);
             }

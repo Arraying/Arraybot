@@ -15,7 +15,17 @@ package de.arraying.arraybot.util;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+@SuppressWarnings("ResultOfMethodCallIgnored")
 public final class UDatatypes {
+
+    public static boolean isInt(String input) {
+        try {
+            Integer.valueOf(input);
+            return true;
+        } catch(NumberFormatException exception) {
+            return false;
+        }
+    }
 
     /**
      * Checks whether a string is a long.
@@ -24,7 +34,6 @@ public final class UDatatypes {
      */
     public static boolean isLong(String input) {
         try {
-            //noinspection ResultOfMethodCallIgnored
             Long.valueOf(input);
             return true;
         } catch(NumberFormatException exception) {

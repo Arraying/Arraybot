@@ -41,7 +41,8 @@ dependencies {
     compile "commons-io:commons-io:2.5" // Utils
     compile "commons-lang:commons-lang:2.6" // Utils
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version" // Kotlin
-    compile "org.jetbrains.kotlinx:kotlinx-coroutines-core:0.16" // Kotlin coroutines (experimental)
+    compile "org.jetbrains.kotlin:kotlin-script-util:$kotlin_version" // Kotlin scripting
+    compile "org.jetbrains.kotlin:kotlin-script-runtime:$kotlin_version" // Kotlin scripting
 }
 
 

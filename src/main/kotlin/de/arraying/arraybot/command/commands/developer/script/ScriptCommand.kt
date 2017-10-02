@@ -22,7 +22,8 @@ import net.dv8tion.jda.core.Permission
  */
 class ScriptCommand: DefaultCommand("script",
         CommandCategory.DEVELOPER,
-        Permission.MESSAGE_WRITE) {
+        Permission.MESSAGE_WRITE,
+        aliases = arrayOf("zeus_i_invoke_you", "zeus_i_summon_thee")) {
 
     /**
      * When the command is executed.

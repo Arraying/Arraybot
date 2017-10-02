@@ -1,6 +1,7 @@
 package de.arraying.arraybot.util.objects;
 
 import java.util.Map;
+import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -18,7 +19,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-public final class MultiKeyMap<K, V> extends ConcurrentHashMap<K, V> {
+public final class MultiKeyMap<K, V> extends TreeMap<K, V> {
 
     private final Map<K, K> keys = new ConcurrentHashMap<>();
 

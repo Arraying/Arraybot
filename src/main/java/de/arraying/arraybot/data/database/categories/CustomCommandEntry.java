@@ -53,6 +53,17 @@ public final class CustomCommandEntry extends HashEntry<CustomCommandEntry.Field
         return Category.CUSTOM_COMMAND_NAMES;
     }
 
+    /**
+     * Creates a custom command.
+     * @param id The guild's ID.
+     * @param secondaryKey The custom command name.
+     */
+    public void create(long id, String secondaryKey) {
+        for(Fields fields : Fields.values()) {
+            push(getField(fields), id, secondaryKey, fields.field.getDefaultValue());
+        }
+    }
+
     public enum Fields {
 
         /**

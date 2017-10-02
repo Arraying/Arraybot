@@ -1,7 +1,6 @@
 package de.arraying.arraybot.script.method.methods;
 
 import de.arraying.arraybot.command.other.CommandEnvironment;
-import de.arraying.arraybot.language.Message;
 import de.arraying.arraybot.script.method.Methods;
 import de.arraying.arraybot.util.UZeus;
 import de.arraying.zeus.backend.annotations.ZeusMethod;
@@ -43,13 +42,43 @@ public final class MessageMethods extends Methods {
     }
 
     /**
+     * Deletes the command message.
+     */
+    @ZeusMethod
+    public void delete() {
+        try {
+            environment.getMessage().delete().queue();
+        } catch(PermissionException exception) {
+            UZeus.errorInChannel(environment.getChannel(), exception);
+        }
+    }
+
+    /**
      * Messages the current channel.
      * @param message The message.
      */
     @ZeusMethod
-    public void message_channel(String message) {
+    public void message_channel(Object message) {
         try {
-            environment.getChannel().sendMessage(message).queue();
+            environment.getChannel().sendMessage(message.toString()).queue();
+        } catch(PermissionException | VerificationLevelException | IllegalArgumentException exception) {
+            UZeus.errorInChannel(environment.getChannel(), exception);
+        }
+    }
+
+    /**
+     * Messages another channel.
+     * @param id The channel ID.
+     * @param message The message.
+     */
+    @ZeusMethod
+    public void message_channel_other(Long id, Object message) {
+        TextChannel channel = environment.getGuild().getTextChannelById(id);
+        if(channel == null) {
+            return;
+        }
+        try {
+            channel.sendMessage(message.toString()).queue();
         } catch(PermissionException | VerificationLevelException | IllegalArgumentException exception) {
             UZeus.errorInChannel(environment.getChannel(), exception);
         }
@@ -61,13 +90,13 @@ public final class MessageMethods extends Methods {
      * @param message The message.
      */
     @ZeusMethod
-    public void message_private(Long id, String message) {
+    public void message_private(Long id, Object message) {
         Member member = environment.getGuild().getMemberById(id);
         if(member == null) {
             return;
         }
         try {
-            member.getUser().openPrivateChannel().queue(channel -> channel.sendMessage(message).queue());
+            member.getUser().openPrivateChannel().queue(channel -> channel.sendMessage(message.toString()).queue());
         } catch(PermissionException | VerificationLevelException | IllegalArgumentException exception) {
             UZeus.errorInChannel(environment.getChannel(), exception);
         }

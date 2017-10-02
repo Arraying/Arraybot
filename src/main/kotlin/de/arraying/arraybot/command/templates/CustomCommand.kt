@@ -5,9 +5,16 @@ import de.arraying.arraybot.command.custom.permission.CustomCommandPermission
 import de.arraying.arraybot.command.custom.syntax.CustomCommandSyntax
 import de.arraying.arraybot.command.custom.type.CustomCommandType
 import de.arraying.arraybot.command.other.CommandEnvironment
+import de.arraying.arraybot.data.database.Redis
+import de.arraying.arraybot.data.database.categories.CustomCommandEntry
+import de.arraying.arraybot.data.database.core.Entry
+import de.arraying.arraybot.data.database.templates.SetEntry
 import de.arraying.arraybot.language.Message
 import de.arraying.arraybot.util.UDefaults
+import kotlinx.coroutines.experimental.CommonPool
+import kotlinx.coroutines.experimental.launch
 import net.dv8tion.jda.core.entities.TextChannel
+import org.slf4j.LoggerFactory
 
 /**
  * Copyright 2017 Arraying
@@ -31,26 +38,83 @@ class CustomCommand(val name: String,
                     val description: String,
                     val value: String): Command {
 
+    private val logger = LoggerFactory.getLogger("Custom-Command")
+
     /**
      * Invokes the custom command.
      */
     override suspend fun invoke(environment: CommandEnvironment, args: List<String>) {
-        //TODO Add custom command invocation.
+        val channel = environment.channel
+        launch(CommonPool) {
+            logger.info("${environment.author.idLong} executed the custom command in the guild ${channel.guild.idLong}.")
+            val resource = Redis.getInstance().resource
+            resource.incr("commands")
+        }
+        if(type == CustomCommandType.UNKNOWN) {
+            Message.CUSTOM_TYPE_INVALID.send(channel).queue()
+            return
+        }
+        if(type.action == null) {
+            Message.CUSTOM_TYPE_IMPLEMENTED.send(channel).queue()
+            return
+        }
+        if(syntax == CustomCommandSyntax.UNKNOWN) {
+            Message.CUSTOM_SYNTAX_INVALID.send(channel).queue()
+            return
+        }
+        if(!permission.hasPermission(environment.member)) {
+            Message.CUSTOM_PERMISSION.send(channel).queue()
+            return
+        }
+        val value = if(syntax == CustomCommandSyntax.STARTS_WITH) {
+            val builder = StringBuilder()
+            for(i in 1 until args.size) {
+                builder
+                        .append(args[i])
+                        .append(" ")
+            }
+            this.value.replace("{input}", builder.toString().trim())
+        } else {
+            this.value
+        }
+        if(value.isEmpty()) {
+            Message.CUSTOM_VALUE_EMPTY.send(channel).queue()
+            return
+        }
+        type.action.onAction(environment, value)
     }
 
     companion object {
 
-        fun fromRedis(name: String, syntaxString: String, permissionString: String, typeString: String,
-                      descriptionString: String, value: String, channel: TextChannel): CustomCommand {
-            val syntax = CustomCommandSyntax.fromString(syntaxString)
-            val permission = CustomCommandPermission(permissionString)
-            val type = CustomCommandType.fromString(typeString)
+        /**
+         * Creates a custom command from Redis.
+         */
+        fun fromRedis(guildId: Long, commandName: String, channel: TextChannel): CustomCommand {
+            val commandEntry = Entry.Category.CUSTOM_COMMAND.entry as CustomCommandEntry
+            val syntax = CustomCommandSyntax.fromString(commandEntry.fetch(commandEntry.getField(CustomCommandEntry.Fields.SYNTAX), guildId, commandName))
+            val permission = CustomCommandPermission(commandEntry.fetch(commandEntry.getField(CustomCommandEntry.Fields.PERMISSION), guildId, commandName))
+            val type = CustomCommandType.fromString(commandEntry.fetch(commandEntry.getField(CustomCommandEntry.Fields.TYPE), guildId, commandName))
+            val descriptionString = commandEntry.fetch(commandEntry.getField(CustomCommandEntry.Fields.DESCRIPTION), guildId, commandName)
             val description = if(descriptionString == UDefaults.DEFAULT_NULL) {
                     Message.CUSTOM_DESCRIPTION.content(channel)
                 } else {
                     descriptionString
                 }
-            return CustomCommand(name, syntax, permission, type, description, value)
+            val value = commandEntry.fetch(commandEntry.getField(CustomCommandEntry.Fields.VALUE), guildId, commandName)
+            return CustomCommand(commandName, syntax, permission, type, description, value)
+        }
+
+        /**
+         * Gets all custom commands for the guild.
+         */
+        fun getAll(guildId: Long, channel: TextChannel): Array<CustomCommand> {
+            val commandList = Entry.Category.CUSTOM_COMMAND_NAMES.entry as SetEntry
+            val commandNames = commandList.values(guildId)
+            val commands = ArrayList<CustomCommand>()
+            commandNames.mapTo(commands) {
+                CustomCommand.fromRedis(guildId, it, channel)
+            }
+            return commands.toTypedArray()
         }
 
     }

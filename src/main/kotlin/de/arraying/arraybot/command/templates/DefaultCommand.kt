@@ -5,8 +5,8 @@ import de.arraying.arraybot.command.Command
 import de.arraying.arraybot.command.Commands
 import de.arraying.arraybot.command.other.CommandEnvironment
 import de.arraying.arraybot.data.database.Redis
-import de.arraying.arraybot.data.database.categories.GuildEntry
 import de.arraying.arraybot.data.database.core.Entry
+import de.arraying.arraybot.data.database.templates.SetEntry
 import de.arraying.arraybot.language.Languages
 import de.arraying.arraybot.language.Message
 import de.arraying.arraybot.util.Limits
@@ -114,7 +114,7 @@ abstract class DefaultCommand(val name: String,
     override suspend fun invoke(environment: CommandEnvironment, args: List<String>) {
         val channel = environment.channel
         val author = environment.author
-        launch(CommonPool) {
+        launch(context = CommonPool) {
             logger.info("${author.idLong} executed the command in the guild ${channel.guild.idLong}.")
             val resource = Redis.getInstance().resource
             resource.incr("commands")
@@ -132,27 +132,31 @@ abstract class DefaultCommand(val name: String,
             Message.COMMAND_UNAVAILABLE_DEVELOPER.send(channel).queue()
             return
         }
-        if (!PermissionUtil.checkPermission(channel, channel.guild.selfMember, Permission.MESSAGE_EMBED_LINKS)) {
+        if(!PermissionUtil.checkPermission(channel, channel.guild.selfMember, Permission.MESSAGE_EMBED_LINKS)) {
             Message.COMMAND_UNAVAILABLE_EMBED.send(channel).queue()
             return
         }
-        if (!PermissionUtil.checkPermission(channel, environment.member, permission)
+        if(!PermissionUtil.checkPermission(channel, environment.member, permission)
                 && !customPermissionChecking) {
             val message = Message.COMMAND_PERMISSION.content(channel)
                     .replace("{permission}", permission.getName())
             channel.sendMessage(message).queue()
             return
         }
-        if (!subCommands.isEmpty()
+        val entry = Entry.Category.DISABLED_COMMAND.entry as SetEntry
+        if(entry.contains(environment.guild.idLong, name)) {
+            return
+        }
+        if(!subCommands.isEmpty()
                 && args.size >= 2) {
             val subCommandName = args[1].toLowerCase()
-            val subCommand = subCommands.filter {
+            val subCommand = subCommands.firstOrNull {
                 it.name == subCommandName
                         || it.aliases.any { alias ->
                     alias == subCommandName
                 }
-            }.firstOrNull()
-            if (subCommand == null) {
+            }
+            if(subCommand == null) {
                 Message.COMMAND_SUBCOMMAND_UNKNOWN.send(channel).queue()
             } else {
                 subCommand.onSubCommand(environment, args)
@@ -166,15 +170,14 @@ abstract class DefaultCommand(val name: String,
      * Gets the description for the command.
      */
     fun getDescription(guild: Long): String {
-        return Languages.get(guild, descriptionPath);
+        return Languages.get(guild, descriptionPath)
     }
 
     /**
-     * Gets the syntax for the command.
+     * Gets the syntax for the command. Without prefix.
      */
     fun getSyntax(guild: Long): String {
-        val entry = Entry.Category.GUILD.entry as GuildEntry
-        return entry.fetch(entry.getField(GuildEntry.Fields.PREFIX), guild, null) + name + " " + Languages.get(guild, syntaxPath)
+        return Languages.get(guild, syntaxPath)
     }
 
 }

@@ -29,9 +29,10 @@ public interface Pages {
     CustomEmbedBuilder getPage(int pageNumber, TextChannel channel);
 
     /**
-     * Gets the total number of pages.
-     * @return The number of pages.
+     * Gets the page number from the input.
+     * @param input The input.
+     * @return A page number or 0 if it is invalid.
      */
-    int getTotalPages();
+    int getPageNumber(String input);
 
 }

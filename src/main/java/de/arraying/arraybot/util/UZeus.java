@@ -1,21 +1,10 @@
 package de.arraying.arraybot.util;
 
-import de.arraying.arraybot.command.other.CommandEnvironment;
 import de.arraying.arraybot.language.Message;
-import de.arraying.zeus.backend.ZeusException;
-import de.arraying.zeus.runtime.ZeusRuntimeBuilder;
 import de.arraying.zeus.std.method.methods.OutputMethods;
-import de.arraying.zeus.utils.ZeusVariableUtil;
-import de.arraying.zeus.variable.VariableType;
-import de.arraying.zeus.variable.ZeusVariable;
 import net.dv8tion.jda.core.entities.TextChannel;
-import net.dv8tion.jda.core.entities.User;
-import net.dv8tion.jda.core.managers.GuildController;
 
 import java.lang.reflect.Method;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.function.BiConsumer;
 
 /**
  * Copyright 2017 Arraying

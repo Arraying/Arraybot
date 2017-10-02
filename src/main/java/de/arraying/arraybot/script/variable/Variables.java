@@ -9,7 +9,6 @@ import de.arraying.zeus.variable.ZeusVariable;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 /**

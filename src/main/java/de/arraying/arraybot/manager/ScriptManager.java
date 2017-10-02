@@ -47,6 +47,15 @@ public final class ScriptManager {
             throws IOException {
         String content = IOUtils.toString(new URL(scriptUrl), Charset.forName("utf-8"));
         String[] code = content.split("\n");
+        executeStringRaw(code, environment);
+    }
+
+    /**
+     * Executes the script with a raw parameter.
+     * @param code The code.
+     * @param environment The command environment.
+     */
+    public void executeStringRaw(String[] code, CommandEnvironment environment) {
         new ScriptRuntime(environment, code).create();
     }
 

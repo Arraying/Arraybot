@@ -1,6 +1,7 @@
 package de.arraying.arraybot.pagination;
 
-import de.arraying.arraybot.pagination.impl.AbstractPageList;
+import de.arraying.arraybot.pagination.types.CommandList;
+import de.arraying.arraybot.pagination.types.PageList;
 import de.arraying.arraybot.util.CustomEmbedBuilder;
 import de.arraying.arraybot.util.UDefaults;
 
@@ -96,11 +97,11 @@ public final class PageBuilder {
     public Pages build() {
         switch(type) {
             case LIST:
-                return new AbstractPageList(embed, total, entries, title);
+                return new PageList(embed, total, entries, title);
             case COMMANDS:
-                return null;
+                return new CommandList(embed, total, entries, title);
             default:
-                throw new IllegalStateException("Attempted to build a nonexistent type.");
+                throw new UnsupportedOperationException("Unknown type.");
         }
     }
 

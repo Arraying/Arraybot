@@ -18,8 +18,55 @@ package de.arraying.arraybot.util
 enum class Limits(val limit: Int) {
 
     /**
+     * The maximum ban reason length.
+     */
+    BAN_REASON(512),
+
+    /**
+     * The minimum channel name length.
+     */
+    CHANNEL_NAME_MIN(2),
+
+    /**
+     * The maximum channel name length.
+     */
+    CHANNEL_NAME_MAX(100),
+
+    /**
+     * The maximum channel topic length.
+     */
+    CHANNEL_TOPIC_MAX(1024),
+
+    /**
+     * The maximum amount of characters for the custom command name.
+     */
+    CUSTOM_NAME(100),
+
+    /**
+     * The maximum amount of characters for the custom command value.
+     */
+    CUSTOM_VALUE(1900),
+
+    /**
      * The maximum amount of characters for any message.
      */
-    MESSAGE(2000)
+    MESSAGE(2000),
+
+    /**
+     * The minimum nickname length.
+     */
+    NICKNAME_MIN(2),
+
+    /**
+     * The maximum nickname length.
+     */
+    NICKNAME_MAX(32);
+
+    /**
+     * Gets the limit as a string.
+     */
+    fun asString(): String {
+        return limit.toString()
+    }
 
 }

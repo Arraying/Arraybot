@@ -1,14 +1,15 @@
 package de.arraying.arraybot.command
 
 import de.arraying.arraybot.Arraybot
-import de.arraying.arraybot.command.templates.DefaultCommand
 import de.arraying.arraybot.command.other.CommandCollection
 import de.arraying.arraybot.command.other.CommandEnvironment
+import de.arraying.arraybot.command.templates.CustomCommand
+import de.arraying.arraybot.command.templates.DefaultCommand
 import de.arraying.arraybot.data.database.categories.GuildEntry
 import de.arraying.arraybot.data.database.core.Entry
 import de.arraying.arraybot.data.database.templates.SetEntry
-import de.arraying.arraybot.util.objects.MultiKeyMap
 import de.arraying.arraybot.util.UDefaults
+import de.arraying.arraybot.util.objects.MultiKeyMap
 import kotlinx.coroutines.experimental.CommonPool
 import kotlinx.coroutines.experimental.launch
 import net.dv8tion.jda.core.Permission
@@ -82,6 +83,14 @@ object Commands {
         val command = commands.getByKeyOrAlias(commandName)
         launch(CommonPool) {
             command?.invoke(environment, args)
+        }
+        val entry = Entry.Category.CUSTOM_COMMAND_NAMES.entry as SetEntry
+        val guildId = guild.idLong
+        if(entry.contains(guildId, commandName)) {
+            val customCommand = CustomCommand.fromRedis(guildId, commandName, channel)
+            launch(CommonPool) {
+                customCommand.invoke(environment, args)
+            }
         }
     }
 

@@ -93,4 +93,15 @@ public final class SetEntry implements Entry {
         resource.srem(UDatabase.getKey(category, id), entry.toString());
     }
 
+    /**
+     * Checks if an entry exists.
+     * @param id The snowflake identifier ID.
+     * @param entry The entry. Cannot be null.
+     * @return True if it does, false otherwise.
+     */
+    public boolean contains(long id, Object entry) {
+        RedisCommands resource = redis.getResource();
+        return resource.sismember(UDatabase.getKey(category, id), entry.toString());
+    }
+
 }

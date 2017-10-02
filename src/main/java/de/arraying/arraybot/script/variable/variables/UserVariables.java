@@ -2,14 +2,13 @@ package de.arraying.arraybot.script.variable.variables;
 
 import de.arraying.arraybot.command.other.CommandEnvironment;
 import de.arraying.arraybot.language.Message;
-import de.arraying.arraybot.pagination.Pages;
 import de.arraying.arraybot.script.variable.Variables;
+import de.arraying.arraybot.util.Limits;
 import de.arraying.arraybot.util.UZeus;
 import de.arraying.zeus.backend.ZeusException;
 import de.arraying.zeus.runtime.ZeusRuntimeBuilder;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.entities.User;
-import net.dv8tion.jda.core.exceptions.HierarchyException;
 import net.dv8tion.jda.core.exceptions.PermissionException;
 import net.dv8tion.jda.core.managers.GuildController;
 
@@ -45,9 +44,12 @@ public final class UserVariables extends Variables {
         registerVariableEvent(userNickname, variable -> {
             TextChannel channel = variable.getEnvironment().getChannel();
             String nickname = variable.getVariable().value().toString();
-            if(nickname.length() < 2
-                    || nickname.length() > 32) {
-                Message.ZEUS_ERROR_NICKNAME_LENGTH.send(channel, false);
+            if(nickname.length() < Limits.NICKNAME_MIN.getLimit()
+                    || nickname.length() > Limits.NICKNAME_MAX.getLimit()) {
+                String message = Message.ZEUS_ERROR_NICKNAME_LENGTH.content(channel, false)
+                        .replace("{min}", Limits.NICKNAME_MIN.asString())
+                        .replace("{max}", Limits.NICKNAME_MAX.asString());
+                channel.sendMessage(message).queue();
             } else {
                 try {
                     GuildController controller = variable.getEnvironment().getGuild().getController();
@@ -70,7 +72,7 @@ public final class UserVariables extends Variables {
     public ZeusRuntimeBuilder registerVariables(ZeusRuntimeBuilder builder, CommandEnvironment environment)
             throws ZeusException {
         User user = environment.getAuthor();
-        return builder.withVariables(createConstant(this.user, user.getName()),
+        return builder.withVariables(createConstant(this.user, user.getIdLong()),
                 createConstant(userAvatar, user.getAvatarUrl()),
                 createConstant(userDiscriminator, user.getDiscriminator()),
                 createConstant(userName, user.getName()),

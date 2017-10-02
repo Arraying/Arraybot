@@ -1,14 +1,12 @@
 package de.arraying.arraybot.script.method.methods;
 
 import de.arraying.arraybot.command.other.CommandEnvironment;
-import de.arraying.arraybot.script.method.Methods;
-import de.arraying.arraybot.util.UZeus;
+import de.arraying.arraybot.script.method.templates.CollectionManagementMethods;
+import de.arraying.arraybot.util.CustomEmbedBuilder;
 import de.arraying.zeus.backend.annotations.ZeusMethod;
-import net.dv8tion.jda.core.EmbedBuilder;
 
 import java.awt.*;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Copyright 2017 Arraying
@@ -26,17 +24,14 @@ import java.util.concurrent.ConcurrentHashMap;
  * limitations under the License.
  */
 @SuppressWarnings({"unused", "WeakerAccess"})
-public final class EmbedMethods extends Methods {
-
-    private final Map<String, EmbedBuilder> embeds = new ConcurrentHashMap<>();
-    private int embedIndex = -1;
+public final class EmbedMethods extends CollectionManagementMethods<CustomEmbedBuilder> {
 
     /**
      * Creates a new method collection object.
      * @param environment The command environment.
      */
     public EmbedMethods(CommandEnvironment environment) {
-        super(environment);
+        super(environment, "embed");
     }
 
     /**
@@ -45,9 +40,7 @@ public final class EmbedMethods extends Methods {
      */
     @ZeusMethod
     public String embed_new() {
-        String id = UZeus.createId("embed", environment.getMessage().getIdLong(), newEmbedIndex());
-        embeds.put(id, new EmbedBuilder());
-        return id;
+        return internalNew(new CustomEmbedBuilder());
     }
 
     /**
@@ -57,7 +50,7 @@ public final class EmbedMethods extends Methods {
      */
     @ZeusMethod
     public void embed_description(String embed, String description) {
-        EmbedBuilder embedBuilder = embeds.get(embed);
+        CustomEmbedBuilder embedBuilder = collection.get(embed);
         if(embedBuilder != null) {
             embedBuilder.setDescription(description);
         }
@@ -73,7 +66,7 @@ public final class EmbedMethods extends Methods {
     @ZeusMethod
     public void embed_color(String embed, Integer r, Integer g, Integer b) {
         try {
-            EmbedBuilder embedBuilder = embeds.get(embed);
+            CustomEmbedBuilder embedBuilder = collection.get(embed);
             if(embedBuilder != null) {
                 embedBuilder.setColor(new Color(r, g, b));
             }
@@ -99,7 +92,7 @@ public final class EmbedMethods extends Methods {
     @ZeusMethod
     public void embed_title(String embed, String title, String iconUrl) {
         try {
-            EmbedBuilder embedBuilder = embeds.get(embed);
+            CustomEmbedBuilder embedBuilder = collection.get(embed);
             if(embedBuilder != null) {
                 embedBuilder.setTitle(title, iconUrl);
             }
@@ -125,7 +118,7 @@ public final class EmbedMethods extends Methods {
     @ZeusMethod
     public void embed_footer(String embed, String footer, String iconUrl) {
         try {
-            EmbedBuilder embedBuilder = embeds.get(embed);
+            CustomEmbedBuilder embedBuilder = collection.get(embed);
             if(embedBuilder != null) {
                 embedBuilder.setFooter(footer, iconUrl);
             }
@@ -142,7 +135,7 @@ public final class EmbedMethods extends Methods {
     @ZeusMethod
     public void embed_field(String embed, String title, String value, Boolean inline) {
         try {
-            EmbedBuilder embedBuilder = embeds.get(embed);
+            CustomEmbedBuilder embedBuilder = collection.get(embed);
             if(embedBuilder != null) {
                 embedBuilder.addField(title, value, inline);
             }
@@ -157,7 +150,7 @@ public final class EmbedMethods extends Methods {
     @ZeusMethod
     public void embed_field_blank(String embed, Boolean inline) {
         try {
-            EmbedBuilder embedBuilder = embeds.get(embed);
+            CustomEmbedBuilder embedBuilder = collection.get(embed);
             if(embedBuilder != null) {
                 embedBuilder.addBlankField(inline);
             }
@@ -168,16 +161,8 @@ public final class EmbedMethods extends Methods {
      * Gets all embeds.
      * @return A map of embeds.
      */
-    public Map<String, EmbedBuilder> getEmbeds() {
-        return embeds;
-    }
-
-    /**
-     * Gets a new unique embed ID.
-     * @return An integer.
-     */
-    private int newEmbedIndex() {
-        return ++embedIndex;
+    public Map<String, CustomEmbedBuilder> getEmbeds() {
+        return collection;
     }
 
 }
