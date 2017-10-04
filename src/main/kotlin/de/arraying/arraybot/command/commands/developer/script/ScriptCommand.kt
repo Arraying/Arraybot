@@ -1,6 +1,6 @@
 package de.arraying.arraybot.command.commands.developer.script
 
-import de.arraying.arraybot.command.other.CommandEnvironment
+import de.arraying.arraybot.command.CommandEnvironment
 import de.arraying.arraybot.command.templates.DefaultCommand
 import de.arraying.arraybot.language.Message
 import net.dv8tion.jda.core.Permission

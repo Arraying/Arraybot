@@ -1,6 +1,6 @@
 package de.arraying.arraybot.script.variable.variables;
 
-import de.arraying.arraybot.command.other.CommandEnvironment;
+import de.arraying.arraybot.command.CommandEnvironment;
 import de.arraying.arraybot.script.variable.Variables;
 import de.arraying.arraybot.util.UZeus;
 import de.arraying.zeus.backend.ZeusException;
@@ -40,7 +40,7 @@ public final class MessageVariables extends Variables {
            TextChannel channel = variable.getEnvironment().getChannel();
            Object valueRaw = variable.getVariable().value();
            if(!(valueRaw instanceof Boolean)) {
-               de.arraying.arraybot.language.Message.ZEUS_ERROR_MESSAGE_PIN_BOOLEAN.send(channel, false);
+               de.arraying.arraybot.language.Message.ZEUS_ERROR_MESSAGE_PIN_BOOLEAN.send(channel);
            } else {
                boolean value = (boolean) valueRaw;
                try {
@@ -53,7 +53,7 @@ public final class MessageVariables extends Variables {
                        message.unpin().queue(null, error -> UZeus.error(channel, variable.getLineNumber(), error.getMessage() + "."));
                    }
                } catch(PermissionException exception) {
-                   UZeus.error(channel, variable.getLineNumber(), de.arraying.arraybot.language.Message.ZEUS_ERROR_MESSAGE_PIN_PERMISSION.content(channel, false));
+                   UZeus.error(channel, variable.getLineNumber(), de.arraying.arraybot.language.Message.ZEUS_ERROR_MESSAGE_PIN_PERMISSION.getContent(channel));
                }
            }
        });

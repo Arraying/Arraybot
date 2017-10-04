@@ -1,6 +1,6 @@
 package de.arraying.arraybot.script.method.methods;
 
-import de.arraying.arraybot.command.other.CommandEnvironment;
+import de.arraying.arraybot.command.CommandEnvironment;
 import de.arraying.arraybot.script.method.templates.EntityCollectionMethods;
 import de.arraying.zeus.backend.annotations.ZeusMethod;
 import net.dv8tion.jda.core.entities.TextChannel;

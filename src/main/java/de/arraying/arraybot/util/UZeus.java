@@ -32,27 +32,13 @@ public final class UZeus {
     }
 
     /**
-     * Creates a new unique ID.
-     * @param type The type of ID.
-     * @param messageId The message ID.
-     * @param index The unique index.
-     * @return A key.
-     */
-    public static String createId(String type, long messageId, int index) {
-        return type + "_" + messageId + "_" + index;
-    }
-
-    /**
      * Sends a standard error.
      * @param channel The channel to send the error in.
      * @param lineNumber The line number.
      * @param message The message.
      */
     public static void error(TextChannel channel, int lineNumber, String message) {
-        channel.sendMessage(Message.ZEUS_ERROR.content(channel, false)
-                .replace("{line}", String.valueOf(lineNumber))
-                .replace("{error}", message))
-                .queue();
+        Message.ZEUS_ERROR.send(channel, String.valueOf(lineNumber), message).queue();
     }
 
     /**
@@ -61,10 +47,8 @@ public final class UZeus {
      * @param exception The exception.
      */
     public static void errorInChannel(TextChannel channel, Exception exception) {
-        channel.sendMessage(Message.ZEUS_ERROR.content(channel, false)
-                .replace("{line}", "<" + Message.ZEUS_ERROR_PROVIDED.content(channel, false) + ">")
-                .replace("{error}", exception.getMessage() + "."))
-                .queue();
+        Message.ZEUS_ERROR.send(channel, "<" + Message.ZEUS_ERROR_PROVIDED.getContent(channel) + ">",
+                exception.getMessage() + ".").queue();
     }
 
 }

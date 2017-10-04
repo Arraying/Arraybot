@@ -1,7 +1,7 @@
 package de.arraying.arraybot.script.method.methods;
 
+import de.arraying.arraybot.command.CommandEnvironment;
 import de.arraying.arraybot.command.Commands;
-import de.arraying.arraybot.command.other.CommandEnvironment;
 import de.arraying.arraybot.script.method.Methods;
 import de.arraying.zeus.backend.annotations.ZeusMethod;
 

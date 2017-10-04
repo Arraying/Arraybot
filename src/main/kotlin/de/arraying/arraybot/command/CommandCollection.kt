@@ -1,9 +1,8 @@
-package de.arraying.arraybot.command.other
+package de.arraying.arraybot.command
 
 import de.arraying.arraybot.command.commands.customization.custom.CustomCommand
 import de.arraying.arraybot.command.commands.developer.eval.EvalCommand
 import de.arraying.arraybot.command.commands.developer.script.ScriptCommand
-import de.arraying.arraybot.command.commands.utils.TestCommand
 import de.arraying.arraybot.command.commands.utils.ping.PingCommand
 import de.arraying.arraybot.command.templates.DefaultCommand
 
@@ -43,10 +42,5 @@ enum class CommandCollection(val command: DefaultCommand) {
      * The command to use to quickly evaluate a long Zeus script.
      */
     SCRIPT(ScriptCommand()),
-
-    /**
-     * A test command.
-     */
-    TEST(TestCommand());
 
 }

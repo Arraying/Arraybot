@@ -1,6 +1,6 @@
 package de.arraying.arraybot.manager;
 
-import de.arraying.arraybot.command.other.CommandEnvironment;
+import de.arraying.arraybot.command.CommandEnvironment;
 import de.arraying.arraybot.script.ScriptRuntime;
 import org.apache.commons.io.IOUtils;
 

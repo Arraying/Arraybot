@@ -1,6 +1,6 @@
 package de.arraying.arraybot.script.variable.variables;
 
-import de.arraying.arraybot.command.other.CommandEnvironment;
+import de.arraying.arraybot.command.CommandEnvironment;
 import de.arraying.arraybot.language.Message;
 import de.arraying.arraybot.script.variable.Variables;
 import de.arraying.arraybot.util.Limits;
@@ -46,16 +46,14 @@ public final class UserVariables extends Variables {
             String nickname = variable.getVariable().value().toString();
             if(nickname.length() < Limits.NICKNAME_MIN.getLimit()
                     || nickname.length() > Limits.NICKNAME_MAX.getLimit()) {
-                String message = Message.ZEUS_ERROR_NICKNAME_LENGTH.content(channel, false)
-                        .replace("{min}", Limits.NICKNAME_MIN.asString())
-                        .replace("{max}", Limits.NICKNAME_MAX.asString());
-                channel.sendMessage(message).queue();
+                Message.ZEUS_ERROR_NICKNAME_LENGTH.send(channel, Limits.NICKNAME_MIN.asString(),
+                        Limits.NICKNAME_MAX.asString()).queue();
             } else {
                 try {
                     GuildController controller = variable.getEnvironment().getGuild().getController();
                     controller.setNickname(variable.getEnvironment().getMember(), variable.getVariable().value().toString()).reason("Script").queue();
                 } catch(PermissionException exception) {
-                    UZeus.error(channel, variable.getLineNumber(), Message.ZEUS_ERROR_NICKNAME_PERMISSION.content(channel, false));
+                    UZeus.error(channel, variable.getLineNumber(), Message.ZEUS_ERROR_NICKNAME_PERMISSION.getContent(channel));
                 }
             }
         });

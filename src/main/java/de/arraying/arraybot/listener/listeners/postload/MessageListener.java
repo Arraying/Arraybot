@@ -1,8 +1,8 @@
 package de.arraying.arraybot.listener.listeners.postload;
 
 import com.lambdaworks.redis.api.sync.RedisCommands;
+import de.arraying.arraybot.command.CommandEnvironment;
 import de.arraying.arraybot.command.Commands;
-import de.arraying.arraybot.command.other.CommandEnvironment;
 import de.arraying.arraybot.data.database.Redis;
 import de.arraying.arraybot.listener.listeners.PostLoadListener;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;

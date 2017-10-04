@@ -1,4 +1,4 @@
-package de.arraying.arraybot.command.other
+package de.arraying.arraybot.command
 
 import net.dv8tion.jda.core.entities.Message
 

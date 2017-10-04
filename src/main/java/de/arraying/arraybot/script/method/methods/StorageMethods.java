@@ -1,6 +1,6 @@
 package de.arraying.arraybot.script.method.methods;
 
-import de.arraying.arraybot.command.other.CommandEnvironment;
+import de.arraying.arraybot.command.CommandEnvironment;
 import de.arraying.arraybot.data.database.categories.VariablesEntry;
 import de.arraying.arraybot.data.database.core.Entry;
 import de.arraying.arraybot.script.method.Methods;

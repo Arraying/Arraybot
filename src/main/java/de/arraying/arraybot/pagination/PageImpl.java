@@ -71,8 +71,7 @@ public abstract class PageImpl implements Pages {
         return embed.addField(title,
                 list,
                 false)
-                .setFooter(Message.PAGE_FOOTER.content(channel, false)
-                                .replace("{pageinfo}", pageNumber + "/" + pages.size()),
+                .setFooter(Message.PAGE_FOOTER.getContent(channel, pageNumber + "/" + pages.size()),
                         null);
     }
 

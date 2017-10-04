@@ -1,7 +1,5 @@
 package de.arraying.arraybot.command
 
-import de.arraying.arraybot.command.other.CommandEnvironment
-
 /**
  * Copyright 2017 Arraying
  *

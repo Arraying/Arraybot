@@ -1,8 +1,6 @@
 package de.arraying.arraybot.command
 
 import de.arraying.arraybot.Arraybot
-import de.arraying.arraybot.command.other.CommandCollection
-import de.arraying.arraybot.command.other.CommandEnvironment
 import de.arraying.arraybot.command.templates.CustomCommand
 import de.arraying.arraybot.command.templates.DefaultCommand
 import de.arraying.arraybot.data.database.categories.GuildEntry

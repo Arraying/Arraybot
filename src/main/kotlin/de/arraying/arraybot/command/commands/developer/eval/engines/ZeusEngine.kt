@@ -1,8 +1,8 @@
 package de.arraying.arraybot.command.commands.developer.eval.engines
 
 import de.arraying.arraybot.Arraybot
+import de.arraying.arraybot.command.CommandEnvironment
 import de.arraying.arraybot.command.commands.developer.eval.EvalEngine
-import de.arraying.arraybot.command.other.CommandEnvironment
 import de.arraying.arraybot.language.Message
 
 /**
@@ -27,7 +27,7 @@ class ZeusEngine: EvalEngine {
      */
     override fun evaluate(environment: CommandEnvironment, code: String): String {
         Arraybot.getInstance().scriptManager.executeStringRaw(code.split("\n").toTypedArray(), environment)
-        return Message.COMMANDS_EVAL_EVALUATED.content(environment.channel)
+        return Message.COMMANDS_EVAL_EVALUATED.getContent(environment.channel)
     }
 
 }

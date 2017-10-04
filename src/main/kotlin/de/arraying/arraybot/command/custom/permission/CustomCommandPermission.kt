@@ -54,10 +54,10 @@ class CustomCommandPermission(val value: String) {
      */
     fun toString(channel: TextChannel): String {
         return when {
-                    isPermission() -> Message.PERMISSION_PERMISSION.content(channel)
-                    isRole(channel.guild) -> Message.PERMISSION_ROLE.content(channel)
-                    else -> Message.PERMISSION_INVALID.content(channel)
-                }.replace("{permission}", value)
+                    isPermission() -> Message.PERMISSION_PERMISSION.getContent(channel, value)
+                    isRole(channel.guild) -> Message.PERMISSION_ROLE.getContent(channel, value)
+                    else -> Message.PERMISSION_INVALID.getContent(channel, value)
+                }//.replace("{permission}", value)
     }
 
     /**

@@ -41,8 +41,7 @@ public final class UEmbed {
                 .setAuthor("Arraybot", "http://arraybot.xyz",
                         shouldImage(channel.getGuild()) ? icon : null)
                 .setColor(new Color(34, 150, 245))
-                .setFooter(Message.EMBED_FOOTER.content(channel, false)
-                                .replace("{year}", String.valueOf(year)),
+                .setFooter(Message.EMBED_FOOTER.getContent(channel, String.valueOf(year)),
                         shouldImage(channel.getGuild()) ? jda.getSelfUser().getAvatarUrl() : null);
         if(shouldImage(guild)) {
             embedBuilder.setThumbnail(icon);

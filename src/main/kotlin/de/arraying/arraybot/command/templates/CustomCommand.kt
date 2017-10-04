@@ -1,10 +1,10 @@
 package de.arraying.arraybot.command.templates
 
 import de.arraying.arraybot.command.Command
+import de.arraying.arraybot.command.CommandEnvironment
 import de.arraying.arraybot.command.custom.permission.CustomCommandPermission
 import de.arraying.arraybot.command.custom.syntax.CustomCommandSyntax
 import de.arraying.arraybot.command.custom.type.CustomCommandType
-import de.arraying.arraybot.command.other.CommandEnvironment
 import de.arraying.arraybot.data.database.Redis
 import de.arraying.arraybot.data.database.categories.CustomCommandEntry
 import de.arraying.arraybot.data.database.core.Entry
@@ -66,17 +66,22 @@ class CustomCommand(val name: String,
             Message.CUSTOM_PERMISSION.send(channel).queue()
             return
         }
-        val value = if(syntax == CustomCommandSyntax.STARTS_WITH) {
-            val builder = StringBuilder()
-            for(i in 1 until args.size) {
-                builder
-                        .append(args[i])
-                        .append(" ")
+        val value: String =
+            if(syntax == CustomCommandSyntax.STARTS_WITH) {
+                if(args.size < 2) {
+                    Message.CUSTOM_ARGUMENT_PROVIDE.send(channel, name, Message.CUSTOM_ARGUMENT.getContent(channel)).queue()
+                    return
+                }
+                val builder = StringBuilder()
+                for(i in 1 until args.size) {
+                    builder
+                            .append(args[i])
+                            .append(" ")
+                }
+                this.value.replace("{input}", builder.toString().trim())
+            } else {
+                this.value
             }
-            this.value.replace("{input}", builder.toString().trim())
-        } else {
-            this.value
-        }
         if(value.isEmpty()) {
             Message.CUSTOM_VALUE_EMPTY.send(channel).queue()
             return
@@ -96,7 +101,7 @@ class CustomCommand(val name: String,
             val type = CustomCommandType.fromString(commandEntry.fetch(commandEntry.getField(CustomCommandEntry.Fields.TYPE), guildId, commandName))
             val descriptionString = commandEntry.fetch(commandEntry.getField(CustomCommandEntry.Fields.DESCRIPTION), guildId, commandName)
             val description = if(descriptionString == UDefaults.DEFAULT_NULL) {
-                    Message.CUSTOM_DESCRIPTION.content(channel)
+                    Message.CUSTOM_DESCRIPTION.getContent(channel)
                 } else {
                     descriptionString
                 }

@@ -1,6 +1,6 @@
 package de.arraying.arraybot.script.variable.variables;
 
-import de.arraying.arraybot.command.other.CommandEnvironment;
+import de.arraying.arraybot.command.CommandEnvironment;
 import de.arraying.arraybot.language.Message;
 import de.arraying.arraybot.script.variable.Variables;
 import de.arraying.arraybot.util.Limits;
@@ -44,10 +44,8 @@ public final class ChannelVariables extends Variables {
                     .replaceAll("[^a-zA-Z0-9-_]", "-");
             if(newName.length() < Limits.CHANNEL_NAME_MIN.getLimit()
                     || newName.length() > Limits.CHANNEL_NAME_MAX.getLimit()) {
-                String message = Message.ZEUS_ERROR_CHANNEL_NAME_LENGTH.content(channel, false)
-                        .replace("{min}", Limits.CHANNEL_NAME_MIN.asString())
-                        .replace("{max}", Limits.CHANNEL_NAME_MAX.asString());
-                channel.sendMessage(message).queue();
+                Message.ZEUS_ERROR_CHANNEL_NAME_LENGTH.send(channel, Limits.CHANNEL_NAME_MIN.asString(),
+                        Limits.CHANNEL_NAME_MAX.asString()).queue();
             } else {
                 try {
                     channel.getManager().setName(newName).queue();
@@ -60,7 +58,7 @@ public final class ChannelVariables extends Variables {
             TextChannel channel = variable.getEnvironment().getChannel();
             Object positionRaw = variable.getVariable().value();
             if(!(positionRaw instanceof Integer)) {
-                Message.ZEUS_ERROR_CHANNEL_POSITION_TYPE.send(channel,false).queue();
+                Message.ZEUS_ERROR_CHANNEL_POSITION_TYPE.send(channel).queue();
             } else {
                 try {
                     channel.getManager().setPosition((Integer) positionRaw).queue();
@@ -73,9 +71,7 @@ public final class ChannelVariables extends Variables {
             TextChannel channel = variable.getEnvironment().getChannel();
             String newTopic = variable.getVariable().value().toString();
             if(newTopic.length() > Limits.CHANNEL_TOPIC_MAX.getLimit()) {
-                String message = Message.ZEUS_ERROR_CHANNEL_TOPIC_LENGTH.content(channel, false)
-                        .replace("{max}", Limits.CHANNEL_TOPIC_MAX.asString());
-                channel.sendMessage(message).queue();
+                Message.ZEUS_ERROR_CHANNEL_TOPIC_LENGTH.send(channel, Limits.CHANNEL_TOPIC_MAX.asString()).queue();
             } else {
                 try {
                     channel.getManager().setTopic(newTopic).queue();
@@ -88,7 +84,7 @@ public final class ChannelVariables extends Variables {
             TextChannel channel = variable.getEnvironment().getChannel();
             Object positionRaw = variable.getVariable().value();
             if(!(positionRaw instanceof Boolean)) {
-                Message.ZEUS_ERROR_CHANNEL_NSFW_TYPE.send(channel,false).queue();
+                Message.ZEUS_ERROR_CHANNEL_NSFW_TYPE.send(channel).queue();
             } else {
                 try {
                     channel.getManager().setNSFW((Boolean) positionRaw).queue();

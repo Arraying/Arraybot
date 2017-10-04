@@ -1,6 +1,6 @@
 package de.arraying.arraybot.script.method.templates;
 
-import de.arraying.arraybot.command.other.CommandEnvironment;
+import de.arraying.arraybot.command.CommandEnvironment;
 import net.dv8tion.jda.core.entities.ISnowflake;
 
 import java.util.List;

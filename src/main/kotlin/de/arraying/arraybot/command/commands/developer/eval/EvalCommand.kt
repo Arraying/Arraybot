@@ -1,8 +1,8 @@
 package de.arraying.arraybot.command.commands.developer.eval
 
+import de.arraying.arraybot.command.CommandEnvironment
 import de.arraying.arraybot.command.commands.developer.eval.engines.JSREngine
 import de.arraying.arraybot.command.commands.developer.eval.engines.ZeusEngine
-import de.arraying.arraybot.command.other.CommandEnvironment
 import de.arraying.arraybot.command.templates.DefaultCommand
 import de.arraying.arraybot.language.Message
 import de.arraying.arraybot.util.Limits
@@ -59,9 +59,7 @@ class EvalCommand: DefaultCommand("eval",
                 } else {
                     "-"
                 }
-            val message = Message.COMMANDS_EVAL_ENGINE_INVALID.content(channel)
-                    .replace("{engines}", engines)
-            channel.sendMessage(message).queue()
+            Message.COMMANDS_EVAL_ENGINE_INVALID.send(channel, engines)
             return
         }
         if(args.size < 3) {

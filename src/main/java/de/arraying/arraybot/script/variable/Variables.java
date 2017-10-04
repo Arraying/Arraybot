@@ -1,6 +1,6 @@
 package de.arraying.arraybot.script.variable;
 
-import de.arraying.arraybot.command.other.CommandEnvironment;
+import de.arraying.arraybot.command.CommandEnvironment;
 import de.arraying.zeus.backend.ZeusException;
 import de.arraying.zeus.runtime.ZeusRuntimeBuilder;
 import de.arraying.zeus.utils.ZeusVariableUtil;

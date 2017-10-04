@@ -1,8 +1,8 @@
 package de.arraying.arraybot.command.commands.developer.eval.engines
 
 import de.arraying.arraybot.Arraybot
+import de.arraying.arraybot.command.CommandEnvironment
 import de.arraying.arraybot.command.commands.developer.eval.EvalEngine
-import de.arraying.arraybot.command.other.CommandEnvironment
 import de.arraying.arraybot.language.Message
 import javax.script.ScriptEngineManager
 
@@ -48,11 +48,11 @@ class JSREngine(private val mode: Mode): EvalEngine {
                 Mode.JAVASCRIPT -> engine.eval("(function() { with (imports) {\n$code\n} })();")
             }
         } catch(exception: Exception) {
-            Message.COMMANDS_EVAL_ERROR.content(channel)
+            Message.COMMANDS_EVAL_ERROR.getContent(channel)
                     .replace("{error}", if(exception.message == null) "null" else exception.message!!)
         }
         if(output == null) {
-            output = Message.COMMANDS_EVAL_EVALUATED.content(channel)
+            output = Message.COMMANDS_EVAL_EVALUATED.getContent(channel)
         }
         return output.toString()
     }

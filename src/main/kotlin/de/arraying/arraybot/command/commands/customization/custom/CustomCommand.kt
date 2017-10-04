@@ -1,6 +1,6 @@
 package de.arraying.arraybot.command.commands.customization.custom
 
-import de.arraying.arraybot.command.other.CommandEnvironment
+import de.arraying.arraybot.command.CommandEnvironment
 import de.arraying.arraybot.command.templates.DefaultCommand
 import de.arraying.arraybot.language.Message
 import de.arraying.arraybot.util.UEmbed
@@ -32,9 +32,9 @@ class CustomCommand: DefaultCommand("custom",
     override fun onCommand(environment: CommandEnvironment, args: List<String>) {
         val channel = environment.channel
         val embed = UEmbed.getEmbed(channel)
-                .setDescription(Message.COMMANDS_CUSTOM_EMBED_DESCRIPTION.content(channel))
-                .addField(Message.EMBED_TITLE_COMMANDS.content(channel),
-                        Message.COMMANDS_CUSTOM_EMBED_VALUE.content(channel, true),
+                .setDescription(Message.COMMANDS_CUSTOM_EMBED_DESCRIPTION.getContent(channel))
+                .addField(Message.EMBED_TITLE_COMMANDS.getContent(channel),
+                        Message.COMMANDS_CUSTOM_EMBED_VALUE.getContent(channel),
                         false)
         channel.sendMessage(embed.build()).queue()
     }

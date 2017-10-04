@@ -56,12 +56,13 @@ public class CommandList extends PageImpl {
             String syntax;
             String description;
             if(command instanceof DefaultCommand) {
-                syntax = prefix + ((DefaultCommand) command).getSyntax(guild);
-                description = ((DefaultCommand) command).getDescription(guild);
+                String language = entry.fetch(entry.getField(GuildEntry.Fields.LANGUAGE), guild, null);
+                syntax = prefix + ((DefaultCommand) command).getSyntax(language);
+                description = ((DefaultCommand) command).getDescription(language);
             } else if(command instanceof CustomCommand) {
                 syntax = prefix + ((CustomCommand) command).getName();
                 if(((CustomCommand) command).getSyntax() == CustomCommandSyntax.STARTS_WITH) {
-                    syntax += Message.CUSTOM_ARGUMENT.content(channel, false);
+                    syntax += Message.CUSTOM_ARGUMENT.getContent(channel);
                 }
                 description = ((CustomCommand) command).getDescription();
             } else {

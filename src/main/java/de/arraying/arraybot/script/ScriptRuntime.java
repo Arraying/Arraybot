@@ -1,7 +1,6 @@
 package de.arraying.arraybot.script;
 
-import de.arraying.arraybot.command.other.CommandEnvironment;
-import de.arraying.arraybot.language.Message;
+import de.arraying.arraybot.command.CommandEnvironment;
 import de.arraying.arraybot.script.method.methods.*;
 import de.arraying.arraybot.script.variable.VariableCollections;
 import de.arraying.arraybot.threadding.AbstractTask;
@@ -74,12 +73,7 @@ public final class ScriptRuntime extends AbstractTask {
                 builder = variables.getVariables().registerVariables(builder, environment);
             }
             ZeusRuntime runtime = builder.build();
-            runtime.evaluate(code, error -> {
-                String errorMessage = Message.ZEUS_ERROR.content(environment.getChannel(), false)
-                        .replace("{line}", String.valueOf(error.getLineNumber()))
-                        .replace("{error}", error.getMessage());
-                environment.getChannel().sendMessage(errorMessage).queue();
-            });
+            runtime.evaluate(code, error -> UZeus.error(environment.getChannel(), error.getLineNumber(), error.getMessage()));
         } catch(ZeusException exception) {
             logger.error("An error occurred.", exception);
         }

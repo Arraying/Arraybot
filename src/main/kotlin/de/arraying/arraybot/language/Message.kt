@@ -20,14 +20,14 @@ import net.dv8tion.jda.core.requests.RestAction
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-enum class Message {
+enum class Message(private val prefix: Boolean = false) {
 
     COMMAND_UNAVAILABLE_DEVELOPER,
     COMMAND_UNAVAILABLE_EMBED,
     COMMAND_PERMISSION,
     COMMAND_SUBCOMMAND_UNKNOWN,
     COMMANDS_CUSTOM_EMBED_DESCRIPTION,
-    COMMANDS_CUSTOM_EMBED_VALUE,
+    COMMANDS_CUSTOM_EMBED_VALUE(true),
     COMMANDS_EVAL_CODE_PROVIDE,
     COMMANDS_EVAL_ENGINE_INVALID,
     COMMANDS_EVAL_ENGINE_PROVIDE,
@@ -38,6 +38,7 @@ enum class Message {
     COMMANDS_SCRIPT_EXECUTED,
     COMMANDS_SCRIPT_PROVIDE,
     CUSTOM_ARGUMENT,
+    CUSTOM_ARGUMENT_PROVIDE(true),
     CUSTOM_DESCRIPTION,
     CUSTOM_PERMISSION,
     CUSTOM_SYNTAX_INVALID,
@@ -70,58 +71,91 @@ enum class Message {
     ZEUS_ERROR_PROVIDED;
 
     /**
-     * Sends the message to the channel.
+     * Returns a usable rest action that can be queued to send to the channel.
+     * The replace parameter can be used to format the string.
      */
-    fun send(channel: TextChannel, replacePrefix: Boolean = false): RestAction<net.dv8tion.jda.core.entities.Message> {
-        return channel.sendMessage(content(channel.guild.idLong, replacePrefix))
+    fun send(channel: TextChannel, vararg format: String): RestAction<net.dv8tion.jda.core.entities.Message> {
+        return channel.sendMessage(getContent(channel.guild.idLong, *format))
     }
 
     /**
-     * Gets the message content.
+     * Gets the content of the message for the specific guild.
+     * The replace parameter can be used to format the string.
      */
-    fun content(channel: TextChannel, replacePrefix: Boolean = false): String {
-        return content(channel.guild.idLong, replacePrefix)
+    fun getContent(guild: Long, vararg format: String): String {
+        val entry = Entry.Category.GUILD.entry as GuildEntry
+        var content = Languages.getEntry(name.toLowerCase(), entry.fetch(entry.getField(GuildEntry.Fields.LANGUAGE), guild, null))
+        if(prefix) {
+            content = content.replace("{prefix}", entry.fetch(entry.getField(GuildEntry.Fields.PREFIX), guild, null))
+        }
+        content = content
+                .replace("{github}", "https://github.com/Arraying/arraybot/")
+                .replace("{zwsp}", "​")
+                .replace("-", "    **-**")
+        content = content.format(*format)
+        return content
     }
 
     /**
-     * Gets the message content.
+     * Alias method to get the content of the message.
      */
-    fun content(id: Long, replaceBoolean: Boolean = false): String {
-        return replace(Languages.get(id, name.toLowerCase().replace("_", ".")), id, replaceBoolean)
+    fun getContent(channel: TextChannel, vararg format: String): String {
+        return getContent(channel.guild.idLong, *format)
     }
 
-    companion object {
-
-        private val githubBase = "https://github.com/Arraying/arraybot/"
-
-        /**
-         * Gets a random message.
-         */
-        fun getMessage(channel: TextChannel, message: String, replacePrefix: Boolean = false): String {
-            return replace(Languages.get(channel.guild, message), channel, replacePrefix)
-        }
-
-        /**
-         * Replaces common placeholders.
-         */
-        private fun replace(input: String, channel: TextChannel, replacePrefix: Boolean = false): String {
-            return replace(input, channel.guild.idLong, replacePrefix)
-        }
-
-        /**
-         * Replaces common placeholders.
-         */
-        fun replace(input: String, id: Long, replacePrefix: Boolean = false): String {
-            var output = input
-                    .replace("{github}", githubBase)
-                    .replace("{zwsp}", "​")
-                    .replace("-", "    **-**")
-            if(replacePrefix) {
-                val entry = Entry.Category.GUILD.entry as GuildEntry
-               output = output.replace("{prefix}", entry.fetch(entry.getField(GuildEntry.Fields.PREFIX), id, null))
-            }
-            return output
-        }
-    }
+//    /**
+//     * Sends the message to the channel.
+//     */
+//    fun send(channel: TextChannel, replacePrefix: Boolean = false): RestAction<net.dv8tion.jda.core.entities.Message> {
+//        return channel.sendMessage(content(channel.guild.idLong, replacePrefix))
+//    }
+//
+//    /**
+//     * Gets the message content.
+//     */
+//    fun content(channel: TextChannel, replacePrefix: Boolean = false): String {
+//        return content(channel.guild.idLong, replacePrefix)
+//    }
+//
+//    /**
+//     * Gets the message content.
+//     */
+//    fun content(id: Long, replaceBoolean: Boolean = false): String {
+//        return replace(Languages.get(id, name.toLowerCase().replace("_", ".")), id, replaceBoolean)
+//    }
+//
+//    companion object {
+//
+//        private val githubBase = "https://github.com/Arraying/arraybot/"
+//
+//        /**
+//         * Gets a random message.
+//         */
+//        fun getMessage(channel: TextChannel, message: String, replacePrefix: Boolean = false): String {
+//            return replace(Languages.get(channel.guild, message), channel, replacePrefix)
+//        }
+//
+//        /**
+//         * Replaces common placeholders.
+//         */
+//        private fun replace(input: String, channel: TextChannel, replacePrefix: Boolean = false): String {
+//            return replace(input, channel.guild.idLong, replacePrefix)
+//        }
+//
+//        /**
+//         * Replaces common placeholders.
+//         */
+//        fun replace(input: String, id: Long, replacePrefix: Boolean = false): String {
+//            var output = input
+//                    .replace("{github}", githubBase)
+//                    .replace("{zwsp}", "​")
+//                    .replace("-", "    **-**")
+//            if(replacePrefix) {
+//                val entry = Entry.Category.GUILD.entry as GuildEntry
+//               output = output.replace("{prefix}", entry.fetch(entry.getField(GuildEntry.Fields.PREFIX), id, null))
+//            }
+//            return output
+//        }
+//    }
 
 }

@@ -1,6 +1,6 @@
 package de.arraying.arraybot.script.method.methods;
 
-import de.arraying.arraybot.command.other.CommandEnvironment;
+import de.arraying.arraybot.command.CommandEnvironment;
 import de.arraying.arraybot.language.Message;
 import de.arraying.arraybot.script.method.templates.EntityCollectionMethods;
 import de.arraying.arraybot.util.Limits;
@@ -133,9 +133,7 @@ public final class UserMethods extends EntityCollectionMethods<User> {
             return;
         }
         if(reason.length() > Limits.BAN_REASON.getLimit()) {
-            String message = Message.ZEUS_ERROR_BAN_REASON_LENGTH.content(channel, false)
-                    .replace("{max}", Limits.BAN_REASON.asString());
-            channel.sendMessage(message).queue();
+            Message.ZEUS_ERROR_BAN_REASON_LENGTH.send(channel, Limits.BAN_REASON.asString()).queue();
             return;
         }
         try {

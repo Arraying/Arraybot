@@ -1,6 +1,6 @@
 package de.arraying.arraybot.command.commands.utils.ping
 
-import de.arraying.arraybot.command.other.CommandEnvironment
+import de.arraying.arraybot.command.CommandEnvironment
 import de.arraying.arraybot.command.templates.DefaultCommand
 import de.arraying.arraybot.language.Message
 import net.dv8tion.jda.core.Permission
@@ -29,10 +29,7 @@ class PingCommand : DefaultCommand("ping",
      */
     override fun onCommand(environment: CommandEnvironment, args: List<String>) {
         val channel = environment.channel
-        val message = Message.COMMANDS_PING_PING.content(channel, true)
-        channel.sendMessage(message
-                .replace("{ping}", channel.jda.ping.toString()))
-                .queue()
+        Message.COMMANDS_PING_PING.send(channel, channel.jda.ping.toString()).queue()
     }
 
 }

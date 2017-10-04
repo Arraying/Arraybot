@@ -4,6 +4,9 @@ import de.arraying.arraybot.Arraybot;
 import de.arraying.arraybot.manager.BotManager;
 import de.arraying.arraybot.threadding.AbstractWatcher;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * Copyright 2017 Arraying
  * <p>
@@ -38,7 +41,8 @@ public final class ShardWatcher extends AbstractWatcher {
     @Override
     public void onTask() {
         BotManager manager = Arraybot.getInstance().getBotManager();
-        for(ShardEntry shard : manager.getShards().values()) {
+        Set<ShardEntry> copy = new HashSet<>(manager.getShards().values());
+        for(ShardEntry shard : copy) {
             long difference = System.currentTimeMillis() - shard.getLastEvent();
             if(difference > maxInactivityThreshold) {
                 logger.info("The shard {} is suspected to be dead. Executing a restart.", shard.getId());

@@ -1,7 +1,7 @@
 package de.arraying.arraybot.command.custom.type.actions
 
+import de.arraying.arraybot.command.CommandEnvironment
 import de.arraying.arraybot.command.custom.type.CustomCommandAction
-import de.arraying.arraybot.command.other.CommandEnvironment
 
 /**
  * Copyright 2017 Arraying

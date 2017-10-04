@@ -34,7 +34,8 @@ public final class StartupLanguages extends StartupTask {
     @Override
     public void onTask() throws Exception {
         logger.info("Attempting to load in all languages...");
-        Languages.Companion.init();
+        //Languages.Companion.init();
+        Languages.INSTANCE.cache();
     }
 
 }

@@ -1,6 +1,6 @@
 package de.arraying.arraybot.script.method.methods;
 
-import de.arraying.arraybot.command.other.CommandEnvironment;
+import de.arraying.arraybot.command.CommandEnvironment;
 import de.arraying.arraybot.script.method.templates.CollectionManagementMethods;
 import de.arraying.arraybot.util.UZeus;
 import de.arraying.zeus.backend.ZeusException;

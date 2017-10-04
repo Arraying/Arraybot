@@ -2,8 +2,8 @@ package de.arraying.arraybot.command.templates
 
 import de.arraying.arraybot.Arraybot
 import de.arraying.arraybot.command.Command
+import de.arraying.arraybot.command.CommandEnvironment
 import de.arraying.arraybot.command.Commands
-import de.arraying.arraybot.command.other.CommandEnvironment
 import de.arraying.arraybot.data.database.Redis
 import de.arraying.arraybot.data.database.core.Entry
 import de.arraying.arraybot.data.database.templates.SetEntry
@@ -41,8 +41,8 @@ abstract class DefaultCommand(val name: String,
 
     protected val arraybot = Arraybot.getInstance()!!
     private val logger = LoggerFactory.getLogger("Command-${WordUtils.capitalize(name)}")
-    private val descriptionPath = "commands.$name.description"
-    private val syntaxPath = "commands.$name.syntax"
+    private val descriptionPath = "commands_${name}_description"
+    private val syntaxPath = "commands_${name}_syntax"
     private var status: String? = null
 
     /**
@@ -54,8 +54,8 @@ abstract class DefaultCommand(val name: String,
      * Internal command checks.
      */
     internal fun checks() {
-        if ((!Languages.contains(descriptionPath)
-                || !Languages.contains(syntaxPath))
+        if ((!Languages.has(descriptionPath)
+                || !Languages.has(syntaxPath))
                 && Commands.commands.containsKey(name)) {
             Commands.unregisterCommand(name)
             logger.error("The command has been unregistered disabled as it does not have a description or syntax defined.")
@@ -138,9 +138,7 @@ abstract class DefaultCommand(val name: String,
         }
         if(!PermissionUtil.checkPermission(channel, environment.member, permission)
                 && !customPermissionChecking) {
-            val message = Message.COMMAND_PERMISSION.content(channel)
-                    .replace("{permission}", permission.getName())
-            channel.sendMessage(message).queue()
+            Message.COMMAND_PERMISSION.send(channel, permission.getName())
             return
         }
         val entry = Entry.Category.DISABLED_COMMAND.entry as SetEntry
@@ -169,15 +167,15 @@ abstract class DefaultCommand(val name: String,
     /**
      * Gets the description for the command.
      */
-    fun getDescription(guild: Long): String {
-        return Languages.get(guild, descriptionPath)
+    fun getDescription(language: String): String {
+        return Languages.getEntry(descriptionPath, language)
     }
 
     /**
      * Gets the syntax for the command. Without prefix.
      */
-    fun getSyntax(guild: Long): String {
-        return Languages.get(guild, syntaxPath)
+    fun getSyntax(language: String): String {
+        return Languages.getEntry(syntaxPath, language)
     }
 
 }
