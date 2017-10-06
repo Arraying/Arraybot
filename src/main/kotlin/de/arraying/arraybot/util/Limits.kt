@@ -48,6 +48,11 @@ enum class Limits(val limit: Int) {
     CUSTOM_VALUE(1900),
 
     /**
+     * The maximum displayable characters in a single embed field.
+     */
+    EMBED_FIELD(1024),
+
+    /**
      * The maximum amount of characters for any message.
      */
     MESSAGE(2000),

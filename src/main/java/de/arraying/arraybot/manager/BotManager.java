@@ -17,6 +17,7 @@ import net.dv8tion.jda.core.requests.SessionReconnectQueue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -48,7 +49,7 @@ public final class BotManager {
      * @return A map of shards.
      */
     public Map<Integer, ShardEntry> getShards() {
-        return shards;
+        return Collections.unmodifiableMap(shards);
     }
 
     /**

@@ -33,10 +33,26 @@ enum class Message(private val prefix: Boolean = false) {
     COMMANDS_EVAL_ENGINE_PROVIDE,
     COMMANDS_EVAL_ERROR,
     COMMANDS_EVAL_EVALUATED,
+    COMMANDS_HELP_EMBED_ANNOUNCEMENT,
+    COMMANDS_HELP_EMBED_DESCRIPTION,
+    COMMANDS_HELP_EMBED_HELP_TITLE,
+    COMMANDS_HELP_EMBED_HELP_VALUE,
+    COMMANDS_HELP_EMBED_START_TITLE,
+    COMMANDS_HELP_EMBED_START_VALUE(true),
     COMMANDS_PING_PING,
+    COMMANDS_RELOAD_EMBED_DESCRIPTION,
+    COMMANDS_RELOAD_EMBED_VALUE(true),
+    COMMANDS_RELOAD_INPUT_PROVIDE,
+    COMMANDS_RELOAD_LANGUAGES_RELOADED,
+    COMMANDS_RELOAD_MODE_PROVIDE,
+    COMMANDS_RELOAD_SHARD_ERROR,
+    COMMANDS_RELOAD_SHARD_INVALID,
+    COMMANDS_RELOAD_SHARD_RELOADED,
     COMMANDS_SCRIPT_ERROR_LINK,
     COMMANDS_SCRIPT_EXECUTED,
     COMMANDS_SCRIPT_PROVIDE,
+    COMMANDS_SHARDS_EMBED_DESCRIPTION(true),
+    COMMANDS_SHARDS_EMBED_TITLE,
     CUSTOM_ARGUMENT,
     CUSTOM_ARGUMENT_PROVIDE(true),
     CUSTOM_DESCRIPTION,
@@ -102,60 +118,5 @@ enum class Message(private val prefix: Boolean = false) {
     fun getContent(channel: TextChannel, vararg format: String): String {
         return getContent(channel.guild.idLong, *format)
     }
-
-//    /**
-//     * Sends the message to the channel.
-//     */
-//    fun send(channel: TextChannel, replacePrefix: Boolean = false): RestAction<net.dv8tion.jda.core.entities.Message> {
-//        return channel.sendMessage(content(channel.guild.idLong, replacePrefix))
-//    }
-//
-//    /**
-//     * Gets the message content.
-//     */
-//    fun content(channel: TextChannel, replacePrefix: Boolean = false): String {
-//        return content(channel.guild.idLong, replacePrefix)
-//    }
-//
-//    /**
-//     * Gets the message content.
-//     */
-//    fun content(id: Long, replaceBoolean: Boolean = false): String {
-//        return replace(Languages.get(id, name.toLowerCase().replace("_", ".")), id, replaceBoolean)
-//    }
-//
-//    companion object {
-//
-//        private val githubBase = "https://github.com/Arraying/arraybot/"
-//
-//        /**
-//         * Gets a random message.
-//         */
-//        fun getMessage(channel: TextChannel, message: String, replacePrefix: Boolean = false): String {
-//            return replace(Languages.get(channel.guild, message), channel, replacePrefix)
-//        }
-//
-//        /**
-//         * Replaces common placeholders.
-//         */
-//        private fun replace(input: String, channel: TextChannel, replacePrefix: Boolean = false): String {
-//            return replace(input, channel.guild.idLong, replacePrefix)
-//        }
-//
-//        /**
-//         * Replaces common placeholders.
-//         */
-//        fun replace(input: String, id: Long, replacePrefix: Boolean = false): String {
-//            var output = input
-//                    .replace("{github}", githubBase)
-//                    .replace("{zwsp}", "​")
-//                    .replace("-", "    **-**")
-//            if(replacePrefix) {
-//                val entry = Entry.Category.GUILD.entry as GuildEntry
-//               output = output.replace("{prefix}", entry.fetch(entry.getField(GuildEntry.Fields.PREFIX), id, null))
-//            }
-//            return output
-//        }
-//    }
 
 }

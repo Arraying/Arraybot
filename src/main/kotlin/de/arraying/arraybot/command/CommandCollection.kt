@@ -2,7 +2,12 @@ package de.arraying.arraybot.command
 
 import de.arraying.arraybot.command.commands.customization.custom.CustomCommand
 import de.arraying.arraybot.command.commands.developer.eval.EvalCommand
+import de.arraying.arraybot.command.commands.developer.reload.ReloadCommand
+import de.arraying.arraybot.command.commands.developer.reload.subcommands.ReloadLanguagesSubCommand
+import de.arraying.arraybot.command.commands.developer.reload.subcommands.ReloadShardsSubCommand
 import de.arraying.arraybot.command.commands.developer.script.ScriptCommand
+import de.arraying.arraybot.command.commands.developer.shards.ShardsCommand
+import de.arraying.arraybot.command.commands.utils.help.HelpCommand
 import de.arraying.arraybot.command.commands.utils.ping.PingCommand
 import de.arraying.arraybot.command.templates.DefaultCommand
 
@@ -29,6 +34,11 @@ enum class CommandCollection(val command: DefaultCommand) {
     CUSTOM(CustomCommand()),
 
     /**
+     * The help command giving a basic overview of the bot, but not listing commands.
+     */
+    HELP(HelpCommand()),
+
+    /**
      * The command to evaluate code.
      */
     EVAL(EvalCommand()),
@@ -39,8 +49,21 @@ enum class CommandCollection(val command: DefaultCommand) {
     PING(PingCommand()),
 
     /**
+     * The command that is responsible for manually reloading certain modules.
+     */
+    RELOAD(ReloadCommand(arrayOf(
+            ReloadLanguagesSubCommand(),
+            ReloadShardsSubCommand()
+    ))),
+
+    /**
      * The command to use to quickly evaluate a long Zeus script.
      */
     SCRIPT(ScriptCommand()),
+
+    /**
+     * The command to display statistics about a shard.
+     */
+    SHARDS(ShardsCommand())
 
 }

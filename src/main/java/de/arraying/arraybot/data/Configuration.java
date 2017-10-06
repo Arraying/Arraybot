@@ -45,6 +45,7 @@ public final class Configuration {
     private final String keyCarbonitex;
     private final String keyDiscordOrg;
     private final String keyDiscordPw;
+    private final String announcement;
 
 
     /**
@@ -63,8 +64,12 @@ public final class Configuration {
      * @param redisAuth The Redis authentication string.
      * Can be empty.
      * @param redisIndex The Redis index to use.
+     * @param keyCarbonitex The Carbonitex.net secret key.
+     * @param keyDiscordOrg The DiscordBots.org secret key.
+     * @param keyDiscordPw The Bots.Discord.pw secret key.
+     * @param announcement The current announcement.
      */
-    private Configuration(String botToken, String botBetaToken, int botShards, long[] botAuthors, String botPrefix, String botVersion, String botLanguage, boolean botBeta, String redisHost, int redisPort, String redisAuth, int redisIndex, String keyCarbonitex, String keyDiscordOrg, String keyDiscordPw) {
+    private Configuration(String botToken, String botBetaToken, int botShards, long[] botAuthors, String botPrefix, String botVersion, String botLanguage, boolean botBeta, String redisHost, int redisPort, String redisAuth, int redisIndex, String keyCarbonitex, String keyDiscordOrg, String keyDiscordPw, String announcement) {
         this.botToken = botToken;
         this.botBetaToken = botBetaToken;
         this.botShards = botShards;
@@ -80,6 +85,7 @@ public final class Configuration {
         this.keyCarbonitex = keyCarbonitex;
         this.keyDiscordOrg = keyDiscordOrg;
         this.keyDiscordPw = keyDiscordPw;
+        this.announcement = announcement;
     }
 
     /**
@@ -311,10 +317,18 @@ public final class Configuration {
         return keyDiscordPw;
     }
 
+    /**
+     * Gets the announcement.
+     * @return The announcement.
+     */
+    public String getAnnouncement() {
+        return announcement;
+    }
+
     @SuppressWarnings("unused")
     private enum ConfigEntry {
 
-        BOT_TOKEN("bot-token", ConfigEntry.ConfigEntryType.STRING, ""), BOT_BETA_TOKEN("bot-beta-token", ConfigEntry.ConfigEntryType.STRING, ""), BOT_SHARDS("bot-shards", ConfigEntry.ConfigEntryType.INT, 1), BOT_AUTHORS("bot-authors", ConfigEntry.ConfigEntryType.ARRAY_LONG, new JSONArray()), BOT_PREFIX("bot-prefix", ConfigEntry.ConfigEntryType.STRING, "//"), BOT_VERSION("bot-version", ConfigEntry.ConfigEntryType.STRING, "0.0.0"), BOT_LANGUAGE("bot-language", ConfigEntry.ConfigEntryType.STRING, "en"), BOT_BETA("bot-beta", ConfigEntry.ConfigEntryType.BOOLEAN, true), REDIS_HOST("redis-host", ConfigEntry.ConfigEntryType.STRING, "localhost"), REDIS_PORT("redis-port", ConfigEntry.ConfigEntryType.INT, 6379), REDIS_AUTH("redis-auth", ConfigEntry.ConfigEntryType.STRING, ""), REDIS_INDEX("redis-index", ConfigEntry.ConfigEntryType.INT, 5), KEY_CARBONITEX("key-carbonitex", ConfigEntryType.STRING, ""), KEY_DISCORD_ORG("key-discord-org", ConfigEntryType.STRING, ""), KEY_DISCORD_PW("key-discord-pw", ConfigEntryType.STRING, "");
+        BOT_TOKEN("bot-token", ConfigEntry.ConfigEntryType.STRING, ""), BOT_BETA_TOKEN("bot-beta-token", ConfigEntry.ConfigEntryType.STRING, ""), BOT_SHARDS("bot-shards", ConfigEntry.ConfigEntryType.INT, 1), BOT_AUTHORS("bot-authors", ConfigEntry.ConfigEntryType.ARRAY_LONG, new JSONArray()), BOT_PREFIX("bot-prefix", ConfigEntry.ConfigEntryType.STRING, "//"), BOT_VERSION("bot-version", ConfigEntry.ConfigEntryType.STRING, "0.0.0"), BOT_LANGUAGE("bot-language", ConfigEntry.ConfigEntryType.STRING, "en"), BOT_BETA("bot-beta", ConfigEntry.ConfigEntryType.BOOLEAN, true), REDIS_HOST("redis-host", ConfigEntry.ConfigEntryType.STRING, "localhost"), REDIS_PORT("redis-port", ConfigEntry.ConfigEntryType.INT, 6379), REDIS_AUTH("redis-auth", ConfigEntry.ConfigEntryType.STRING, ""), REDIS_INDEX("redis-index", ConfigEntry.ConfigEntryType.INT, 5), KEY_CARBONITEX("key-carbonitex", ConfigEntryType.STRING, ""), KEY_DISCORD_ORG("key-discord-org", ConfigEntryType.STRING, ""), KEY_DISCORD_PW("key-discord-pw", ConfigEntryType.STRING, ""), ANNOUNCEMENT("announcement", ConfigEntryType.STRING, "");
 
         private final String jsonKey;
         private final ConfigEntry.ConfigEntryType type;
