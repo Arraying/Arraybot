@@ -2,6 +2,7 @@ package de.arraying.arraybot.data.database.templates;
 
 import com.lambdaworks.redis.api.sync.RedisCommands;
 import de.arraying.arraybot.data.database.Redis;
+import de.arraying.arraybot.data.database.core.Category;
 import de.arraying.arraybot.data.database.core.Entry;
 import de.arraying.arraybot.util.UDatabase;
 

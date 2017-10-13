@@ -24,7 +24,7 @@ import de.arraying.arraybot.util.UDatatypes
 class ReloadShardsSubCommand: SubCommand("shards",
         aliases = arrayOf("shards", "shard", "s")) {
 
-    private val config = Arraybot.getInstance().configuration
+    private val config = arraybot.configuration
 
     /**
      * When the sub command is executed.
@@ -56,7 +56,7 @@ class ReloadShardsSubCommand: SubCommand("shards",
             shards.add(shard)
         } else {
             if(toReload.equals("all", true)) {
-                shards.addAll(Arraybot.getInstance().botManager.shards.keys)
+                shards.addAll(arraybot.botManager.shards.keys)
             } else {
                 Message.COMMANDS_RELOAD_SHARD_INVALID.send(channel, min.toString(), max.toString()).queue()
                 return
@@ -64,7 +64,7 @@ class ReloadShardsSubCommand: SubCommand("shards",
         }
         Message.COMMANDS_RELOAD_SHARD_RELOADED.send(channel).queue()
         for(shard in shards) {
-            val result = Arraybot.getInstance().botManager.restartShard(shard)
+            val result = arraybot.botManager.restartShard(shard)
             if(!result) {
                 Message.COMMANDS_RELOAD_SHARD_ERROR.send(channel).queue()
                 return

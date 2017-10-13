@@ -1,4 +1,4 @@
-package de.arraying.arraybot.command.commands.developer.reload
+package de.arraying.arraybot.command.commands.utils.commands
 
 import de.arraying.arraybot.command.CommandEnvironment
 import de.arraying.arraybot.command.templates.DefaultCommand
@@ -22,10 +22,9 @@ import net.dv8tion.jda.core.Permission
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-class ReloadCommand(override val subCommands: Array<SubCommand>): DefaultCommand("reload",
-        CommandCategory.DEVELOPER,
-        Permission.MESSAGE_WRITE,
-        aliases = arrayOf("restart", "refresh")) {
+class CommandsCommand(override val subCommands: Array<SubCommand>): DefaultCommand(CommandsCommandData.name,
+        CommandCategory.UTILS,
+        Permission.MESSAGE_WRITE) {
 
     /**
      * When the command is executed.
@@ -33,9 +32,9 @@ class ReloadCommand(override val subCommands: Array<SubCommand>): DefaultCommand
     override fun onCommand(environment: CommandEnvironment, args: List<String>) {
         val channel = environment.channel
         val embed = UEmbed.getEmbed(channel)
-                .setDescription(Message.COMMANDS_RELOAD_EMBED_DESCRIPTION.getContent(channel))
+                .setDescription(Message.COMMANDS_COMMANDS_EMBED_MAIN_DESCRIPTION.getContent(channel))
                 .addField(Message.EMBED_TITLE_COMMANDS.getContent(channel),
-                        Message.COMMANDS_RELOAD_EMBED_VALUE.getContent(channel),
+                        Message.COMMANDS_COMMANDS_EMBED_MAIN_VALUE.getContent(channel),
                         false)
         channel.sendMessage(embed.build()).queue()
     }

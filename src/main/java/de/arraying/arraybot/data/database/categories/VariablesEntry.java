@@ -1,5 +1,6 @@
 package de.arraying.arraybot.data.database.categories;
 
+import de.arraying.arraybot.data.database.core.Category;
 import de.arraying.arraybot.data.database.core.EntryField;
 import de.arraying.arraybot.data.database.templates.HashEntry;
 import de.arraying.arraybot.util.UDefaults;
@@ -19,7 +20,7 @@ import de.arraying.arraybot.util.UDefaults;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-public class VariablesEntry extends HashEntry<String> {
+public final class VariablesEntry extends HashEntry<String> {
 
     /**
      * Gets a field by key.

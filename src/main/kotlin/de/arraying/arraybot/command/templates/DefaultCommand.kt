@@ -5,7 +5,7 @@ import de.arraying.arraybot.command.Command
 import de.arraying.arraybot.command.CommandEnvironment
 import de.arraying.arraybot.command.Commands
 import de.arraying.arraybot.data.database.Redis
-import de.arraying.arraybot.data.database.core.Entry
+import de.arraying.arraybot.data.database.core.Category
 import de.arraying.arraybot.data.database.templates.SetEntry
 import de.arraying.arraybot.language.Languages
 import de.arraying.arraybot.language.Message
@@ -14,6 +14,7 @@ import kotlinx.coroutines.experimental.CommonPool
 import kotlinx.coroutines.experimental.launch
 import net.dv8tion.jda.core.Permission
 import net.dv8tion.jda.core.utils.PermissionUtil
+import org.apache.commons.lang.StringUtils
 import org.apache.commons.lang.WordUtils
 import org.slf4j.LoggerFactory
 
@@ -54,11 +55,15 @@ abstract class DefaultCommand(val name: String,
      * Internal command checks.
      */
     internal fun checks() {
-        if ((!Languages.has(descriptionPath)
+        if((!Languages.has(descriptionPath)
                 || !Languages.has(syntaxPath))
                 && Commands.commands.containsKey(name)) {
             Commands.unregisterCommand(name)
-            logger.error("The command has been unregistered disabled as it does not have a description or syntax defined.")
+            logger.error("The command has been unregistered as it does not have a description and/or syntax defined.")
+        }
+        if(!StringUtils.isAllLowerCase(name)) {
+            Commands.unregisterCommand(name)
+            logger.error("The command has been unregistered due to the name not being all lowercase. Consistency, please.")
         }
     }
 
@@ -141,8 +146,9 @@ abstract class DefaultCommand(val name: String,
             Message.COMMAND_PERMISSION.send(channel, permission.getName())
             return
         }
-        val entry = Entry.Category.DISABLED_COMMAND.entry as SetEntry
+        val entry = Category.DISABLED_COMMAND.entry as SetEntry
         if(entry.contains(environment.guild.idLong, name)) {
+            logger.info("Did not execute command as it was disabled in the guild ${environment.guild.idLong}")
             return
         }
         if(!subCommands.isEmpty()

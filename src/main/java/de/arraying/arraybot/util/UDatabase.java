@@ -1,6 +1,6 @@
 package de.arraying.arraybot.util;
 
-import de.arraying.arraybot.data.database.core.Entry;
+import de.arraying.arraybot.data.database.core.Category;
 
 /**
  * Copyright 2017 Arraying
@@ -25,7 +25,7 @@ public final class UDatabase {
      * @param primaryKey The primary key.
      * @return A string key.
      */
-    public static String getKey(Entry.Category category, Object primaryKey) {
+    public static String getKey(Category category, Object primaryKey) {
         return getKey(category, primaryKey, null);
     }
 
@@ -36,7 +36,7 @@ public final class UDatabase {
      * @param secondaryKey The secondary key. Can be null.
      * @return A string key.
      */
-    public static String getKey(Entry.Category category, Object primaryKey, Object secondaryKey) {
+    public static String getKey(Category category, Object primaryKey, Object secondaryKey) {
         String key = category.getPrefix() + "_" + primaryKey.toString();
         if(secondaryKey != null) {
             key = key + "_" + secondaryKey.toString();

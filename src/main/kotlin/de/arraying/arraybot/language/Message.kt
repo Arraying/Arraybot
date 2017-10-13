@@ -1,7 +1,7 @@
 package de.arraying.arraybot.language
 
 import de.arraying.arraybot.data.database.categories.GuildEntry
-import de.arraying.arraybot.data.database.core.Entry
+import de.arraying.arraybot.data.database.core.Category
 import net.dv8tion.jda.core.entities.TextChannel
 import net.dv8tion.jda.core.requests.RestAction
 
@@ -22,10 +22,29 @@ import net.dv8tion.jda.core.requests.RestAction
  */
 enum class Message(private val prefix: Boolean = false) {
 
+    COMMAND_NAME_PROVIDE,
+    COMMAND_NAME_INVALID,
+    COMMAND_PERMISSION,
     COMMAND_UNAVAILABLE_DEVELOPER,
     COMMAND_UNAVAILABLE_EMBED,
-    COMMAND_PERMISSION,
     COMMAND_SUBCOMMAND_UNKNOWN,
+    COMMANDS_COMMANDS_DISABLE_DEVELOPER,
+    COMMANDS_COMMANDS_DISABLE_COMMANDS,
+    COMMANDS_COMMANDS_DISABLE_DISABLED(true),
+    COMMANDS_COMMANDS_EMBED_MAIN_DESCRIPTION,
+    COMMANDS_COMMANDS_EMBED_MAIN_VALUE(true),
+    COMMANDS_COMMANDS_INFO_ALIASES,
+    COMMANDS_COMMANDS_INFO_CATEGORY,
+    COMMANDS_COMMANDS_INFO_COMMANDDESCRIPTION,
+    COMMANDS_COMMANDS_INFO_DESCRIPTION,
+    COMMANDS_COMMANDS_INFO_HELP_TITLE,
+    COMMANDS_COMMANDS_INFO_HELP_VALUE,
+    COMMANDS_COMMANDS_INFO_NAME,
+    COMMANDS_COMMANDS_INFO_PERMISSION,
+    COMMANDS_COMMANDS_INFO_SYNTAX,
+    COMMANDS_COMMANDS_INFO_TYPE,
+    COMMANDS_COMMANDS_ENABLE(true),
+    COMMANDS_COMMANDS_LIST_DESCRIPTION(true),
     COMMANDS_CUSTOM_EMBED_DESCRIPTION,
     COMMANDS_CUSTOM_EMBED_VALUE(true),
     COMMANDS_EVAL_CODE_PROVIDE,
@@ -68,6 +87,7 @@ enum class Message(private val prefix: Boolean = false) {
     CUSTOM_VALUE_EMPTY,
     EMBED_FOOTER,
     EMBED_TITLE_COMMANDS,
+    MISC_NONE,
     PAGE_FOOTER,
     PAGE_COMMAND_UNKNOWN,
     PERMISSION_PERMISSION,
@@ -99,7 +119,7 @@ enum class Message(private val prefix: Boolean = false) {
      * The replace parameter can be used to format the string.
      */
     fun getContent(guild: Long, vararg format: String): String {
-        val entry = Entry.Category.GUILD.entry as GuildEntry
+        val entry = Category.GUILD.entry as GuildEntry
         var content = Languages.getEntry(name.toLowerCase(), entry.fetch(entry.getField(GuildEntry.Fields.LANGUAGE), guild, null))
         if(prefix) {
             content = content.replace("{prefix}", entry.fetch(entry.getField(GuildEntry.Fields.PREFIX), guild, null))

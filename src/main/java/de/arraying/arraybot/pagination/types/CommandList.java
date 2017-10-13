@@ -4,7 +4,7 @@ import de.arraying.arraybot.command.custom.syntax.CustomCommandSyntax;
 import de.arraying.arraybot.command.templates.CustomCommand;
 import de.arraying.arraybot.command.templates.DefaultCommand;
 import de.arraying.arraybot.data.database.categories.GuildEntry;
-import de.arraying.arraybot.data.database.core.Entry;
+import de.arraying.arraybot.data.database.core.Category;
 import de.arraying.arraybot.language.Message;
 import de.arraying.arraybot.pagination.PageImpl;
 import de.arraying.arraybot.util.CustomEmbedBuilder;
@@ -49,7 +49,7 @@ public class CommandList extends PageImpl {
     @Override
     public String asString(List<Object> input, TextChannel channel) {
         long guild = channel.getGuild().getIdLong();
-        GuildEntry entry = (GuildEntry) Entry.Category.GUILD.getEntry();
+        GuildEntry entry = (GuildEntry) Category.GUILD.getEntry();
         String prefix = entry.fetch(entry.getField(GuildEntry.Fields.PREFIX), guild, null);
         StringBuilder builder = new StringBuilder();
         for(Object command : input) {

@@ -4,13 +4,14 @@ import de.arraying.arraybot.Arraybot
 import de.arraying.arraybot.command.templates.CustomCommand
 import de.arraying.arraybot.command.templates.DefaultCommand
 import de.arraying.arraybot.data.database.categories.GuildEntry
-import de.arraying.arraybot.data.database.core.Entry
+import de.arraying.arraybot.data.database.core.Category
 import de.arraying.arraybot.data.database.templates.SetEntry
 import de.arraying.arraybot.util.UDefaults
 import de.arraying.arraybot.util.objects.MultiKeyMap
 import kotlinx.coroutines.experimental.CommonPool
 import kotlinx.coroutines.experimental.launch
 import net.dv8tion.jda.core.Permission
+import net.dv8tion.jda.core.entities.TextChannel
 import net.dv8tion.jda.core.utils.PermissionUtil
 import org.slf4j.LoggerFactory
 
@@ -64,7 +65,7 @@ object Commands {
         if (!PermissionUtil.checkPermission(channel, guild.selfMember, Permission.MESSAGE_WRITE)) {
             return
         }
-        val prefixEntry = Entry.Category.GUILD.entry as? GuildEntry ?: return
+        val prefixEntry = Category.GUILD.entry as? GuildEntry ?: return
         val guildPrefix = prefixEntry.fetch(prefixEntry.getField(GuildEntry.Fields.PREFIX), guild.idLong, null)
         var message = environment.message.rawContent.replace(" +".toRegex(), " ").trim()
         message = when {
@@ -72,7 +73,7 @@ object Commands {
             message.startsWith(guildPrefix, true) -> message.substring(guildPrefix.length)
             else -> return
         }
-        val blacklist = Entry.Category.BLACKLIST.entry as? SetEntry ?: return
+        val blacklist = Category.BLACKLIST.entry as? SetEntry ?: return
         if(blacklist.values(UDefaults.DEFAULT_BLACKLIST.toLong()).contains(author.id)) {
             return
         }
@@ -82,7 +83,7 @@ object Commands {
         launch(CommonPool) {
             command?.invoke(environment, args)
         }
-        val entry = Entry.Category.CUSTOM_COMMAND_NAMES.entry as SetEntry
+        val entry = Category.CUSTOM_COMMAND_NAMES.entry as SetEntry
         val guildId = guild.idLong
         if(entry.contains(guildId, commandName)) {
             val customCommand = CustomCommand.fromRedis(guildId, commandName, channel)
@@ -90,6 +91,22 @@ object Commands {
                 customCommand.invoke(environment, args)
             }
         }
+    }
+
+    /**
+     * Gets all commands for the member.
+     */
+    fun getCommands(channel: TextChannel): Array<Command> {
+        val id = channel.guild.idLong
+        val commands = ArrayList<Command>()
+        val entry = Category.DISABLED_COMMAND.entry as SetEntry
+        val disabled = entry.values(id)
+        this.commands.values.filterTo(commands) {
+            !disabled.contains(it.name)
+                    && it.category != DefaultCommand.CommandCategory.DEVELOPER
+        }
+        commands.addAll(CustomCommand.getAll(id, channel))
+        return commands.toTypedArray()
     }
 
 }

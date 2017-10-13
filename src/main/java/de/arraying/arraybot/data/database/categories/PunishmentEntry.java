@@ -1,5 +1,6 @@
 package de.arraying.arraybot.data.database.categories;
 
+import de.arraying.arraybot.data.database.core.Category;
 import de.arraying.arraybot.data.database.core.EntryField;
 import de.arraying.arraybot.data.database.templates.HashEntry;
 import de.arraying.arraybot.util.UDefaults;

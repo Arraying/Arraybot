@@ -2,7 +2,7 @@ package de.arraying.arraybot.script.method.methods;
 
 import de.arraying.arraybot.command.CommandEnvironment;
 import de.arraying.arraybot.data.database.categories.VariablesEntry;
-import de.arraying.arraybot.data.database.core.Entry;
+import de.arraying.arraybot.data.database.core.Category;
 import de.arraying.arraybot.script.method.Methods;
 import de.arraying.zeus.backend.annotations.ZeusMethod;
 
@@ -39,7 +39,7 @@ public final class StorageMethods extends Methods {
      */
     @ZeusMethod
     public String vs_get(String identifier) {
-        VariablesEntry entry = (VariablesEntry) Entry.Category.VARIABLES.getEntry();
+        VariablesEntry entry = (VariablesEntry) Category.VARIABLES.getEntry();
         return entry.fetch(entry.getField(identifier), environment.getGuild().getIdLong(), null);
     }
 
@@ -52,7 +52,7 @@ public final class StorageMethods extends Methods {
     @ZeusMethod
     public String vs_set(String identifier, Object value) {
         String newValue = value.toString();
-        VariablesEntry entry = (VariablesEntry) Entry.Category.VARIABLES.getEntry();
+        VariablesEntry entry = (VariablesEntry) Category.VARIABLES.getEntry();
         entry.push(entry.getField(identifier), environment.getGuild().getIdLong(), null, newValue);
         return newValue;
     }

@@ -57,7 +57,7 @@ class CustomCommandPermission(val value: String) {
                     isPermission() -> Message.PERMISSION_PERMISSION.getContent(channel, value)
                     isRole(channel.guild) -> Message.PERMISSION_ROLE.getContent(channel, value)
                     else -> Message.PERMISSION_INVALID.getContent(channel, value)
-                }//.replace("{permission}", value)
+                }
     }
 
     /**

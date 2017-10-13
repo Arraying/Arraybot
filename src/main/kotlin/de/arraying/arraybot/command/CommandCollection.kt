@@ -7,6 +7,11 @@ import de.arraying.arraybot.command.commands.developer.reload.subcommands.Reload
 import de.arraying.arraybot.command.commands.developer.reload.subcommands.ReloadShardsSubCommand
 import de.arraying.arraybot.command.commands.developer.script.ScriptCommand
 import de.arraying.arraybot.command.commands.developer.shards.ShardsCommand
+import de.arraying.arraybot.command.commands.utils.commands.CommandsCommand
+import de.arraying.arraybot.command.commands.utils.commands.subcommands.CommandsDisableSubCommand
+import de.arraying.arraybot.command.commands.utils.commands.subcommands.CommandsEnableSubCommand
+import de.arraying.arraybot.command.commands.utils.commands.subcommands.CommandsInfoSubCommand
+import de.arraying.arraybot.command.commands.utils.commands.subcommands.CommandsListSubCommand
 import de.arraying.arraybot.command.commands.utils.help.HelpCommand
 import de.arraying.arraybot.command.commands.utils.ping.PingCommand
 import de.arraying.arraybot.command.templates.DefaultCommand
@@ -27,6 +32,16 @@ import de.arraying.arraybot.command.templates.DefaultCommand
  * limitations under the License.
  */
 enum class CommandCollection(val command: DefaultCommand) {
+
+    /**
+     * The command that shows information concerning commands.
+     */
+    COMMANDS(CommandsCommand(arrayOf(
+            CommandsDisableSubCommand(),
+            CommandsEnableSubCommand(),
+            CommandsInfoSubCommand(),
+            CommandsListSubCommand()
+    ))),
 
     /**
      * The custom command management command.

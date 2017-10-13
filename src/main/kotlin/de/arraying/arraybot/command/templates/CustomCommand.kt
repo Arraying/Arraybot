@@ -7,7 +7,8 @@ import de.arraying.arraybot.command.custom.syntax.CustomCommandSyntax
 import de.arraying.arraybot.command.custom.type.CustomCommandType
 import de.arraying.arraybot.data.database.Redis
 import de.arraying.arraybot.data.database.categories.CustomCommandEntry
-import de.arraying.arraybot.data.database.core.Entry
+import de.arraying.arraybot.data.database.categories.GuildEntry
+import de.arraying.arraybot.data.database.core.Category
 import de.arraying.arraybot.data.database.templates.SetEntry
 import de.arraying.arraybot.language.Message
 import de.arraying.arraybot.util.UDefaults
@@ -89,13 +90,22 @@ class CustomCommand(val name: String,
         type.action.onAction(environment, value)
     }
 
+    /**
+     * Gets the syntax.
+     */
+    fun getSyntax(channel: TextChannel): String {
+        val entry = Category.GUILD.entry as GuildEntry
+        val prefix = entry.fetch(entry.getField(GuildEntry.Fields.PREFIX), channel.guild.idLong, null)
+        return prefix + name + if(syntax == CustomCommandSyntax.STARTS_WITH) Message.CUSTOM_ARGUMENT.getContent(channel) else ""
+    }
+
     companion object {
 
         /**
          * Creates a custom command from Redis.
          */
         fun fromRedis(guildId: Long, commandName: String, channel: TextChannel): CustomCommand {
-            val commandEntry = Entry.Category.CUSTOM_COMMAND.entry as CustomCommandEntry
+            val commandEntry = Category.CUSTOM_COMMAND.entry as CustomCommandEntry
             val syntax = CustomCommandSyntax.fromString(commandEntry.fetch(commandEntry.getField(CustomCommandEntry.Fields.SYNTAX), guildId, commandName))
             val permission = CustomCommandPermission(commandEntry.fetch(commandEntry.getField(CustomCommandEntry.Fields.PERMISSION), guildId, commandName))
             val type = CustomCommandType.fromString(commandEntry.fetch(commandEntry.getField(CustomCommandEntry.Fields.TYPE), guildId, commandName))
@@ -113,7 +123,7 @@ class CustomCommand(val name: String,
          * Gets all custom commands for the guild.
          */
         fun getAll(guildId: Long, channel: TextChannel): Array<CustomCommand> {
-            val commandList = Entry.Category.CUSTOM_COMMAND_NAMES.entry as SetEntry
+            val commandList = Category.CUSTOM_COMMAND_NAMES.entry as SetEntry
             val commandNames = commandList.values(guildId)
             val commands = ArrayList<CustomCommand>()
             commandNames.mapTo(commands) {

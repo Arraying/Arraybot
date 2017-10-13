@@ -1,7 +1,4 @@
-package de.arraying.arraybot.command.templates
-
-import de.arraying.arraybot.Arraybot
-import de.arraying.arraybot.command.CommandEnvironment
+package de.arraying.arraybot.command.commands.utils.commands
 
 /**
  * Copyright 2017 Arraying
@@ -18,14 +15,8 @@ import de.arraying.arraybot.command.CommandEnvironment
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-abstract class SubCommand(val name: String,
-                          val aliases: Array<String> = arrayOf()) {
+object CommandsCommandData {
 
-    protected val arraybot = Arraybot.getInstance()!!
-
-    /**
-     * Executes the subcommand.
-     */
-    abstract fun onSubCommand(environment: CommandEnvironment, args: List<String>);
+    val name = "commands"
 
 }

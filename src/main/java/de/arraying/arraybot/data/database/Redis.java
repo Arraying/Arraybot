@@ -5,8 +5,7 @@ import com.lambdaworks.redis.RedisURI;
 import com.lambdaworks.redis.api.StatefulRedisConnection;
 import com.lambdaworks.redis.api.sync.RedisCommands;
 import de.arraying.arraybot.data.Configuration;
-import de.arraying.arraybot.data.database.core.Entry;
-import de.arraying.arraybot.data.database.templates.HashEntry;
+import de.arraying.arraybot.data.database.core.Category;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -80,7 +79,7 @@ public final class Redis {
         RedisClient client = RedisClient.create(uri.build());
         StatefulRedisConnection<String, String> connection = client.connect();
         sync = connection.sync();
-        for(Entry.Category category : Entry.Category.values()) {
+        for(Category category : Category.values()) {
             logger.info("Registered the category {} with the type {}.", category, category.getEntry().getType());
             category.getEntry().setCategory(category);
         }
@@ -88,14 +87,18 @@ public final class Redis {
 
     /**
      * Purges all information related to the guild with that ID.
+     * This is not a test. This is your emergency broadcast system announcing the commencement of the Annual Purge sanctioned by the U.S. Government.
+     * Weapons of class 4 and lower have been authorized for use during the Purge.
+     * All other weapons are restricted.
+     * Government officials of ranking 10 have been granted immunity from the Purge and shall not be harmed.
+     * Commencing at the siren, any and all crime, including murder, will be legal for 12 continuous hours. Police, fire, and emergency medical services will be unavailable until tomorrow morning until 7 a.m., when The Purge concludes.
+     * Blessed be our New Founding Fathers and America, a nation reborn.
+     * May God be with you all.
      * @param id The ID.
      */
     public void purge(long id) {
-        for(Entry.Category category : Entry.Category.values()) {
-            Entry entry = category.getEntry();
-            if(entry instanceof HashEntry) {
-                entry.delete(id);
-            }
+        for(Category category : Category.values()) {
+            category.getEntry().delete(id);
         }
     }
 
