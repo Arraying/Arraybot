@@ -1,3 +1,3 @@
 # Arraybot
 
-Version 5.0.0 work in progress. This branch will be merged into master.
+This is the current repository for the Arraybot 5.0.0 code, which is not completed. Arraybot 4.x.x code will not be available publically. The current wiki still refers to the latest Arraybot 4.x.x release.
