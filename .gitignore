@@ -58,5 +58,17 @@ fabric.properties
 
 .idea/
 
-src/test/
+## Backup in case stuff goes wrong
 .gradle/
+.idea/
+.idea/modules
+build/
+gradle/
+logs/
+modules/
+out/
+src/test/
+gradlew
+gradlew.bat
+settings.gradle
+splash.txt

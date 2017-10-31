@@ -37,7 +37,7 @@
     <orderEntry type="module" module-name="Arraybot_main" />
     <orderEntry type="library" name="Gradle: com.github.Arraying:Zeus:0.4.2" level="project" />
     <orderEntry type="library" name="Gradle: ch.qos.logback:logback-classic:1.2.3" level="project" />
-    <orderEntry type="library" name="Gradle: net.dv8tion:JDA:3.3.1_284" level="project" />
+    <orderEntry type="library" name="Gradle: net.dv8tion:JDA:3.3.1_300" level="project" />
     <orderEntry type="library" name="Gradle: biz.paluch.redis:lettuce:5.0.0.Beta1" level="project" />
     <orderEntry type="library" name="Gradle: commons-io:commons-io:2.5" level="project" />
     <orderEntry type="library" name="Gradle: commons-lang:commons-lang:2.6" level="project" />

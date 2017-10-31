@@ -1,5 +1,7 @@
 package de.arraying.arraybot.punishment;
 
+import de.arraying.arraybot.punishment.punishments.KickPunishment;
+
 /**
  * Copyright 2017 Arraying
  * <p>
@@ -17,50 +19,71 @@ package de.arraying.arraybot.punishment;
  */
 public enum PunishmentType {
 
+    /*
+     * Todo: Create different punishment types!
+     */
+
     /**
      * When a user is kicked.
      */
-    KICK,
+    KICK(new KickPunishment()),
 
     /**
      * When a user is temporarily muted.
      */
-    TEMP_MUTE,
+    TEMP_MUTE(null),
 
     /**
      * When a user is un-muted.
      */
-    UN_MUTE,
+    UN_MUTE(null),
 
     /**
      * When a user is permanently muted.
      */
-    MUTE,
+    MUTE(null),
 
     /**
      * When a user is kicked and their messages of the last 1 day cleared.
      */
-    SOFTBAN,
+    SOFT_BAN(null),
 
     /**
      * When a user is temporarily banned.
      */
-    TEMP_BAN,
+    TEMP_BAN(null),
 
     /**
      * When a user is un-banned.
      */
-    UN_BAN,
+    UN_BAN(null),
 
     /**
      * When a user is permanently banned.
      */
-    BAN,
+    BAN(null),
 
     /**
      * When a severe error occurs or the Great War breaks out.
      * I feel like I play too much Fallout 4, thanks Bethesda for making it so addictive!
      */
-    UNKNOWN
+    UNKNOWN((guild, punishedId, reason) -> false);
 
+    private final Punishment punishment;
+
+    /**
+     * Sets the punishment.
+     * @param punishment The punishment.
+     */
+    PunishmentType(Punishment punishment) {
+        this.punishment = punishment;
+    }
+
+    /**
+     * Gets the punishment.
+     * @return The punishment interface implementation.
+     */
+    public Punishment getPunishment() {
+        return punishment;
+    }
 }
