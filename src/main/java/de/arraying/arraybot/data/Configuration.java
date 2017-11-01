@@ -1,5 +1,6 @@
 package de.arraying.arraybot.data;
 
+import de.arraying.arraybot.request.BotListRequest;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -9,7 +10,9 @@ import org.slf4j.LoggerFactory;
 import java.io.*;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Copyright 2017 Arraying
@@ -42,9 +45,7 @@ public final class Configuration {
     private final int redisPort;
     private final String redisAuth;
     private final int redisIndex;
-    private final String keyCarbonitex;
-    private final String keyDiscordOrg;
-    private final String keyDiscordPw;
+    private final BotListRequest[] requests;
     private final String announcement;
 
 
@@ -64,12 +65,12 @@ public final class Configuration {
      * @param redisAuth The Redis authentication string.
      * Can be empty.
      * @param redisIndex The Redis index to use.
-     * @param keyCarbonitex The Carbonitex.net secret key.
-     * @param keyDiscordOrg The DiscordBots.org secret key.
-     * @param keyDiscordPw The Bots.Discord.pw secret key.
+     //* @param keyCarbonitex The Carbonitex.net secret key.
+     //* @param keyDiscordOrg The DiscordBots.org secret key.
+     //* @param keyDiscordPw The Bots.Discord.pw secret key.
      * @param announcement The current announcement.
      */
-    private Configuration(String botToken, String botBetaToken, int botShards, long[] botAuthors, String botPrefix, String botVersion, String botLanguage, boolean botBeta, String redisHost, int redisPort, String redisAuth, int redisIndex, String keyCarbonitex, String keyDiscordOrg, String keyDiscordPw, String announcement) {
+    private Configuration(String botToken, String botBetaToken, int botShards, long[] botAuthors, String botPrefix, String botVersion, String botLanguage, boolean botBeta, String redisHost, int redisPort, String redisAuth, int redisIndex, /*String keyCarbonitex, String keyDiscordOrg, String keyDiscordPw*/ BotListRequest[] requests, String announcement) {
         this.botToken = botToken;
         this.botBetaToken = botBetaToken;
         this.botShards = botShards;
@@ -82,9 +83,7 @@ public final class Configuration {
         this.redisPort = redisPort;
         this.redisAuth = redisAuth;
         this.redisIndex = redisIndex;
-        this.keyCarbonitex = keyCarbonitex;
-        this.keyDiscordOrg = keyDiscordOrg;
-        this.keyDiscordPw = keyDiscordPw;
+        this.requests = requests;
         this.announcement = announcement;
     }
 
@@ -146,6 +145,25 @@ public final class Configuration {
                             }
                             entryObject = entries;
                             break;
+                        case ARRAY_REQUEST:
+                            JSONArray requestArray = jsonObject.getJSONArray(key);
+                            List<BotListRequest> requestList = new ArrayList<>();
+                            for(int i = 0; i < requestArray.length(); i++) {
+                                JSONObject request = requestArray.getJSONObject(i);
+                                String url = request.getString("url");
+                                String auth = request.getString("auth");
+                                JSONArray parameterArray = request.getJSONArray("parameters");
+                                List<BotListRequest.Parameter> parameterList = new ArrayList<>();
+                                for(int j = 0; j < parameterArray.length(); j++) {
+                                    JSONObject parameter = parameterArray.getJSONObject(j);
+                                    String parameterKey = parameter.getString("key");
+                                    String parameterValue = parameter.getString("value");
+                                    parameterList.add(new BotListRequest.Parameter(parameterKey, parameterValue));
+                                }
+                                requestList.add(new BotListRequest(url, auth, parameterList.toArray(new BotListRequest.Parameter[parameterList.size()])));
+                            }
+                            entryObject = requestList.toArray(new BotListRequest[requestList.size()]);
+                            break;
                         default:
                             throw new IllegalStateException("Something went very badly wrong with the config entry.");
                     }
@@ -156,8 +174,13 @@ public final class Configuration {
                 }
                 constructorParameters.add(entryObject);
             }
+            System.out.println(constructorParameters);
             if(constructorParameters.size() != constructor.getParameterCount()) {
-                throw new IllegalStateException("The DataClass constructor has a different number of parameters than the ones defined in the entry set.");
+                throw new IllegalStateException("The constructor has a different number of parameters than the amount of entries in the enumeration (" +
+                        constructor.getParameterCount() +
+                        " vs " +
+                        constructorParameters.size() +
+                        ").");
             }
             constructor.setAccessible(true);
             Configuration config = (Configuration) constructor.newInstance(constructorParameters.toArray());
@@ -294,27 +317,11 @@ public final class Configuration {
     }
 
     /**
-     * Gets the Carbonitex secret key.
-     * @return The secret key.
+     * Gets all request objects.
+     * @return An array of requests.
      */
-    public String getKeyCarbonitex() {
-        return keyCarbonitex;
-    }
-
-    /**
-     * Gets the discordbots.org token.
-     * @return The token.
-     */
-    public String getKeyDiscordOrg() {
-        return keyDiscordOrg;
-    }
-
-    /**
-     * Gets the bots.discord.pw token.
-     * @return The token.
-     */
-    public String getKeyDiscordPw() {
-        return keyDiscordPw;
+    public BotListRequest[] getRequests() {
+        return requests;
     }
 
     /**
@@ -328,7 +335,75 @@ public final class Configuration {
     @SuppressWarnings("unused")
     private enum ConfigEntry {
 
-        BOT_TOKEN("bot-token", ConfigEntry.ConfigEntryType.STRING, ""), BOT_BETA_TOKEN("bot-beta-token", ConfigEntry.ConfigEntryType.STRING, ""), BOT_SHARDS("bot-shards", ConfigEntry.ConfigEntryType.INT, 1), BOT_AUTHORS("bot-authors", ConfigEntry.ConfigEntryType.ARRAY_LONG, new JSONArray()), BOT_PREFIX("bot-prefix", ConfigEntry.ConfigEntryType.STRING, "//"), BOT_VERSION("bot-version", ConfigEntry.ConfigEntryType.STRING, "0.0.0"), BOT_LANGUAGE("bot-language", ConfigEntry.ConfigEntryType.STRING, "en"), BOT_BETA("bot-beta", ConfigEntry.ConfigEntryType.BOOLEAN, true), REDIS_HOST("redis-host", ConfigEntry.ConfigEntryType.STRING, "localhost"), REDIS_PORT("redis-port", ConfigEntry.ConfigEntryType.INT, 6379), REDIS_AUTH("redis-auth", ConfigEntry.ConfigEntryType.STRING, ""), REDIS_INDEX("redis-index", ConfigEntry.ConfigEntryType.INT, 5), KEY_CARBONITEX("key-carbonitex", ConfigEntryType.STRING, ""), KEY_DISCORD_ORG("key-discord-org", ConfigEntryType.STRING, ""), KEY_DISCORD_PW("key-discord-pw", ConfigEntryType.STRING, ""), ANNOUNCEMENT("announcement", ConfigEntryType.STRING, "");
+        /**
+         * The main bot's secret login token.
+         */
+        BOT_TOKEN("bot-token", ConfigEntry.ConfigEntryType.STRING, ""),
+
+        /**
+         * The beta bot's secret login token.
+         */
+        BOT_BETA_TOKEN("bot-beta-token", ConfigEntry.ConfigEntryType.STRING, ""),
+
+        /**
+         * The number of shards the bot should use.
+         */
+        BOT_SHARDS("bot-shards", ConfigEntry.ConfigEntryType.INT, 1),
+
+        /**
+         * An array of bot developer IDs.
+         */
+        BOT_AUTHORS("bot-authors", ConfigEntry.ConfigEntryType.ARRAY_LONG, new long[]{}),
+
+        /**
+         * The bot's prefix.
+         */
+        BOT_PREFIX("bot-prefix", ConfigEntry.ConfigEntryType.STRING, "//"),
+
+        /**
+         * The bot version.
+         */
+        BOT_VERSION("bot-version", ConfigEntry.ConfigEntryType.STRING, "0.0.0"),
+
+        /**
+         * The default language that the bot should use.
+         */
+        BOT_LANGUAGE("bot-language", ConfigEntry.ConfigEntryType.STRING, "en"),
+
+        /**
+         * Whether or not the bot should use the regular or beta token.
+         */
+        BOT_BETA("bot-beta", ConfigEntry.ConfigEntryType.BOOLEAN, true),
+
+        /**
+         * The Redis hostname.
+         */
+        REDIS_HOST("redis-host", ConfigEntry.ConfigEntryType.STRING, "localhost"),
+
+        /**
+         * The Redis port.
+         */
+        REDIS_PORT("redis-port", ConfigEntry.ConfigEntryType.INT, 6379),
+
+        /**
+         * The Redis password.
+         */
+        REDIS_AUTH("redis-auth", ConfigEntry.ConfigEntryType.STRING, ""),
+
+        /**
+         * The database index to use.
+         */
+        REDIS_INDEX("redis-index", ConfigEntry.ConfigEntryType.INT, 5),
+
+        /**
+         * An array of all request endpoints to POST to on startup/guild join and leave.
+         */
+        REQUESTS("requests", ConfigEntryType.ARRAY_REQUEST, null),
+
+        /**
+         * The announcement displayed on the help command.
+         */
+        ANNOUNCEMENT("announcement", ConfigEntryType.STRING, "");
 
         private final String jsonKey;
         private final ConfigEntry.ConfigEntryType type;
@@ -348,7 +423,35 @@ public final class Configuration {
 
         private enum ConfigEntryType {
 
-            STRING, INT, LONG, BOOLEAN, ARRAY_LONG,
+            /**
+             * If the configuration entry is a string.
+             */
+            STRING,
+
+            /**
+             * If the configuration entry is an integer.
+             */
+            INT,
+
+            /**
+             * If the configuration entry is a long number.
+             */
+            LONG,
+
+            /**
+             * The configuration entry is a boolean.
+             */
+            BOOLEAN,
+
+            /**
+             * The configuration entry is an array of long numbers.
+             */
+            ARRAY_LONG,
+
+            /**
+             * The configuration entry is an array of endpoints.
+             */
+            ARRAY_REQUEST,
 
         }
 

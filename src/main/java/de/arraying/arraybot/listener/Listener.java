@@ -1,18 +1,15 @@
 package de.arraying.arraybot.listener;
 
+import de.arraying.arraybot.Arraybot;
 import de.arraying.arraybot.listener.listeners.PostLoadListener;
 import de.arraying.arraybot.listener.listeners.postload.DeathListener;
 import de.arraying.arraybot.listener.listeners.postload.GuildListener;
 import de.arraying.arraybot.listener.listeners.postload.MessageListener;
-import de.arraying.arraybot.request.requests.CarbonitexRequest;
-import de.arraying.arraybot.request.requests.DiscordOrgRequest;
-import de.arraying.arraybot.request.requests.DiscordPwRequest;
+import de.arraying.arraybot.request.BotListRequest;
 import de.arraying.arraybot.threadding.AbstractTask;
 import net.dv8tion.jda.core.JDA;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.io.IOException;
 
 /**
  * Copyright 2017 Arraying
@@ -62,12 +59,13 @@ public final class Listener {
          */
         @Override
         public void onExecution() {
-            try {
-                new CarbonitexRequest(shard).sendRequest();
-                new DiscordOrgRequest(shard).sendRequest();
-                new DiscordPwRequest(shard).sendRequest();
-            } catch(IOException exception) {
-                logger.error("Encountered an error.", exception);
+            BotListRequest[] requests = Arraybot.getInstance().getConfiguration().getRequests();
+            if(requests == null) {
+                logger.warn("Could not POST an updated guild count due to there being no endpoints.");
+                return;
+            }
+            for(BotListRequest request : requests) {
+                request.send(shard);
             }
         }
 

@@ -44,7 +44,7 @@
   "commands_help_embed_start_value":"Great to hear that you're on board. Simply execute the following for commands:\n\n`{prefix}commands list`\n\n{zwsp}",
   "commands_help_syntax":"help",
   "commands_ping_description":"Returns the approximate WebSocket latency",
-  "commands_ping_ping":"My ping is currently %s milliseconds.",
+  "commands_ping_ping":"Currently running with a latency of %s milliseconds.",
   "commands_ping_syntax":"ping",
   "commands_reload_description":"Reloads a specific module.",
   "commands_reload_embed_description":"Here are a list of reload commands.",

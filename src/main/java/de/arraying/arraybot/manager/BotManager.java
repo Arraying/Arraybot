@@ -160,7 +160,8 @@ public final class BotManager {
 
     /**
      * Sets the author's URL.
-     * @param shard The shard.     */
+     * @param shard The shard.
+     */
     private void setAuthorUrl(JDA shard) {
         User author = shard.getUserById(configuration.getBotAuthors()[0]);
         if(author != null) {
