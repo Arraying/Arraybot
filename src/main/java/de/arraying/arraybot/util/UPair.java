@@ -1,6 +1,6 @@
 package de.arraying.arraybot.util;
 
-import de.arraying.arraybot.util.objects.ActionPair;
+import de.arraying.arraybot.util.objects.Pair;
 
 import java.util.regex.Pattern;
 
@@ -41,14 +41,14 @@ public final class UPair {
      * @param input The input.
      * @return An action pair.
      */
-    public static ActionPair<Long, Long> getAction(String input) {
+    public static Pair<Long, Long> getAction(String input) {
         String[] result = SPLIT.split(input, 2);
         long a = Long.valueOf(result[0]);
         Long b = null;
         if(result.length > 1) {
             b = Long.valueOf(result[1]);
         }
-        return new ActionPair<>(a, b);
+        return new Pair<>(a, b);
     }
 
 }

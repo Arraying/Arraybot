@@ -1,6 +1,12 @@
 package de.arraying.arraybot.punishment;
 
+import de.arraying.arraybot.language.Message;
+import de.arraying.arraybot.punishment.punishments.BanPunishment;
 import de.arraying.arraybot.punishment.punishments.KickPunishment;
+import de.arraying.arraybot.punishment.punishments.MutePunishment;
+import de.arraying.arraybot.punishment.punishments.SoftBanPunishment;
+import de.arraying.arraybot.util.objects.Pair;
+import net.dv8tion.jda.core.entities.Guild;
 
 /**
  * Copyright 2017 Arraying
@@ -19,64 +25,91 @@ import de.arraying.arraybot.punishment.punishments.KickPunishment;
  */
 public enum PunishmentType {
 
-    /*
-     * Todo: Create different punishment types!
-     */
-
     /**
      * When a user is kicked.
      */
-    KICK(new KickPunishment()),
+    KICK(new KickPunishment(), Message.PUNISH_TYPE_KICK),
 
     /**
      * When a user is temporarily muted.
      */
-    TEMP_MUTE(null),
-
-    /**
-     * When a user is un-muted.
-     */
-    UN_MUTE(null),
+    TEMP_MUTE(new MutePunishment(), Message.PUNISH_TYPE_TEMPMUTE),
 
     /**
      * When a user is permanently muted.
      */
-    MUTE(null),
+    MUTE(new MutePunishment(), Message.PUNISH_TYPE_MUTE),
 
     /**
      * When a user is kicked and their messages of the last 1 day cleared.
      */
-    SOFT_BAN(null),
+    SOFT_BAN(new SoftBanPunishment(), Message.PUNISH_TYPE_SOFTBAN),
 
     /**
      * When a user is temporarily banned.
      */
-    TEMP_BAN(null),
-
-    /**
-     * When a user is un-banned.
-     */
-    UN_BAN(null),
+    TEMP_BAN(new BanPunishment(), Message.PUNISH_TYPE_TEMPBAN),
 
     /**
      * When a user is permanently banned.
      */
-    BAN(null),
+    BAN(new BanPunishment(), Message.PUNISH_TYPE_BAN),
 
     /**
      * When a severe error occurs or the Great War breaks out.
      * I feel like I play too much Fallout 4, thanks Bethesda for making it so addictive!
      */
-    UNKNOWN((guild, punishedId, reason) -> false);
+    UNKNOWN(new Punishment() {
+
+        /**
+         * Just returns false.
+         * @param guild The guild where the punishment is to occur.
+         * @param punishedId The ID of the punished user.
+         * @param reason The reason for the punishment.
+         * @return False.
+         */
+        @Override
+        public Pair<Boolean, Boolean> punish(Guild guild, long punishedId, String reason) {
+            return new Pair<>(false, false);
+        }
+
+        /**
+         * Returns false too.
+         * @param guild The guild where the punishment occurred.
+         * @param punishedId The ID of the punishment.
+         * @return False.
+         */
+        @Override
+        public boolean revoke(Guild guild, long punishedId) {
+            return false;
+        }
+
+    }, Message.PUNISH_TYPE_UNKNOWN);
 
     private final Punishment punishment;
+    private final Message name;
 
     /**
      * Sets the punishment.
      * @param punishment The punishment.
+     * @param name The name of the type as a message.
      */
-    PunishmentType(Punishment punishment) {
+    PunishmentType(Punishment punishment, Message name) {
         this.punishment = punishment;
+        this.name = name;
+    }
+
+    /**
+     * Gets a punishment type from a string.
+     * @param type The string.
+     * @return The punishment type.
+     */
+    public static PunishmentType fromString(String type) {
+        try {
+            return PunishmentType.valueOf(type.toUpperCase());
+        } catch(IllegalArgumentException exception) {
+            return UNKNOWN;
+        }
     }
 
     /**
@@ -86,4 +119,13 @@ public enum PunishmentType {
     public Punishment getPunishment() {
         return punishment;
     }
+
+    /**
+     * Gets the name.
+     * @return The appropriate message enumeration for the type.
+     */
+    public Message getName() {
+        return name;
+    }
+
 }

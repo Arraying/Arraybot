@@ -160,6 +160,11 @@ public final class GuildEntry extends HashEntry<GuildEntry.Fields> {
         MUTE_PERMISSION(new EntryField("mute_role", UDefaults.DEFAULT_SNOWFLAKE)),
 
         /**
+         * The punishment log channel.
+         */
+        PUNISHMENT_CHANNEL(new EntryField("punishment_channel", UDefaults.DEFAULT_SNOWFLAKE)),
+
+        /**
          * The incrementing latest announcement ID.
          */
         COUNT_ANNOUNCEMENT(new EntryField("count_announcements", UDefaults.DEFAULT_COUNT)),

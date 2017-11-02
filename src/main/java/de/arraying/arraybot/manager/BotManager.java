@@ -6,12 +6,14 @@ import de.arraying.arraybot.data.Configuration;
 import de.arraying.arraybot.listener.Listener;
 import de.arraying.arraybot.listener.listeners.PostLoadListener;
 import de.arraying.arraybot.listener.listeners.preload.ReadyListener;
+import de.arraying.arraybot.punishment.PunishmentObject;
 import de.arraying.arraybot.shard.ShardEntry;
 import net.dv8tion.jda.core.AccountType;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
 import net.dv8tion.jda.core.OnlineStatus;
 import net.dv8tion.jda.core.entities.Game;
+import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.User;
 import net.dv8tion.jda.core.requests.SessionReconnectQueue;
 import org.slf4j.Logger;
@@ -115,6 +117,12 @@ public final class BotManager {
         entry.getJDA().addEventListener((Object[]) Listener.POST_LOAD_LISTENERS);
         new Listener.Updater(entry.getJDA()).create();
         setAuthorUrl(entry.getJDA());
+        PunishmentManager punishmentManager = Arraybot.getInstance().getPunishmentManager();
+        for(Guild guild : entry.getJDA().getGuilds()) {
+            for(PunishmentObject punishment : punishmentManager.getAllPunishments(guild)) {
+                punishmentManager.schedulePunishmentRevocation(guild, punishment);
+            }
+        }
     }
 
     /**
