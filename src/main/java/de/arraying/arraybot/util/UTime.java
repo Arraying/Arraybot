@@ -103,6 +103,7 @@ public class UTime {
         if(!found) {
             return -1;
         }
+        long now = System.currentTimeMillis();
         GregorianCalendar calendar = new GregorianCalendar();
         if(years > 0) {
             calendar.add(Calendar.YEAR, years);

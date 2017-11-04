@@ -48,8 +48,7 @@ class JSREngine(private val mode: Mode): EvalEngine {
                 Mode.JAVASCRIPT -> engine.eval("(function() { with (imports) {\n$code\n} })();")
             }
         } catch(exception: Exception) {
-            Message.COMMANDS_EVAL_ERROR.getContent(channel)
-                    .replace("{error}", if(exception.message == null) "null" else exception.message!!)
+            Message.COMMANDS_EVAL_ERROR.getContent(channel, if(exception.message == null) "null" else exception.message!!)
         }
         if(output == null) {
             output = Message.COMMANDS_EVAL_EVALUATED.getContent(channel)

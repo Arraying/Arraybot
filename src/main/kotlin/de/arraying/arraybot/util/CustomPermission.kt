@@ -1,7 +1,6 @@
-package de.arraying.arraybot.command.custom.permission
+package de.arraying.arraybot.util
 
 import de.arraying.arraybot.language.Message
-import de.arraying.arraybot.util.UDatatypes
 import net.dv8tion.jda.core.Permission
 import net.dv8tion.jda.core.entities.Guild
 import net.dv8tion.jda.core.entities.Member
@@ -22,7 +21,7 @@ import net.dv8tion.jda.core.entities.TextChannel
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-class CustomCommandPermission(val value: String) {
+class CustomPermission(val value: String) {
 
     /**
      * Checks if the provided permission is valid.

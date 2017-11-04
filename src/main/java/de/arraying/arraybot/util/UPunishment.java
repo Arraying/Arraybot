@@ -26,6 +26,41 @@ import net.dv8tion.jda.core.exceptions.PermissionException;
 public final class UPunishment {
 
     /**
+     * Whether or not a member is muted.
+     * @param member The member.
+     * @return True if they are, false otherwise.
+     */
+    public static boolean isMute(Member member) {
+        String mutedRole = getMutedRole(member.getGuild());
+        for(Role role : member.getRoles()) {
+            if(role.getId().equals(mutedRole)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Gets the ID of the mute role.
+     * @param guild The guild.
+     * @return The ID of the mute role as a string.
+     */
+    public static String getMutedRole(Guild guild) {
+        GuildEntry guildEntry = (GuildEntry) Category.GUILD.getEntry();
+        return guildEntry.fetch(guildEntry.getField(GuildEntry.Fields.MUTE_ROLE), guild.getIdLong(), null);
+    }
+
+    /**
+     * Gets the ID of the mute permission role.
+     * @param guild The guild.
+     * @return The ID of the mute role as a string.
+     */
+    public static String getMutedPermission(Guild guild) {
+        GuildEntry guildEntry = (GuildEntry) Category.GUILD.getEntry();
+        return guildEntry.fetch(guildEntry.getField(GuildEntry.Fields.MUTE_PERMISSION), guild.getIdLong(), null);
+    }
+
+    /**
      * Applies the muted role to the user.
      * @param guild The guild.
      * @param punishedId The ID of the punished user.
@@ -33,6 +68,16 @@ public final class UPunishment {
      */
     public static Pair<Boolean, Boolean> mute(Guild guild, long punishedId) {
         return manageMute(guild, punishedId, true);
+    }
+
+    /**
+     * Checks whether the specified member is banned in the guild.
+     * @param guild The guild.
+     * @param user The user.
+     * @return True if they are, false otherwise.
+     */
+    public static boolean isBan(Guild guild, long user) {
+        return guild.getBans().complete().stream().anyMatch(userObject -> userObject.getIdLong() == user);
     }
 
     /**

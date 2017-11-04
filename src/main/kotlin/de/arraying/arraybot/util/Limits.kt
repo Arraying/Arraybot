@@ -18,11 +18,6 @@ package de.arraying.arraybot.util
 enum class Limits(val limit: Int) {
 
     /**
-     * The maximum ban reason length.
-     */
-    BAN_REASON(512),
-
-    /**
      * The minimum channel name length.
      */
     CHANNEL_NAME_MIN(2),
@@ -65,7 +60,12 @@ enum class Limits(val limit: Int) {
     /**
      * The maximum nickname length.
      */
-    NICKNAME_MAX(32);
+    NICKNAME_MAX(32),
+
+    /**
+     * The maximum reason length.
+     */
+    REASON(512);
 
     /**
      * Gets the limit as a string.

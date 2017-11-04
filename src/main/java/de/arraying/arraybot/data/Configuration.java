@@ -174,7 +174,6 @@ public final class Configuration {
                 }
                 constructorParameters.add(entryObject);
             }
-            System.out.println(constructorParameters);
             if(constructorParameters.size() != constructor.getParameterCount()) {
                 throw new IllegalStateException("The constructor has a different number of parameters than the amount of entries in the enumeration (" +
                         constructor.getParameterCount() +

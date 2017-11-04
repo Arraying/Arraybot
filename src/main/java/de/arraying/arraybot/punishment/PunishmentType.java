@@ -6,6 +6,7 @@ import de.arraying.arraybot.punishment.punishments.KickPunishment;
 import de.arraying.arraybot.punishment.punishments.MutePunishment;
 import de.arraying.arraybot.punishment.punishments.SoftBanPunishment;
 import de.arraying.arraybot.util.objects.Pair;
+import net.dv8tion.jda.core.audit.ActionType;
 import net.dv8tion.jda.core.entities.Guild;
 
 /**
@@ -28,32 +29,32 @@ public enum PunishmentType {
     /**
      * When a user is kicked.
      */
-    KICK(new KickPunishment(), Message.PUNISH_TYPE_KICK),
+    KICK(new KickPunishment(), Message.PUNISH_TYPE_KICK, ActionType.KICK, ActionType.UNKNOWN),
 
     /**
      * When a user is temporarily muted.
      */
-    TEMP_MUTE(new MutePunishment(), Message.PUNISH_TYPE_TEMPMUTE),
+    TEMP_MUTE(new MutePunishment(), Message.PUNISH_TYPE_TEMPMUTE, ActionType.MEMBER_ROLE_UPDATE, ActionType.MEMBER_ROLE_UPDATE),
 
     /**
      * When a user is permanently muted.
      */
-    MUTE(new MutePunishment(), Message.PUNISH_TYPE_MUTE),
+    MUTE(new MutePunishment(), Message.PUNISH_TYPE_MUTE, ActionType.MEMBER_ROLE_UPDATE, ActionType.MEMBER_ROLE_UPDATE),
 
     /**
      * When a user is kicked and their messages of the last 1 day cleared.
      */
-    SOFT_BAN(new SoftBanPunishment(), Message.PUNISH_TYPE_SOFTBAN),
+    SOFT_BAN(new SoftBanPunishment(), Message.PUNISH_TYPE_SOFTBAN, ActionType.BAN, ActionType.UNBAN),
 
     /**
      * When a user is temporarily banned.
      */
-    TEMP_BAN(new BanPunishment(), Message.PUNISH_TYPE_TEMPBAN),
+    TEMP_BAN(new BanPunishment(), Message.PUNISH_TYPE_TEMPBAN, ActionType.BAN, ActionType.UNBAN),
 
     /**
      * When a user is permanently banned.
      */
-    BAN(new BanPunishment(), Message.PUNISH_TYPE_BAN),
+    BAN(new BanPunishment(), Message.PUNISH_TYPE_BAN, ActionType.BAN, ActionType.UNBAN),
 
     /**
      * When a severe error occurs or the Great War breaks out.
@@ -84,19 +85,26 @@ public enum PunishmentType {
             return false;
         }
 
-    }, Message.PUNISH_TYPE_UNKNOWN);
+    }, Message.PUNISH_TYPE_UNKNOWN, ActionType.UNKNOWN, ActionType.UNKNOWN);
 
     private final Punishment punishment;
     private final Message name;
+    private final ActionType auditType;
+    private final ActionType undoAuditType;
 
     /**
      * Sets the punishment.
      * @param punishment The punishment.
      * @param name The name of the type as a message.
+     * @param auditType The type corresponding to this in the audit logs.
+     * @param undoAuditType The type opposite to the punishment.
+     * E.g. mute -> unmute, ban -> unban, etc.
      */
-    PunishmentType(Punishment punishment, Message name) {
+    PunishmentType(Punishment punishment, Message name, ActionType auditType, ActionType undoAuditType) {
         this.punishment = punishment;
         this.name = name;
+        this.auditType = auditType;
+        this.undoAuditType = undoAuditType;
     }
 
     /**
@@ -126,6 +134,22 @@ public enum PunishmentType {
      */
     public Message getName() {
         return name;
+    }
+
+    /**
+     * Gets the corresponding audit log type.
+     * @return The type.
+     */
+    public ActionType getAuditType() {
+        return auditType;
+    }
+
+    /**
+     * Gets the undo audit log type.
+     * @return The type.
+     */
+    public ActionType getUndoAuditType() {
+        return undoAuditType;
     }
 
 }

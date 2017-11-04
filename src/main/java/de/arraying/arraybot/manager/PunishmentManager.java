@@ -6,10 +6,7 @@ import de.arraying.arraybot.data.database.templates.SetEntry;
 import de.arraying.arraybot.language.Message;
 import de.arraying.arraybot.punishment.PunishmentObject;
 import de.arraying.arraybot.punishment.PunishmentType;
-import de.arraying.arraybot.util.CustomEmbedBuilder;
-import de.arraying.arraybot.util.UEmbed;
-import de.arraying.arraybot.util.UTime;
-import de.arraying.arraybot.util.UUser;
+import de.arraying.arraybot.util.*;
 import de.arraying.arraybot.util.objects.Pair;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.TextChannel;
@@ -19,6 +16,7 @@ import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Predicate;
 
 /**
  * Copyright 2017 Arraying
@@ -51,6 +49,7 @@ public final class PunishmentManager {
      * @return True if the punishment was successful, false if it was not.
      */
     public boolean punish(Guild guild, long punished, PunishmentType type, long staff, long expiration, boolean viaAudit, String reason) {
+        reason = reason == null ? Message.PUNISH_EMBED_REASON_DEFAULT.getContent(guild.getIdLong()) : reason;
         Boolean revocation = null;
         if(!viaAudit) {
             Pair<Boolean, Boolean> result = type.getPunishment().punish(guild, punished, reason);
@@ -67,15 +66,15 @@ public final class PunishmentManager {
         punishmentObject.toRedis(guild);
         schedulePunishmentRevocation(guild, punishmentObject);
         log(guild, punishmentObject, false, null);
-        return false;
+        return true;
     }
 
     /**
      * Schedules the punishment revocation.
      * @param guild The guild.
-     * @param punishmentObject The punishent object.
+     * @param punishmentObject The punishment object.
      */
-    public void schedulePunishmentRevocation(Guild guild, PunishmentObject punishmentObject) {
+    void schedulePunishmentRevocation(Guild guild, PunishmentObject punishmentObject) {
         if(punishmentObject.isRevoked()) {
             return;
         }
@@ -93,7 +92,11 @@ public final class PunishmentManager {
             revoke(guild, punishmentObject, null);
             return;
         }
-        executor.schedule(() -> revoke(guild, punishmentObject, null), (current - expiration), TimeUnit.MILLISECONDS);
+        executor.schedule(() -> {
+            if(punishmentObject.isRevoked()) {
+                revoke(guild, punishmentObject, null);
+            }
+        }, (expiration - current), TimeUnit.MILLISECONDS);
     }
 
     /**
@@ -130,6 +133,19 @@ public final class PunishmentManager {
     }
 
     /**
+     * Gets a specific punishment based on a filter.
+     * @param guild The guild.
+     * @param filter The filter.
+     * @return A punishment, or null.
+     */
+    public PunishmentObject getSpecificPunishment(Guild guild, Predicate<? super PunishmentObject> filter) {
+        return getAllPunishments(guild).stream()
+                .filter(filter)
+                .findFirst()
+                .orElse(null);
+    }
+
+    /**
      * Logs the punishment into a logging channel.
      * @param guild The guild.
      * @param punishmentObject The punishment.
@@ -147,9 +163,11 @@ public final class PunishmentManager {
         if(onRevoke) {
             switch(punishmentObject.getType()) {
                 case TEMP_BAN:
+                case BAN:
                     punishmentType = Message.PUNISH_TYPE_UNBAN.getContent(channel);
                     break;
                 case TEMP_MUTE:
+                case MUTE:
                     punishmentType = Message.PUNISH_TYPE_UNMUTE.getContent(channel);
                     break;
                 default:
@@ -167,7 +185,9 @@ public final class PunishmentManager {
                         onRevoke ?
                                 revoker == null ?
                                         Message.PUNISH_EMBED_AUTOMATIC.getContent(channel) :
-                                        UUser.asMention(revoker) :
+                                        revoker == UDefaults.DEFAULT_UNKNOWN_SNOWFLAKE ? Message.PUNISH_EMBED_UNKNOWN.getContent(channel) :
+                                                UUser.asMention(revoker)
+                                :
                                 UUser.asMention(punishmentObject.getStaff()),
                         false);
         if(!onRevoke) {

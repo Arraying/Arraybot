@@ -34,7 +34,7 @@ repositories {
 }
 
 dependencies {
-    compile "com.github.Arraying:Zeus:0.4.2" // Script engine
+    compile "com.github.Arraying:Zeus:0.4.3" // Script engine
     compile "ch.qos.logback:logback-classic:1.2.3" // Logging
     compile "net.dv8tion:JDA:3.3.1_302" // Discord
     compile "biz.paluch.redis:lettuce:5.0.0.Beta1" // Database

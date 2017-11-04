@@ -7,6 +7,8 @@ import de.arraying.arraybot.command.commands.developer.reload.subcommands.Reload
 import de.arraying.arraybot.command.commands.developer.reload.subcommands.ReloadShardsSubCommand
 import de.arraying.arraybot.command.commands.developer.script.ScriptCommand
 import de.arraying.arraybot.command.commands.developer.shards.ShardsCommand
+import de.arraying.arraybot.command.commands.moderation.punishment.PunishmentCommand
+import de.arraying.arraybot.command.commands.moderation.punishment.PunishmentRevocationCommand
 import de.arraying.arraybot.command.commands.utils.commands.CommandsCommand
 import de.arraying.arraybot.command.commands.utils.commands.subcommands.CommandsDisableSubCommand
 import de.arraying.arraybot.command.commands.utils.commands.subcommands.CommandsEnableSubCommand
@@ -15,6 +17,8 @@ import de.arraying.arraybot.command.commands.utils.commands.subcommands.Commands
 import de.arraying.arraybot.command.commands.utils.help.HelpCommand
 import de.arraying.arraybot.command.commands.utils.ping.PingCommand
 import de.arraying.arraybot.command.templates.DefaultCommand
+import de.arraying.arraybot.punishment.PunishmentType
+import net.dv8tion.jda.core.Permission
 
 /**
  * Copyright 2017 Arraying
@@ -32,6 +36,11 @@ import de.arraying.arraybot.command.templates.DefaultCommand
  * limitations under the License.
  */
 enum class CommandCollection(val command: DefaultCommand) {
+
+    /**
+     * The command that permanently bans users.
+     */
+    BAN(PunishmentCommand("ban", Permission.BAN_MEMBERS, PunishmentType.BAN)),
 
     /**
      * The command that shows information concerning commands.
@@ -52,6 +61,16 @@ enum class CommandCollection(val command: DefaultCommand) {
      * The help command giving a basic overview of the bot, but not listing commands.
      */
     HELP(HelpCommand()),
+
+    /**
+     * The command that kicks a user from the guild.
+     */
+    KICK(PunishmentCommand("kick", Permission.KICK_MEMBERS, PunishmentType.KICK)),
+
+    /**
+     * The command that applies the muted role to a user.
+     */
+    MUTE(PunishmentCommand("mute", Permission.MESSAGE_WRITE, PunishmentType.MUTE)),
 
     /**
      * The command to evaluate code.
@@ -79,6 +98,32 @@ enum class CommandCollection(val command: DefaultCommand) {
     /**
      * The command to display statistics about a shard.
      */
-    SHARDS(ShardsCommand())
+    SHARDS(ShardsCommand()),
+
+    /**
+     * The command bans a user from the guild in order to clear the messages, then unbans them again.
+     * Thus, this command acts like an enhanced kick.
+     */
+    SOFT_BAN(PunishmentCommand("softban", Permission.BAN_MEMBERS, PunishmentType.SOFT_BAN)),
+
+    /**
+     * This command temporarily bans users.
+     */
+    TEMP_BAN(PunishmentCommand("tempban", Permission.BAN_MEMBERS, PunishmentType.TEMP_BAN)),
+
+    /**
+     * This command temporarily applies the muted role to a user.
+     */
+    TEMP_MUTE(PunishmentCommand("tempmute", Permission.MESSAGE_WRITE, PunishmentType.TEMP_MUTE)),
+
+    /**
+     * This command revokes a ban punishment on a user.
+     */
+    UN_BAN(PunishmentRevocationCommand("unban", PunishmentType.BAN)),
+
+    /**
+     * This command revokes a mute punishment on a user.
+     */
+    UN_MUTE(PunishmentRevocationCommand("unmute", PunishmentType.MUTE));
 
 }

@@ -1,4 +1,8 @@
-package de.arraying.arraybot.util.objects;
+package de.arraying.arraybot.startup.startups;
+
+import de.arraying.arraybot.Arraybot;
+import de.arraying.arraybot.manager.PunishmentManager;
+import de.arraying.arraybot.startup.StartupTask;
 
 /**
  * Copyright 2017 Arraying
@@ -15,27 +19,23 @@ package de.arraying.arraybot.util.objects;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-public final class Pair<A, B> {
-
-    private final A a;
-    private final B b;
+public class StartupMisc extends StartupTask {
 
     /**
-     * Creates a new pair.
-     * @param a The first value.
-     * @param b The second value.
+     * Creates the language startup task.
      */
-    public Pair(A a, B b) {
-        this.a = a;
-        this.b = b;
+    public StartupMisc() {
+        super("Startup-Misc");
     }
 
-    public A getA() {
-        return a;
-    }
-
-    public B getB() {
-        return b;
+    /**
+     * Runs the actual startup task.
+     * @throws Exception If an error occurs.
+     */
+    @Override
+    public void onTask() throws Exception {
+        logger.info("Creating punishment manager...");
+        Arraybot.getInstance().setPunishmentManager(new PunishmentManager());
     }
 
 }

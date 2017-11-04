@@ -35,7 +35,7 @@ import org.slf4j.LoggerFactory
  */
 abstract class DefaultCommand(val name: String,
                               val category: CommandCategory,
-                              val permission: Permission,
+                              open val permission: Permission,
                               open val subCommands: Array<SubCommand> = arrayOf(),
                               val aliases: Array<String> = arrayOf(),
                               private val customPermissionChecking: Boolean = false): Command {
@@ -143,7 +143,7 @@ abstract class DefaultCommand(val name: String,
         }
         if(!PermissionUtil.checkPermission(channel, environment.member, permission)
                 && !customPermissionChecking) {
-            Message.COMMAND_PERMISSION.send(channel, permission.getName())
+            Message.COMMAND_PERMISSION.send(channel).queue()
             return
         }
         val entry = Category.DISABLED_COMMAND.entry as SetEntry
