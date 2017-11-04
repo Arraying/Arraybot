@@ -8,9 +8,8 @@ import de.arraying.arraybot.util.UZeus;
 import de.arraying.zeus.backend.ZeusException;
 import de.arraying.zeus.runtime.ZeusRuntime;
 import de.arraying.zeus.runtime.ZeusRuntimeBuilder;
+import de.arraying.zeus.standard.method.methods.OutputMethods;
 import de.arraying.zeus.variable.ZeusVariable;
-
-import java.lang.reflect.Method;
 
 /**
  * Copyright 2017 Arraying
@@ -52,10 +51,8 @@ public final class ScriptRuntime extends AbstractTask {
     @Override
     public void onExecution() {
         try {
-            ZeusRuntimeBuilder builder = new ZeusRuntimeBuilder(ZeusRuntimeBuilder.Configuration.STANDARD);
-            for(Method method : UZeus.getIgnored()) {
-                builder.withoutMethods(method);
-            }
+            ZeusRuntimeBuilder builder = new ZeusRuntimeBuilder(ZeusRuntimeBuilder.Configuration.STANDARD)
+                    .withoutMethodContainer(OutputMethods.class);
             EmbedMethods embedMethods = new EmbedMethods(environment);
             StringListMethods stringListMethods = new StringListMethods(environment);
             builder.withEventListeners(new ScriptListener(this))

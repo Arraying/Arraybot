@@ -1,6 +1,9 @@
 package de.arraying.arraybot.startup;
 
 import de.arraying.arraybot.startup.startups.*;
+import de.arraying.arraybot.threadding.AbstractTask;
+
+import java.util.Arrays;
 
 /**
  * Copyright 2017 Arraying
@@ -19,7 +22,7 @@ import de.arraying.arraybot.startup.startups.*;
  */
 public final class Starter {
 
-    private static final StartupTask[] tasks = new StartupTask[] {new StartupBot(), new StartupCommands(), new StartupLanguages(), new StartupRedis(), new StartupScripting()};
+    private static final StartupTask[] tasks = new StartupTask[] {new StartupCommands(), new StartupLanguages(), new StartupMisc(), new StartupRedis(), new StartupScripting()};
 
     /**
      * Starts all startup tasks.
@@ -28,6 +31,22 @@ public final class Starter {
         for(StartupTask task : tasks) {
             task.create();
         }
+        new AbstractTask("Startup-Watcher") {
+
+            /**
+             * Ensures all watchers are started  before starting the bots.
+             */
+            @Override
+            public void onExecution() {
+                while(!Arrays.stream(tasks).allMatch(StartupTask::isCompleted)) {
+                    try {
+                        Thread.sleep(50);
+                    } catch(InterruptedException ignored) {}
+                }
+                new StartupBot().create();
+            }
+
+        }.create();
     }
 
 }

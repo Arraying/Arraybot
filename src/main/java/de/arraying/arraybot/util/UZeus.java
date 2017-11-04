@@ -1,10 +1,7 @@
 package de.arraying.arraybot.util;
 
 import de.arraying.arraybot.language.Message;
-import de.arraying.zeus.std.method.methods.OutputMethods;
 import net.dv8tion.jda.core.entities.TextChannel;
-
-import java.lang.reflect.Method;
 
 /**
  * Copyright 2017 Arraying
@@ -22,14 +19,6 @@ import java.lang.reflect.Method;
  * limitations under the License.
  */
 public final class UZeus {
-
-    /**
-     * Gets all ignored methods.
-     * @return An array of methods.
-     */
-    public static Method[] getIgnored() {
-        return OutputMethods.class.getMethods();
-    }
 
     /**
      * Sends a standard error.

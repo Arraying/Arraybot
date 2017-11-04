@@ -151,13 +151,18 @@ public final class GuildEntry extends HashEntry<GuildEntry.Fields> {
         /**
          * The mute role.
          */
-        MUTE_ROLE(new EntryField("mute_permission", UDefaults.DEFAULT_MUTE_PERMISSION)),
+        MUTE_ROLE(new EntryField("mute_role", UDefaults.DEFAULT_SNOWFLAKE)),
 
         /**
          * The mute permission.
          * This can be a role ID or Permissions object.
          */
-        MUTE_PERMISSION(new EntryField("mute_role", UDefaults.DEFAULT_SNOWFLAKE)),
+        MUTE_PERMISSION(new EntryField("mute_permission", UDefaults.DEFAULT_MUTE_PERMISSION)),
+
+        /**
+         * The punishment log channel.
+         */
+        PUNISHMENT_CHANNEL(new EntryField("punishment_channel", UDefaults.DEFAULT_SNOWFLAKE)),
 
         /**
          * The incrementing latest announcement ID.

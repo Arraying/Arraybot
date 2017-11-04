@@ -1,10 +1,9 @@
 package de.arraying.arraybot.punishment.punishments;
 
 import de.arraying.arraybot.punishment.Punishment;
+import de.arraying.arraybot.util.UPunishment;
 import de.arraying.arraybot.util.objects.Pair;
 import net.dv8tion.jda.core.entities.Guild;
-import net.dv8tion.jda.core.exceptions.PermissionException;
-
 /**
  * Copyright 2017 Arraying
  * <p>
@@ -20,10 +19,10 @@ import net.dv8tion.jda.core.exceptions.PermissionException;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-public final class KickPunishment implements Punishment {
+public final class MutePunishment implements Punishment {
 
     /**
-     * Kicks the user.
+     * Mutes a user.
      * @param guild The guild where the punishment is to occur.
      * @param punishedId The ID of the punished user.
      * @param reason The reason for the punishment.
@@ -31,12 +30,7 @@ public final class KickPunishment implements Punishment {
      */
     @Override
     public Pair<Boolean, Boolean> punish(Guild guild, long punishedId, String reason) {
-        try {
-            guild.getController().kick(String.valueOf(punishedId), reason).queue();
-            return new Pair<>(true, false);
-        } catch(PermissionException | IllegalArgumentException exception) {
-            return new Pair<>(false, false);
-        }
+        return UPunishment.mute(guild, punishedId);
     }
 
     /**
@@ -47,7 +41,7 @@ public final class KickPunishment implements Punishment {
      */
     @Override
     public boolean revoke(Guild guild, long punishedId) {
-        return true;
+        return UPunishment.unmute(guild, punishedId).getA();
     }
 
 }

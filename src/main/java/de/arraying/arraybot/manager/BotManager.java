@@ -6,12 +6,19 @@ import de.arraying.arraybot.data.Configuration;
 import de.arraying.arraybot.listener.Listener;
 import de.arraying.arraybot.listener.listeners.PostLoadListener;
 import de.arraying.arraybot.listener.listeners.preload.ReadyListener;
+import de.arraying.arraybot.punishment.PunishmentObject;
+import de.arraying.arraybot.punishment.PunishmentType;
 import de.arraying.arraybot.shard.ShardEntry;
+import de.arraying.arraybot.threadding.AbstractTask;
+import de.arraying.arraybot.util.UDefaults;
+import de.arraying.arraybot.util.UPunishment;
 import net.dv8tion.jda.core.AccountType;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
 import net.dv8tion.jda.core.OnlineStatus;
 import net.dv8tion.jda.core.entities.Game;
+import net.dv8tion.jda.core.entities.Guild;
+import net.dv8tion.jda.core.entities.Member;
 import net.dv8tion.jda.core.entities.User;
 import net.dv8tion.jda.core.requests.SessionReconnectQueue;
 import org.slf4j.Logger;
@@ -115,6 +122,37 @@ public final class BotManager {
         entry.getJDA().addEventListener((Object[]) Listener.POST_LOAD_LISTENERS);
         new Listener.Updater(entry.getJDA()).create();
         setAuthorUrl(entry.getJDA());
+        PunishmentManager punishmentManager = Arraybot.getInstance().getPunishmentManager();
+        new AbstractTask("Punishments") {
+
+            /**
+             * Iterates through all guilds and handles punishments.
+             */
+            @Override
+            public void onExecution() {
+                for(Guild guild : entry.getJDA().getGuilds()) {
+                    for(PunishmentObject punishment : punishmentManager.getAllPunishments(guild)) {
+                        if(!punishment.isRevoked()) {
+                            if(punishment.getType() == PunishmentType.BAN) {
+                                if(!UPunishment.isBan(guild, punishment.getUser())) {
+                                    punishmentManager.revoke(guild, punishment, UDefaults.DEFAULT_UNKNOWN_SNOWFLAKE);
+                                }
+                            } else if(punishment.getType() == PunishmentType.MUTE) {
+                                Member muted = guild.getMemberById(punishment.getUser());
+                                if(muted == null) {
+                                    return;
+                                }
+                                if(!UPunishment.isMute(muted)) {
+                                    punishmentManager.revoke(guild, punishment, UDefaults.DEFAULT_UNKNOWN_SNOWFLAKE);
+                                }
+                            }
+                        }
+                        punishmentManager.schedulePunishmentRevocation(guild, punishment);
+                    }
+                }
+            }
+
+        }.create();
     }
 
     /**

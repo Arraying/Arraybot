@@ -3,7 +3,7 @@ package de.arraying.arraybot.command.custom.type.actions
 import de.arraying.arraybot.command.CommandEnvironment
 import de.arraying.arraybot.language.Message
 import de.arraying.arraybot.util.UPair
-import de.arraying.arraybot.util.objects.ActionPair
+import de.arraying.arraybot.util.objects.Pair
 
 /**
  * Copyright 2017 Arraying
@@ -25,7 +25,7 @@ open class RoleAction {
     /**
      * Pre processes the role action for ease and DRY code.
      */
-    protected fun preprocess(environment: CommandEnvironment, value: String): ActionPair<Long, Long?>? {
+    protected fun preprocess(environment: CommandEnvironment, value: String): Pair<Long, Long?>? {
         val channel = environment.channel
         if(!UPair.isValid(value)) {
             Message.CUSTOM_TYPE_INVALID.send(channel).queue()

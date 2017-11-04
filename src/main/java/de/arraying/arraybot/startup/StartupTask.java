@@ -19,6 +19,8 @@ import de.arraying.arraybot.threadding.AbstractTask;
  */
 public abstract class StartupTask extends AbstractTask {
 
+    private boolean completed = false;
+
     /**
      * Creates a new startup task.
      * @param name The name of the task.
@@ -34,6 +36,7 @@ public abstract class StartupTask extends AbstractTask {
     public void onExecution() {
         try {
             onTask();
+            completed = true;
         } catch(Exception exception) {
             logger.error("An error occurred during the startup task.", exception);
             System.exit(0);
@@ -41,5 +44,13 @@ public abstract class StartupTask extends AbstractTask {
     }
 
     public abstract void onTask() throws Exception;
+
+    /**
+     * Gets whether the current task is completed.
+     * @return True if it is, false otherwise.
+     */
+    boolean isCompleted() {
+        return completed;
+    }
 
 }

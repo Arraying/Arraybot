@@ -2,7 +2,6 @@ package de.arraying.arraybot.command.templates
 
 import de.arraying.arraybot.command.Command
 import de.arraying.arraybot.command.CommandEnvironment
-import de.arraying.arraybot.command.custom.permission.CustomCommandPermission
 import de.arraying.arraybot.command.custom.syntax.CustomCommandSyntax
 import de.arraying.arraybot.command.custom.type.CustomCommandType
 import de.arraying.arraybot.data.database.Redis
@@ -11,6 +10,7 @@ import de.arraying.arraybot.data.database.categories.GuildEntry
 import de.arraying.arraybot.data.database.core.Category
 import de.arraying.arraybot.data.database.templates.SetEntry
 import de.arraying.arraybot.language.Message
+import de.arraying.arraybot.util.CustomPermission
 import de.arraying.arraybot.util.UDefaults
 import kotlinx.coroutines.experimental.CommonPool
 import kotlinx.coroutines.experimental.launch
@@ -34,7 +34,7 @@ import org.slf4j.LoggerFactory
  */
 class CustomCommand(val name: String,
                     val syntax: CustomCommandSyntax,
-                    val permission: CustomCommandPermission,
+                    val permission: CustomPermission,
                     val type: CustomCommandType,
                     val description: String,
                     val value: String): Command {
@@ -107,7 +107,7 @@ class CustomCommand(val name: String,
         fun fromRedis(guildId: Long, commandName: String, channel: TextChannel): CustomCommand {
             val commandEntry = Category.CUSTOM_COMMAND.entry as CustomCommandEntry
             val syntax = CustomCommandSyntax.fromString(commandEntry.fetch(commandEntry.getField(CustomCommandEntry.Fields.SYNTAX), guildId, commandName))
-            val permission = CustomCommandPermission(commandEntry.fetch(commandEntry.getField(CustomCommandEntry.Fields.PERMISSION), guildId, commandName))
+            val permission = CustomPermission(commandEntry.fetch(commandEntry.getField(CustomCommandEntry.Fields.PERMISSION), guildId, commandName))
             val type = CustomCommandType.fromString(commandEntry.fetch(commandEntry.getField(CustomCommandEntry.Fields.TYPE), guildId, commandName))
             val descriptionString = commandEntry.fetch(commandEntry.getField(CustomCommandEntry.Fields.DESCRIPTION), guildId, commandName)
             val description = if(descriptionString == UDefaults.DEFAULT_NULL) {

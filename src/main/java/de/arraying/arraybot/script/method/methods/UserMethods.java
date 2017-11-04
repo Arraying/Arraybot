@@ -132,8 +132,8 @@ public final class UserMethods extends EntityCollectionMethods<User> {
         if(member == null) {
             return;
         }
-        if(reason.length() > Limits.BAN_REASON.getLimit()) {
-            Message.ZEUS_ERROR_BAN_REASON_LENGTH.send(channel, Limits.BAN_REASON.asString()).queue();
+        if(reason.length() > Limits.REASON.getLimit()) {
+            Message.ZEUS_ERROR_BAN_REASON_LENGTH.send(channel, Limits.REASON.asString()).queue();
             return;
         }
         try {

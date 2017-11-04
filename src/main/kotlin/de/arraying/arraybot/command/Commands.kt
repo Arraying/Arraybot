@@ -65,7 +65,7 @@ object Commands {
         if (!PermissionUtil.checkPermission(channel, guild.selfMember, Permission.MESSAGE_WRITE)) {
             return
         }
-        val prefixEntry = Category.GUILD.entry as? GuildEntry ?: return
+        val prefixEntry = Category.GUILD.entry as GuildEntry
         val guildPrefix = prefixEntry.fetch(prefixEntry.getField(GuildEntry.Fields.PREFIX), guild.idLong, null)
         var message = environment.message.rawContent.replace(" +".toRegex(), " ").trim()
         message = when {
@@ -73,7 +73,7 @@ object Commands {
             message.startsWith(guildPrefix, true) -> message.substring(guildPrefix.length)
             else -> return
         }
-        val blacklist = Category.BLACKLIST.entry as? SetEntry ?: return
+        val blacklist = Category.BLACKLIST.entry as SetEntry
         if(blacklist.values(UDefaults.DEFAULT_BLACKLIST.toLong()).contains(author.id)) {
             return
         }

@@ -1,5 +1,6 @@
 package de.arraying.arraybot.punishment;
 
+import de.arraying.arraybot.util.objects.Pair;
 import net.dv8tion.jda.core.entities.Guild;
 
 /**
@@ -24,8 +25,16 @@ public interface Punishment {
      * @param guild The guild where the punishment is to occur.
      * @param punishedId The ID of the punished user.
      * @param reason The reason for the punishment.
-     * @return True if the punishment was a success, false otherwise.
+     * @return A pair of success and whether the punishment needs to be revoked.
      */
-    boolean punish(Guild guild, long punishedId, String reason);
+    Pair<Boolean, Boolean> punish(Guild guild, long punishedId, String reason);
+
+    /**
+     * Revokes a punishment.
+     * @param guild The guild where the punishment occurred.
+     * @param punishedId The ID of the punishment.
+     * @return True if the revocation was successful, false otherwise.
+     */
+    boolean revoke(Guild guild, long punishedId);
 
 }

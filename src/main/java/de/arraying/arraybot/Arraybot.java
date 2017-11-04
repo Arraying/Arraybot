@@ -2,6 +2,7 @@ package de.arraying.arraybot;
 
 import de.arraying.arraybot.data.Configuration;
 import de.arraying.arraybot.manager.BotManager;
+import de.arraying.arraybot.manager.PunishmentManager;
 import de.arraying.arraybot.manager.ScriptManager;
 import de.arraying.arraybot.startup.Starter;
 import de.arraying.arraybot.util.objects.Splash;
@@ -38,6 +39,7 @@ public final class Arraybot {
     private final Logger logger = LoggerFactory.getLogger("Arraybot");
     private Configuration configuration;
     private BotManager botManager;
+    private PunishmentManager punishmentManager;
     private ScriptManager scriptManager;
     private boolean initialized = false;
 
@@ -117,6 +119,14 @@ public final class Arraybot {
     }
 
     /**
+     * Gets the punishment manager.
+     * @return The punishment manager.
+     */
+    public PunishmentManager getPunishmentManager() {
+        return punishmentManager;
+    }
+
+    /**
      * Gets the script manager.
      * @return The script manager.
      */
@@ -132,6 +142,14 @@ public final class Arraybot {
         if(botManager == null) {
             botManager = manager;
         }
+    }
+
+    /**
+     * Sets the punishment manager.
+     * @param punishmentManager The manager.
+     */
+    public void setPunishmentManager(PunishmentManager punishmentManager) {
+        this.punishmentManager = punishmentManager;
     }
 
     /**

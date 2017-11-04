@@ -15,17 +15,17 @@ package de.arraying.arraybot.util.objects;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-public final class ActionPair<A, B> {
+public final class Pair<A, B> {
 
     private final A a;
     private final B b;
 
     /**
-     * Creates a new action pair.
+     * Creates a new pair.
      * @param a The first value.
      * @param b The second value.
      */
-    public ActionPair(A a, B b) {
+    public Pair(A a, B b) {
         this.a = a;
         this.b = b;
     }
