@@ -23,6 +23,28 @@ import net.dv8tion.jda.core.entities.TextChannel
  */
 class CustomPermission(val value: String) {
 
+    companion object {
+
+        /**
+         * Gets the permission from a string.
+         */
+        fun getPermissionFromString(guild: Guild, input: String): CustomPermission? {
+            val permission: String?
+            val role = URole.getRole(guild, input)
+            permission = if(role != null) {
+                role.id
+            } else {
+                try {
+                    Permission.valueOf(input.toUpperCase()).toString()
+                } catch(exception: Exception) {
+                    return null
+                }
+            }
+            return CustomPermission(permission!!)
+        }
+
+    }
+
     /**
      * Checks if the provided permission is valid.
      */

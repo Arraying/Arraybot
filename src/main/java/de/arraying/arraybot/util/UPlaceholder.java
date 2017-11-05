@@ -21,22 +21,20 @@ import net.dv8tion.jda.core.entities.*;
 public class UPlaceholder {
 
     /**
-     * Parses the input and replaces common placeholders.
-     * @param environment The environment.
+     * Parses replaces the core placeholders.
+     * @param member The member.
      * @param input The input.
-     * @return The parsed input.
+     * @return A replaced string.
      */
-    public static String parse(CommandEnvironment environment, String input) {
-        User user = environment.getAuthor();
-        Guild guild = environment.getGuild();
-        TextChannel channel = environment.getChannel();
-        Message message = environment.getMessage();
+    public static String replaceCore(Member member, String input) {
+        Guild guild = member.getGuild();
+        User user = member.getUser();
         return input.replace("{user}", user.getAsMention())
                 .replace("{user_id}", user.getId())
                 .replace("{user_avatar}", user.getEffectiveAvatarUrl())
                 .replace("{user_name}", user.getName())
                 .replace("{user_discriminator}", user.getDiscriminator())
-                .replace("{user_nickname}", environment.getMember().getEffectiveName())
+                .replace("{user_nickname}", member.getEffectiveName())
                 .replace("{guild_id}", guild.getId())
                 .replace("{guild_icon}", guild.getIconUrl())
                 .replace("{guild_name}", guild.getName())
@@ -44,12 +42,30 @@ public class UPlaceholder {
                 .replace("{guild_owner_name}", guild.getOwner().getUser().getName())
                 .replace("{guild_owner_discriminator}", guild.getOwner().getUser().getDiscriminator())
                 .replace("{guild_owner_nickname}", guild.getOwner().getNickname())
-                .replace("{guild_region}", guild.getRegionRaw())
-                .replace("{channel}", channel.getAsMention())
+                .replace("{guild_region}", guild.getRegionRaw());
+    }
+
+    /**
+     * Replaces additional channel placeholders.
+     * @param channel The channel.
+     * @param input The input.
+     * @return A replaced string.
+     */
+    public static String replaceChannel(TextChannel channel, String input) {
+        return input.replace("{channel}", channel.getAsMention())
                 .replace("{channel_name}", channel.getName())
                 .replace("{channel_topic}", channel.getTopic())
-                .replace("{channel_nsfw}", String.valueOf(channel.isNSFW()))
-                .replace("{message_id}", message.getId())
+                .replace("{channel_nsfw}", String.valueOf(channel.isNSFW()));
+    }
+
+    /**
+     * Replaces additional message placeholders.
+     * @param message The message.
+     * @param input The input.
+     * @return A replaced string.
+     */
+    public static String replaceMessage(Message message, String input) {
+        return input.replace("{message_id}", message.getId())
                 .replace("{message_time}", message.getCreationTime().toString());
     }
 

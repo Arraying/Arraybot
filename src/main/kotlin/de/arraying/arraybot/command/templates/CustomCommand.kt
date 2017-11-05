@@ -91,7 +91,10 @@ class CustomCommand(override val name: String,
                         .replace(parameter.trigger, "")
             }
         }
-        value = UPlaceholder.parse(environment, value).trim()
+        value = value.trim()
+        value = UPlaceholder.replaceCore(environment.member, value)
+        value = UPlaceholder.replaceChannel(environment.channel, value)
+        value = UPlaceholder.replaceMessage(environment.message, value)
         if(value.isEmpty()) {
             Message.CUSTOM_VALUE_EMPTY.send(channel).queue()
             return
