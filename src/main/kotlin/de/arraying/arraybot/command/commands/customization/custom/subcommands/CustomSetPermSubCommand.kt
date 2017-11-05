@@ -6,6 +6,7 @@ import de.arraying.arraybot.data.database.categories.CustomCommandEntry
 import de.arraying.arraybot.data.database.core.Category
 import de.arraying.arraybot.data.database.templates.SetEntry
 import de.arraying.arraybot.language.Message
+import de.arraying.arraybot.util.CustomPermission
 import de.arraying.arraybot.util.URole
 import net.dv8tion.jda.core.Permission
 
@@ -49,23 +50,13 @@ class CustomSetPermSubCommand: SubCommand("setperm",
         }
         val permissionRaw = args[3]
         val guild = environment.guild
-        val permission: String
-        val role = URole.getRole(guild, permissionRaw)
-        permission = if(role != null) {
-            role.id
-        } else {
-            try {
-                Permission.valueOf(permissionRaw.toUpperCase()).toString()
-            } catch(exception: Exception) {
-                ""
-            }
-        }
-        if(permission.isEmpty()) {
-            Message.COMMANDS_CUSTOM_PERMISSION_INVALID.send(channel).queue()
+        val permission = CustomPermission.getPermissionFromString(guild, permissionRaw)
+        if(permission == null) {
+            Message.ROLE_OR_PERMISSION_INVALID.send(channel).queue()
             return
         }
         val customCommand = Category.CUSTOM_COMMAND.entry as CustomCommandEntry
-        customCommand.push(customCommand.getField(CustomCommandEntry.Fields.PERMISSION), guildId, name, permission)
+        customCommand.push(customCommand.getField(CustomCommandEntry.Fields.PERMISSION), guildId, name, permission.value)
         Message.COMMANDS_CUSTOM_UPDATED.send(channel).queue()
     }
 

@@ -28,7 +28,7 @@ import net.dv8tion.jda.core.Permission
 class EvalCommand: DefaultCommand("eval",
         CommandCategory.DEVELOPER,
         Permission.MESSAGE_WRITE,
-        aliases = arrayOf("evaluate", "exec", "execute", "breakbot")) {
+        aliases = arrayOf("evaluate", "exec", "execute", "e", "breakbot")) {
 
     private val engines = MultiKeyMap<String, EvalEngine>()
     private val placeholder = "[...]"

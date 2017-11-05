@@ -1,7 +1,14 @@
 package de.arraying.arraybot.command
 
+import de.arraying.arraybot.command.commands.customization.autorole.AutoRoleCommand
+import de.arraying.arraybot.command.commands.customization.autorole.subcommands.AutoRoleSetCommand
+import de.arraying.arraybot.command.commands.customization.autorole.subcommands.AutoRoleShowSubCommand
+import de.arraying.arraybot.command.commands.customization.autorole.subcommands.AutoRoleToggleSubCommand
 import de.arraying.arraybot.command.commands.customization.custom.CustomCommand
 import de.arraying.arraybot.command.commands.customization.custom.subcommands.*
+import de.arraying.arraybot.command.commands.customization.mutesettings.MuteSettingsCommand
+import de.arraying.arraybot.command.commands.customization.mutesettings.subcommands.MuteSettingsPermissionSubCommand
+import de.arraying.arraybot.command.commands.customization.mutesettings.subcommands.MuteSettingsRoleSubCommand
 import de.arraying.arraybot.command.commands.developer.eval.EvalCommand
 import de.arraying.arraybot.command.commands.developer.reload.ReloadCommand
 import de.arraying.arraybot.command.commands.developer.reload.subcommands.ReloadAppSubCommand
@@ -38,6 +45,15 @@ import net.dv8tion.jda.core.Permission
  * limitations under the License.
  */
 enum class CommandCollection(val command: DefaultCommand) {
+
+    /**
+     * The command that handler the automatic role assigning when users join.
+     */
+    AUTO_ROLE(AutoRoleCommand(arrayOf(
+            AutoRoleSetCommand(),
+            AutoRoleShowSubCommand(),
+            AutoRoleToggleSubCommand()
+    ))),
 
     /**
      * The command that permanently bans users.
@@ -82,6 +98,14 @@ enum class CommandCollection(val command: DefaultCommand) {
      * The command that applies the muted role to a user.
      */
     MUTE(PunishmentCommand("mute", Permission.MESSAGE_WRITE, PunishmentType.MUTE)),
+
+    /**
+     * The command that managers mute settings.
+     */
+    MUTE_SETTINGS(MuteSettingsCommand(arrayOf(
+            MuteSettingsPermissionSubCommand(),
+            MuteSettingsRoleSubCommand()
+    ))),
 
     /**
      * The command to evaluate code.

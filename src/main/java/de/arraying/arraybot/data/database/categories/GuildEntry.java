@@ -113,12 +113,6 @@ public final class GuildEntry extends HashEntry<GuildEntry.Fields> {
         AUTOROLE_ENABLED(new EntryField("autorole_enabled", false)),
 
         /**
-         * Whether or not autorole should occur on first message rather
-         * than on guild join.
-         */
-        AUTOROLE_MESSAGE(new EntryField("autorole_message", false)),
-
-        /**
          * The autorole role ID.
          */
         AUTOROLE_ROLE(new EntryField("autorole_role", UDefaults.DEFAULT_SNOWFLAKE)),

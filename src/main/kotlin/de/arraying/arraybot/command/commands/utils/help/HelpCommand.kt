@@ -24,7 +24,8 @@ import net.dv8tion.jda.core.Permission
  */
 class HelpCommand: DefaultCommand("help",
         CommandCategory.UTILS,
-        Permission.MESSAGE_WRITE) {
+        Permission.MESSAGE_WRITE,
+        aliases = arrayOf("helpme", "h")) {
 
     /**
      * When the command is executed.
