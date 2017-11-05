@@ -3,6 +3,7 @@ package de.arraying.arraybot.command.custom.type.actions
 import de.arraying.arraybot.command.CommandEnvironment
 import de.arraying.arraybot.command.custom.type.CustomCommandAction
 import de.arraying.arraybot.language.Message
+import net.dv8tion.jda.core.entities.TextChannel
 import net.dv8tion.jda.core.exceptions.PermissionException
 
 /**
@@ -23,18 +24,26 @@ import net.dv8tion.jda.core.exceptions.PermissionException
 class AddRoleAction: CustomCommandAction, RoleAction() {
 
     /**
+     * Gets the message.
+     */
+    override fun getMessage(channel: TextChannel): String {
+        return Message.CUSTOM_TYPE_ROLE_ADDED.getContent(channel)
+    }
+
+    /**
      * Adds the specified role to the specified user.
      */
-    override fun onAction(environment: CommandEnvironment, value: String) {
+    override fun onAction(environment: CommandEnvironment, value: String): Boolean {
         val guild = environment.guild
         val channel = environment.channel
-        val action = preprocess(environment, value) ?: return
+        val action = preprocess(environment, value) ?: return true
         val user = if(action.b == null) environment.member.user.idLong else action.b!!
-        try {
+        return try {
             guild.controller.addSingleRoleToMember(guild.getMemberById(user), guild.getRoleById(action.a)).queue()
-            Message.CUSTOM_TYPE_ROLE_ADDED.send(channel).queue()
+            true
         } catch(exception: PermissionException) {
             Message.CUSTOM_TYPE_ROLE_PERMISSION.send(channel).queue()
+            false
         }
     }
 

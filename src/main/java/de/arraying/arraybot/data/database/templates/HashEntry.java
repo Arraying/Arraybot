@@ -25,8 +25,8 @@ import de.arraying.arraybot.util.UDatabase;
 @SuppressWarnings("unchecked")
 public abstract class HashEntry<T> implements Entry {
 
-    private final Redis redis;
-    private Category category;
+    protected final Redis redis;
+    protected Category category;
 
     /**
      * Creates a new hash entry.
@@ -121,6 +121,16 @@ public abstract class HashEntry<T> implements Entry {
     public boolean exists(EntryField field, long id, Object secondaryKey) {
         RedisCommands resource = redis.getResource();
         return resource.hexists(UDatabase.getKey(category, id, secondaryKey), field.getRedisKey());
+    }
+
+    /**
+     * Deletes itself.
+     * @param id The ID.
+     * @param secondaryKey The secondary key.
+     */
+    protected void deleteSelf(long id, String secondaryKey) {
+        RedisCommands resource = redis.getResource();
+        resource.del(UDatabase.getKey(category, id, secondaryKey));
     }
 
     /**

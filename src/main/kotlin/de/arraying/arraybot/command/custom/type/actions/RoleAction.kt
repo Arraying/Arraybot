@@ -1,6 +1,7 @@
 package de.arraying.arraybot.command.custom.type.actions
 
 import de.arraying.arraybot.command.CommandEnvironment
+import de.arraying.arraybot.command.custom.type.CustomCommandType
 import de.arraying.arraybot.language.Message
 import de.arraying.arraybot.util.UPair
 import de.arraying.arraybot.util.objects.Pair
@@ -28,7 +29,7 @@ open class RoleAction {
     protected fun preprocess(environment: CommandEnvironment, value: String): Pair<Long, Long?>? {
         val channel = environment.channel
         if(!UPair.isValid(value)) {
-            Message.CUSTOM_TYPE_INVALID.send(channel).queue()
+            Message.CUSTOM_TYPE_ROLE_VALUE.send(channel, CustomCommandType.getTypes()).queue()
             return null
         }
         val pair = UPair.getAction(value)

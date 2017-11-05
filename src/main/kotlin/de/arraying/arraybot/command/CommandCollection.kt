@@ -1,8 +1,10 @@
 package de.arraying.arraybot.command
 
 import de.arraying.arraybot.command.commands.customization.custom.CustomCommand
+import de.arraying.arraybot.command.commands.customization.custom.subcommands.*
 import de.arraying.arraybot.command.commands.developer.eval.EvalCommand
 import de.arraying.arraybot.command.commands.developer.reload.ReloadCommand
+import de.arraying.arraybot.command.commands.developer.reload.subcommands.ReloadAppSubCommand
 import de.arraying.arraybot.command.commands.developer.reload.subcommands.ReloadLanguagesSubCommand
 import de.arraying.arraybot.command.commands.developer.reload.subcommands.ReloadShardsSubCommand
 import de.arraying.arraybot.command.commands.developer.script.ScriptCommand
@@ -55,7 +57,16 @@ enum class CommandCollection(val command: DefaultCommand) {
     /**
      * The custom command management command.
      */
-    CUSTOM(CustomCommand()),
+    CUSTOM(CustomCommand(arrayOf(
+            CustomCreateSubCommand(),
+            CustomDeleteSubCommand(),
+            CustomListSubCommand(),
+            CustomSetDescriptionSubCommand(),
+            CustomSetPermSubCommand(),
+            CustomSetSynaxSubCommand(),
+            CustomSetTypeSubCommand(),
+            CustomSetValueSubCommand()
+    ))),
 
     /**
      * The help command giving a basic overview of the bot, but not listing commands.
@@ -86,6 +97,7 @@ enum class CommandCollection(val command: DefaultCommand) {
      * The command that is responsible for manually reloading certain modules.
      */
     RELOAD(ReloadCommand(arrayOf(
+            ReloadAppSubCommand(),
             ReloadLanguagesSubCommand(),
             ReloadShardsSubCommand()
     ))),

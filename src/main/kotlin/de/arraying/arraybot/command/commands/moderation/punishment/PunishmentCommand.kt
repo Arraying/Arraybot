@@ -96,13 +96,7 @@ open class PunishmentCommand(commandName: String,
             reasonIndex = 2
         }
         val reason = if(args.size > reasonIndex) {
-            val stringBuilder = StringBuilder()
-            for(i in reasonIndex until args.size) {
-                stringBuilder
-                        .append(args[i])
-                        .append(" ")
-            }
-            stringBuilder.toString().trim()
+            UArguments.combine(args.toTypedArray(), reasonIndex)
         } else {
             null
         }

@@ -1,7 +1,11 @@
 package de.arraying.arraybot.command.templates
 
+import de.arraying.arraybot.Arraybot
 import de.arraying.arraybot.command.Command
 import de.arraying.arraybot.command.CommandEnvironment
+import de.arraying.arraybot.command.custom.parameters.DeleteParameter
+import de.arraying.arraybot.command.custom.parameters.SilentParameter
+import de.arraying.arraybot.command.custom.parameters.ToidParameter
 import de.arraying.arraybot.command.custom.syntax.CustomCommandSyntax
 import de.arraying.arraybot.command.custom.type.CustomCommandType
 import de.arraying.arraybot.data.database.Redis
@@ -10,8 +14,7 @@ import de.arraying.arraybot.data.database.categories.GuildEntry
 import de.arraying.arraybot.data.database.core.Category
 import de.arraying.arraybot.data.database.templates.SetEntry
 import de.arraying.arraybot.language.Message
-import de.arraying.arraybot.util.CustomPermission
-import de.arraying.arraybot.util.UDefaults
+import de.arraying.arraybot.util.*
 import kotlinx.coroutines.experimental.CommonPool
 import kotlinx.coroutines.experimental.launch
 import net.dv8tion.jda.core.entities.TextChannel
@@ -32,7 +35,7 @@ import org.slf4j.LoggerFactory
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-class CustomCommand(val name: String,
+class CustomCommand(override val name: String,
                     val syntax: CustomCommandSyntax,
                     val permission: CustomPermission,
                     val type: CustomCommandType,
@@ -40,6 +43,7 @@ class CustomCommand(val name: String,
                     val value: String): Command {
 
     private val logger = LoggerFactory.getLogger("Custom-Command")
+    private val parameters = arrayOf(DeleteParameter(), SilentParameter(), ToidParameter())
 
     /**
      * Invokes the custom command.
@@ -52,7 +56,7 @@ class CustomCommand(val name: String,
             resource.incr("commands")
         }
         if(type == CustomCommandType.UNKNOWN) {
-            Message.CUSTOM_TYPE_INVALID.send(channel).queue()
+            Message.CUSTOM_TYPE_INVALID.send(channel, CustomCommandType.getTypes()).queue()
             return
         }
         if(type.action == null) {
@@ -60,34 +64,56 @@ class CustomCommand(val name: String,
             return
         }
         if(syntax == CustomCommandSyntax.UNKNOWN) {
-            Message.CUSTOM_SYNTAX_INVALID.send(channel).queue()
+            Message.CUSTOM_SYNTAX_INVALID.send(channel, CustomCommandSyntax.getSyntaxes()).queue()
             return
         }
         if(!permission.hasPermission(environment.member)) {
             Message.CUSTOM_PERMISSION.send(channel).queue()
             return
         }
-        val value: String =
-            if(syntax == CustomCommandSyntax.STARTS_WITH) {
+        val uid = environment.message.idLong
+        val storageManager = Arraybot.getInstance().storageManager
+        storageManager.customCommandStorageDataStorage.create(uid)
+        var value: String =
+            if(syntax == CustomCommandSyntax.STARTSWITH) {
                 if(args.size < 2) {
                     Message.CUSTOM_ARGUMENT_PROVIDE.send(channel, name, Message.CUSTOM_ARGUMENT.getContent(channel)).queue()
                     return
                 }
-                val builder = StringBuilder()
-                for(i in 1 until args.size) {
-                    builder
-                            .append(args[i])
-                            .append(" ")
-                }
-                this.value.replace("{input}", builder.toString().trim())
+                val input = UArguments.combine(args.toTypedArray(), 1)
+                this.value.replace("{input}", input)
             } else {
                 this.value
             }
+        for(parameter in parameters) {
+            while(value.contains(parameter.trigger, true)) {
+                value = parameter.parse(environment, value)
+                        .replace(parameter.trigger, "")
+            }
+        }
+        value = UPlaceholder.parse(environment, value).trim()
         if(value.isEmpty()) {
             Message.CUSTOM_VALUE_EMPTY.send(channel).queue()
             return
+        } else if(value.length > Limits.MESSAGE.limit) {
+            Message.CUSTOM_VALUE_LENGTH.send(channel, Limits.MESSAGE.limit.toString()).queue()
+            return
         }
-        type.action.onAction(environment, value)
+        val success = type.action.onAction(environment, value)
+        if(success) {
+            val storage = storageManager.customCommandStorageDataStorage.get(uid)
+            if(storage.isDelete) {
+                try {
+                    environment.message.delete().queue()
+                } catch(ignored: Exception) {}
+            }
+            val message = type.action.getMessage(channel)
+            if(!storage.isSilent
+                    && message.isNotEmpty()) {
+                channel.sendMessage(message).queue()
+            }
+        }
+        storageManager.customCommandStorageDataStorage.remove(uid)
     }
 
     /**
@@ -96,7 +122,7 @@ class CustomCommand(val name: String,
     fun getSyntax(channel: TextChannel): String {
         val entry = Category.GUILD.entry as GuildEntry
         val prefix = entry.fetch(entry.getField(GuildEntry.Fields.PREFIX), channel.guild.idLong, null)
-        return prefix + name + if(syntax == CustomCommandSyntax.STARTS_WITH) Message.CUSTOM_ARGUMENT.getContent(channel) else ""
+        return prefix + name + " " + if(syntax == CustomCommandSyntax.STARTSWITH) Message.CUSTOM_ARGUMENT.getContent(channel) else ""
     }
 
     companion object {

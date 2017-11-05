@@ -24,7 +24,8 @@ import net.dv8tion.jda.core.Permission
  */
 class CommandsCommand(override val subCommands: Array<SubCommand>): DefaultCommand(CommandsCommandData.name,
         CommandCategory.UTILS,
-        Permission.MESSAGE_WRITE) {
+        Permission.MESSAGE_WRITE,
+        aliases = arrayOf("commandlist", "c")) {
 
     /**
      * When the command is executed.

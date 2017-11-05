@@ -2,6 +2,7 @@ package de.arraying.arraybot.command.custom.type.actions
 
 import de.arraying.arraybot.command.CommandEnvironment
 import de.arraying.arraybot.command.custom.type.CustomCommandAction
+import net.dv8tion.jda.core.entities.TextChannel
 
 /**
  * Copyright 2017 Arraying
@@ -21,10 +22,18 @@ import de.arraying.arraybot.command.custom.type.CustomCommandAction
 class MessageAction: CustomCommandAction {
 
     /**
+     * Gets the message.
+     */
+    override fun getMessage(channel: TextChannel): String {
+        return ""
+    }
+
+    /**
      * Sends the specified message into the channel.
      */
-    override fun onAction(environment: CommandEnvironment, value: String) {
+    override fun onAction(environment: CommandEnvironment, value: String): Boolean {
         environment.channel.sendMessage(value).queue()
+        return true
     }
 
 }

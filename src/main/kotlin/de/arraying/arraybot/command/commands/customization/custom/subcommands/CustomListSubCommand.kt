@@ -1,7 +1,7 @@
-package de.arraying.arraybot.command.commands.utils.commands.subcommands
+package de.arraying.arraybot.command.commands.customization.custom.subcommands
 
 import de.arraying.arraybot.command.CommandEnvironment
-import de.arraying.arraybot.command.Commands
+import de.arraying.arraybot.command.templates.CustomCommand
 import de.arraying.arraybot.command.templates.SubCommand
 import de.arraying.arraybot.language.Message
 import de.arraying.arraybot.pagination.PageBuilder
@@ -23,17 +23,17 @@ import de.arraying.arraybot.util.UEmbed
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-class CommandsListSubCommand: SubCommand("list",
-        aliases = arrayOf("l")) {
+class CustomListSubCommand: SubCommand("list",
+        aliases = arrayOf("l", "showmewhatyougot")) {
 
     /**
-     * When the sub command is executed.
+     * When the command is executed.
      */
     override fun onSubCommand(environment: CommandEnvironment, args: List<String>) {
         val channel = environment.channel
-        val commands = Commands.getCommands(channel)
+        val commands = CustomCommand.getAll(environment.guild.idLong, channel)
         val embed = UEmbed.getEmbed(channel)
-                .setDescription(Message.COMMANDS_COMMANDS_LIST_DESCRIPTION.getContent(channel))
+                .setDescription(Message.COMMANDS_CUSTOM_LIST.getContent(channel))
         val pages = PageBuilder()
                 .withEntries(commands)
                 .withTotal(5)

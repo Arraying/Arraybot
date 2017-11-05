@@ -1,9 +1,8 @@
-package de.arraying.arraybot.command.custom.type.actions
+package de.arraying.arraybot.command.custom.parameters
 
+import de.arraying.arraybot.Arraybot
 import de.arraying.arraybot.command.CommandEnvironment
-import de.arraying.arraybot.command.custom.type.CustomCommandAction
-import de.arraying.arraybot.language.Message
-import net.dv8tion.jda.core.entities.TextChannel
+import de.arraying.arraybot.parameter.Parameter
 
 /**
  * Copyright 2017 Arraying
@@ -20,20 +19,21 @@ import net.dv8tion.jda.core.entities.TextChannel
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-class PrivateMessageAction: CustomCommandAction {
+class SilentParameter: Parameter {
 
-    override fun getMessage(channel: TextChannel): String {
-        return Message.CUSTOM_TYPE_PRIVATE.getContent(channel)
+    /**
+     * Gets the trigger.
+     */
+    override fun getTrigger(): String {
+        return "--silent"
     }
 
     /**
-     * Private messages the user executing the command.
+     * Parses the parameter.
      */
-    override fun onAction(environment: CommandEnvironment, value: String): Boolean {
-        environment.author.openPrivateChannel().queue({
-            it.sendMessage(value).queue()
-        })
-        return true
+    override fun parse(environment: CommandEnvironment?, input: String?): String {
+        Arraybot.getInstance().storageManager.customCommandStorageDataStorage.get(environment!!.message.idLong).isSilent = true
+        return input!!
     }
 
 }

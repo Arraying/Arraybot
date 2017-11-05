@@ -1,13 +1,12 @@
 package de.arraying.arraybot.pagination;
 
+import de.arraying.arraybot.command.Command;
 import de.arraying.arraybot.language.Message;
 import de.arraying.arraybot.util.CustomEmbedBuilder;
 import de.arraying.arraybot.util.UDatatypes;
 import net.dv8tion.jda.core.entities.TextChannel;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.TreeMap;
+import java.util.*;
 
 /**
  * Copyright 2017 Arraying
@@ -93,6 +92,11 @@ public abstract class PageImpl implements Pages {
      * @param itemsPerPage The number of items per page.
      */
     private void compute(int itemsPerPage) {
+        if(entries instanceof Command[]) {
+            Arrays.sort((Command[]) entries, new Comparator());
+        } else {
+            Arrays.sort(entries);
+        }
         if(itemsPerPage < 1) {
             throw new IllegalArgumentException("The number of items per page must be equal to one or more.");
         }
@@ -121,6 +125,31 @@ public abstract class PageImpl implements Pages {
      */
     private void newPage(int index) {
         pages.put(index, new ArrayList<>());
+    }
+
+    public static class Comparator implements java.util.Comparator<Command> {
+
+        /**
+         * Compares two commands.
+         * @param o1 The first object.
+         * @param o2 The second object.
+         * @return The comparison.
+         */
+        @Override
+        public int compare(Command o1, Command o2) {
+            if(o1 == null
+                    && o2 == null) {
+                return 0;
+            }
+            if(o1 == null) {
+                return -19;
+            }
+            if(o2 == null) {
+                return 19;
+            }
+            return o1.getName().compareTo(o2.getName());
+        }
+
     }
 
 }

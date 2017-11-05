@@ -1,5 +1,7 @@
 package de.arraying.arraybot.command.custom.syntax
 
+import de.arraying.arraybot.util.UFormatting
+
 /**
  * Copyright 2017 Arraying
  *
@@ -25,7 +27,7 @@ enum class CustomCommandSyntax {
     /**
      * If there is supposed to be any input.
      */
-    STARTS_WITH,
+    STARTSWITH,
 
     /**
      * If the syntax is unknown.
@@ -43,6 +45,13 @@ enum class CustomCommandSyntax {
                 } catch(exception: Exception) {
                     UNKNOWN
                 }
+        }
+
+        /**
+         * Gets all syntaxes as a displayable list.
+         */
+        fun getSyntaxes(): String {
+            return UFormatting.formatToList(values())
         }
 
     }

@@ -1,6 +1,7 @@
 package de.arraying.arraybot.command.custom.type
 
 import de.arraying.arraybot.command.CommandEnvironment
+import net.dv8tion.jda.core.entities.TextChannel
 
 /**
  * Copyright 2017 Arraying
@@ -20,8 +21,13 @@ import de.arraying.arraybot.command.CommandEnvironment
 interface CustomCommandAction {
 
     /**
+     * Gets the message for the action.
+     */
+    fun getMessage(channel: TextChannel): String
+
+    /**
      * Executes the action.
      */
-    fun onAction(environment: CommandEnvironment, value: String)
+    fun onAction(environment: CommandEnvironment, value: String): Boolean
 
 }
