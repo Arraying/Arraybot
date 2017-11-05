@@ -33,6 +33,11 @@ enum class Limits(val limit: Int) {
     CHANNEL_TOPIC_MAX(1024),
 
     /**
+     * The maximum amount of characters for the custom command description.
+     */
+    CUSTOM_DESCRIPTION(256),
+
+    /**
      * The maximum amount of characters for the custom command name.
      */
     CUSTOM_NAME(100),

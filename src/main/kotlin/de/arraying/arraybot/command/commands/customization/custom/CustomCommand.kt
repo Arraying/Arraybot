@@ -2,6 +2,7 @@ package de.arraying.arraybot.command.commands.customization.custom
 
 import de.arraying.arraybot.command.CommandEnvironment
 import de.arraying.arraybot.command.templates.DefaultCommand
+import de.arraying.arraybot.command.templates.SubCommand
 import de.arraying.arraybot.language.Message
 import de.arraying.arraybot.util.UEmbed
 import net.dv8tion.jda.core.Permission
@@ -21,7 +22,7 @@ import net.dv8tion.jda.core.Permission
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-class CustomCommand: DefaultCommand("custom",
+class CustomCommand(override val subCommands: Array<SubCommand>): DefaultCommand("custom",
         CommandCategory.CUSTOMIZATION,
         Permission.MANAGE_SERVER,
         aliases = arrayOf("customcommand", "customcommands", "cc")) {

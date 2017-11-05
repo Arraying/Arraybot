@@ -4,6 +4,7 @@ import de.arraying.arraybot.data.Configuration;
 import de.arraying.arraybot.manager.BotManager;
 import de.arraying.arraybot.manager.PunishmentManager;
 import de.arraying.arraybot.manager.ScriptManager;
+import de.arraying.arraybot.manager.StorageManager;
 import de.arraying.arraybot.startup.Starter;
 import de.arraying.arraybot.util.objects.Splash;
 import net.dv8tion.jda.core.JDAInfo;
@@ -41,6 +42,7 @@ public final class Arraybot {
     private BotManager botManager;
     private PunishmentManager punishmentManager;
     private ScriptManager scriptManager;
+    private StorageManager storageManager;
     private boolean initialized = false;
 
     /**
@@ -135,21 +137,31 @@ public final class Arraybot {
     }
 
     /**
+     * Gets the storage manager.
+     * @return The storage manager.
+     */
+    public StorageManager getStorageManager() {
+        return storageManager;
+    }
+
+    /**
      * Sets the bot manager.
      * @param manager The manager.
      */
     public synchronized void setBotManager(BotManager manager) {
         if(botManager == null) {
-            botManager = manager;
+            this.botManager = manager;
         }
     }
 
     /**
      * Sets the punishment manager.
-     * @param punishmentManager The manager.
+     * @param manager The manager.
      */
-    public void setPunishmentManager(PunishmentManager punishmentManager) {
-        this.punishmentManager = punishmentManager;
+    public synchronized void setPunishmentManager(PunishmentManager manager) {
+        if(punishmentManager == null) {
+            this.punishmentManager = manager;
+        }
     }
 
     /**
@@ -163,11 +175,13 @@ public final class Arraybot {
     }
 
     /**
-     * Whether or not Arraybot is initialized.
-     * @return True if it is, false otherwise.
+     * Sets the storage manager.
+     * @param manager The manager.
      */
-    public boolean isInitialized() {
-        return initialized;
+    public synchronized void setStorageManager(StorageManager manager) {
+        if(storageManager == null) {
+            this.storageManager = manager;
+        }
     }
 
 }

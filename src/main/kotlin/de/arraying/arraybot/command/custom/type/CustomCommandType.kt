@@ -1,6 +1,7 @@
 package de.arraying.arraybot.command.custom.type
 
 import de.arraying.arraybot.command.custom.type.actions.*
+import de.arraying.arraybot.util.UFormatting
 
 /**
  * Copyright 2017 Arraying
@@ -22,7 +23,7 @@ enum class CustomCommandType(val action: CustomCommandAction?) {
     /**
      * Adds a role to a member.
      */
-    ADD_ROLE(AddRoleAction()),
+    ADDROLE(AddRoleAction()),
 
     /**
      * Messages the channel the command was invoked in.
@@ -32,12 +33,12 @@ enum class CustomCommandType(val action: CustomCommandAction?) {
     /**
      * Private messages the command executor.
      */
-    PRIVATE_MESSAGE(PrivateMessageAction()),
+    PRIVATEMESSAGE(PrivateMessageAction()),
 
     /**
      * Removes a role from a member.
      */
-    REMOVE_ROLE(RemoveRoleAction()),
+    REMOVEROLE(RemoveRoleAction()),
 
     /**
      * Executes a piece of Zeus script.
@@ -49,7 +50,7 @@ enum class CustomCommandType(val action: CustomCommandAction?) {
      * If the member has the role, it will remove it.
      * Else, it will add it.
      */
-    TOGGLE_ROLE(ToggleRoleAction()),
+    TOGGLEROLE(ToggleRoleAction()),
 
     /**
      * If the type is unknown.
@@ -67,6 +68,13 @@ enum class CustomCommandType(val action: CustomCommandAction?) {
             } catch(exception: Exception) {
                 UNKNOWN
             }
+        }
+
+        /**
+         * Gets the types as a list.
+         */
+        fun getTypes(): String {
+            return UFormatting.formatToList(values())
         }
 
     }

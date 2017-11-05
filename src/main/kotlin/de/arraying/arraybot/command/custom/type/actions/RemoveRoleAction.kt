@@ -3,6 +3,7 @@ package de.arraying.arraybot.command.custom.type.actions
 import de.arraying.arraybot.command.CommandEnvironment
 import de.arraying.arraybot.command.custom.type.CustomCommandAction
 import de.arraying.arraybot.language.Message
+import net.dv8tion.jda.core.entities.TextChannel
 import net.dv8tion.jda.core.exceptions.PermissionException
 
 /**
@@ -23,18 +24,26 @@ import net.dv8tion.jda.core.exceptions.PermissionException
 class RemoveRoleAction: CustomCommandAction, RoleAction() {
 
     /**
+     * Gets the message.
+     */
+    override fun getMessage(channel: TextChannel): String {
+        return Message.CUSTOM_TYPE_ROLE_REMOVED.getContent(channel)
+    }
+
+    /**
      * Removes the specified role from the specified user.
      */
-    override fun onAction(environment: CommandEnvironment, value: String) {
+    override fun onAction(environment: CommandEnvironment, value: String): Boolean {
         val channel = environment.channel
         val guild = environment.guild
-        val action = preprocess(environment, value) ?: return
+        val action = preprocess(environment, value) ?: return false
         val user = if(action.b == null) environment.member.user.idLong else action.b!!
-        try {
+        return try {
             guild.controller.removeSingleRoleFromMember(guild.getMemberById(user), guild.getRoleById(action.a)).queue()
-            Message.CUSTOM_TYPE_ROLE_REMOVED.send(channel).queue()
+            true
         } catch(exception: PermissionException) {
             Message.CUSTOM_TYPE_ROLE_PERMISSION.send(channel).queue()
+            false
         }
     }
 

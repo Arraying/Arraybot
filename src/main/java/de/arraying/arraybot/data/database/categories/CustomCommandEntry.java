@@ -1,8 +1,11 @@
 package de.arraying.arraybot.data.database.categories;
 
+import com.lambdaworks.redis.api.sync.RedisCommands;
 import de.arraying.arraybot.data.database.core.Category;
 import de.arraying.arraybot.data.database.core.EntryField;
 import de.arraying.arraybot.data.database.templates.HashEntry;
+import de.arraying.arraybot.data.database.templates.SetEntry;
+import de.arraying.arraybot.util.UDatabase;
 import de.arraying.arraybot.util.UDefaults;
 
 import java.util.HashMap;
@@ -59,10 +62,23 @@ public final class CustomCommandEntry extends HashEntry<CustomCommandEntry.Field
      * @param id The guild's ID.
      * @param secondaryKey The custom command name.
      */
-    public void create(long id, String secondaryKey) {
+    public void createCustomCommand(long id, String secondaryKey) {
+        SetEntry parent = (SetEntry) getParent().getEntry();
+        parent.add(id, secondaryKey);
         for(Fields fields : Fields.values()) {
             push(getField(fields), id, secondaryKey, fields.field.getDefaultValue());
         }
+    }
+
+    /**
+     * Deletes a custom command.
+     * @param id The guild's ID.
+     * @param secondaryKey The custom command name.
+     */
+    public void deleteCustomCommand(long id, String secondaryKey) {
+        SetEntry parent = (SetEntry) getParent().getEntry();
+        parent.remove(id, secondaryKey);
+        deleteSelf(id, secondaryKey);
     }
 
     public enum Fields {

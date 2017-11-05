@@ -1,11 +1,10 @@
-package de.arraying.arraybot.command.commands.utils.commands.subcommands
+package de.arraying.arraybot.command.commands.developer.reload.subcommands
 
+import de.arraying.arraybot.Arraybot
 import de.arraying.arraybot.command.CommandEnvironment
-import de.arraying.arraybot.command.Commands
 import de.arraying.arraybot.command.templates.SubCommand
-import de.arraying.arraybot.data.database.core.Category
-import de.arraying.arraybot.data.database.templates.SetEntry
 import de.arraying.arraybot.language.Message
+import org.slf4j.LoggerFactory
 
 /**
  * Copyright 2017 Arraying
@@ -22,26 +21,32 @@ import de.arraying.arraybot.language.Message
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-class CommandsEnableSubCommand: SubCommand("enable",
-        aliases = arrayOf("enablecommand", "e")) {
+class ReloadAppSubCommand: SubCommand("app",
+        aliases = arrayOf("application", "a")) {
 
     /**
-     * When the command is executed.
+     * When the sub command is executed.
      */
     override fun onSubCommand(environment: CommandEnvironment, args: List<String>) {
         val channel = environment.channel
-        if(args.size < 3) {
-            Message.COMMAND_NAME_PROVIDE.send(channel).queue()
-            return
+        Runtime.getRuntime().addShutdownHook(RestartShutdownHook("Restart-Shutdown-Hook"))
+        Message.COMMANDS_RELOAD_APP.send(channel).queue({
+            System.exit(0)
+        })
+    }
+
+    class RestartShutdownHook(name: String): Thread(name) {
+
+        private val logger = LoggerFactory.getLogger(name)
+
+        /**
+         * When the thread is run.
+         */
+        override fun run() {
+            logger.info("Attempting to reboot...")
+            Runtime.getRuntime().exec(Arraybot.getInstance().configuration.startCommand)
         }
-        val commandName = args[2].toLowerCase()
-        if(!Commands.commands.containsKey(commandName)) {
-            Message.COMMAND_NAME_INVALID.send(channel).queue()
-            return
-        }
-        val entry = Category.DISABLED_COMMAND.entry as SetEntry
-        entry.remove(channel.guild.idLong, commandName)
-        Message.COMMANDS_COMMANDS_ENABLE.send(channel, commandName).queue()
+
     }
 
 }

@@ -6,6 +6,7 @@ import de.arraying.arraybot.command.commands.developer.eval.engines.ZeusEngine
 import de.arraying.arraybot.command.templates.DefaultCommand
 import de.arraying.arraybot.language.Message
 import de.arraying.arraybot.util.Limits
+import de.arraying.arraybot.util.UArguments
 import de.arraying.arraybot.util.objects.MultiKeyMap
 import net.dv8tion.jda.core.Permission
 
@@ -71,7 +72,7 @@ class EvalCommand: DefaultCommand("eval",
             builder.append(args[i])
                     .append(" ")
         }
-        val code = builder.toString().trim()
+        val code = UArguments.combine(args.toTypedArray(), 2)
         var result = engines.getByKeyOrAlias(engine)!!.evaluate(environment, code)
         if(result.length > Limits.MESSAGE.limit) {
             result = result.substring(0, Limits.MESSAGE.limit - placeholder.length) + placeholder

@@ -33,7 +33,7 @@ import org.slf4j.LoggerFactory
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-abstract class DefaultCommand(val name: String,
+abstract class DefaultCommand(override final val name: String,
                               val category: CommandCategory,
                               open val permission: Permission,
                               open val subCommands: Array<SubCommand> = arrayOf(),

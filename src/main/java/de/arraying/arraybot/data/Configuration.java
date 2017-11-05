@@ -47,6 +47,7 @@ public final class Configuration {
     private final int redisIndex;
     private final BotListRequest[] requests;
     private final String announcement;
+    private final String startCommand;
 
 
     /**
@@ -65,12 +66,10 @@ public final class Configuration {
      * @param redisAuth The Redis authentication string.
      * Can be empty.
      * @param redisIndex The Redis index to use.
-     //* @param keyCarbonitex The Carbonitex.net secret key.
-     //* @param keyDiscordOrg The DiscordBots.org secret key.
-     //* @param keyDiscordPw The Bots.Discord.pw secret key.
      * @param announcement The current announcement.
+     * @param startCommand The command to start the application.
      */
-    private Configuration(String botToken, String botBetaToken, int botShards, long[] botAuthors, String botPrefix, String botVersion, String botLanguage, boolean botBeta, String redisHost, int redisPort, String redisAuth, int redisIndex, /*String keyCarbonitex, String keyDiscordOrg, String keyDiscordPw*/ BotListRequest[] requests, String announcement) {
+    private Configuration(String botToken, String botBetaToken, int botShards, long[] botAuthors, String botPrefix, String botVersion, String botLanguage, boolean botBeta, String redisHost, int redisPort, String redisAuth, int redisIndex, BotListRequest[] requests, String announcement, String startCommand) {
         this.botToken = botToken;
         this.botBetaToken = botBetaToken;
         this.botShards = botShards;
@@ -85,6 +84,7 @@ public final class Configuration {
         this.redisIndex = redisIndex;
         this.requests = requests;
         this.announcement = announcement;
+        this.startCommand = startCommand;
     }
 
     /**
@@ -331,6 +331,14 @@ public final class Configuration {
         return announcement;
     }
 
+    /**
+     * Gets the start command.
+     * @return The start command.
+     */
+    public String getStartCommand() {
+        return startCommand;
+    }
+
     @SuppressWarnings("unused")
     private enum ConfigEntry {
 
@@ -402,7 +410,12 @@ public final class Configuration {
         /**
          * The announcement displayed on the help command.
          */
-        ANNOUNCEMENT("announcement", ConfigEntryType.STRING, "");
+        ANNOUNCEMENT("announcement", ConfigEntryType.STRING, ""),
+
+        /**
+         * The command to be used in order to restart the bot.
+         */
+        START_SCRIPT("start-command", ConfigEntryType.STRING, "./start.sh");
 
         private final String jsonKey;
         private final ConfigEntry.ConfigEntryType type;

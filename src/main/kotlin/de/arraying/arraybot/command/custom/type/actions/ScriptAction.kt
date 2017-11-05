@@ -3,6 +3,7 @@ package de.arraying.arraybot.command.custom.type.actions
 import de.arraying.arraybot.Arraybot
 import de.arraying.arraybot.command.CommandEnvironment
 import de.arraying.arraybot.command.custom.type.CustomCommandAction
+import net.dv8tion.jda.core.entities.TextChannel
 
 /**
  * Copyright 2017 Arraying
@@ -22,10 +23,18 @@ import de.arraying.arraybot.command.custom.type.CustomCommandAction
 class ScriptAction: CustomCommandAction {
 
     /**
+     * Gets the message.
+     */
+    override fun getMessage(channel: TextChannel): String {
+        return ""
+    }
+
+    /**
      * Executes the script.
      */
-    override fun onAction(environment: CommandEnvironment, value: String) {
+    override fun onAction(environment: CommandEnvironment, value: String): Boolean {
         Arraybot.getInstance().scriptManager.executeScript(value, environment)
+        return true
     }
 
 }

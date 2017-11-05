@@ -25,7 +25,7 @@ import java.util.regex.Pattern;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-public class UTime {
+public final class UTime {
 
     /**
      * The pattern to use when figuring out the time.

@@ -1,8 +1,8 @@
-package de.arraying.arraybot.command.commands.utils.commands.subcommands
+package de.arraying.arraybot.command.commands.customization.custom.subcommands
 
 import de.arraying.arraybot.command.CommandEnvironment
-import de.arraying.arraybot.command.Commands
 import de.arraying.arraybot.command.templates.SubCommand
+import de.arraying.arraybot.data.database.categories.CustomCommandEntry
 import de.arraying.arraybot.data.database.core.Category
 import de.arraying.arraybot.data.database.templates.SetEntry
 import de.arraying.arraybot.language.Message
@@ -22,26 +22,28 @@ import de.arraying.arraybot.language.Message
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-class CommandsEnableSubCommand: SubCommand("enable",
-        aliases = arrayOf("enablecommand", "e")) {
+class CustomDeleteSubCommand: SubCommand("delete",
+        aliases = arrayOf("remove", "d")) {
 
     /**
-     * When the command is executed.
+     * When the sub command is executed.
      */
     override fun onSubCommand(environment: CommandEnvironment, args: List<String>) {
         val channel = environment.channel
         if(args.size < 3) {
-            Message.COMMAND_NAME_PROVIDE.send(channel).queue()
+            Message.COMMANDS_CUSTOM_PROVIDE_NAME.send(channel).queue()
             return
         }
-        val commandName = args[2].toLowerCase()
-        if(!Commands.commands.containsKey(commandName)) {
-            Message.COMMAND_NAME_INVALID.send(channel).queue()
+        val name = args[2].toLowerCase()
+        val customCommands = Category.CUSTOM_COMMAND_NAMES.entry as SetEntry
+        val guildId = environment.guild.idLong
+        if(!customCommands.contains(guildId, name)) {
+            Message.COMMANDS_CUSTOM_NOT_EXISTS.send(channel).queue()
             return
         }
-        val entry = Category.DISABLED_COMMAND.entry as SetEntry
-        entry.remove(channel.guild.idLong, commandName)
-        Message.COMMANDS_COMMANDS_ENABLE.send(channel, commandName).queue()
+        val customCommand = Category.CUSTOM_COMMAND.entry as CustomCommandEntry
+        customCommand.deleteCustomCommand(guildId, name)
+        Message.COMMANDS_CUSTOM_DELETED.send(channel).queue()
     }
 
 }

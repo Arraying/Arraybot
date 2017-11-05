@@ -61,8 +61,8 @@ public class CommandList extends PageImpl {
                 description = ((DefaultCommand) command).getDescription(language);
             } else if(command instanceof CustomCommand) {
                 syntax = prefix + ((CustomCommand) command).getName();
-                if(((CustomCommand) command).getSyntax() == CustomCommandSyntax.STARTS_WITH) {
-                    syntax += Message.CUSTOM_ARGUMENT.getContent(channel);
+                if(((CustomCommand) command).getSyntax() == CustomCommandSyntax.STARTSWITH) {
+                    syntax += " " + Message.CUSTOM_ARGUMENT.getContent(channel);
                 }
                 description = ((CustomCommand) command).getDescription();
             } else {
@@ -71,7 +71,7 @@ public class CommandList extends PageImpl {
             builder.append("`")
                     .append(syntax)
                     .append("`")
-                    .append("\n")
+                    .append("\n    **-** ")
                     .append(description)
                     .append("\n\n");
         }

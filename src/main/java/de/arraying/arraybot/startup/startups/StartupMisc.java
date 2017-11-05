@@ -2,6 +2,7 @@ package de.arraying.arraybot.startup.startups;
 
 import de.arraying.arraybot.Arraybot;
 import de.arraying.arraybot.manager.PunishmentManager;
+import de.arraying.arraybot.manager.StorageManager;
 import de.arraying.arraybot.startup.StartupTask;
 
 /**
@@ -36,6 +37,8 @@ public class StartupMisc extends StartupTask {
     public void onTask() throws Exception {
         logger.info("Creating punishment manager...");
         Arraybot.getInstance().setPunishmentManager(new PunishmentManager());
+        logger.info("Creating storage manager...");
+        Arraybot.getInstance().setStorageManager(new StorageManager());
     }
 
 }

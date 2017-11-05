@@ -1,13 +1,12 @@
-package de.arraying.arraybot.command.commands.utils.commands.subcommands
+package de.arraying.arraybot.command.commands.customization.custom.subcommands
 
 import de.arraying.arraybot.command.CommandEnvironment
-import de.arraying.arraybot.command.Commands
-import de.arraying.arraybot.command.commands.utils.commands.CommandsCommandData
-import de.arraying.arraybot.command.templates.DefaultCommand
 import de.arraying.arraybot.command.templates.SubCommand
+import de.arraying.arraybot.data.database.categories.CustomCommandEntry
 import de.arraying.arraybot.data.database.core.Category
 import de.arraying.arraybot.data.database.templates.SetEntry
 import de.arraying.arraybot.language.Message
+import de.arraying.arraybot.util.Limits
 
 /**
  * Copyright 2017 Arraying
@@ -24,8 +23,8 @@ import de.arraying.arraybot.language.Message
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-class CommandsDisableSubCommand: SubCommand("disable",
-        aliases = arrayOf("disablecommand", "d")) {
+class CustomCreateSubCommand: SubCommand("create",
+        aliases = arrayOf("new", "c")) {
 
     /**
      * When the sub command is executed.
@@ -33,26 +32,23 @@ class CommandsDisableSubCommand: SubCommand("disable",
     override fun onSubCommand(environment: CommandEnvironment, args: List<String>) {
         val channel = environment.channel
         if(args.size < 3) {
-            Message.COMMAND_NAME_PROVIDE.send(channel).queue()
+            Message.COMMANDS_CUSTOM_PROVIDE_NAME.send(channel).queue()
             return
         }
-        val commandName = args[2].toLowerCase()
-        if(!Commands.commands.containsKey(commandName)) {
-            Message.COMMAND_NAME_INVALID.send(channel).queue()
+        val name = args[2].toLowerCase()
+        if(name.length > Limits.CUSTOM_NAME.limit) {
+            Message.COMMANDS_CUSTOM_NAME_LENGTH.send(channel, Limits.CUSTOM_NAME.limit.toString()).queue()
             return
         }
-        val command = Commands.commands[commandName]!!
-        if(command.category == DefaultCommand.CommandCategory.DEVELOPER) {
-            Message.COMMANDS_COMMANDS_DISABLE_DEVELOPER.send(channel).queue()
+        val customCommands = Category.CUSTOM_COMMAND_NAMES.entry as SetEntry
+        val guildId = environment.guild.idLong
+        if(customCommands.contains(guildId, name)) {
+            Message.COMMANDS_CUSTOM_EXISTS.send(channel).queue()
             return
         }
-        if(command.name == CommandsCommandData.name) {
-            Message.COMMANDS_COMMANDS_DISABLE_COMMANDS.send(channel).queue()
-            return
-        }
-        val entry = Category.DISABLED_COMMAND.entry as SetEntry
-        entry.add(channel.guild.idLong, commandName)
-        Message.COMMANDS_COMMANDS_DISABLE_DISABLED.send(channel, commandName).queue()
+        val customCommand = Category.CUSTOM_COMMAND.entry as CustomCommandEntry
+        customCommand.createCustomCommand(guildId, name)
+        Message.COMMANDS_CUSTOM_CREATED.send(channel).queue()
     }
 
 }

@@ -47,6 +47,28 @@ public final class UFormatting {
     }
 
     /**
+     * Formats an Object array to list.
+     * This will not append anything called "UNKNOWN".
+     * @param input The array to format.
+     * @return A formatted list.
+     */
+    public static String formatToList(Object[] input) {
+        StringBuilder builder = new StringBuilder();
+        for(Object object : input) {
+            if(object.toString().equals("UNKNOWN")) {
+                continue;
+            }
+            builder.append(UFormatting.displayableEnumField(object))
+                    .append(", ");
+        }
+        String value = builder.toString().trim();
+        if(!value.isEmpty()) {
+            value = value.substring(0, value.length()-1);
+        }
+        return value;
+    }
+
+    /**
      * Makes an enum field displayable.
      * @param field The field.
      * @return A displayable string.

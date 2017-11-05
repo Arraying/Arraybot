@@ -9,6 +9,7 @@ import de.arraying.arraybot.data.database.core.Category
 import de.arraying.arraybot.data.database.templates.SetEntry
 import de.arraying.arraybot.language.Message
 import de.arraying.arraybot.util.UEmbed
+import de.arraying.arraybot.util.UFormatting
 
 /**
  * Copyright 2017 Arraying
@@ -26,7 +27,7 @@ import de.arraying.arraybot.util.UEmbed
  * limitations under the License.
  */
 class CommandsInfoSubCommand: SubCommand("info",
-        aliases = arrayOf("commandinfo", "wat")) {
+        aliases = arrayOf("commandinfo", "wat", "i")) {
 
     /**
      * When the sub command is getting executed.
@@ -61,7 +62,7 @@ class CommandsInfoSubCommand: SubCommand("info",
                                 aliases,
                                 false)
                         .addField(Message.COMMANDS_COMMANDS_INFO_CATEGORY.getContent(channel),
-                                command.category.toString(),
+                                UFormatting.displayableEnumField(command.category.toString()),
                                 false)
                         .addField(Message.COMMANDS_COMMANDS_INFO_COMMANDDESCRIPTION.getContent(channel),
                                 command.getDescription(language),
@@ -82,7 +83,7 @@ class CommandsInfoSubCommand: SubCommand("info",
                                 commandName,
                                 false)
                         .addField(Message.COMMANDS_COMMANDS_INFO_TYPE.getContent(channel),
-                                command.type.toString(),
+                                UFormatting.displayableEnumField(command.type.toString()),
                                 false)
                         .addField(Message.COMMANDS_COMMANDS_INFO_PERMISSION.getContent(channel),
                                 command.permission.toString(channel),
