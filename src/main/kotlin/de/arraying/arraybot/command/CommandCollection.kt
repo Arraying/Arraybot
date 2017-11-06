@@ -1,14 +1,19 @@
 package de.arraying.arraybot.command
 
+import de.arraying.arraybot.command.commands.customization.announcer.AnnouncerCommand
+import de.arraying.arraybot.command.commands.customization.announcer.AnnouncerGenericSubCommand
 import de.arraying.arraybot.command.commands.customization.autorole.AutoRoleCommand
 import de.arraying.arraybot.command.commands.customization.autorole.subcommands.AutoRoleSetCommand
 import de.arraying.arraybot.command.commands.customization.autorole.subcommands.AutoRoleShowSubCommand
 import de.arraying.arraybot.command.commands.customization.autorole.subcommands.AutoRoleToggleSubCommand
 import de.arraying.arraybot.command.commands.customization.custom.CustomCommand
 import de.arraying.arraybot.command.commands.customization.custom.subcommands.*
+import de.arraying.arraybot.command.commands.customization.language.LanguageCommand
+import de.arraying.arraybot.command.commands.customization.modlogs.ModLogsCommand
 import de.arraying.arraybot.command.commands.customization.mutesettings.MuteSettingsCommand
 import de.arraying.arraybot.command.commands.customization.mutesettings.subcommands.MuteSettingsPermissionSubCommand
 import de.arraying.arraybot.command.commands.customization.mutesettings.subcommands.MuteSettingsRoleSubCommand
+import de.arraying.arraybot.command.commands.customization.prefix.PrefixCommand
 import de.arraying.arraybot.command.commands.developer.eval.EvalCommand
 import de.arraying.arraybot.command.commands.developer.reload.ReloadCommand
 import de.arraying.arraybot.command.commands.developer.reload.subcommands.ReloadAppSubCommand
@@ -45,6 +50,19 @@ import net.dv8tion.jda.core.Permission
  * limitations under the License.
  */
 enum class CommandCollection(val command: DefaultCommand) {
+
+    /**
+     * The command handles join and leave messages and their corresponding settings.
+     * Announcements are handled separately.
+     */
+    ANNOUNCER(AnnouncerCommand(arrayOf(
+            AnnouncerGenericSubCommand("join",
+                    aliases = arrayOf("j"),
+                    join = true),
+            AnnouncerGenericSubCommand("leave",
+                    aliases = arrayOf("l"),
+                    join = false)
+    ))),
 
     /**
      * The command that handler the automatic role assigning when users join.
@@ -95,6 +113,16 @@ enum class CommandCollection(val command: DefaultCommand) {
     KICK(PunishmentCommand("kick", Permission.KICK_MEMBERS, PunishmentType.KICK)),
 
     /**
+     * Sets the bot's language for the guild.
+     */
+    LANGUAGE(LanguageCommand()),
+
+    /**
+     * The command that gets/sets the punishment logging channel.
+     */
+    MOD_LOGS(ModLogsCommand()),
+
+    /**
      * The command that applies the muted role to a user.
      */
     MUTE(PunishmentCommand("mute", Permission.MESSAGE_WRITE, PunishmentType.MUTE)),
@@ -111,6 +139,11 @@ enum class CommandCollection(val command: DefaultCommand) {
      * The command to evaluate code.
      */
     EVAL(EvalCommand()),
+
+    /**
+     * The command that manages the prefix.
+     */
+    PREFIX(PrefixCommand()),
 
     /**
      * The command to check the WebSocket ping.

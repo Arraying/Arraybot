@@ -18,6 +18,11 @@ package de.arraying.arraybot.util
 enum class Limits(val limit: Int) {
 
     /**
+     * The maximum length for join and leave messages.
+     */
+    ANNOUNCER_MESSAGE(1500),
+
+    /**
      * The minimum channel name length.
      */
     CHANNEL_NAME_MIN(2),
@@ -66,6 +71,11 @@ enum class Limits(val limit: Int) {
      * The maximum nickname length.
      */
     NICKNAME_MAX(32),
+
+    /**
+     * The maximum prefix length.
+     */
+    PREFIX(128),
 
     /**
      * The maximum reason length.
