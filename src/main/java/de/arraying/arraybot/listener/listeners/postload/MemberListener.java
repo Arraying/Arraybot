@@ -3,7 +3,9 @@ package de.arraying.arraybot.listener.listeners.postload;
 import de.arraying.arraybot.data.database.categories.GuildEntry;
 import de.arraying.arraybot.data.database.core.Category;
 import de.arraying.arraybot.listener.listeners.PostLoadListener;
+import de.arraying.arraybot.parameter.Parameter;
 import de.arraying.arraybot.util.Limits;
+import de.arraying.arraybot.util.UDefaults;
 import de.arraying.arraybot.util.UPlaceholder;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.Member;
@@ -34,6 +36,7 @@ import org.slf4j.LoggerFactory;
 public final class MemberListener extends PostLoadListener {
 
     private final Logger logger = LoggerFactory.getLogger("Member-Listener");
+    private final String privateMessageParameter = "--pm";
 
     /**
      * Does not need initialization.
@@ -92,11 +95,24 @@ public final class MemberListener extends PostLoadListener {
             return;
         }
         String message = entry.fetch(entry.getField(messageId), guildId, null);
+        if(message.equals(UDefaults.DEFAULT_NULL)) {
+            return;
+        }
         message = UPlaceholder.replaceCore(event.getMember(), message);
+        boolean privateMessage = false;
+        if(message.contains(privateMessageParameter)) {
+            privateMessage = true;
+            message = message.replace(privateMessageParameter, "");
+        }
         if(message.length() > Limits.MESSAGE.getLimit()) {
             return;
         }
-        channel.sendMessage(message).queue();
+        final String finalMessage = message;
+        if(privateMessage) {
+            event.getMember().getUser().openPrivateChannel().queue(privateChannel -> privateChannel.sendMessage(finalMessage).queue());
+            return;
+        }
+        channel.sendMessage(finalMessage).queue();
     }
 
     /**

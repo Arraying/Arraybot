@@ -41,7 +41,7 @@ public class UPlaceholder {
                 .replace("{guild_owner}", guild.getOwner().getAsMention())
                 .replace("{guild_owner_name}", guild.getOwner().getUser().getName())
                 .replace("{guild_owner_discriminator}", guild.getOwner().getUser().getDiscriminator())
-                .replace("{guild_owner_nickname}", guild.getOwner().getNickname())
+                .replace("{guild_owner_nickname}", guild.getOwner().getEffectiveName())
                 .replace("{guild_region}", guild.getRegionRaw());
     }
 

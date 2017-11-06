@@ -82,6 +82,13 @@ object Languages {
     }
 
     /**
+     * Gets all languages.
+     */
+    fun getAll(): Set<String> {
+        return languages.keys
+    }
+
+    /**
      * Checks if the default language contains the key.
      */
     fun has(key: String) = languages[default]!!.has(key)

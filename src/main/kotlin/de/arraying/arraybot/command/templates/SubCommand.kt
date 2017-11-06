@@ -18,8 +18,8 @@ import de.arraying.arraybot.command.CommandEnvironment
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-abstract class SubCommand(val name: String,
-                          val aliases: Array<String> = arrayOf()) {
+abstract class SubCommand(open val name: String,
+                          open val aliases: Array<String> = arrayOf()) {
 
     protected val arraybot = Arraybot.getInstance()!!
 
