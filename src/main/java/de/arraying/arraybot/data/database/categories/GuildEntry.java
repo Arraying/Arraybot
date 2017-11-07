@@ -176,7 +176,12 @@ public final class GuildEntry extends HashEntry<GuildEntry.Fields> {
         /**
          * The incrementing latest punishment ID.
          */
-        COUNT_PUNISHMENT(new EntryField("count_punishment", UDefaults.DEFAULT_COUNT));
+        COUNT_PUNISHMENT(new EntryField("count_punishment", UDefaults.DEFAULT_COUNT)),
+
+        /**
+         * The amount of custom variables.
+         */
+        COUNT_VS(new EntryField("count_vs", UDefaults.DEFAULT_COUNT));
 
         private final EntryField field;
 

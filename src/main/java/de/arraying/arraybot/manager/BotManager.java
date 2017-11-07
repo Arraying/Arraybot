@@ -10,6 +10,7 @@ import de.arraying.arraybot.punishment.PunishmentObject;
 import de.arraying.arraybot.punishment.PunishmentType;
 import de.arraying.arraybot.shard.ShardEntry;
 import de.arraying.arraybot.threadding.AbstractTask;
+import de.arraying.arraybot.util.UDatatypes;
 import de.arraying.arraybot.util.UDefaults;
 import de.arraying.arraybot.util.UPunishment;
 import net.dv8tion.jda.core.AccountType;
@@ -116,6 +117,19 @@ public final class BotManager {
         }
         logger.info("The shard {} has been flagged as ready and is commencing with event receiving.", shard);
         entry.onEvent(System.currentTimeMillis());
+        long guildId = configuration.getGuildId();
+        long premiumId = configuration.getPremiumId();
+        if(UDatatypes.getShardId(guildId) == shard) {
+            Guild guild = entry.getJDA().getGuildById(guildId);
+            if(guild == null) {
+                logger.error("Invalid home guild ID ({}).", guildId);
+                System.exit(1);
+            }
+            if(guild.getRoleById(configuration.getPremiumId()) == null) {
+                logger.error("Invalid Premium role ID ({}).", premiumId);
+                System.exit(1);
+            }
+        }
         for(PostLoadListener listener : Listener.POST_LOAD_LISTENERS) {
             listener.init();
         }
@@ -153,6 +167,17 @@ public final class BotManager {
             }
 
         }.create();
+    }
+
+    /**
+     * Gets the hub guild.
+     * @return The guild. May be null, but generally should not be.
+     */
+    public Guild getHub() {
+        long hub = configuration.getGuildId();
+        int id = UDatatypes.getShardId(hub);
+        ShardEntry entry = shards.get(id);
+        return entry.getJDA().getGuildById(hub);
     }
 
     /**

@@ -1,5 +1,7 @@
 package de.arraying.arraybot.util;
 
+import de.arraying.arraybot.Arraybot;
+
 /**
  * Copyright 2017 Arraying
  * <p>
@@ -39,6 +41,19 @@ public final class UDatatypes {
         } catch(NumberFormatException exception) {
             return false;
         }
+    }
+
+    /**
+     * Gets the shard ID corresponding to a guild ID.
+     * @param guildId The guild ID.
+     * @return The shard ID.
+     */
+    public static int getShardId(long guildId) {
+        int shards = Arraybot.getInstance().getConfiguration().getBotShards();
+        if(shards == 1) {
+            return Arraybot.SINGLE_SHARD_INDEX;
+        }
+        return (int) (guildId >> 22) % shards;
     }
 
 }

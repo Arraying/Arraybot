@@ -50,7 +50,6 @@ public final class Cache {
         return authorIconUrl;
     }
 
-
     /**
      * Sets the author's icon URL.
      * @param authorIconUrl A url.
@@ -58,5 +57,5 @@ public final class Cache {
     public void setAuthorIconUrl(String authorIconUrl) {
         this.authorIconUrl = authorIconUrl;
     }
-    
+
 }

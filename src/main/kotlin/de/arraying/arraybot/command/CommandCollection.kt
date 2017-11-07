@@ -30,6 +30,7 @@ import de.arraying.arraybot.command.commands.utils.commands.subcommands.Commands
 import de.arraying.arraybot.command.commands.utils.commands.subcommands.CommandsListSubCommand
 import de.arraying.arraybot.command.commands.utils.help.HelpCommand
 import de.arraying.arraybot.command.commands.utils.ping.PingCommand
+import de.arraying.arraybot.command.commands.utils.premium.PremiumCommand
 import de.arraying.arraybot.command.templates.DefaultCommand
 import de.arraying.arraybot.punishment.PunishmentType
 import net.dv8tion.jda.core.Permission
@@ -144,6 +145,11 @@ enum class CommandCollection(val command: DefaultCommand) {
      * The command that manages the prefix.
      */
     PREFIX(PrefixCommand()),
+
+    /**
+     * The command shows information on Arraybot Premium.
+     */
+    PREMIUM(PremiumCommand()),
 
     /**
      * The command to check the WebSocket ping.

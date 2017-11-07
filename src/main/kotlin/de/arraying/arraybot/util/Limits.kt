@@ -80,7 +80,12 @@ enum class Limits(val limit: Int) {
     /**
      * The maximum reason length.
      */
-    REASON(512);
+    REASON(512),
+
+    /**
+     * The amount of custom variables a non Premium guild can store.
+     */
+    VS_CAP(5000);
 
     /**
      * Gets the limit as a string.

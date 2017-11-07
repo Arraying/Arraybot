@@ -1,6 +1,7 @@
 package de.arraying.arraybot.data;
 
 import de.arraying.arraybot.request.BotListRequest;
+import de.arraying.arraybot.util.UDefaults;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -39,8 +40,10 @@ public final class Configuration {
     private final long[] botAuthors;
     private final String botPrefix;
     private final String botVersion;
-    private final boolean botBeta;
     private final String botLanguage;
+    private final boolean botBeta;
+    private final long guildId;
+    private final long premiumId;
     private final String redisHost;
     private final int redisPort;
     private final String redisAuth;
@@ -69,7 +72,7 @@ public final class Configuration {
      * @param announcement The current announcement.
      * @param startCommand The command to start the application.
      */
-    private Configuration(String botToken, String botBetaToken, int botShards, long[] botAuthors, String botPrefix, String botVersion, String botLanguage, boolean botBeta, String redisHost, int redisPort, String redisAuth, int redisIndex, BotListRequest[] requests, String announcement, String startCommand) {
+    private Configuration(String botToken, String botBetaToken, int botShards, long[] botAuthors, String botPrefix, String botVersion, String botLanguage, boolean botBeta, long guildId, long premiumId, String redisHost, int redisPort, String redisAuth, int redisIndex, BotListRequest[] requests, String announcement, String startCommand) {
         this.botToken = botToken;
         this.botBetaToken = botBetaToken;
         this.botShards = botShards;
@@ -78,6 +81,8 @@ public final class Configuration {
         this.botVersion = botVersion;
         this.botLanguage = botLanguage;
         this.botBeta = botBeta;
+        this.guildId = guildId;
+        this.premiumId = premiumId;
         this.redisHost = redisHost;
         this.redisPort = redisPort;
         this.redisAuth = redisAuth;
@@ -216,7 +221,7 @@ public final class Configuration {
      * @return True if it is valid, else false.
      */
     private boolean isValid() {
-        return ((botBeta && !botBetaToken.isEmpty()) || (!botBeta && !botToken.isEmpty())) && botShards > 0 && botAuthors.length > 0 && !botPrefix.isEmpty() && !botVersion.isEmpty() && !botLanguage.isEmpty() && !redisHost.isEmpty() && (redisPort > 1024 && redisPort < 49151) && (redisIndex >= 0 && redisIndex <= 16);
+        return ((botBeta && !botBetaToken.isEmpty()) || (!botBeta && !botToken.isEmpty())) && botShards > 0 && botAuthors.length > 0 && !botPrefix.isEmpty() && !botVersion.isEmpty() && !botLanguage.isEmpty() && !redisHost.isEmpty() && (redisPort > 1024 && redisPort < 49151) && (redisIndex >= 0 && redisIndex <= 16) && guildId != UDefaults.DEFAULT_SNOWFLAKE && premiumId != UDefaults.DEFAULT_SNOWFLAKE;
     }
 
     /**
@@ -268,6 +273,14 @@ public final class Configuration {
     }
 
     /**
+     * Gets the default bot language.
+     * @return The bot language.
+     */
+    public String getBotLanguage() {
+        return botLanguage;
+    }
+
+    /**
      * Whether or not to use the beta token.
      * @return True = beta, false = regular.
      */
@@ -276,11 +289,19 @@ public final class Configuration {
     }
 
     /**
-     * Gets the default bot language.
-     * @return The bot language.
+     * Gets the ID of the guild.
+     * @return The ID.
      */
-    public String getBotLanguage() {
-        return botLanguage;
+    public long getGuildId() {
+        return guildId;
+    }
+
+    /**
+     * Gets the ID of the Premium role.
+     * @return The role.
+     */
+    public long getPremiumId() {
+        return premiumId;
     }
 
     /**
@@ -381,6 +402,16 @@ public final class Configuration {
          * Whether or not the bot should use the regular or beta token.
          */
         BOT_BETA("bot-beta", ConfigEntry.ConfigEntryType.BOOLEAN, true),
+
+        /**
+         * The ID of the "home" guild.
+         */
+        GUILD_ID("guild-id", ConfigEntryType.LONG, UDefaults.DEFAULT_SNOWFLAKE),
+
+        /**
+         * The ID of the Premium role, located in the "home" guild.
+         */
+        PREMIUM_ID("premium-id", ConfigEntryType.LONG, UDefaults.DEFAULT_SNOWFLAKE),
 
         /**
          * The Redis hostname.
