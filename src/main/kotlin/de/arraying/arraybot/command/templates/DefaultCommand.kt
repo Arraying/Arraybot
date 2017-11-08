@@ -10,6 +10,7 @@ import de.arraying.arraybot.data.database.templates.SetEntry
 import de.arraying.arraybot.language.Languages
 import de.arraying.arraybot.language.Message
 import de.arraying.arraybot.util.Limits
+import de.arraying.arraybot.util.UDatabase
 import kotlinx.coroutines.experimental.CommonPool
 import kotlinx.coroutines.experimental.launch
 import net.dv8tion.jda.core.Permission
@@ -123,7 +124,7 @@ abstract class DefaultCommand(override final val name: String,
         launch(context = CommonPool) {
             logger.info("${author.idLong} executed the command in the guild ${channel.guild.idLong}.")
             val resource = Redis.getInstance().resource
-            resource.incr("commands")
+            resource.incr(UDatabase.COMMANDS_KEY)
         }
         status?.let {
             if (!it.isEmpty()

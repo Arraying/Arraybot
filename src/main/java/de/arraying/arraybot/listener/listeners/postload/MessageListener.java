@@ -4,7 +4,9 @@ import com.lambdaworks.redis.api.sync.RedisCommands;
 import de.arraying.arraybot.command.CommandEnvironment;
 import de.arraying.arraybot.command.Commands;
 import de.arraying.arraybot.data.database.Redis;
+import de.arraying.arraybot.filter.Filter;
 import de.arraying.arraybot.listener.listeners.PostLoadListener;
+import de.arraying.arraybot.util.UDatabase;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
 
@@ -41,7 +43,7 @@ public final class MessageListener extends PostLoadListener {
     @Override
     public void onMessageReceived(MessageReceivedEvent event) {
         RedisCommands resource = Redis.getInstance().getResource();
-        resource.incr("messages");
+        resource.incr(UDatabase.MESSAGES_KEY);
     }
 
     /**
@@ -51,13 +53,15 @@ public final class MessageListener extends PostLoadListener {
      */
     @Override
     public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
-        if(event != null) {
-            if(event.getMember().getUser().isBot()
-                    || event.getMember().getUser().isFake()) {
-                return;
-            }
-            Commands.INSTANCE.executeCommand(new CommandEnvironment(event.getMessage()));
+        if(event == null) {
+            return;
         }
+        Filter.getInstance().handle(event);
+        if(event.getMember().getUser().isBot()
+                || event.getMember().getUser().isFake()) {
+            return;
+        }
+        Commands.INSTANCE.executeCommand(new CommandEnvironment(event.getMessage()));
     }
 
 }

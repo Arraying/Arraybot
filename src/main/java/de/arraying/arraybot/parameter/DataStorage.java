@@ -19,7 +19,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-public class DataStorage<T> {
+public final class DataStorage<T> {
 
     private final Map<Long, T> storage = new ConcurrentHashMap<>();
     private final Class<T> clazz;

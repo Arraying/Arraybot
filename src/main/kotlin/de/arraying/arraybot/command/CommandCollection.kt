@@ -31,6 +31,7 @@ import de.arraying.arraybot.command.commands.utils.commands.subcommands.Commands
 import de.arraying.arraybot.command.commands.utils.help.HelpCommand
 import de.arraying.arraybot.command.commands.utils.ping.PingCommand
 import de.arraying.arraybot.command.commands.utils.premium.PremiumCommand
+import de.arraying.arraybot.command.commands.utils.stats.StatsCommand
 import de.arraying.arraybot.command.templates.DefaultCommand
 import de.arraying.arraybot.punishment.PunishmentType
 import net.dv8tion.jda.core.Permission
@@ -174,6 +175,11 @@ enum class CommandCollection(val command: DefaultCommand) {
      * The command to display statistics about a shard.
      */
     SHARDS(ShardsCommand()),
+
+    /**
+     * The command that displays statistics.
+     */
+    STATS(StatsCommand()),
 
     /**
      * The command bans a user from the guild in order to clear the messages, then unbans them again.
