@@ -1,4 +1,4 @@
-package de.arraying.arraybot.misc;
+package de.arraying.arraybot.filter;
 
 /**
  * Copyright 2017 Arraying
@@ -15,21 +15,39 @@ package de.arraying.arraybot.misc;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-public enum BypassType {
+public enum FilterBypassType {
 
     /**
-     * The bypass applies in the text channel.
-     */
-    CHANNEL,
-
-    /**
-     * The bypass applies to the user.
+     * When the bypass ID is a user.
      */
     USER,
 
     /**
-     * The bypass applies to all users with the role.
+     * When the bypass ID is a channel.
      */
-    ROLE
+    CHANNEL,
+
+    /**
+     * When the bypass ID is a role.
+     */
+    ROLE,
+
+    /**
+     * Unknown bypass type.
+     */
+    UNKNOWN;
+
+    /**
+     * Gets the filter bypass type from a string.
+     * @param value The value of the type.
+     * @return A bypass type or unknown.
+     */
+    public static FilterBypassType fromString(String value) {
+        try {
+            return FilterBypassType.valueOf(value.toUpperCase());
+        } catch(IllegalArgumentException exception) {
+            return UNKNOWN;
+        }
+    }
 
 }

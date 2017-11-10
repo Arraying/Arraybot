@@ -181,6 +181,17 @@ public final class BotManager {
     }
 
     /**
+     * Whether or not a provided ID is a valid guild.
+     * @param id The ID of the guild.
+     * @return True if it is, false otherwise.
+     */
+    public boolean isGuild(long id) {
+        int index = UDatatypes.getShardId(id);
+        ShardEntry entry = shards.get(index);
+        return entry.getJDA().getGuildById(id) != null;
+    }
+
+    /**
      * Loads the bot.
      * @param shard The current shard.
      * @param total The shard total.

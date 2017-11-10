@@ -1,5 +1,6 @@
 package de.arraying.arraybot.command
 
+import de.arraying.arraybot.command.commands.`fun`.eightball.EightballCommand
 import de.arraying.arraybot.command.commands.customization.announcer.AnnouncerCommand
 import de.arraying.arraybot.command.commands.customization.announcer.AnnouncerGenericSubCommand
 import de.arraying.arraybot.command.commands.customization.autorole.AutoRoleCommand
@@ -29,6 +30,7 @@ import de.arraying.arraybot.command.commands.utils.commands.subcommands.Commands
 import de.arraying.arraybot.command.commands.utils.commands.subcommands.CommandsInfoSubCommand
 import de.arraying.arraybot.command.commands.utils.commands.subcommands.CommandsListSubCommand
 import de.arraying.arraybot.command.commands.utils.help.HelpCommand
+import de.arraying.arraybot.command.commands.utils.invite.InviteCommand
 import de.arraying.arraybot.command.commands.utils.ping.PingCommand
 import de.arraying.arraybot.command.commands.utils.premium.PremiumCommand
 import de.arraying.arraybot.command.commands.utils.stats.StatsCommand
@@ -105,9 +107,19 @@ enum class CommandCollection(val command: DefaultCommand) {
     ))),
 
     /**
+     * The 8Ball command.
+     */
+    EIGHT_BALL(EightballCommand()),
+
+    /**
      * The help command giving a basic overview of the bot, but not listing commands.
      */
     HELP(HelpCommand()),
+
+    /**
+     * The command that sends invite links.
+     */
+    INVITE(InviteCommand()),
 
     /**
      * The command that kicks a user from the guild.

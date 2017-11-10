@@ -1,5 +1,6 @@
 package de.arraying.arraybot.listener.listeners.postload;
 
+import de.arraying.arraybot.Arraybot;
 import de.arraying.arraybot.data.database.Redis;
 import de.arraying.arraybot.listener.Listener;
 import de.arraying.arraybot.listener.listeners.PostLoadListener;
@@ -62,6 +63,7 @@ public final class GuildListener extends PostLoadListener {
 
     private class Remover extends AbstractTask {
 
+        private final int delay = 120000;
         private long id;
 
         /**
@@ -79,7 +81,14 @@ public final class GuildListener extends PostLoadListener {
          */
         @Override
         public void onExecution() {
-            Redis.getInstance().purge(id);
+            try {
+                Thread.sleep(delay);
+            } catch(InterruptedException exception) {
+                logger.error("Encountered interrupted exception, ", exception);
+            }
+            if(!Arraybot.getInstance().getBotManager().isGuild(id)) {
+                Redis.getInstance().purge(id);
+            }
         }
 
     }

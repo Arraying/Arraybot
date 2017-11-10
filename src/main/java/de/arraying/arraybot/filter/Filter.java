@@ -3,10 +3,17 @@ package de.arraying.arraybot.filter;
 import de.arraying.arraybot.data.database.categories.GuildEntry;
 import de.arraying.arraybot.data.database.core.Category;
 import de.arraying.arraybot.data.database.templates.SetEntry;
+import de.arraying.arraybot.language.Message;
 import de.arraying.arraybot.threadding.AbstractTask;
+import de.arraying.arraybot.util.UDefaults;
+import de.arraying.arraybot.util.UFormatting;
+import de.arraying.arraybot.util.ULambda;
+import de.arraying.arraybot.util.UPlaceholder;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.MessageEmbed;
+import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.core.exceptions.PermissionException;
 
 import java.util.regex.PatternSyntaxException;
 
@@ -25,7 +32,7 @@ import java.util.regex.PatternSyntaxException;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-public class Filter {
+public final class Filter {
 
     private static Filter instance;
     private final static Object mutex = new Object();
@@ -91,7 +98,38 @@ public class Filter {
                 if(filteredMessage == null) {
                     return;
                 }
-
+                if(ULambda.INSTANCE.anyBypass(FilterBypass.getAll(guild), event.getMessage())) {
+                    return;
+                }
+                try {
+                    event.getMessage().delete().queue();
+                } catch(PermissionException exception) {
+                    return;
+                }
+                boolean silent = Boolean.valueOf(guildEntry.fetch(guildEntry.getField(GuildEntry.Fields.FILTER_SILENT), guildId, null));
+                if(silent) {
+                    return;
+                }
+                boolean dm = Boolean.valueOf(guildEntry.fetch(guildEntry.getField(GuildEntry.Fields.FILTER_PRIVATE), guildId, null));
+                String response = guildEntry.fetch(guildEntry.getField(GuildEntry.Fields.FILTER_MESSAGE), guildId, null);
+                TextChannel channel = event.getChannel();
+                if(filteredMessage.equals(UDefaults.DEFAULT_NULL)) {
+                    response = Message.FILTER_MESSAGE.getContent(channel);
+                }
+                response = UPlaceholder.replaceCore(event.getMember(), response);
+                response = UPlaceholder.replaceChannel(channel, response);
+                response = UPlaceholder.replaceMessage(event.getMessage(), response);
+                if(dm) {
+                    if(!regex) {
+                        response = response.replace("{message}", "`" + UFormatting.removeMentions(filteredMessage) + "`");
+                    } else {
+                        response = response.replace("{message}", Message.FILTER_REGEX.getContent(channel));
+                    }
+                    final String finalResponse = response;
+                    event.getAuthor().openPrivateChannel().queue(privateChannel -> privateChannel.sendMessage(finalResponse).queue());
+                } else {
+                    event.getChannel().sendMessage(response).queue();
+                }
             }
 
         }.create();
