@@ -6,7 +6,10 @@ import de.arraying.arraybot.util.CustomEmbedBuilder;
 import de.arraying.arraybot.util.UDatatypes;
 import net.dv8tion.jda.core.entities.TextChannel;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.TreeMap;
 
 /**
  * Copyright 2017 Arraying
@@ -99,9 +102,6 @@ public abstract class PageImpl implements Pages {
         }
         if(itemsPerPage < 1) {
             throw new IllegalArgumentException("The number of items per page must be equal to one or more.");
-        }
-        if(entries.length == 0) {
-            throw new IllegalArgumentException("The entries must not be empty.");
         }
         int currentPage = FIRST_PAGE;
         int currentIteration = 0;

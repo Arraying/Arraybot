@@ -44,7 +44,12 @@ class ReloadAppSubCommand: SubCommand("app",
          */
         override fun run() {
             logger.info("Attempting to reboot...")
-            Runtime.getRuntime().exec(Arraybot.getInstance().configuration.startCommand)
+            val command = Arraybot.getInstance().configuration.startCommand
+            if(command != null) {
+                Runtime.getRuntime().exec(command)
+            } else {
+                logger.error("Could not reboot due to the start command being null.")
+            }
         }
 
     }

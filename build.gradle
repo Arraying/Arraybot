@@ -20,8 +20,8 @@ version "5dev"
 ext.main = "Arraybot"
 mainClassName = "de.arraying.arraybot.Arraybot"
 
-apply plugin: "java"
-apply plugin: "kotlin"
+apply plugin: "java" // Java
+apply plugin: "kotlin" // Kotlin
 
 sourceCompatibility = 1.8
 
@@ -29,14 +29,15 @@ repositories {
     jcenter()
     mavenCentral()
     maven {
-        url "https://jitpack.io"
+        url "https://jitpack.io" // Arraying's repositories
     }
 }
 
 dependencies {
+    compile "com.github.Arraying:Kotys:0.3.2" // JSON
     compile "com.github.Arraying:Zeus:0.4.3" // Script engine
     compile "ch.qos.logback:logback-classic:1.2.3" // Logging
-    compile "net.dv8tion:JDA:3.3.1_303" // Discord
+    compile "net.dv8tion:JDA:3.3.1_307" // Discord
     compile "biz.paluch.redis:lettuce:5.0.0.Beta1" // Database
     compile "commons-io:commons-io:2.5" // Utils
     compile "commons-lang:commons-lang:2.6" // Utils

@@ -7,8 +7,6 @@ import de.arraying.arraybot.data.database.core.Category
 import de.arraying.arraybot.data.database.templates.SetEntry
 import de.arraying.arraybot.language.Message
 import de.arraying.arraybot.util.CustomPermission
-import de.arraying.arraybot.util.URole
-import net.dv8tion.jda.core.Permission
 
 /**
  * Copyright 2017 Arraying

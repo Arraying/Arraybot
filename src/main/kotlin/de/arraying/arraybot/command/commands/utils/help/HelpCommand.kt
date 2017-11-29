@@ -32,7 +32,8 @@ class HelpCommand: DefaultCommand("help",
      */
     override fun onCommand(environment: CommandEnvironment, args: List<String>) {
         val channel = environment.channel
-        var announcement = arraybot.configuration.announcement
+        val announcementRaw = arraybot.configuration.announcement
+        var announcement = announcementRaw ?: ""
         announcement = if(announcement.length <= Limits.EMBED_FIELD.limit) {
                 announcement
             } else {

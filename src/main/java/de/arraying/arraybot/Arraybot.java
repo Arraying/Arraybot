@@ -12,6 +12,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Copyright 2017 Arraying
@@ -38,6 +40,7 @@ public final class Arraybot {
     private static Arraybot instance;
     private static final Object mutex = new Object();
     private final Logger logger = LoggerFactory.getLogger("Arraybot");
+    private final Set<Long> overrides = new HashSet<>();
     private Configuration configuration;
     private BotManager botManager;
     private PunishmentManager punishmentManager;
@@ -102,6 +105,14 @@ public final class Arraybot {
      */
     public Logger getLogger() {
         return logger;
+    }
+
+    /**
+     * Gets all guild overrides.
+     * @return A set of overrides.
+     */
+    public Set<Long> getOverrides() {
+        return overrides;
     }
 
     /**

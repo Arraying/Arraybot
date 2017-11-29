@@ -3,7 +3,6 @@ package de.arraying.arraybot.listener.listeners.postload;
 import de.arraying.arraybot.data.database.categories.GuildEntry;
 import de.arraying.arraybot.data.database.core.Category;
 import de.arraying.arraybot.listener.listeners.PostLoadListener;
-import de.arraying.arraybot.parameter.Parameter;
 import de.arraying.arraybot.util.Limits;
 import de.arraying.arraybot.util.UDefaults;
 import de.arraying.arraybot.util.UPlaceholder;

@@ -1,5 +1,7 @@
 package de.arraying.arraybot.filter;
 
+import de.arraying.arraybot.util.UFormatting;
+
 /**
  * Copyright 2017 Arraying
  * <p>
@@ -48,6 +50,14 @@ public enum FilterBypassType {
         } catch(IllegalArgumentException exception) {
             return UNKNOWN;
         }
+    }
+
+    /**
+     * Gets all filter bypass types.
+     * @return A comma seperated list.
+     */
+    public static String getTypes() {
+        return UFormatting.formatToList(values());
     }
 
 }

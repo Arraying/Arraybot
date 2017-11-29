@@ -1,7 +1,7 @@
 package de.arraying.arraybot.language
 
 import de.arraying.arraybot.Arraybot
-import org.json.JSONObject
+import de.arraying.kotys.JSON
 import org.slf4j.LoggerFactory
 import java.io.File
 import java.util.*
@@ -24,7 +24,7 @@ import java.util.regex.Pattern
  */
 object Languages {
 
-    private val languages = HashMap<String, JSONObject>()
+    private val languages = HashMap<String, JSON>()
     private val default = Arraybot.getInstance().configuration.botLanguage
     private val filePattern = Pattern.compile("[a-z]{2,}\\.json")
     private val logger = LoggerFactory.getLogger("Languages")
@@ -32,7 +32,7 @@ object Languages {
 
     /**
      * Refreshes the languages.
-     * Loads in all properties from the files into the cache.
+     * Loads in all JSON messages from files into the cache.
      */
     @Throws(Exception::class)
     fun cache() {
@@ -49,7 +49,7 @@ object Languages {
                     continue
                 }
                 name = name.substring(0, name.lastIndex - 4)
-                languages.put(name, JSONObject(file.readText()))
+                languages.put(name, JSON(file.readText().replace("\\n", "\n")))
                 logger.info("Registered the language \"$name\"")
             }
             if(languages.isEmpty()) {
@@ -74,10 +74,10 @@ object Languages {
                 return if(!languages[default]!!.has(key)) {
                     "Something went very wrong. Contact a developer if you see this message."
                 } else {
-                    languages[default]!!.getString(key)
+                    languages[default]!!.string(key)
                 }
             } else {
-                languages[language]!!.getString(key)
+                languages[language]!!.string(key)
             }
     }
 

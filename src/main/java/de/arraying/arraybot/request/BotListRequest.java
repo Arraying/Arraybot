@@ -1,9 +1,10 @@
 package de.arraying.arraybot.request;
 
 import de.arraying.arraybot.util.UDatatypes;
+import de.arraying.kotys.JSON;
+import de.arraying.kotys.JSONField;
 import net.dv8tion.jda.core.JDA;
 import okhttp3.*;
-import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,21 +29,9 @@ public final class BotListRequest {
 
     private final Logger logger = LoggerFactory.getLogger("Requester");
     private final MediaType type = MediaType.parse("application/json");
-    private final String url;
-    private final String auth;
-    private final Parameter[] parameters;
-
-    /**
-     * Creates a new bot list request.
-     * @param url The URL of the endpoint to POST to.
-     * @param auth The value to use as the authentication header in the request.
-     * @param parameters An array of request parameters to be used in the body.
-     */
-    public BotListRequest(String url, String auth, Parameter[] parameters) {
-        this.url = url;
-        this.auth = auth;
-        this.parameters = parameters;
-    }
+    @JSONField(key = "url") private String url;
+    @JSONField(key = "auth") private String auth;
+    @JSONField(key = "parameters") private Parameter[] parameters;
 
     /**
      * Sends the request.
@@ -72,7 +61,7 @@ public final class BotListRequest {
      */
     private RequestBody getBody(JDA shard) {
         JDA.ShardInfo shardInfo = shard.getShardInfo();
-        JSONObject jsonObject = new JSONObject();
+        JSON json = new JSON();
         for(Parameter parameter : parameters) {
             String value = parameter.getValue()
                     .replace("{guilds}", String.valueOf(shard.getGuilds().size()));
@@ -87,42 +76,9 @@ public final class BotListRequest {
             } else {
                 object = value;
             }
-            jsonObject.put(parameter.getKey(), object);
+            json.put(parameter.getKey(), object);
         }
-        return RequestBody.create(type, jsonObject.toString());
-    }
-
-    public static class Parameter {
-
-        private final String key;
-        private final String value;
-
-        /**
-         * Creates a new POST body parameter.
-         * @param key The key for the parameter.
-         * @param value The value of the parameter.
-         */
-        public Parameter(String key, String value) {
-            this.key = key;
-            this.value = value;
-        }
-
-        /**
-         * Gets the parameter key.
-         * @return The key.
-         */
-        public String getKey() {
-            return key;
-        }
-
-        /**
-         * Gets the parameter value.
-         * @return The value.
-         */
-        public String getValue() {
-            return value;
-        }
-
+        return RequestBody.create(type, json.marshal());
     }
 
 }

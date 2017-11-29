@@ -98,6 +98,9 @@ public final class Filter {
                 if(filteredMessage == null) {
                     return;
                 }
+                if(FilterBypass.getAll(guild).stream().anyMatch(bypass -> isBypass(bypass, event))) {
+                    return;
+                }
                 if(ULambda.INSTANCE.anyBypass(FilterBypass.getAll(guild), event.getMessage())) {
                     return;
                 }
@@ -113,7 +116,7 @@ public final class Filter {
                 boolean dm = Boolean.valueOf(guildEntry.fetch(guildEntry.getField(GuildEntry.Fields.FILTER_PRIVATE), guildId, null));
                 String response = guildEntry.fetch(guildEntry.getField(GuildEntry.Fields.FILTER_MESSAGE), guildId, null);
                 TextChannel channel = event.getChannel();
-                if(filteredMessage.equals(UDefaults.DEFAULT_NULL)) {
+                if(response.equals(UDefaults.DEFAULT_NULL)) {
                     response = Message.FILTER_MESSAGE.getContent(channel);
                 }
                 response = UPlaceholder.replaceCore(event.getMember(), response);
@@ -179,6 +182,15 @@ public final class Filter {
                 || embed.getFooter() != null
                 && embed.getFooter().getText() != null
                 && needsFiltering(filteredPhrase, embed.getFooter().getText(), regex);
+    }
+
+    private boolean isBypass(FilterBypass bypass, GuildMessageReceivedEvent event) {
+        return (bypass.getType() == FilterBypassType.USER
+                && event.getAuthor().getIdLong() == bypass.getValue())
+                || (bypass.getType() == FilterBypassType.CHANNEL
+                && event.getChannel().getIdLong() == bypass.getValue())
+                || (bypass.getType() == FilterBypassType.ROLE
+                && event.getMember().getRoles().stream().anyMatch(role -> role.getIdLong() == bypass.getValue()));
     }
 
 }
