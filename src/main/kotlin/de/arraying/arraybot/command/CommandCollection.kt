@@ -1,5 +1,6 @@
 package de.arraying.arraybot.command
 
+import de.arraying.arraybot.command.commands.`fun`.eightball.EightballCommand
 import de.arraying.arraybot.command.commands.customization.announcer.AnnouncerCommand
 import de.arraying.arraybot.command.commands.customization.announcer.AnnouncerGenericSubCommand
 import de.arraying.arraybot.command.commands.customization.autorole.AutoRoleCommand
@@ -8,6 +9,8 @@ import de.arraying.arraybot.command.commands.customization.autorole.subcommands.
 import de.arraying.arraybot.command.commands.customization.autorole.subcommands.AutoRoleToggleSubCommand
 import de.arraying.arraybot.command.commands.customization.custom.CustomCommand
 import de.arraying.arraybot.command.commands.customization.custom.subcommands.*
+import de.arraying.arraybot.command.commands.customization.filter.FilterCommand
+import de.arraying.arraybot.command.commands.customization.filter.subcommands.*
 import de.arraying.arraybot.command.commands.customization.language.LanguageCommand
 import de.arraying.arraybot.command.commands.customization.modlogs.ModLogsCommand
 import de.arraying.arraybot.command.commands.customization.mutesettings.MuteSettingsCommand
@@ -29,8 +32,11 @@ import de.arraying.arraybot.command.commands.utils.commands.subcommands.Commands
 import de.arraying.arraybot.command.commands.utils.commands.subcommands.CommandsInfoSubCommand
 import de.arraying.arraybot.command.commands.utils.commands.subcommands.CommandsListSubCommand
 import de.arraying.arraybot.command.commands.utils.help.HelpCommand
+import de.arraying.arraybot.command.commands.utils.invite.InviteCommand
+import de.arraying.arraybot.command.commands.utils.override.OverrideCommand
 import de.arraying.arraybot.command.commands.utils.ping.PingCommand
 import de.arraying.arraybot.command.commands.utils.premium.PremiumCommand
+import de.arraying.arraybot.command.commands.utils.stats.StatsCommand
 import de.arraying.arraybot.command.templates.DefaultCommand
 import de.arraying.arraybot.punishment.PunishmentType
 import net.dv8tion.jda.core.Permission
@@ -104,9 +110,42 @@ enum class CommandCollection(val command: DefaultCommand) {
     ))),
 
     /**
+     * The 8Ball command.
+     */
+    EIGHT_BALL(EightballCommand()),
+
+    /**
+     * The command to evaluate code.
+     */
+    EVAL(EvalCommand()),
+
+
+    /**
+     * The command that handles filtered messages.
+     */
+    FILTER(FilterCommand(arrayOf(
+            FilterAddSubCommand(),
+            FilterBypassAddSubCommand(),
+            FilterBypassInfoSubCommand(),
+            FilterBypassListSubCommand(),
+            FilterBypassRemoveSubCommand(),
+            FilterListSubCommand(),
+            FilterMessageSubCommand(),
+            FilterRegexSubCommand(),
+            FilterRemoveSubCommand(),
+            FilterSilentSubCommand(),
+            FilterToggleSubCommand()
+    ))),
+
+    /**
      * The help command giving a basic overview of the bot, but not listing commands.
      */
     HELP(HelpCommand()),
+
+    /**
+     * The command that sends invite links.
+     */
+    INVITE(InviteCommand()),
 
     /**
      * The command that kicks a user from the guild.
@@ -137,9 +176,9 @@ enum class CommandCollection(val command: DefaultCommand) {
     ))),
 
     /**
-     * The command to evaluate code.
+     * The override command that handles permission overrides.
      */
-    EVAL(EvalCommand()),
+    OVERRIDE(OverrideCommand()),
 
     /**
      * The command that manages the prefix.
@@ -174,6 +213,11 @@ enum class CommandCollection(val command: DefaultCommand) {
      * The command to display statistics about a shard.
      */
     SHARDS(ShardsCommand()),
+
+    /**
+     * The command that displays statistics.
+     */
+    STATS(StatsCommand()),
 
     /**
      * The command bans a user from the guild in order to clear the messages, then unbans them again.

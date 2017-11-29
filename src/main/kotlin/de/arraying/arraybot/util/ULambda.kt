@@ -1,9 +1,12 @@
 package de.arraying.arraybot.util
 
 import de.arraying.arraybot.Arraybot
+import de.arraying.arraybot.filter.FilterBypass
+import de.arraying.arraybot.filter.FilterBypassType
 import de.arraying.arraybot.punishment.PunishmentObject
 import de.arraying.arraybot.punishment.PunishmentType
 import net.dv8tion.jda.core.entities.Guild
+import net.dv8tion.jda.core.entities.Message
 
 /**
  * Copyright 2017 Arraying
@@ -40,6 +43,20 @@ object ULambda {
                 true
             }
             && !it.isRevoked
+        })
+    }
+
+    /**
+     * Whether or there is a bypass for the message.
+     */
+    fun anyBypass(bypasses: List<FilterBypass>, message: Message) = bypasses.any {
+        (it.type == FilterBypassType.USER
+                && it.value == message.author.idLong)
+                || (it.type == FilterBypassType.CHANNEL
+                && it.value == message.channel.idLong)
+                || (it.type ==FilterBypassType.ROLE
+                && message.member.roles.any {
+            role -> it.value == role.idLong
         })
     }
 

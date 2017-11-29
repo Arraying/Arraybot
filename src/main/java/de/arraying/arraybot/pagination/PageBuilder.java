@@ -70,8 +70,7 @@ public final class PageBuilder {
      * @return The builder.
      */
     public PageBuilder withEntries(Object[] entries) {
-        if(entries != null
-                && entries.length > 0) {
+        if(entries != null) {
             this.entries = entries;
         }
         return this;

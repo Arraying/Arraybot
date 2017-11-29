@@ -3,6 +3,7 @@ package de.arraying.arraybot.data.database.categories;
 import de.arraying.arraybot.data.database.core.Category;
 import de.arraying.arraybot.data.database.core.EntryField;
 import de.arraying.arraybot.data.database.templates.HashEntry;
+import de.arraying.arraybot.filter.FilterBypassType;
 import de.arraying.arraybot.util.UDefaults;
 
 import java.util.HashMap;
@@ -52,6 +53,19 @@ public final class FilterBypassEntry extends HashEntry<FilterBypassEntry.Fields>
     @Override
     public Category getParent() {
         return Category.FILTER_BYPASS_IDS;
+    }
+
+    /**
+     * Creates a filter bypass.
+     * @param guild The guild.
+     * @param id The ID.
+     * @param type The type.
+     * @param value The value.
+     */
+    public void createBypass(long guild, int id, FilterBypassType type, long value) {
+        push(getField(Fields.BYPASS_ID), guild, id, id);
+        push(getField(Fields.TYPE), guild, id, type);
+        push(getField(Fields.VALUE), guild, id, value);
     }
 
     public enum Fields {

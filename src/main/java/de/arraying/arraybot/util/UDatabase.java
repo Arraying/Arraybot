@@ -20,6 +20,16 @@ import de.arraying.arraybot.data.database.core.Category;
 public final class UDatabase {
 
     /**
+     * The Redis key for the commands executed.
+     */
+    public static final String COMMANDS_KEY = "commands";
+
+    /**
+     * The Redis key for the messages received.
+     */
+    public static final String MESSAGES_KEY = "messages";
+
+    /**
      * Combines things to form one big key.
      * @param category The category.
      * @param primaryKey The primary key.

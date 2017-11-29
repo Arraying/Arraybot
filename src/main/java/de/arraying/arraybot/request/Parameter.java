@@ -1,4 +1,6 @@
-package de.arraying.arraybot.misc;
+package de.arraying.arraybot.request;
+
+import de.arraying.kotys.JSONContainer;
 
 /**
  * Copyright 2017 Arraying
@@ -15,21 +17,26 @@ package de.arraying.arraybot.misc;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-public enum BypassType {
+@SuppressWarnings("unused")
+public final @JSONContainer class Parameter {
+
+    private String key;
+    private String value;
 
     /**
-     * The bypass applies in the text channel.
+     * Gets the parameter key.
+     * @return The key.
      */
-    CHANNEL,
+    public String getKey() {
+        return key;
+    }
 
     /**
-     * The bypass applies to the user.
+     * Gets the parameter value.
+     * @return The value.
      */
-    USER,
-
-    /**
-     * The bypass applies to all users with the role.
-     */
-    ROLE
+    public String getValue() {
+        return value;
+    }
 
 }

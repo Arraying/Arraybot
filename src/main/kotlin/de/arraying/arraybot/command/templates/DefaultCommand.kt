@@ -10,6 +10,7 @@ import de.arraying.arraybot.data.database.templates.SetEntry
 import de.arraying.arraybot.language.Languages
 import de.arraying.arraybot.language.Message
 import de.arraying.arraybot.util.Limits
+import de.arraying.arraybot.util.UDatabase
 import kotlinx.coroutines.experimental.CommonPool
 import kotlinx.coroutines.experimental.launch
 import net.dv8tion.jda.core.Permission
@@ -123,7 +124,7 @@ abstract class DefaultCommand(override final val name: String,
         launch(context = CommonPool) {
             logger.info("${author.idLong} executed the command in the guild ${channel.guild.idLong}.")
             val resource = Redis.getInstance().resource
-            resource.incr("commands")
+            resource.incr(UDatabase.COMMANDS_KEY)
         }
         status?.let {
             if (!it.isEmpty()
@@ -132,9 +133,7 @@ abstract class DefaultCommand(override final val name: String,
             }
         }
         if(category == CommandCategory.DEVELOPER
-                && !arraybot.configuration.botAuthors.any {
-            it == author.idLong
-        }) {
+                && !isDeveloper(author.idLong)) {
             Message.COMMAND_UNAVAILABLE_DEVELOPER.send(channel).queue()
             return
         }
@@ -147,11 +146,21 @@ abstract class DefaultCommand(override final val name: String,
             Message.COMMAND_UNAVAILABLE_EMBED.send(channel).queue()
             return
         }
-        if(!PermissionUtil.checkPermission(channel, environment.member, permission)
-                && !customPermissionChecking) {
-            Message.COMMAND_PERMISSION.send(channel).queue()
-            return
+        if(!customPermissionChecking) {
+            if(!PermissionUtil.checkPermission(channel, environment.member, permission)
+                    && !(
+                        arraybot.overrides.contains(environment.guild.idLong)
+                        && isDeveloper(author.idLong)
+                    )) {
+                Message.COMMAND_PERMISSION.send(channel).queue()
+                return
+            }
         }
+//        if(!PermissionUtil.checkPermission(channel, environment.member, permission)
+//                && !customPermissionChecking) {
+//            Message.COMMAND_PERMISSION.send(channel).queue()
+//            return
+//        }
         val entry = Category.DISABLED_COMMAND.entry as SetEntry
         if(entry.contains(environment.guild.idLong, name)) {
             logger.info("Did not execute command as it was disabled in the guild ${environment.guild.idLong}")
@@ -211,5 +220,7 @@ abstract class DefaultCommand(override final val name: String,
             }
         }
     }
+
+    private fun isDeveloper(id: Long) = arraybot.configuration.botAuthors.any { it == id }
 
 }

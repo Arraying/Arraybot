@@ -2,7 +2,6 @@ package de.arraying.arraybot.command.commands.customization.custom.subcommands
 
 import de.arraying.arraybot.command.CommandEnvironment
 import de.arraying.arraybot.command.custom.syntax.CustomCommandSyntax
-import de.arraying.arraybot.command.custom.type.CustomCommandType
 import de.arraying.arraybot.command.templates.SubCommand
 import de.arraying.arraybot.data.database.categories.CustomCommandEntry
 import de.arraying.arraybot.data.database.core.Category

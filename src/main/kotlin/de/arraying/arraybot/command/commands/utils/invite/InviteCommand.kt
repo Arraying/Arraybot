@@ -1,9 +1,8 @@
-package de.arraying.arraybot.command.commands.utils.help
+package de.arraying.arraybot.command.commands.utils.invite
 
 import de.arraying.arraybot.command.CommandEnvironment
 import de.arraying.arraybot.command.templates.DefaultCommand
 import de.arraying.arraybot.language.Message
-import de.arraying.arraybot.util.Limits
 import de.arraying.arraybot.util.UEmbed
 import net.dv8tion.jda.core.Permission
 
@@ -22,36 +21,21 @@ import net.dv8tion.jda.core.Permission
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-class HelpCommand: DefaultCommand("help",
+class InviteCommand: DefaultCommand("invite",
         CommandCategory.UTILS,
         Permission.MESSAGE_WRITE,
-        aliases = arrayOf("helpme", "h")) {
+        aliases = arrayOf("link")) {
 
     /**
      * When the command is executed.
      */
     override fun onCommand(environment: CommandEnvironment, args: List<String>) {
         val channel = environment.channel
-        val announcementRaw = arraybot.configuration.announcement
-        var announcement = announcementRaw ?: ""
-        announcement = if(announcement.length <= Limits.EMBED_FIELD.limit) {
-                announcement
-            } else {
-                announcement.substring(0, Limits.EMBED_FIELD.limit)
-            }
         val embed = UEmbed.getEmbed(channel)
-                .setDescription(Message.COMMANDS_HELP_EMBED_DESCRIPTION.getContent(channel))
-                .addField(Message.COMMANDS_HELP_EMBED_START_TITLE.getContent(channel),
-                        Message.COMMANDS_HELP_EMBED_START_VALUE.getContent(channel),
+                .setDescription(Message.COMMANDS_INVITE_EMBED_DESCRIPTION.getContent(channel))
+                .addField(Message.COMMANDS_INVITE_EMBED_TITLE.getContent(channel),
+                        Message.COMMANDS_INVITE_EMBED_VALUE.getContent(channel),
                         false)
-                .addField(Message.COMMANDS_HELP_EMBED_HELP_TITLE.getContent(channel),
-                        Message.COMMANDS_HELP_EMBED_HELP_VALUE.getContent(channel),
-                        false)
-        if(!announcement.isEmpty()) {
-            embed.addField(Message.COMMANDS_HELP_EMBED_ANNOUNCEMENT.getContent(channel),
-                    announcement,
-                    false)
-        }
         channel.sendMessage(embed.build()).queue()
     }
 

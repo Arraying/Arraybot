@@ -1,11 +1,9 @@
 package de.arraying.arraybot.data.database.categories;
 
-import com.lambdaworks.redis.api.sync.RedisCommands;
 import de.arraying.arraybot.data.database.core.Category;
 import de.arraying.arraybot.data.database.core.EntryField;
 import de.arraying.arraybot.data.database.templates.HashEntry;
 import de.arraying.arraybot.data.database.templates.SetEntry;
-import de.arraying.arraybot.util.UDatabase;
 import de.arraying.arraybot.util.UDefaults;
 
 import java.util.HashMap;

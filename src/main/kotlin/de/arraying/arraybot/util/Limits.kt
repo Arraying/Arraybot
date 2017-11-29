@@ -58,6 +58,16 @@ enum class Limits(val limit: Int) {
     EMBED_FIELD(1024),
 
     /**
+     * The maximum amount of characters
+     */
+    FILTER_ENTRY(512),
+
+    /**
+     * The maximum amount of characters in a filter message.
+     */
+    FILTER_MESSAGE(512),
+
+    /**
      * The maximum amount of characters for any message.
      */
     MESSAGE(2000),

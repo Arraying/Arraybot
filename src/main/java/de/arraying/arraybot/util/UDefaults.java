@@ -2,7 +2,7 @@ package de.arraying.arraybot.util;
 
 import de.arraying.arraybot.command.custom.syntax.CustomCommandSyntax;
 import de.arraying.arraybot.command.custom.type.CustomCommandType;
-import de.arraying.arraybot.misc.BypassType;
+import de.arraying.arraybot.filter.FilterBypassType;
 import de.arraying.arraybot.pagination.PageBuilder;
 import de.arraying.arraybot.punishment.PunishmentType;
 import net.dv8tion.jda.core.Permission;
@@ -78,7 +78,7 @@ public final class UDefaults {
     /**
      * The default bypass type.
      */
-    public static final BypassType DEFAULT_BYPASS_TYPE = BypassType.CHANNEL;
+    public static final FilterBypassType DEFAULT_BYPASS_TYPE = FilterBypassType.CHANNEL;
 
     /**
      * The default punishment type.

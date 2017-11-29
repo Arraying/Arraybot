@@ -1,6 +1,5 @@
 package de.arraying.arraybot.util;
 
-import de.arraying.arraybot.command.CommandEnvironment;
 import net.dv8tion.jda.core.entities.*;
 
 /**

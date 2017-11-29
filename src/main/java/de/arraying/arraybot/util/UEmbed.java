@@ -1,5 +1,8 @@
 package de.arraying.arraybot.util;
 
+import de.arraying.arraybot.Arraybot;
+import de.arraying.arraybot.data.database.categories.GuildEntry;
+import de.arraying.arraybot.data.database.core.Category;
 import de.arraying.arraybot.language.Message;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.entities.Guild;
@@ -37,15 +40,23 @@ public final class UEmbed {
         JDA jda = channel.getJDA();
         Guild guild = channel.getGuild();
         int year = calendar.get(Calendar.YEAR);
+        GuildEntry entry = (GuildEntry) Category.GUILD.getEntry();
+        String language = entry.fetch(entry.getField(GuildEntry.Fields.LANGUAGE), guild.getIdLong(), null);
         CustomEmbedBuilder embedBuilder = new CustomEmbedBuilder()
                 .setAuthor("Arraybot", "http://arraybot.xyz",
                         shouldImage(channel.getGuild()) ? icon : null)
-                .setColor(new Color(34, 150, 245))
-                .setFooter(Message.EMBED_FOOTER.getContent(channel, String.valueOf(year)),
-                        shouldImage(channel.getGuild()) ? jda.getSelfUser().getAvatarUrl() : null);
+                .setColor(new Color(34, 150, 245));
         if(shouldImage(guild)) {
             embedBuilder.setThumbnail(icon);
         }
+        String languageFooter;
+        if(!language.equalsIgnoreCase(Arraybot.getInstance().getConfiguration().getBotLanguage())) {
+            languageFooter = Message.EMBED_TRANSLATED.getContent(channel);
+        } else {
+            languageFooter = "";
+        }
+        embedBuilder.setFooter(Message.EMBED_FOOTER.getContent(channel, String.valueOf(year), languageFooter),
+                shouldImage(channel.getGuild()) ? jda.getSelfUser().getAvatarUrl() : null);
         return embedBuilder;
     }
 

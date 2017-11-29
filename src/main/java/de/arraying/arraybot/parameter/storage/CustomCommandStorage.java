@@ -15,7 +15,7 @@ package de.arraying.arraybot.parameter.storage;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-public class CustomCommandStorage {
+public final class CustomCommandStorage {
 
     private boolean silent = false, delete = false;
 

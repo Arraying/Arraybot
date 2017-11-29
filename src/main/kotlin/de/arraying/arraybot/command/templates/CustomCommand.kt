@@ -53,7 +53,7 @@ class CustomCommand(override val name: String,
         launch(CommonPool) {
             logger.info("${environment.author.idLong} executed the custom command in the guild ${channel.guild.idLong}.")
             val resource = Redis.getInstance().resource
-            resource.incr("commands")
+            resource.incr(UDatabase.COMMANDS_KEY)
         }
         if(type == CustomCommandType.UNKNOWN) {
             Message.CUSTOM_TYPE_INVALID.send(channel, CustomCommandType.getTypes()).queue()
