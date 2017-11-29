@@ -25,75 +25,75 @@ import java.util.Map;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-@SuppressWarnings("unused")
-public class StringListMethods extends ListCollectionMethods<String> {
+@SuppressWarnings({"unused", "WeakerAccess"})
+public class ListMethods extends ListCollectionMethods<Object> {
 
     /**
      * Creates a new method collection object.
      * @param environment The command environment.
      */
-    public StringListMethods(CommandEnvironment environment) {
-        super(environment, "strl");
+    public ListMethods(CommandEnvironment environment) {
+        super(environment, "list");
     }
 
     /**
-     * Creates a new string list.
+     * Creates a new list.
      * @return The key.
      */
     @ZeusMethod
-    public String str_list_create() {
+    public String list_create() {
         return internalNew(new ArrayList<>());
     }
 
     /**
-     * Gets the size of the string list.
+     * Gets the size of the list.
      * @param key The key.
      * @return The size or -1.
      */
     @ZeusMethod
-    public Integer str_list_size(String key) {
+    public Integer list_size(String key) {
         return size(key);
     }
 
     /**
-     * Adds a value to the string list.
+     * Adds a value to the list.
      * @param key The key.
      * @param value The value.
      */
     @ZeusMethod
-    public void str_list_add(String key, String value) {
+    public void list_add(String key, String value) {
         add(key, value);
     }
 
     /**
-     * Removes a value from the string list.
+     * Removes a value from the list.
      * @param key The key.
      * @param value The value.
      */
     @ZeusMethod
-    public void str_list_remove(String key, String value) {
+    public void list_remove(String key, String value) {
         remove(key, value);
     }
 
     /**
-     * Whether or not the value exists in the string list.
+     * Whether or not the value exists in the list.
      * @param key The key.
      * @param value The value.
      * @return True if it does, false otherwise.
      */
     @ZeusMethod
-    public Boolean str_list_exists(String key, String value) {
+    public Boolean list_exists(String key, String value) {
         return exists(key, value);
     }
 
     /**
-     * Gets the value from the string list.
+     * Gets the value from the list.
      * @param key The key.
      * @param index The index.
      * @return The value or "null".
      */
-    public String str_list_get(String key, Integer index) {
-        String returnValue;
+    public Object str_list_get(String key, Integer index) {
+        Object returnValue;
         try {
             returnValue = get(key, index);
         } catch(ZeusException exception) {
@@ -102,7 +102,11 @@ public class StringListMethods extends ListCollectionMethods<String> {
         return returnValue;
     }
 
-    public Map<String, List<String>> getCollection() {
+    /**
+     * Gets the collection.
+     * @return The collection.
+     */
+    public Map<String, List<Object>> getCollection() {
         return collection;
     }
 

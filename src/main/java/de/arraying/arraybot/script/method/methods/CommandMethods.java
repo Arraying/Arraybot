@@ -6,6 +6,7 @@ import de.arraying.arraybot.script.method.Methods;
 import de.arraying.zeus.backend.annotations.ZeusMethod;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Copyright 2017 Arraying
@@ -25,16 +26,16 @@ import java.util.List;
 @SuppressWarnings({"unused", "WeakerAccess"})
 public class CommandMethods extends Methods {
 
-    private final StringListMethods stringListMethods;
+    private final ListMethods listMethods;
 
     /**
      * Creates a new method collection object.
      * @param environment The command environment.
-     * @param stringListMethods The string lists.
+     * @param listMethods The string lists.
      */
-    public CommandMethods(CommandEnvironment environment, StringListMethods stringListMethods) {
+    public CommandMethods(CommandEnvironment environment, ListMethods listMethods) {
         super(environment);
-        this.stringListMethods = stringListMethods;
+        this.listMethods = listMethods;
     }
 
     /**
@@ -53,7 +54,7 @@ public class CommandMethods extends Methods {
      */
     @ZeusMethod
     public void exec_command(String name) {
-        exec_command(name, stringListMethods.str_list_create());
+        exec_command(name, listMethods.list_create());
     }
 
     /**
@@ -63,12 +64,13 @@ public class CommandMethods extends Methods {
      */
     @ZeusMethod
     public void exec_command(String name, String key) {
-        List<String> list = stringListMethods.getCollection().get(key);
+        List<Object> listRaw = listMethods.getCollection().get(key);
         if(key == null) {
             return;
         }
+        List<String> arguments = listRaw.stream().map(Object::toString).collect(Collectors.toList());
         Commands.INSTANCE.getCommands().getByKeyOrAlias(name.toLowerCase())
-                .invoke(environment, list, null);
+                .invoke(environment, arguments, null);
     }
 
 }

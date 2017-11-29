@@ -54,17 +54,16 @@ public final class ScriptRuntime extends AbstractTask {
             ZeusRuntimeBuilder builder = new ZeusRuntimeBuilder(ZeusRuntimeBuilder.Configuration.STANDARD)
                     .withoutMethodContainer(OutputMethods.class);
             EmbedMethods embedMethods = new EmbedMethods(environment);
-            StringListMethods stringListMethods = new StringListMethods(environment);
+            ListMethods listMethods = new ListMethods(environment);
             builder.withEventListeners(new ScriptListener(this))
                     .withVariables(variables)
                     .withMethods(new ArgumentMethods(environment),
                             new ChannelMethods(environment),
-                            new CommandMethods(environment, stringListMethods),
+                            new CommandMethods(environment, listMethods),
                             embedMethods,
                             new MessageMethods(environment, embedMethods),
                             new RoleMethods(environment),
-                            new StorageMethods(environment),
-                            stringListMethods,
+                            new StorageMethods(environment), listMethods,
                             new UserMethods(environment));
             for(VariableCollections variables : VariableCollections.values()) {
                 builder = variables.getVariables().registerVariables(builder, environment);
