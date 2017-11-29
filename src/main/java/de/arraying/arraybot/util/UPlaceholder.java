@@ -17,7 +17,7 @@ import net.dv8tion.jda.core.entities.*;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-public class UPlaceholder {
+public final class UPlaceholder {
 
     /**
      * Parses replaces the core placeholders.

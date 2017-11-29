@@ -31,6 +31,7 @@ import de.arraying.arraybot.command.commands.utils.commands.subcommands.Commands
 import de.arraying.arraybot.command.commands.utils.commands.subcommands.CommandsEnableSubCommand
 import de.arraying.arraybot.command.commands.utils.commands.subcommands.CommandsInfoSubCommand
 import de.arraying.arraybot.command.commands.utils.commands.subcommands.CommandsListSubCommand
+import de.arraying.arraybot.command.commands.utils.convert.ConvertCommand
 import de.arraying.arraybot.command.commands.utils.help.HelpCommand
 import de.arraying.arraybot.command.commands.utils.invite.InviteCommand
 import de.arraying.arraybot.command.commands.utils.override.OverrideCommand
@@ -94,6 +95,11 @@ enum class CommandCollection(val command: DefaultCommand) {
             CommandsInfoSubCommand(),
             CommandsListSubCommand()
     ))),
+
+    /**
+     * The command that can do conversion.
+     */
+    CONVERT(ConvertCommand()),
 
     /**
      * The custom command management command.

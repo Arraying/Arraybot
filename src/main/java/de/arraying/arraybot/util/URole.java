@@ -21,7 +21,7 @@ import java.util.regex.Pattern;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-public class URole {
+public final class URole {
 
     /**
      * The regular expression for a regular role ID.

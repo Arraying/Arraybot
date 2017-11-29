@@ -60,7 +60,7 @@ class EvalCommand: DefaultCommand("eval",
                 } else {
                     "-"
                 }
-            Message.COMMANDS_EVAL_ENGINE_INVALID.send(channel, engines)
+            Message.COMMANDS_EVAL_ENGINE_INVALID.send(channel, engines).queue()
             return
         }
         if(args.size < 3) {
