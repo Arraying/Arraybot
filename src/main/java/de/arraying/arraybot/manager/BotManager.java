@@ -219,7 +219,7 @@ public final class BotManager {
                 .setToken(configuration.isBotBeta() ? configuration.getBotBetaToken() : configuration.getBotToken())
                 .setStatus(OnlineStatus.DO_NOT_DISTURB)
                 .addEventListener(new ReadyListener())
-                .setGame(Game.of(configuration.getBotPrefix() + "help || v" + configuration.getBotVersion()));
+                .setGame(Game.listening(configuration.getBotPrefix() + "help || v" + configuration.getBotVersion()));
     }
 
     /**

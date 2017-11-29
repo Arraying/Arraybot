@@ -44,6 +44,19 @@ public final class UDatatypes {
     }
 
     /**
+     * Gets the string input as a double.
+     * @param input The input.
+     * @return The double, or null.
+     */
+    public static Double toDouble(String input) {
+        try {
+            return Double.valueOf(input);
+        } catch(NumberFormatException exception) {
+            return null;
+        }
+    }
+
+    /**
      * Gets the shard ID corresponding to a guild ID.
      * @param guildId The guild ID.
      * @return The shard ID.
