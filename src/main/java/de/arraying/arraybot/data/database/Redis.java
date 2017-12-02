@@ -98,7 +98,7 @@ public final class Redis {
      */
     public void purge(long id) {
         for(Category category : Category.values()) {
-            category.getEntry().delete(id);
+            category.getEntry().deleteGuild(id);
         }
     }
 

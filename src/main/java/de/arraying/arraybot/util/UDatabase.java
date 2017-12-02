@@ -54,33 +54,4 @@ public final class UDatabase {
         return key;
     }
 
-    /**
-     * Converts a string Redis entry to a boolean.
-     * @param entry The entry.
-     * @return A boolean.
-     */
-    public static boolean asBoolean(String entry) {
-        return Boolean.valueOf(entry);
-    }
-
-    /**
-     * Converts a string Redis entry to an integer.
-     * This should only be used it it is certain that the entry is of type int.
-     * @param entry The entry.
-     * @return An integer.
-     */
-    public static int asInt(String entry) {
-        return Integer.valueOf(entry);
-    }
-
-    /**
-     * Converts a string Redis entry to a long.
-     * This should only be used if it is certain that the entry is of type long.
-     * @param entry The entry.
-     * @return A long.
-     */
-    public static long asLong(String entry) {
-        return Long.valueOf(entry);
-    }
-
 }

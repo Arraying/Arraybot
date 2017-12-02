@@ -55,13 +55,13 @@ public enum Category {
      * A disabled command name for a specific guild.
      * Set.
      */
-    DISABLED_COMMAND("d", new SetEntry()),
+    DISABLED_COMMAND("d", new SetEntry(true)),
 
     /**
      * A collection of filtered phrases.
      * Set.
      */
-    FILTER("f", new SetEntry()),
+    FILTER("f", new SetEntry(true)),
 
     /**
      * A collection of all filter bypass IDs.

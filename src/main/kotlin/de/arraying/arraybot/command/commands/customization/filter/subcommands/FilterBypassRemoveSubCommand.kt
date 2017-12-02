@@ -49,7 +49,7 @@ class FilterBypassRemoveSubCommand: SubCommand("bypassremove",
             Message.COMMANDS_FILTER_BYPASS_ID_EXISTS.send(channel).queue()
             return
         }
-        bypassEntry.delete(guildId)
+        bypassEntry.deleteSingleEntry(guildId, id)
         Message.COMMANDS_FILTER_BYPASS_REMOVE.send(channel).queue()
     }
 

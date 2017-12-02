@@ -68,21 +68,37 @@ public abstract class HashEntry<T> implements Entry {
     }
 
     /**
-     * Deletes everything corresponding to the ID.
-     * @param id The ID.
+     * Deletes the specific entry.
+     * @param guild The ID of the guild.
+     * @param key The entry key. This can be null.
      */
-    @Override
-    public void delete(long id) {
+    public void deleteSingleEntry(long guild, Object key) {
+        RedisCommands resource = redis.getResource();
+        resource.del(UDatabase.getKey(category, guild, key));
         Category parentCategory = getParent();
         if(parentCategory == null) {
             return;
         }
+        SetEntry parent = (SetEntry) parentCategory.getEntry();
+        parent.remove(guild, key);
+    }
+
+    /**
+     * Deletes everything corresponding to the ID.
+     * @param id The ID.
+     */
+    @Override
+    public void deleteGuild(long id) {
         RedisCommands resource = redis.getResource();
+        Category parentCategory = getParent();
+        if(parentCategory == null) {
+            return;
+        }
         SetEntry parent = (SetEntry) parentCategory.getEntry();
         for(String key : parent.values(id)) {
             resource.del(UDatabase.getKey(category, id, key));
         }
-        parent.delete(id);
+        parent.internalDelete(id);
     }
 
     /**

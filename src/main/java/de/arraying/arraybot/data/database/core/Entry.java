@@ -35,7 +35,7 @@ public interface Entry {
      * Deletes everything corresponding to the ID.
      * @param id The ID.
      */
-    void delete(long id);
+    void deleteGuild(long id);
 
     enum Type {
 
