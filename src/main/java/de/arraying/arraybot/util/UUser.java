@@ -25,7 +25,7 @@ public final class UUser {
     /**
      * The regular expression for a regular user ID.
      */
-    private static final Pattern ID_PATTERN = Pattern.compile("^\\d{17,20}$");
+    public static final Pattern ID_PATTERN = Pattern.compile("^\\d{17,20}$");
 
     /**
      * The regular expression for a mention.

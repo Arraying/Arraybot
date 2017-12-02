@@ -1,11 +1,14 @@
 package de.arraying.arraybot;
 
 import de.arraying.arraybot.data.Configuration;
+import de.arraying.arraybot.data.database.core.Category;
+import de.arraying.arraybot.data.database.templates.SetEntry;
 import de.arraying.arraybot.manager.BotManager;
 import de.arraying.arraybot.manager.PunishmentManager;
 import de.arraying.arraybot.manager.ScriptManager;
 import de.arraying.arraybot.manager.StorageManager;
 import de.arraying.arraybot.startup.Starter;
+import de.arraying.arraybot.util.UDefaults;
 import de.arraying.arraybot.util.objects.Splash;
 import net.dv8tion.jda.core.JDAInfo;
 import org.slf4j.Logger;
@@ -97,6 +100,26 @@ public final class Arraybot {
         new Splash(new File("splash.txt")).print(logger, configuration.getBotVersion(), JDAInfo.VERSION, "Arraying, xaanit");
         Starter.start();
         initialized = true;
+    }
+
+    /**
+     * Blacklists a user.
+     * @param entry Should be a user ID.
+     */
+    @SuppressWarnings("unused")
+    public void blacklist(Object entry) {
+        SetEntry blacklist = (SetEntry) Category.BLACKLIST.getEntry();
+        blacklist.add(UDefaults.DEFAULT_BLACKLIST, entry);
+    }
+
+    /**
+     * Un-blacklists a user.
+     * @param entry Should be the user ID.
+     */
+    @SuppressWarnings("unused")
+    public void unBlacklist(Object entry) {
+        SetEntry blacklist = (SetEntry) Category.BLACKLIST.getEntry();
+        blacklist.remove(UDefaults.DEFAULT_BLACKLIST, entry);
     }
 
     /**
