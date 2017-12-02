@@ -56,11 +56,20 @@ class PunishmentRevocationCommand(commandName: String,
         }
         val userRaw = args[1]
         val userObject = UUser.getMember(guild, userRaw)
-        if(userObject == null) {
-            Message.PUNISH_COMMAND_USER_INVALID.send(channel).queue()
-            return
-        }
-        val user = userObject.user.idLong
+        val user: Long = if(userObject == null) {
+                if(type == PunishmentType.MUTE) {
+                    Message.PUNISH_COMMAND_USER_INVALID.send(channel).queue()
+                    return
+                }
+                if(UUser.ID_PATTERN.matcher(userRaw).find()) {
+                    userRaw.replace("\\D".toRegex(), "").toLong()
+                } else {
+                    Message.PUNISH_COMMAND_USER_INVALID.send(channel).queue()
+                    return
+                }
+            } else {
+                userObject.user.idLong
+            }
         val punishment = ULambda.getSpecificGeneralizedPunishment(guild, user, type)
         if(punishment == null) {
             Message.PUNISH_COMMAND_REVOKE_FIND.send(channel).queue()

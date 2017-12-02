@@ -1,6 +1,10 @@
 package de.arraying.arraybot.command
 
+import de.arraying.arraybot.command.commands.`fun`.cat.CatCommand
+import de.arraying.arraybot.command.commands.`fun`.dog.DogCommand
 import de.arraying.arraybot.command.commands.`fun`.eightball.EightballCommand
+import de.arraying.arraybot.command.commands.`fun`.skin.SkinCommand
+import de.arraying.arraybot.command.commands.`fun`.urban.UrbanCommand
 import de.arraying.arraybot.command.commands.customization.announcer.AnnouncerCommand
 import de.arraying.arraybot.command.commands.customization.announcer.AnnouncerGenericSubCommand
 import de.arraying.arraybot.command.commands.customization.autorole.AutoRoleCommand
@@ -91,6 +95,11 @@ enum class CommandCollection(val command: DefaultCommand) {
     BAN(PunishmentCommand("ban", Permission.BAN_MEMBERS, PunishmentType.BAN)),
 
     /**
+     * Meeeooooowwwww.
+     */
+    CAT(CatCommand()),
+
+    /**
      * The command that clears messages.
      */
     CLEAR(ClearCommand()),
@@ -123,6 +132,11 @@ enum class CommandCollection(val command: DefaultCommand) {
             CustomSetTypeSubCommand(),
             CustomSetValueSubCommand()
     ))),
+
+    /**
+     * Woof.
+     */
+    DOG(DogCommand()),
 
     /**
      * The 8Ball command.
@@ -245,6 +259,11 @@ enum class CommandCollection(val command: DefaultCommand) {
     SHARDS(ShardsCommand()),
 
     /**
+     * Shows the Minecraft skin of a player.
+     */
+    SKIN(SkinCommand()),
+
+    /**
      * The command that displays statistics.
      */
     STATS(StatsCommand()),
@@ -273,6 +292,11 @@ enum class CommandCollection(val command: DefaultCommand) {
     /**
      * This command revokes a mute punishment on a user.
      */
-    UN_MUTE(PunishmentRevocationCommand("unmute", PunishmentType.MUTE));
+    UN_MUTE(PunishmentRevocationCommand("unmute", PunishmentType.MUTE)),
+
+    /**
+     * The UrbanDictionary command.
+     */
+    URBAN(UrbanCommand());
 
 }
