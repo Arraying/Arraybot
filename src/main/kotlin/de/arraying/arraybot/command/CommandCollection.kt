@@ -24,6 +24,9 @@ import de.arraying.arraybot.command.commands.developer.reload.subcommands.Reload
 import de.arraying.arraybot.command.commands.developer.reload.subcommands.ReloadShardsSubCommand
 import de.arraying.arraybot.command.commands.developer.script.ScriptCommand
 import de.arraying.arraybot.command.commands.developer.shards.ShardsCommand
+import de.arraying.arraybot.command.commands.moderation.clear.ClearCommand
+import de.arraying.arraybot.command.commands.moderation.history.HistoryCommand
+import de.arraying.arraybot.command.commands.moderation.lookup.LookupCommand
 import de.arraying.arraybot.command.commands.moderation.punishment.PunishmentCommand
 import de.arraying.arraybot.command.commands.moderation.punishment.PunishmentRevocationCommand
 import de.arraying.arraybot.command.commands.utils.commands.CommandsCommand
@@ -33,6 +36,7 @@ import de.arraying.arraybot.command.commands.utils.commands.subcommands.Commands
 import de.arraying.arraybot.command.commands.utils.commands.subcommands.CommandsListSubCommand
 import de.arraying.arraybot.command.commands.utils.convert.ConvertCommand
 import de.arraying.arraybot.command.commands.utils.help.HelpCommand
+import de.arraying.arraybot.command.commands.utils.id.IDCommand
 import de.arraying.arraybot.command.commands.utils.invite.InviteCommand
 import de.arraying.arraybot.command.commands.utils.override.OverrideCommand
 import de.arraying.arraybot.command.commands.utils.ping.PingCommand
@@ -85,6 +89,11 @@ enum class CommandCollection(val command: DefaultCommand) {
      * The command that permanently bans users.
      */
     BAN(PunishmentCommand("ban", Permission.BAN_MEMBERS, PunishmentType.BAN)),
+
+    /**
+     * The command that clears messages.
+     */
+    CLEAR(ClearCommand()),
 
     /**
      * The command that shows information concerning commands.
@@ -149,6 +158,16 @@ enum class CommandCollection(val command: DefaultCommand) {
     HELP(HelpCommand()),
 
     /**
+     * The command that shows all punishments for a user.
+     */
+    HISTORY(HistoryCommand()),
+
+    /**
+     * The command that will show the IDs of different entities.
+     */
+    ID(IDCommand()),
+
+    /**
      * The command that sends invite links.
      */
     INVITE(InviteCommand()),
@@ -162,6 +181,11 @@ enum class CommandCollection(val command: DefaultCommand) {
      * Sets the bot's language for the guild.
      */
     LANGUAGE(LanguageCommand()),
+
+    /**
+     * The command that shows info on specific punishments.
+     */
+    LOOKUP(LookupCommand()),
 
     /**
      * The command that gets/sets the punishment logging channel.

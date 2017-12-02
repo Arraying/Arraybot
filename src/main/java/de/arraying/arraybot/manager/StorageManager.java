@@ -1,6 +1,7 @@
 package de.arraying.arraybot.manager;
 
 import de.arraying.arraybot.parameter.DataStorage;
+import de.arraying.arraybot.parameter.storage.ClearCommandStorage;
 import de.arraying.arraybot.parameter.storage.CustomCommandStorage;
 
 /**
@@ -21,6 +22,7 @@ import de.arraying.arraybot.parameter.storage.CustomCommandStorage;
 public final class StorageManager {
 
     private final DataStorage<CustomCommandStorage> customCommandStorageDataStorage = new DataStorage<>(CustomCommandStorage.class);
+    private final DataStorage<ClearCommandStorage> clearCommandStorageDataStorage = new DataStorage<>(ClearCommandStorage.class);
 
     /**
      * Gets the custom command storage.
@@ -28,6 +30,14 @@ public final class StorageManager {
      */
     public DataStorage<CustomCommandStorage> getCustomCommandStorageDataStorage() {
         return customCommandStorageDataStorage;
+    }
+
+    /**
+     * Gets the clear command storage.
+     * @return The storage.
+     */
+    public DataStorage<ClearCommandStorage> getClearCommandStorageDataStorage() {
+        return clearCommandStorageDataStorage;
     }
 
 }
