@@ -42,7 +42,7 @@ class CustomDeleteSubCommand: SubCommand("delete",
             return
         }
         val customCommand = Category.CUSTOM_COMMAND.entry as CustomCommandEntry
-        customCommand.deleteCustomCommand(guildId, name)
+        customCommand.deleteSingleEntry(guildId, name)
         Message.COMMANDS_CUSTOM_DELETED.send(channel).queue()
     }
 

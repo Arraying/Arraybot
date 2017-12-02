@@ -3,6 +3,7 @@ package de.arraying.arraybot.data.database.categories;
 import de.arraying.arraybot.data.database.core.Category;
 import de.arraying.arraybot.data.database.core.EntryField;
 import de.arraying.arraybot.data.database.templates.HashEntry;
+import de.arraying.arraybot.data.database.templates.SetEntry;
 import de.arraying.arraybot.filter.FilterBypassType;
 import de.arraying.arraybot.util.UDefaults;
 
@@ -63,6 +64,8 @@ public final class FilterBypassEntry extends HashEntry<FilterBypassEntry.Fields>
      * @param value The value.
      */
     public void createBypass(long guild, int id, FilterBypassType type, long value) {
+        SetEntry parent = (SetEntry) getParent().getEntry();
+        parent.add(id, id);
         push(getField(Fields.BYPASS_ID), guild, id, id);
         push(getField(Fields.TYPE), guild, id, type);
         push(getField(Fields.VALUE), guild, id, value);

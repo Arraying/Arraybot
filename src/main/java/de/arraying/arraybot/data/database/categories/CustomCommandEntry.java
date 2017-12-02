@@ -68,17 +68,6 @@ public final class CustomCommandEntry extends HashEntry<CustomCommandEntry.Field
         }
     }
 
-    /**
-     * Deletes a custom command.
-     * @param id The guild's ID.
-     * @param secondaryKey The custom command name.
-     */
-    public void deleteCustomCommand(long id, String secondaryKey) {
-        SetEntry parent = (SetEntry) getParent().getEntry();
-        parent.remove(id, secondaryKey);
-        deleteSelf(id, secondaryKey);
-    }
-
     public enum Fields {
 
         /**

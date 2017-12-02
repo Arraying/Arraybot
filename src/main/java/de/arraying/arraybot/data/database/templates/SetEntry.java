@@ -27,13 +27,24 @@ import java.util.Set;
 public final class SetEntry implements Entry {
 
     private final Redis redis;
+    private final boolean deletable;
     private Category category;
+
+    /**
+     * Creates a new set entry.
+     * @param deletable Whether or not the set entry can be deleted.
+     */
+    public SetEntry(boolean deletable) {
+        this.redis = Redis.getInstance();
+        this.deletable = deletable;
+    }
 
     /**
      * Creates a new set entry.
      */
     public SetEntry() {
         this.redis = Redis.getInstance();
+        this.deletable = false;
     }
 
     /**
@@ -55,13 +66,23 @@ public final class SetEntry implements Entry {
     }
 
     /**
+     * Actually deletes the guild.
+     * @param id The guild ID.
+     */
+    void internalDelete(long id) {
+        RedisCommands resource = redis.getResource();
+        resource.del(UDatabase.getKey(category, id));
+    }
+
+    /**
      * Deletes everything corresponding to the ID.
      * @param id The ID.
      */
     @Override
-    public void delete(long id) {
-        RedisCommands resource = redis.getResource();
-        resource.del(UDatabase.getKey(category, id));
+    public void deleteGuild(long id) {
+        if(deletable) {
+            internalDelete(id);
+        }
     }
 
     /**

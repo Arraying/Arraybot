@@ -56,8 +56,9 @@ public final class KVEntry implements Entry {
      * Does nothing.
      * @param id The ID.
      */
+    @SuppressWarnings("unused")
     @Override
-    public void delete(long id) {
+    public void deleteGuild(long id) {
     }
 
     /**
