@@ -41,7 +41,7 @@ class CustomEmbedBuilder : EmbedBuilder() {
     }
 
     private val lengthPlaceholder = "[...]"
-    var totalLength = 0
+    private var totalLength = 0
 
     /**
      * When the wrong field adding method is invoked.
