@@ -57,8 +57,8 @@ public final class MessageListener extends PostLoadListener {
             return;
         }
         Filter.getInstance().handle(event);
-        if(event.getMember().getUser().isBot()
-                || event.getMember().getUser().isFake()) {
+        if(event.getAuthor().isFake()
+            || event.getAuthor().isBot()) {
             return;
         }
         Commands.INSTANCE.executeCommand(new CommandEnvironment(event.getMessage()));
