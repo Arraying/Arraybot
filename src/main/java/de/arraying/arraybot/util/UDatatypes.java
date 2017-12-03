@@ -66,7 +66,7 @@ public final class UDatatypes {
         if(shards == 1) {
             return Arraybot.SINGLE_SHARD_INDEX;
         }
-        return (int) (guildId >> 22) % shards;
+        return (int) ((guildId >> 22) % shards);
     }
 
 }
