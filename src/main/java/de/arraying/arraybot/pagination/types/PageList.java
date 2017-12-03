@@ -45,7 +45,7 @@ public final class PageList extends PageImpl {
     public String asString(List<Object> input, TextChannel channel) {
         StringBuilder builder = new StringBuilder();
         for(Object entry : input) {
-            builder.append("**•** ")
+            builder.append("**>** ")
                     .append(UFormatting.stripFormatting(entry.toString()))
                     .append("\n");
         }

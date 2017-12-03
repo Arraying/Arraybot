@@ -2,6 +2,7 @@ package de.arraying.arraybot.script.method.methods;
 
 import de.arraying.arraybot.command.CommandEnvironment;
 import de.arraying.arraybot.script.method.templates.CollectionManagementMethods;
+import de.arraying.arraybot.util.UArguments;
 import de.arraying.arraybot.util.UZeus;
 import de.arraying.zeus.backend.ZeusException;
 import de.arraying.zeus.backend.annotations.ZeusMethod;
@@ -80,6 +81,26 @@ public final class ArgumentMethods extends CollectionManagementMethods<String[]>
             error = "Index out of bounds (0 based indexing).";
         }
         throw new ZeusException(error);
+    }
+
+    /**
+     * Concatenates arguments to one big string.
+     * @param argumentId The argument OD.
+     * @param index The index to start at.
+     * @return The string.
+     * @throws ZeusException If the argument ID does not exist or the index is invalid.
+     */
+    @ZeusMethod
+    public String args_concat(String argumentId, Integer index)
+            throws ZeusException {
+        String[] arguments = collection.get(argumentId);
+        if(arguments == null) {
+            throw new ZeusException("That argument ID does not exist.");
+        }
+        if(index >= arguments.length) {
+            throw new ZeusException("Index is too large");
+        }
+        return UArguments.combine(arguments, index);
     }
 
 }

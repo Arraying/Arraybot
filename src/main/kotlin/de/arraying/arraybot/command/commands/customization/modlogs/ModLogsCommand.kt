@@ -51,12 +51,19 @@ class ModLogsCommand: DefaultCommand("modlogs",
             Message.COMMANDS_MODLOGS_CHANNEL.send(channel, chan.asMention).queue()
             return
         }
-        val chan = UChannel.getTextChannel(guild, args[1])
-        if(chan == null) {
-            Message.CHANNEL_INVALID.send(channel).queue()
-            return
-        }
-        entry.push(entry.getField(GuildEntry.Fields.PUNISHMENT_CHANNEL), guildId, null, chan.idLong)
+        val input = args[1]
+        val chan: Long
+        chan = if(input == "none") {
+                UDefaults.DEFAULT_SNOWFLAKE.toLong()
+            } else {
+                val c = UChannel.getTextChannel(guild, input)
+                if(c == null) {
+                    Message.CHANNEL_INVALID.send(channel).queue()
+                    return
+                }
+                c.idLong
+            }
+        entry.push(entry.getField(GuildEntry.Fields.PUNISHMENT_CHANNEL), guildId, null, chan)
         Message.COMMANDS_MODLOGS_UPDATED.send(channel).queue()
     }
 
