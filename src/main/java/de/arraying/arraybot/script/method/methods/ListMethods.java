@@ -26,7 +26,7 @@ import java.util.Map;
  * limitations under the License.
  */
 @SuppressWarnings({"unused", "WeakerAccess"})
-public class ListMethods extends ListCollectionMethods<Object> {
+public final class ListMethods extends ListCollectionMethods<Object> {
 
     /**
      * Creates a new method collection object.

@@ -169,11 +169,6 @@ public final class GuildEntry extends HashEntry<GuildEntry.Fields> {
         COUNT_BYPASS(new EntryField("count_bypass", UDefaults.DEFAULT_COUNT)),
 
         /**
-         * The incrementing latest filter ID.
-         */
-        COUNT_FILTER(new EntryField("count_filter", UDefaults.DEFAULT_COUNT)),
-
-        /**
          * The incrementing latest punishment ID.
          */
         COUNT_PUNISHMENT(new EntryField("count_punishment", UDefaults.DEFAULT_COUNT)),

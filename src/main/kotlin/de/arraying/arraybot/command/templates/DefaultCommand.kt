@@ -156,11 +156,6 @@ abstract class DefaultCommand(override final val name: String,
                 return
             }
         }
-//        if(!PermissionUtil.checkPermission(channel, environment.member, permission)
-//                && !customPermissionChecking) {
-//            Message.COMMAND_PERMISSION.send(channel).queue()
-//            return
-//        }
         val entry = Category.DISABLED_COMMAND.entry as SetEntry
         if(entry.contains(environment.guild.idLong, name)) {
             logger.info("Did not execute command as it was disabled in the guild ${environment.guild.idLong}")
@@ -199,28 +194,35 @@ abstract class DefaultCommand(override final val name: String,
         return Languages.getEntry(syntaxPath, language)
     }
 
-    /**
-     * Checks if the guild is able to execute premium commands.
-     */
-    protected fun isPremium(environment: CommandEnvironment): Boolean {
-        val hub = arraybot.botManager.hub
-        if(hub == null) {
-            logger.error("The hub guild returned null.")
-            return false
-        }
-        if(environment.guild.idLong == hub.idLong) {
-            return true
-        }
-        val roleId = arraybot.configuration.premiumId
-        return environment.guild.members.any {
-            it.hasPermission(Permission.MANAGE_SERVER)
-            && hub.getMemberById(it.user.idLong) != null
-            && hub.getMemberById(it.user.idLong).roles.any {
-                role -> role.idLong == roleId
-            }
-        }
-    }
 
     private fun isDeveloper(id: Long) = arraybot.configuration.botAuthors.any { it == id }
+
+    companion object {
+
+        /**
+         * Checks if the guild is able to execute premium commands.
+         */
+        fun isPremium(environment: CommandEnvironment): Boolean {
+            val arraybot = Arraybot.getInstance()
+            val logger = LoggerFactory.getLogger("Premium")
+            val hub = arraybot.botManager.hub
+            if(hub == null) {
+                logger.error("The hub guild returned null.")
+                return false
+            }
+            if(environment.guild.idLong == hub.idLong) {
+                return true
+            }
+            val roleId = arraybot.configuration.premiumId
+            return environment.guild.members.any {
+                it.hasPermission(Permission.MANAGE_SERVER)
+                        && hub.getMemberById(it.user.idLong) != null
+                        && hub.getMemberById(it.user.idLong).roles.any {
+                    role -> role.idLong == roleId
+                }
+            }
+        }
+
+    }
 
 }

@@ -128,25 +128,15 @@ public abstract class HashEntry<T> implements Entry {
     }
 
     /**
-     * Checks whether or not a field exists.
+     * Removes a hash value.
+     * This should only be used in Zeus' variable storage.
      * @param field The field.
      * @param id The primary key.
      * @param secondaryKey The secondary key.
-     * @return The value.
      */
-    public boolean exists(EntryField field, long id, Object secondaryKey) {
+    public void purge(EntryField field, long id, Object secondaryKey) {
         RedisCommands resource = redis.getResource();
-        return resource.hexists(UDatabase.getKey(category, id, secondaryKey), field.getRedisKey());
-    }
-
-    /**
-     * Deletes itself.
-     * @param id The ID.
-     * @param secondaryKey The secondary key.
-     */
-    protected void deleteSelf(long id, String secondaryKey) {
-        RedisCommands resource = redis.getResource();
-        resource.del(UDatabase.getKey(category, id, secondaryKey));
+        resource.hdel(UDatabase.getKey(category, id, secondaryKey), field.getRedisKey());
     }
 
     /**

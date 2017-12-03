@@ -1,9 +1,13 @@
 package de.arraying.arraybot.script.method.methods;
 
 import de.arraying.arraybot.command.CommandEnvironment;
+import de.arraying.arraybot.command.templates.DefaultCommand;
+import de.arraying.arraybot.data.database.categories.GuildEntry;
 import de.arraying.arraybot.data.database.categories.VariablesEntry;
 import de.arraying.arraybot.data.database.core.Category;
 import de.arraying.arraybot.script.method.Methods;
+import de.arraying.arraybot.util.Limits;
+import de.arraying.zeus.backend.ZeusException;
 import de.arraying.zeus.backend.annotations.ZeusMethod;
 
 /**
@@ -48,13 +52,36 @@ public final class StorageMethods extends Methods {
      * @param identifier The identifier.
      * @param value The new value.
      * @return The new value.
+     * @throws ZeusException If the storage limit has been reached.
      */
     @ZeusMethod
-    public String vs_set(String identifier, Object value) {
+    public String vs_set(String identifier, Object value)
+            throws ZeusException {
+        GuildEntry guildEntry = (GuildEntry) Category.GUILD.getEntry();
+        int current = Integer.valueOf(guildEntry.fetch(guildEntry.getField(GuildEntry.Fields.COUNT_VS), environment.getGuild().getIdLong(), null));
+        current += 1;
+        if(current >= Limits.VS_CAP.getLimit()
+                && !DefaultCommand.Companion.isPremium(environment)) {
+            throw new ZeusException("You have reached your storage limit. Please consider updating to Premium for no limit.");
+        }
+        guildEntry.push(guildEntry.getField(GuildEntry.Fields.COUNT_VS), environment.getGuild().getIdLong(), null, current);
         String newValue = value.toString();
         VariablesEntry entry = (VariablesEntry) Category.VARIABLES.getEntry();
         entry.push(entry.getField(identifier), environment.getGuild().getIdLong(), null, newValue);
         return newValue;
+    }
+
+    /**
+     * Deletes a variable.
+     * @param identifier The identifier.
+     */
+    @ZeusMethod
+    public void vs_del(String identifier) {
+        VariablesEntry entry = (VariablesEntry) Category.VARIABLES.getEntry();
+        entry.purge(entry.getField(identifier), environment.getGuild().getIdLong(), null);
+        GuildEntry guildEntry = (GuildEntry) Category.GUILD.getEntry();
+        int current = Integer.valueOf(guildEntry.fetch(guildEntry.getField(GuildEntry.Fields.COUNT_VS), environment.getGuild().getIdLong(), null));
+        guildEntry.push(guildEntry.getField(GuildEntry.Fields.COUNT_VS), environment.getGuild().getIdLong(), null, current);
     }
 
 }

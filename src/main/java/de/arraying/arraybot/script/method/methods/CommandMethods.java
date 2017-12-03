@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
  * limitations under the License.
  */
 @SuppressWarnings({"unused", "WeakerAccess"})
-public class CommandMethods extends Methods {
+public final class CommandMethods extends Methods {
 
     private final ListMethods listMethods;
 
