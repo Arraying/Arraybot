@@ -3,10 +3,12 @@ package de.arraying.arraybot.util;
 import de.arraying.arraybot.data.database.categories.GuildEntry;
 import de.arraying.arraybot.data.database.core.Category;
 import de.arraying.arraybot.util.objects.Pair;
+import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.Member;
 import net.dv8tion.jda.core.entities.Role;
 import net.dv8tion.jda.core.exceptions.PermissionException;
+import net.dv8tion.jda.core.utils.PermissionUtil;
 
 /**
  * Copyright 2017 Arraying
@@ -77,7 +79,7 @@ public final class UPunishment {
      * @return True if they are, false otherwise.
      */
     public static boolean isBan(Guild guild, long user) {
-        return guild.getBans().complete().stream().anyMatch(userObject -> userObject.getIdLong() == user);
+        return PermissionUtil.checkPermission(guild.getSelfMember(), Permission.BAN_MEMBERS) && guild.getBans().complete().stream().anyMatch(userObject -> userObject.getIdLong() == user);
     }
 
     /**
