@@ -5,6 +5,7 @@ import de.arraying.arraybot.command.templates.DefaultCommand
 import de.arraying.arraybot.language.Message
 import de.arraying.arraybot.util.Limits
 import de.arraying.arraybot.util.UEmbed
+import de.arraying.arraybot.util.UPremium
 import net.dv8tion.jda.core.Permission
 
 /**
@@ -33,7 +34,7 @@ class PremiumCommand: DefaultCommand("premium",
     override fun onCommand(environment: CommandEnvironment, args: List<String>) {
         val channel = environment.channel
         val embed = UEmbed.getEmbed(channel)
-                .setDescription(Message.COMMANDS_PREMIUM_EMBED_DESCRIPTION.getContent(channel, isPremium(environment).toString()))
+                .setDescription(Message.COMMANDS_PREMIUM_EMBED_DESCRIPTION.getContent(channel, UPremium.isPremium(environment).toString()))
                 .addField(Message.COMMANDS_PREMIUM_EMBED_WHAT_TITLE.getContent(channel),
                         Message.COMMANDS_PREMIUM_EMBED_WHAT_VALUE.getContent(channel),
                         false)

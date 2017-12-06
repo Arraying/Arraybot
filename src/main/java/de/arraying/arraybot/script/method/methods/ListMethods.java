@@ -92,7 +92,7 @@ public final class ListMethods extends ListCollectionMethods<Object> {
      * @param index The index.
      * @return The value or "null".
      */
-    public Object str_list_get(String key, Integer index) {
+    public Object list_get(String key, Integer index) {
         Object returnValue;
         try {
             returnValue = get(key, index);

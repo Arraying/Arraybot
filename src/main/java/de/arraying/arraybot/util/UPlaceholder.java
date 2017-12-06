@@ -35,13 +35,15 @@ public final class UPlaceholder {
                 .replace("{user_discriminator}", user.getDiscriminator())
                 .replace("{user_nickname}", member.getEffectiveName())
                 .replace("{guild_id}", guild.getId())
-                .replace("{guild_icon}", guild.getIconUrl())
+                .replace("{guild_icon}", guild.getIconUrl() == null ? "null" : guild.getIconUrl())
+                .replace("{guild_members}", String.valueOf(guild.getMembers().size()))
                 .replace("{guild_name}", guild.getName())
                 .replace("{guild_owner}", guild.getOwner().getAsMention())
                 .replace("{guild_owner_name}", guild.getOwner().getUser().getName())
                 .replace("{guild_owner_discriminator}", guild.getOwner().getUser().getDiscriminator())
                 .replace("{guild_owner_nickname}", guild.getOwner().getEffectiveName())
-                .replace("{guild_region}", guild.getRegionRaw());
+                .replace("{guild_region}", guild.getRegionRaw())
+                .replace("{date}", UTime.getDisplayableTime(guild, System.currentTimeMillis()));
     }
 
     /**
@@ -53,7 +55,7 @@ public final class UPlaceholder {
     public static String replaceChannel(TextChannel channel, String input) {
         return input.replace("{channel}", channel.getAsMention())
                 .replace("{channel_name}", channel.getName())
-                .replace("{channel_topic}", channel.getTopic())
+                .replace("{channel_topic}", channel.getTopic() == null ? "null" : channel.getTopic())
                 .replace("{channel_nsfw}", String.valueOf(channel.isNSFW()));
     }
 

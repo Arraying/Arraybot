@@ -66,7 +66,9 @@ public final class UEmbed {
      * @return True if it should, false otherwise.
      */
     private static boolean shouldImage(Guild guild) {
-        return guild.getExplicitContentLevel() == Guild.ExplicitContentLevel.OFF;
+        return guild.getExplicitContentLevel() == Guild.ExplicitContentLevel.OFF
+                || (guild.getExplicitContentLevel() == Guild.ExplicitContentLevel.NO_ROLE
+                && !guild.getSelfMember().getRoles().isEmpty());
     }
 
 }

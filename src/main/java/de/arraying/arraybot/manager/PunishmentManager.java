@@ -93,7 +93,7 @@ public final class PunishmentManager {
             return;
         }
         executor.schedule(() -> {
-            if(punishmentObject.isRevoked()) {
+            if(!punishmentObject.isRevoked()) {
                 revoke(guild, punishmentObject, null);
             }
         }, (expiration - current), TimeUnit.MILLISECONDS);
@@ -156,7 +156,8 @@ public final class PunishmentManager {
         GuildEntry entry = (GuildEntry) Category.GUILD.getEntry();
         long channelId = Long.valueOf(entry.fetch(entry.getField(GuildEntry.Fields.PUNISHMENT_CHANNEL), guild.getIdLong(), null));
         TextChannel channel = guild.getTextChannelById(channelId);
-        if(channel == null) {
+        if(channel == null
+                || !UChannel.canTalk(channel)) {
             return;
         }
         String punishmentType;

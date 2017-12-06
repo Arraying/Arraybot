@@ -8,6 +8,8 @@ import de.arraying.arraybot.command.templates.SubCommand
 import de.arraying.arraybot.data.database.core.Category
 import de.arraying.arraybot.data.database.templates.SetEntry
 import de.arraying.arraybot.language.Message
+import net.dv8tion.jda.core.Permission
+import net.dv8tion.jda.core.utils.PermissionUtil
 
 /**
  * Copyright 2017 Arraying
@@ -32,6 +34,10 @@ class CommandsDisableSubCommand: SubCommand("disable",
      */
     override fun onSubCommand(environment: CommandEnvironment, args: List<String>) {
         val channel = environment.channel
+        if(!PermissionUtil.checkPermission(channel, environment.member, Permission.MANAGE_SERVER)) {
+            Message.COMMAND_PERMISSION.send(channel).queue()
+            return
+        }
         if(args.size < 3) {
             Message.COMMAND_NAME_PROVIDE.send(channel).queue()
             return

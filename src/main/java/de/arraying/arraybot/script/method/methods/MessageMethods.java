@@ -1,6 +1,7 @@
 package de.arraying.arraybot.script.method.methods;
 
 import de.arraying.arraybot.command.CommandEnvironment;
+import de.arraying.arraybot.language.Message;
 import de.arraying.arraybot.script.method.Methods;
 import de.arraying.arraybot.util.UZeus;
 import de.arraying.zeus.backend.annotations.ZeusMethod;
@@ -30,6 +31,8 @@ import net.dv8tion.jda.core.exceptions.PermissionException;
 public final class MessageMethods extends Methods {
 
     private final EmbedMethods methods;
+    private final int messageLimit = 4;
+    private int messagesSent = 0;
 
     /**
      * Creates a new method collection object.
@@ -59,11 +62,19 @@ public final class MessageMethods extends Methods {
      */
     @ZeusMethod
     public void message_channel(Object message) {
+        if(messagesSent > messageLimit) {
+            if(messagesSent == messageLimit + 1) {
+                UZeus.errorInChannel(environment.getChannel(), new Exception(Message.ZEUS_ERROR_RATELIMIT.getContent(environment.getChannel())));
+            }
+            messagesSent++;
+            return;
+        }
         try {
             environment.getChannel().sendMessage(message.toString()).queue();
         } catch(PermissionException | VerificationLevelException | IllegalArgumentException exception) {
             UZeus.errorInChannel(environment.getChannel(), exception);
         }
+        messagesSent++;
     }
 
     /**
@@ -73,6 +84,13 @@ public final class MessageMethods extends Methods {
      */
     @ZeusMethod
     public void message_channel_other(Long id, Object message) {
+        if(messagesSent > messageLimit) {
+            if(messagesSent == messageLimit + 1) {
+                UZeus.errorInChannel(environment.getChannel(), new Exception(Message.ZEUS_ERROR_RATELIMIT.getContent(environment.getChannel())));
+            }
+            messagesSent++;
+            return;
+        }
         TextChannel channel = environment.getGuild().getTextChannelById(id);
         if(channel == null) {
             return;
@@ -82,6 +100,7 @@ public final class MessageMethods extends Methods {
         } catch(PermissionException | VerificationLevelException | IllegalArgumentException exception) {
             UZeus.errorInChannel(environment.getChannel(), exception);
         }
+        messagesSent++;
     }
 
     /**
@@ -91,6 +110,13 @@ public final class MessageMethods extends Methods {
      */
     @ZeusMethod
     public void message_private(Long id, Object message) {
+        if(messagesSent > messageLimit) {
+            if(messagesSent == messageLimit + 1) {
+                UZeus.errorInChannel(environment.getChannel(), new Exception(Message.ZEUS_ERROR_RATELIMIT.getContent(environment.getChannel())));
+            }
+            messagesSent++;
+            return;
+        }
         Member member = environment.getGuild().getMemberById(id);
         if(member == null) {
             return;
@@ -100,6 +126,7 @@ public final class MessageMethods extends Methods {
         } catch(PermissionException | VerificationLevelException | IllegalArgumentException exception) {
             UZeus.errorInChannel(environment.getChannel(), exception);
         }
+        messagesSent++;
     }
 
     /**
@@ -108,6 +135,13 @@ public final class MessageMethods extends Methods {
      */
     @ZeusMethod
     public void message_channel_embed(String embed) {
+        if(messagesSent > messageLimit) {
+            if(messagesSent == messageLimit + 1) {
+                UZeus.errorInChannel(environment.getChannel(), new Exception(Message.ZEUS_ERROR_RATELIMIT.getContent(environment.getChannel())));
+            }
+            messagesSent++;
+            return;
+        }
         try {
             EmbedBuilder embedBuilder = methods.getEmbeds().get(embed);
             if(embedBuilder != null) {
@@ -116,6 +150,7 @@ public final class MessageMethods extends Methods {
         } catch(PermissionException | VerificationLevelException | IllegalArgumentException exception) {
             UZeus.errorInChannel(environment.getChannel(), exception);
         }
+        messagesSent++;
     }
 
     /**
@@ -125,6 +160,13 @@ public final class MessageMethods extends Methods {
      */
     @ZeusMethod
     public void message_private_embed(Long id, String embed) {
+        if(messagesSent > messageLimit) {
+            if(messagesSent == messageLimit + 1) {
+                UZeus.errorInChannel(environment.getChannel(), new Exception(Message.ZEUS_ERROR_RATELIMIT.getContent(environment.getChannel())));
+            }
+            messagesSent++;
+            return;
+        }
         Member member = environment.getGuild().getMemberById(id);
         if(member == null) {
             return;
@@ -137,6 +179,7 @@ public final class MessageMethods extends Methods {
         } catch(PermissionException | VerificationLevelException | IllegalArgumentException exception) {
             UZeus.errorInChannel(environment.getChannel(), exception);
         }
+        messagesSent++;
     }
 
 }

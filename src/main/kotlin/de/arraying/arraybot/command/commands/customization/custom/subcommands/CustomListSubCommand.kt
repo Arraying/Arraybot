@@ -36,7 +36,7 @@ class CustomListSubCommand: SubCommand("list",
                 .setDescription(Message.COMMANDS_CUSTOM_LIST.getContent(channel))
         val pages = PageBuilder()
                 .withEntries(commands)
-                .withTotal(5)
+                .withTotal(10)
                 .withType(PageBuilder.Type.COMMANDS)
                 .withTitle(Message.EMBED_TITLE_COMMANDS.getContent(channel))
                 .withEmbed(embed)

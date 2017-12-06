@@ -9,6 +9,8 @@ import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.events.guild.GuildJoinEvent;
 import net.dv8tion.jda.core.events.guild.GuildLeaveEvent;
 
+import java.io.IOException;
+
 /**
  * Copyright 2017 Arraying
  * <p>
@@ -49,7 +51,7 @@ public final class GuildListener extends PostLoadListener {
      */
     @Override
     public void onGuildLeave(GuildLeaveEvent event) {
-        new Remover(event.getGuild().getIdLong()).create();
+        new Remover(event.getGuild().getIdLong(), false).create();
         update(event.getJDA());
     }
 
@@ -61,7 +63,7 @@ public final class GuildListener extends PostLoadListener {
         new Listener.Updater(shard).create();
     }
 
-    private class Remover extends AbstractTask {
+    public static class Remover extends AbstractTask {
 
         private final int delay = 120000;
         private long id;
@@ -70,9 +72,16 @@ public final class GuildListener extends PostLoadListener {
          * Creates a new guild remover.
          * @param id The ID of the guild.
          */
-        private Remover(long id) {
+        public Remover(long id, boolean start) {
             super("Guild-Remover");
             this.id = id;
+            if(!start) {
+                try {
+                    Arraybot.getInstance().getFileManager().addToRemovalQueue(id);
+                } catch(IOException exception) {
+                    logger.error("An error occurred adding to the removal queue.", exception);
+                }
+            }
         }
 
 
@@ -88,6 +97,11 @@ public final class GuildListener extends PostLoadListener {
             }
             if(!Arraybot.getInstance().getBotManager().isGuild(id)) {
                 Redis.getInstance().purge(id);
+            }
+            try {
+                Arraybot.getInstance().getFileManager().removeFromRemovalQueue(id);
+            } catch(IOException exception) {
+                logger.error("An error occurred removing from the removal queue.", exception);
             }
         }
 

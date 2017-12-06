@@ -1,12 +1,12 @@
 package de.arraying.arraybot.script.method.methods;
 
 import de.arraying.arraybot.command.CommandEnvironment;
-import de.arraying.arraybot.command.templates.DefaultCommand;
 import de.arraying.arraybot.data.database.categories.GuildEntry;
 import de.arraying.arraybot.data.database.categories.VariablesEntry;
 import de.arraying.arraybot.data.database.core.Category;
 import de.arraying.arraybot.script.method.Methods;
 import de.arraying.arraybot.util.Limits;
+import de.arraying.arraybot.util.UPremium;
 import de.arraying.zeus.backend.ZeusException;
 import de.arraying.zeus.backend.annotations.ZeusMethod;
 
@@ -61,7 +61,7 @@ public final class StorageMethods extends Methods {
         int current = Integer.valueOf(guildEntry.fetch(guildEntry.getField(GuildEntry.Fields.COUNT_VS), environment.getGuild().getIdLong(), null));
         current += 1;
         if(current >= Limits.VS_CAP.getLimit()
-                && !DefaultCommand.Companion.isPremium(environment)) {
+                && !UPremium.INSTANCE.isPremium(environment)) {
             throw new ZeusException("You have reached your storage limit. Please consider updating to Premium for no limit.");
         }
         guildEntry.push(guildEntry.getField(GuildEntry.Fields.COUNT_VS), environment.getGuild().getIdLong(), null, current);

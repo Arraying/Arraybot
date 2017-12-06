@@ -362,5 +362,7 @@
   "zeus_error_nickname_permission":"I do not have permission to change that/any person's nickname.",
   "zeus_error_message_pin_boolean":"Required a boolean for the new message value.",
   "zeus_error_message_pin_permission":"I do not have permission to pin the message.",
+  "zeus_error_provided":"no line provided",
+  "zeus_error_ratelimit":"Unfortunately, this action could not be performed as you have already performed too many similar actions",
   "zeus_error_vs_premium":"Unfortunately, you are unable to store more variables. Each guild is limited to %s variables they can store. Premium guilds can bypass this limit, for more information execute \"{prefix}premium\"."
 }

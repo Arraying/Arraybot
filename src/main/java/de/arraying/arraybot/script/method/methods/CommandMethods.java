@@ -64,10 +64,10 @@ public final class CommandMethods extends Methods {
      */
     @ZeusMethod
     public void exec_command(String name, String key) {
-        List<Object> listRaw = listMethods.getCollection().get(key);
         if(key == null) {
             return;
         }
+        List<Object> listRaw = listMethods.getCollection().get(key);
         List<String> arguments = listRaw.stream().map(Object::toString).collect(Collectors.toList());
         Commands.INSTANCE.getCommands().getByKeyOrAlias(name.toLowerCase())
                 .invoke(environment, arguments, null);

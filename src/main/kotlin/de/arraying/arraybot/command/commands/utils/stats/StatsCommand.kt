@@ -55,7 +55,7 @@ class StatsCommand: DefaultCommand("stats",
         }.toString()
         val channelsShard = (jda.textChannels.size + jda.voiceChannels.size).toString()
         val osMxBeam = ManagementFactory.getOperatingSystemMXBean() as OperatingSystemMXBean
-        val cpu = osMxBeam.processCpuLoad
+        val cpu = osMxBeam.systemCpuLoad * 100
         val memoryUsage = Runtime.getRuntime().freeMemory()
         val ram = FileUtils.byteCountToDisplaySize(memoryUsage)
         val threads = Thread.activeCount().toString()

@@ -4,6 +4,7 @@ import de.arraying.arraybot.Arraybot
 import de.arraying.arraybot.command.Command
 import de.arraying.arraybot.command.CommandEnvironment
 import de.arraying.arraybot.command.custom.parameters.DeleteParameter
+import de.arraying.arraybot.command.custom.parameters.RandomParameter
 import de.arraying.arraybot.command.custom.parameters.SilentParameter
 import de.arraying.arraybot.command.custom.parameters.ToidParameter
 import de.arraying.arraybot.command.custom.syntax.CustomCommandSyntax
@@ -19,6 +20,7 @@ import kotlinx.coroutines.experimental.CommonPool
 import kotlinx.coroutines.experimental.launch
 import net.dv8tion.jda.core.entities.TextChannel
 import org.slf4j.LoggerFactory
+import java.util.*
 
 /**
  * Copyright 2017 Arraying
@@ -43,7 +45,8 @@ class CustomCommand(override val name: String,
                     val value: String): Command {
 
     private val logger = LoggerFactory.getLogger("Custom-Command")
-    private val parameters = arrayOf(DeleteParameter(), SilentParameter(), ToidParameter())
+    private val parameters = arrayOf(DeleteParameter(), RandomParameter(), SilentParameter(), ToidParameter())
+    private val random = Random()
 
     /**
      * Invokes the custom command.
@@ -91,6 +94,11 @@ class CustomCommand(override val name: String,
                         .replace(parameter.trigger, "")
             }
         }
+        val storage = storageManager.customCommandStorageDataStorage.get(uid)
+        if(storage.isRandom) {
+            val parts = value.split(";".toRegex())
+            value = parts[random.nextInt(parts.size)]
+        }
         value = value.trim()
         value = UPlaceholder.replaceCore(environment.member, value)
         value = UPlaceholder.replaceChannel(environment.channel, value)
@@ -104,7 +112,6 @@ class CustomCommand(override val name: String,
         }
         val success = type.action.onAction(environment, value)
         if(success) {
-            val storage = storageManager.customCommandStorageDataStorage.get(uid)
             if(storage.isDelete) {
                 try {
                     environment.message.delete().queue()

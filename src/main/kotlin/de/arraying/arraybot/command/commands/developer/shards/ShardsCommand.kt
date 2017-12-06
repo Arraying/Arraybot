@@ -47,7 +47,7 @@ class ShardsCommand: DefaultCommand("shards",
                 .withType(PageBuilder.Type.LIST)
                 .withEmbed(embed)
                 .withTitle(Message.COMMANDS_SHARDS_EMBED_TITLE.getContent(channel))
-                .withTotal(5)
+                .withTotal(15)
                 .withEntries(entries.toTypedArray())
                 .build()
         var pageNumber = PageImpl.FIRST_PAGE

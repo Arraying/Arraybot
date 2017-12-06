@@ -22,6 +22,8 @@ import net.dv8tion.jda.core.events.guild.member.GuildMemberLeaveEvent;
 import net.dv8tion.jda.core.events.guild.member.GuildMemberRoleAddEvent;
 import net.dv8tion.jda.core.events.guild.member.GuildMemberRoleRemoveEvent;
 
+import java.util.List;
+
 /**
  * Copyright 2017 Arraying
  * <p>
@@ -157,7 +159,11 @@ public final class PunishmentListener extends PostLoadListener {
                     return;
                 }
                 long user = userObject.getIdLong();
-                AuditLogEntry entry = guild.getAuditLogs().complete().get(0);
+                List<AuditLogEntry> entries = guild.getAuditLogs().complete();
+                if(entries.isEmpty()) {
+                    return;
+                }
+                AuditLogEntry entry = entries.get(0);
                 if(!isPunishment(entry, user, type, roles)
                         || entry.getUser().getIdLong() == guild.getSelfMember().getUser().getIdLong()) {
                     return;

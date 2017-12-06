@@ -31,7 +31,6 @@ public abstract class HashEntry<T> implements Entry {
     /**
      * Creates a new hash entry.
      */
-    @SuppressWarnings("WeakerAccess")
     public HashEntry() {
         this.redis = Redis.getInstance();
     }
@@ -92,6 +91,7 @@ public abstract class HashEntry<T> implements Entry {
         RedisCommands resource = redis.getResource();
         Category parentCategory = getParent();
         if(parentCategory == null) {
+            resource.del(UDatabase.getKey(category, id));
             return;
         }
         SetEntry parent = (SetEntry) parentCategory.getEntry();

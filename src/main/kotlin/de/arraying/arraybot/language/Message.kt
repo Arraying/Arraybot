@@ -314,6 +314,7 @@ enum class Message(private val prefix: Boolean = false) {
     ZEUS_ERROR_MESSAGE_PIN_BOOLEAN,
     ZEUS_ERROR_MESSAGE_PIN_PERMISSION,
     ZEUS_ERROR_PROVIDED,
+    ZEUS_ERROR_RATELIMIT,
     ZEUS_ERROR_VS_PREMIUM(true);
 
     /**

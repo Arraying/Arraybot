@@ -54,9 +54,8 @@ public final class Redis {
     }
 
     /**
-     * Gets the Jedis resource from the pool.
-     * This resource needs to be closed using Jedis#close upon completion.
-     * @return The Jedis object.
+     * Gets the Redis resource from the pool.
+     * @return The Redis object.
      */
     public RedisCommands getResource() {
         return sync;
@@ -97,6 +96,7 @@ public final class Redis {
      * @param id The ID.
      */
     public void purge(long id) {
+        logger.info("Purging the guild {}.", id);
         for(Category category : Category.values()) {
             category.getEntry().deleteGuild(id);
         }

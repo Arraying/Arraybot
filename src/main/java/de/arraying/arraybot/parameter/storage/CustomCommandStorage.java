@@ -17,7 +17,7 @@ package de.arraying.arraybot.parameter.storage;
  */
 public final class CustomCommandStorage {
 
-    private boolean silent = false, delete = false;
+    private boolean silent = false, delete = false, random = false;
 
     /**
      * Whether or not the custom command is silent.
@@ -36,6 +36,14 @@ public final class CustomCommandStorage {
     }
 
     /**
+     * Whether or not custom command values should be random.
+     * @return True if they should, false otherwise.
+     */
+    public boolean isRandom() {
+        return random;
+    }
+
+    /**
      * Sets the silent boolean.
      * @param silent The new value.
      */
@@ -49,6 +57,14 @@ public final class CustomCommandStorage {
      */
     public void setDelete(boolean delete) {
         this.delete = delete;
+    }
+
+    /**
+     * Sets the random value.
+     * @param random The boolean.
+     */
+    public void setRandom(boolean random) {
+        this.random = random;
     }
 
 }

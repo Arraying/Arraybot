@@ -4,6 +4,7 @@ import de.arraying.arraybot.data.database.categories.GuildEntry;
 import de.arraying.arraybot.data.database.core.Category;
 import de.arraying.arraybot.listener.listeners.PostLoadListener;
 import de.arraying.arraybot.util.Limits;
+import de.arraying.arraybot.util.UChannel;
 import de.arraying.arraybot.util.UDefaults;
 import de.arraying.arraybot.util.UPlaceholder;
 import net.dv8tion.jda.core.entities.Guild;
@@ -90,7 +91,8 @@ public final class MemberListener extends PostLoadListener {
         }
         String id = entry.fetch(entry.getField(channelId), guildId, null);
         TextChannel channel = guild.getTextChannelById(id);
-        if(channel == null) {
+        if(channel == null
+                || !UChannel.canTalk(channel)) {
             return;
         }
         String message = entry.fetch(entry.getField(messageId), guildId, null);

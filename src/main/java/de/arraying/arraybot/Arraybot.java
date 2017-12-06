@@ -3,10 +3,7 @@ package de.arraying.arraybot;
 import de.arraying.arraybot.data.Configuration;
 import de.arraying.arraybot.data.database.core.Category;
 import de.arraying.arraybot.data.database.templates.SetEntry;
-import de.arraying.arraybot.manager.BotManager;
-import de.arraying.arraybot.manager.PunishmentManager;
-import de.arraying.arraybot.manager.ScriptManager;
-import de.arraying.arraybot.manager.StorageManager;
+import de.arraying.arraybot.manager.*;
 import de.arraying.arraybot.startup.Starter;
 import de.arraying.arraybot.util.UDefaults;
 import de.arraying.arraybot.util.objects.Splash;
@@ -49,6 +46,7 @@ public final class Arraybot {
     private PunishmentManager punishmentManager;
     private ScriptManager scriptManager;
     private StorageManager storageManager;
+    private FileManager fileManager;
     private boolean initialized = false;
 
     /**
@@ -179,6 +177,14 @@ public final class Arraybot {
     }
 
     /**
+     * Gets the file manager.
+     * @return The file manager.
+     */
+    public FileManager getFileManager() {
+        return fileManager;
+    }
+
+    /**
      * Sets the bot manager.
      * @param manager The manager.
      */
@@ -215,6 +221,16 @@ public final class Arraybot {
     public synchronized void setStorageManager(StorageManager manager) {
         if(storageManager == null) {
             this.storageManager = manager;
+        }
+    }
+
+    /**
+     * Sets the file manager.
+     * @param manager The manager.
+     */
+    public synchronized void setFileManager(FileManager manager) {
+        if(fileManager == null) {
+            this.fileManager = manager;
         }
     }
 

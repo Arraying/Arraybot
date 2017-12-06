@@ -49,6 +49,7 @@ public final class BotListRequest {
         try {
             Response response = client.newCall(request.build()).execute();
             logger.info("POST request to \"{}\" returned status code {}.", url, response.code());
+            response.close();
         } catch(IOException exception) {
             logger.error(String.format("An error occurred sending a POST request to \"%s\".", url), exception);
         }

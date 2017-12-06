@@ -1,9 +1,12 @@
 package de.arraying.arraybot.startup.startups;
 
 import de.arraying.arraybot.Arraybot;
+import de.arraying.arraybot.listener.listeners.postload.GuildListener;
 import de.arraying.arraybot.manager.BotManager;
 import de.arraying.arraybot.shard.ShardWatcher;
 import de.arraying.arraybot.startup.StartupTask;
+
+import java.io.IOException;
 
 /**
  * Copyright 2017 Arraying
@@ -42,6 +45,13 @@ public final class StartupBot extends StartupTask {
         manager.start();
         logger.info("Finished starting the shards, they should be loading asynchronously if they are not loaded yet.");
         new ShardWatcher(30000).create();
+        try {
+            for(long guild : Arraybot.getInstance().getFileManager().getRemovalQueue()) {
+                new GuildListener.Remover(guild, true).create();
+            }
+        } catch(IOException exception) {
+            logger.error("Something went wrong loading in the Redis purge queue.", exception);
+        }
     }
 
 }

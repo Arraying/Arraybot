@@ -188,6 +188,9 @@ public final class BotManager {
     public boolean isGuild(long id) {
         int index = UDatatypes.getShardId(id);
         ShardEntry entry = shards.get(index);
+        if(entry == null) {
+            throw new IllegalStateException("Shard entry returned null, something is seriously wrong.");
+        }
         return entry.getJDA().getGuildById(id) != null;
     }
 

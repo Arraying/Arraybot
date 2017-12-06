@@ -11,6 +11,7 @@ import de.arraying.arraybot.language.Languages
 import de.arraying.arraybot.language.Message
 import de.arraying.arraybot.util.Limits
 import de.arraying.arraybot.util.UDatabase
+import de.arraying.arraybot.util.UPremium
 import kotlinx.coroutines.experimental.CommonPool
 import kotlinx.coroutines.experimental.launch
 import net.dv8tion.jda.core.Permission
@@ -138,7 +139,7 @@ abstract class DefaultCommand(override final val name: String,
             return
         }
         if(beta
-                && !isPremium(environment)) {
+                && !UPremium.isPremium(environment)) {
             Message.COMMAND_PREMIUM.send(channel).queue()
             return
         }
@@ -196,33 +197,5 @@ abstract class DefaultCommand(override final val name: String,
 
 
     private fun isDeveloper(id: Long) = arraybot.configuration.botAuthors.any { it == id }
-
-    companion object {
-
-        /**
-         * Checks if the guild is able to execute premium commands.
-         */
-        fun isPremium(environment: CommandEnvironment): Boolean {
-            val arraybot = Arraybot.getInstance()
-            val logger = LoggerFactory.getLogger("Premium")
-            val hub = arraybot.botManager.hub
-            if(hub == null) {
-                logger.error("The hub guild returned null.")
-                return false
-            }
-            if(environment.guild.idLong == hub.idLong) {
-                return true
-            }
-            val roleId = arraybot.configuration.premiumId
-            return environment.guild.members.any {
-                it.hasPermission(Permission.MANAGE_SERVER)
-                        && hub.getMemberById(it.user.idLong) != null
-                        && hub.getMemberById(it.user.idLong).roles.any {
-                    role -> role.idLong == roleId
-                }
-            }
-        }
-
-    }
 
 }

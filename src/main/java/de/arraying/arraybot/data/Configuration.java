@@ -1,11 +1,15 @@
 package de.arraying.arraybot.data;
 
+import de.arraying.arraybot.manager.FileManager;
 import de.arraying.arraybot.request.BotListRequest;
 import de.arraying.arraybot.util.UDefaults;
 import de.arraying.kotys.JSON;
 import de.arraying.kotys.JSONField;
 
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 /**
  * Copyright 2017 Arraying
@@ -69,14 +73,7 @@ public final class Configuration {
      */
     private static Configuration load(File file) throws ConfigurationException {
         try {
-            BufferedReader reader = new BufferedReader(new FileReader(file));
-            StringBuilder stringBuilder = new StringBuilder();
-            String line;
-            while((line = reader.readLine()) != null) {
-                stringBuilder.append(line);
-            }
-            reader.close();
-            String jsonString = stringBuilder.toString();
+            String jsonString = FileManager.content(file);
             JSON json = new JSON(jsonString);
             Configuration config = json.marshal(Configuration.class);
             if(!config.isValid()) {
