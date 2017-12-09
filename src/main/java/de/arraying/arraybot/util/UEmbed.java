@@ -36,27 +36,35 @@ public final class UEmbed {
      * @return The embed.
      */
     public static CustomEmbedBuilder getEmbed(TextChannel channel) {
+        return getEmbed(channel.getGuild());
+    }
+
+    /**
+     * Gets the embed builder.
+     * @param guild The guild.
+     * @return The embed.
+     */
+    public static CustomEmbedBuilder getEmbed(Guild guild) {
         Calendar calendar = Calendar.getInstance();
-        JDA jda = channel.getJDA();
-        Guild guild = channel.getGuild();
+        JDA jda = guild.getJDA();
         int year = calendar.get(Calendar.YEAR);
         GuildEntry entry = (GuildEntry) Category.GUILD.getEntry();
         String language = entry.fetch(entry.getField(GuildEntry.Fields.LANGUAGE), guild.getIdLong(), null);
         CustomEmbedBuilder embedBuilder = new CustomEmbedBuilder()
                 .setAuthor("Arraybot", "http://arraybot.xyz",
-                        shouldImage(channel.getGuild()) ? icon : null)
+                        shouldImage(guild) ? icon : null)
                 .setColor(new Color(34, 150, 245));
         if(shouldImage(guild)) {
             embedBuilder.setThumbnail(icon);
         }
         String languageFooter;
         if(!language.equalsIgnoreCase(Arraybot.getInstance().getConfiguration().getBotLanguage())) {
-            languageFooter = Message.EMBED_TRANSLATED.getContent(channel);
+            languageFooter = Message.EMBED_TRANSLATED.getContent(guild.getIdLong());
         } else {
             languageFooter = "";
         }
-        embedBuilder.setFooter(Message.EMBED_FOOTER.getContent(channel, String.valueOf(year), languageFooter),
-                shouldImage(channel.getGuild()) ? jda.getSelfUser().getAvatarUrl() : null);
+        embedBuilder.setFooter(Message.EMBED_FOOTER.getContent(guild.getIdLong(), String.valueOf(year), languageFooter),
+                shouldImage(guild) ? jda.getSelfUser().getAvatarUrl() : null);
         return embedBuilder;
     }
 

@@ -64,6 +64,9 @@ class CommandsInfoSubCommand: SubCommand("info",
                         .addField(Message.COMMANDS_COMMANDS_INFO_CATEGORY.getContent(channel),
                                 UFormatting.displayableEnumField(command.category.toString()),
                                 false)
+                        .addField(Message.COMMANDS_COMMANDS_INFO_PERMISSION.getContent(channel),
+                                command.permission.getName(),
+                                false)
                         .addField(Message.COMMANDS_COMMANDS_INFO_COMMANDDESCRIPTION.getContent(channel),
                                 command.getDescription(language),
                                 false)

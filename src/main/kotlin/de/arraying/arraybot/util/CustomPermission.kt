@@ -48,8 +48,8 @@ class CustomPermission(val value: String) {
     /**
      * Checks if the provided permission is valid.
      */
-    fun isValid(guild: Guild): Boolean {
-        return isPermission()
+    private fun isValid(guild: Guild): Boolean {
+        return isPermission() != null
                 || isRole(guild)
     }
 
@@ -75,7 +75,7 @@ class CustomPermission(val value: String) {
      */
     fun toString(channel: TextChannel): String {
         return when {
-                    isPermission() -> Message.PERMISSION_PERMISSION.getContent(channel, value)
+                    isPermission() != null -> Message.PERMISSION_PERMISSION.getContent(channel, isPermission()!!.getName())
                     isRole(channel.guild) -> Message.PERMISSION_ROLE.getContent(channel, value)
                     else -> Message.PERMISSION_INVALID.getContent(channel, value)
                 }
@@ -84,12 +84,11 @@ class CustomPermission(val value: String) {
     /**
      * Whether or not the permission is of the Permission enumeration.
      */
-    private fun isPermission(): Boolean {
+    private fun isPermission(): Permission? {
         return try {
             Permission.valueOf(value.toUpperCase())
-            true
         } catch(exception: Exception) {
-            false
+            null
         }
     }
 

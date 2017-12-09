@@ -7,8 +7,6 @@ import de.arraying.arraybot.data.database.templates.SetEntry
 import de.arraying.arraybot.language.Message
 import de.arraying.arraybot.punishment.PunishmentObject
 import de.arraying.arraybot.util.UDatatypes
-import de.arraying.arraybot.util.UEmbed
-import de.arraying.arraybot.util.UUser
 import net.dv8tion.jda.core.Permission
 
 /**
@@ -53,19 +51,7 @@ class LookupCommand: DefaultCommand("lookup",
             return
         }
         val punishment = PunishmentObject.fromRedis(guild, id)
-        val embed = UEmbed.getEmbed(channel)
-                .setAuthor(Message.PUNISH_EMBED_TITLE.getContent(channel,
-                        punishment.type.getName().getContent(channel),
-                        idRaw))
-                .addField(Message.PUNISH_EMBED_USER.getContent(channel),
-                        UUser.asMention(punishment.user),
-                        false)
-                .addField(Message.PUNISH_EMBED_STAFF.getContent(channel),
-                        UUser.asMention(punishment.staff),
-                        false)
-                .addField(Message.PUNISH_EMBED_REASON.getContent(channel),
-                        punishment.reason,
-                        false)
+        val embed = arraybot.punishmentManager.getEmbed(guild, punishment, false, null)
         channel.sendMessage(embed.build()).queue()
     }
 

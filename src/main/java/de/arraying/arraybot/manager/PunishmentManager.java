@@ -146,6 +146,61 @@ public final class PunishmentManager {
     }
 
     /**
+     * Get the punishment embed.
+     * @param guild The guild in which the punishment was invoked.
+     * @param punishmentObject The punishment itself.
+     * @param onRevoke If the punishment is being revoked.
+     * @param revoker The person who revoked, null if it is not being revoked.
+     * @return The embed.
+     */
+    public CustomEmbedBuilder getEmbed(Guild guild, PunishmentObject punishmentObject, boolean onRevoke, Long revoker) {
+        long guildId = guild.getIdLong();
+        String punishmentType;
+        if(onRevoke) {
+            switch(punishmentObject.getType()) {
+                case TEMP_BAN:
+                case BAN:
+                    punishmentType = Message.PUNISH_TYPE_UNBAN.getContent(guildId);
+                    break;
+                case TEMP_MUTE:
+                case MUTE:
+                    punishmentType = Message.PUNISH_TYPE_UNMUTE.getContent(guild.getIdLong());
+                    break;
+                default:
+                    punishmentType = Message.PUNISH_TYPE_UNKNOWN.getContent(guild.getIdLong());
+            }
+        } else {
+            punishmentType = punishmentObject.getType().getName().getContent(guild.getIdLong());
+        }
+        CustomEmbedBuilder embed = UEmbed.getEmbed(guild)
+                .setAuthor(Message.PUNISH_EMBED_TITLE.getContent(guild.getIdLong(), punishmentType, String.valueOf(punishmentObject.getId())), null, null)
+                .addField(Message.PUNISH_EMBED_USER.getContent(guildId),
+                        UUser.asMention(punishmentObject.getUser()),
+                        false)
+                .addField(Message.PUNISH_EMBED_STAFF.getContent(guildId),
+                        onRevoke ?
+                                revoker == null ?
+                                        Message.PUNISH_EMBED_AUTOMATIC.getContent(guildId) :
+                                        revoker == UDefaults.DEFAULT_UNKNOWN_SNOWFLAKE ? Message.PUNISH_EMBED_UNKNOWN.getContent(guildId) :
+                                                UUser.asMention(revoker)
+                                :
+                                UUser.asMention(punishmentObject.getStaff()),
+                        false);
+        if(!onRevoke) {
+            embed.addField(Message.PUNISH_EMBED_REASON.getContent(guildId),
+                    punishmentObject.getReason(),
+                    false);
+            if(punishmentObject.getExpiration() > 0) {
+                embed.addField(Message.PUNISH_EMBED_EXPIRATION.getContent(guildId),
+                        UTime.getDisplayableTime(guild, punishmentObject.getExpiration()),
+                        false)
+                        .setFooter(Message.PUNISH_EMBED_EXPIRATION_FOOTER.getContent(guildId), null);
+            }
+        }
+        return embed;
+    }
+
+    /**
      * Logs the punishment into a logging channel.
      * @param guild The guild.
      * @param punishmentObject The punishment.
@@ -160,48 +215,7 @@ public final class PunishmentManager {
                 || !UChannel.canTalk(channel)) {
             return;
         }
-        String punishmentType;
-        if(onRevoke) {
-            switch(punishmentObject.getType()) {
-                case TEMP_BAN:
-                case BAN:
-                    punishmentType = Message.PUNISH_TYPE_UNBAN.getContent(channel);
-                    break;
-                case TEMP_MUTE:
-                case MUTE:
-                    punishmentType = Message.PUNISH_TYPE_UNMUTE.getContent(channel);
-                    break;
-                default:
-                    punishmentType = Message.PUNISH_TYPE_UNKNOWN.getContent(channel);
-            }
-        } else {
-            punishmentType = punishmentObject.getType().getName().getContent(channel);
-        }
-        CustomEmbedBuilder embed = UEmbed.getEmbed(channel)
-                .setAuthor(Message.PUNISH_EMBED_TITLE.getContent(channel, punishmentType, String.valueOf(punishmentObject.getId())), null, null)
-                .addField(Message.PUNISH_EMBED_USER.getContent(channel),
-                        UUser.asMention(punishmentObject.getUser()),
-                        false)
-                .addField(Message.PUNISH_EMBED_STAFF.getContent(channel),
-                        onRevoke ?
-                                revoker == null ?
-                                        Message.PUNISH_EMBED_AUTOMATIC.getContent(channel) :
-                                        revoker == UDefaults.DEFAULT_UNKNOWN_SNOWFLAKE ? Message.PUNISH_EMBED_UNKNOWN.getContent(channel) :
-                                                UUser.asMention(revoker)
-                                :
-                                UUser.asMention(punishmentObject.getStaff()),
-                        false);
-        if(!onRevoke) {
-            embed.addField(Message.PUNISH_EMBED_REASON.getContent(channel),
-                    punishmentObject.getReason(),
-                    false);
-            if(punishmentObject.getExpiration() > 0) {
-                embed.addField(Message.PUNISH_EMBED_EXPIRATION.getContent(channel),
-                        UTime.getDisplayableTime(guild, punishmentObject.getExpiration()),
-                        false)
-                        .setFooter(Message.PUNISH_EMBED_EXPIRATION_FOOTER.getContent(channel), null);
-            }
-        }
+        CustomEmbedBuilder embed = getEmbed(guild, punishmentObject, onRevoke, revoker);
         channel.sendMessage(embed.build()).queue();
     }
 
