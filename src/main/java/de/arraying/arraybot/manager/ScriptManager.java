@@ -2,6 +2,10 @@ package de.arraying.arraybot.manager;
 
 import de.arraying.arraybot.command.CommandEnvironment;
 import de.arraying.arraybot.script.ScriptRuntime;
+import de.arraying.arraybot.script2.ScriptEvaluator;
+import de.arraying.arraybot.script2.method.MessageMethods;
+import delight.nashornsandbox.NashornSandbox;
+import delight.nashornsandbox.NashornSandboxes;
 import org.apache.commons.io.IOUtils;
 
 import java.io.IOException;
@@ -48,6 +52,21 @@ public final class ScriptManager {
         String content = IOUtils.toString(new URL(scriptUrl), Charset.forName("utf-8"));
         String[] code = content.split("\n");
         executeStringRaw(code, environment);
+    }
+
+    /**
+     * Executes the script.
+     * @param scriptUrl The script URL.
+     * @param environment The command environment.
+     * @throws IOException If an exception occurs parsing the code.
+     */
+    public void executeScript2(String scriptUrl, CommandEnvironment environment)
+            throws Exception {
+        String code = IOUtils.toString(new URL(scriptUrl), Charset.forName("utf-8"));
+        new ScriptEvaluator(code)
+                .variable("user", environment.getAuthor())
+                .variable("messenger", new MessageMethods(environment))
+                .evaluate();
     }
 
     /**

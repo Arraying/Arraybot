@@ -46,6 +46,7 @@ import de.arraying.arraybot.command.commands.utils.override.OverrideCommand
 import de.arraying.arraybot.command.commands.utils.ping.PingCommand
 import de.arraying.arraybot.command.commands.utils.premium.PremiumCommand
 import de.arraying.arraybot.command.commands.utils.stats.StatsCommand
+import de.arraying.arraybot.command.commands.utils.test.TestCommand
 import de.arraying.arraybot.command.templates.DefaultCommand
 import de.arraying.arraybot.punishment.PunishmentType
 import net.dv8tion.jda.core.Permission
@@ -283,6 +284,8 @@ enum class CommandCollection(val command: DefaultCommand) {
      * This command temporarily applies the muted role to a user.
      */
     TEMP_MUTE(PunishmentCommand("tempmute", Permission.MESSAGE_WRITE, PunishmentType.TEMP_MUTE)),
+
+    TEST(TestCommand()),
 
     /**
      * This command revokes a ban punishment on a user.

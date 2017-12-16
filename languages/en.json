@@ -275,6 +275,8 @@
   "commands_tempban_syntax":"tempban <user> <duration> [reason]",
   "commands_tempmute_description":"Temporarily mutes the specified user for the specified duration.",
   "commands_tempmute_syntax":"tempmute <user> <duration> [reason]",
+  "commands_test_description":"test",
+  "commands_test_syntax":"oh ffs please die alreayd",
   "commands_unban_description":"Unbans the specified user.",
   "commands_unban_syntax":"unban <user>",
   "commands_unmute_description":"Unmutes the specified user.",
