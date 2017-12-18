@@ -45,7 +45,7 @@ open class PunishmentCommand(commandName: String,
                 return
             }
             val permission = CustomPermission(UPunishment.getMutedPermission(guild))
-            if(!permission.hasPermission(environment.member)) {
+            if(!permission.hasPermission(member, channel)) {
                 Message.PUNISH_MUTE_INVALID_PERMISSION.send(channel).queue()
                 return
             }
@@ -53,7 +53,6 @@ open class PunishmentCommand(commandName: String,
                 Message.PUNISH_COMMAND_ALREADY_MUTED.send(channel).queue()
                 return
             }
-
         }
         if(!PermissionUtil.checkPermission(channel, environment.member, newPermission)) {
             Message.COMMAND_PERMISSION.send(channel, permission.getName()).queue()
@@ -70,6 +69,10 @@ open class PunishmentCommand(commandName: String,
             return
         }
         val user = userObject.user.idLong
+        if(user == guild.selfMember.user.idLong) {
+            Message.PUNISH_COMMAND_SELF.send(channel).queue()
+            return
+        }
         if((type == PunishmentType.BAN
                 || type == PunishmentType.TEMP_BAN)
                 && UPunishment.isBan(guild, user)) {

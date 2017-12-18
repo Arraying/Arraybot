@@ -70,7 +70,7 @@ class CustomCommand(override val name: String,
             Message.CUSTOM_SYNTAX_INVALID.send(channel, CustomCommandSyntax.getSyntaxes()).queue()
             return
         }
-        if(!permission.hasPermission(environment.member)) {
+        if(!permission.hasPermission(environment.member, channel)) {
             Message.CUSTOM_PERMISSION.send(channel).queue()
             return
         }

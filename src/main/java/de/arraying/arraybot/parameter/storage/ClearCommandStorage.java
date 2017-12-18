@@ -1,5 +1,7 @@
 package de.arraying.arraybot.parameter.storage;
 
+import net.dv8tion.jda.core.entities.TextChannel;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -21,6 +23,7 @@ import java.util.Set;
 public final class ClearCommandStorage {
 
     private final Set<Long> users = new HashSet<>();
+    private TextChannel channel;
     private boolean bots = false;
 
     /**
@@ -41,11 +44,27 @@ public final class ClearCommandStorage {
     }
 
     /**
+     * Gets the text channel that should be cleared.
+     * @return The channel.
+     */
+    public TextChannel getChannel() {
+        return channel;
+    }
+
+    /**
      * Sets whether or not all bots should be purged.
      * @param bots True if they should, false otherwise.
      */
     public void setBots(boolean bots) {
         this.bots = bots;
+    }
+
+    /**
+     * Sets the channel in which the messages will get cleared.
+     * @param channel The channel.
+     */
+    public void setChannel(TextChannel channel) {
+        this.channel = channel;
     }
 
 }

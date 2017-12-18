@@ -40,7 +40,7 @@ class PunishmentRevocationCommand(commandName: String,
         val guild = environment.guild
         if(type == PunishmentType.MUTE) {
             val permission = CustomPermission(UPunishment.getMutedPermission(guild))
-            if(!permission.hasPermission(environment.member)) {
+            if(!permission.hasPermission(environment.member, channel)) {
                 Message.PUNISH_MUTE_INVALID_PERMISSION.send(channel).queue()
                 return
             }

@@ -5,6 +5,7 @@ import net.dv8tion.jda.core.Permission
 import net.dv8tion.jda.core.entities.Guild
 import net.dv8tion.jda.core.entities.Member
 import net.dv8tion.jda.core.entities.TextChannel
+import net.dv8tion.jda.core.utils.PermissionUtil
 
 /**
  * Copyright 2017 Arraying
@@ -49,21 +50,21 @@ class CustomPermission(val value: String) {
      * Checks if the provided permission is valid.
      */
     private fun isValid(guild: Guild): Boolean {
-        return isPermission() != null
+        return asPermission() != null
                 || isRole(guild)
     }
 
     /**
      * Whether or not the member has permission.
      */
-    fun hasPermission(member: Member): Boolean {
+    fun hasPermission(member: Member, channel: TextChannel): Boolean {
         if(!isValid(member.guild)) {
             return false
         }
-        return try {
-            val permission = Permission.valueOf(value.toUpperCase())
-            member.hasPermission(permission)
-        } catch(exception: Exception) {
+        val permission = asPermission()
+        return if(permission != null) {
+            PermissionUtil.checkPermission(channel, member, permission)
+        } else {
             member.roles.any {
                 it.id == value
             }
@@ -75,16 +76,16 @@ class CustomPermission(val value: String) {
      */
     fun toString(channel: TextChannel): String {
         return when {
-                    isPermission() != null -> Message.PERMISSION_PERMISSION.getContent(channel, isPermission()!!.getName())
-                    isRole(channel.guild) -> Message.PERMISSION_ROLE.getContent(channel, value)
+                    asPermission() != null -> Message.PERMISSION_PERMISSION.getContent(channel, asPermission()!!.getName())
+                    isRole(channel.guild) -> Message.PERMISSION_ROLE.getContent(channel, "<@&$value>")
                     else -> Message.PERMISSION_INVALID.getContent(channel, value)
                 }
     }
 
     /**
-     * Whether or not the permission is of the Permission enumeration.
+     * Gets the permission, or null if it is invalid.
      */
-    private fun isPermission(): Permission? {
+    private fun asPermission(): Permission? {
         return try {
             Permission.valueOf(value.toUpperCase())
         } catch(exception: Exception) {
