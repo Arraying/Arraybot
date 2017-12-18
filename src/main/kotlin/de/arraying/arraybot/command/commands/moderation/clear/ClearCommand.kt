@@ -2,6 +2,7 @@ package de.arraying.arraybot.command.commands.moderation.clear
 
 import de.arraying.arraybot.command.CommandEnvironment
 import de.arraying.arraybot.command.commands.moderation.clear.parameters.BotsClearParameter
+import de.arraying.arraybot.command.commands.moderation.clear.parameters.ChannelClearParameter
 import de.arraying.arraybot.command.commands.moderation.clear.parameters.UserClearParameter
 import de.arraying.arraybot.command.templates.DefaultCommand
 import de.arraying.arraybot.language.Message
@@ -32,7 +33,7 @@ class ClearCommand: DefaultCommand("clear",
         Permission.MESSAGE_MANAGE,
         aliases = arrayOf("purge", "pwn")) {
 
-    private val parameters = arrayOf(BotsClearParameter(), UserClearParameter())
+    private val parameters = arrayOf(BotsClearParameter(), ChannelClearParameter(), UserClearParameter())
 
     /**
      * When the command is executed.
@@ -68,8 +69,9 @@ class ClearCommand: DefaultCommand("clear",
             Message.COMMANDS_CLEAR_BOUND.send(channel).queue()
             return
         }
-        val messageHistory = channel.history
         val storage = arraybot.storageManager.clearCommandStorageDataStorage.get(storageId)
+        val channelDelete = storage.channel?: channel
+        val messageHistory = channelDelete.history
         messageHistory.retrievePast(amount + 1).queue({
             val target = ArrayList<net.dv8tion.jda.core.entities.Message>()
             if(storage.isBots) {
@@ -89,7 +91,7 @@ class ClearCommand: DefaultCommand("clear",
                 Message.COMMANDS_CLEAR_LITTLE.send(channel).queue()
                 return@queue
             }
-            channel.deleteMessages(target).queue({
+            channelDelete.deleteMessages(target).queue({
                 Message.COMMANDS_CLEAR_CLEAR.send(channel, target.size.toString()).queue()
                 arraybot.storageManager.clearCommandStorageDataStorage.remove(storageId)
             })

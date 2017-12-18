@@ -321,6 +321,7 @@
   "punish_command_revoke_fail":"The punishment could not be revoked.",
   "punish_command_revoke_find":"There is no active punishment for tha user or they were never punished while I was watching, hence I am unable to undo the punishment.",
   "punish_command_revoke_success":"The user's punishment has been revoked successfully.",
+  "punish_command_self":"I can't punish myself.",
   "punish_command_success":"The user has been punished successfully.",
   "punish_command_time_invalid":"The provided punishment duration is invalid.",
   "punish_command_time_provide":"Please provide the punishment duration.",

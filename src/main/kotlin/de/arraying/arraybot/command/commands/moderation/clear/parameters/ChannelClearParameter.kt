@@ -3,8 +3,8 @@ package de.arraying.arraybot.command.commands.moderation.clear.parameters
 import de.arraying.arraybot.Arraybot
 import de.arraying.arraybot.command.CommandEnvironment
 import de.arraying.arraybot.parameter.Parameter
+import de.arraying.arraybot.util.UChannel
 import de.arraying.arraybot.util.UParameter
-import de.arraying.arraybot.util.UUser
 
 /**
  * Copyright 2017 Arraying
@@ -21,13 +21,13 @@ import de.arraying.arraybot.util.UUser
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-class UserClearParameter: Parameter {
+class ChannelClearParameter: Parameter {
 
     /**
      * Gets the trigger.
      */
     override fun getTrigger(): String {
-        return "--user"
+        return "--channel"
     }
 
     /**
@@ -37,13 +37,13 @@ class UserClearParameter: Parameter {
         var toReturn = input!!.replace(trigger, "")
         val id = environment!!.message.idLong
         val storage = Arraybot.getInstance().storageManager.clearCommandStorageDataStorage.get(id)
-        val userRaw = UParameter.getParameterValue(input, trigger)
-        if(userRaw.isEmpty()) {
+        val channelRaw = UParameter.getParameterValue(input, trigger)
+        if(channelRaw.isEmpty()) {
             return toReturn
         }
-        toReturn = input.replace(trigger + " " + userRaw, "")
-        val user = UUser.getMember(environment.guild, userRaw)?: return toReturn
-        storage.users.add(user.user.idLong)
+        toReturn = input.replace(trigger + " " + channelRaw, "")
+        val channel = UChannel.getTextChannel(environment.guild, channelRaw)?: return toReturn
+        storage.channel = channel
         return toReturn
     }
 
