@@ -4,6 +4,7 @@ import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.Member;
 
 import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 
 /**
  * Copyright 2017 Arraying
@@ -45,9 +46,11 @@ public final class UUser {
      * @return A Member object, or null if the input is invalid.
      */
     public static Member getMember(Guild guild, String input) {
-        if(ID_PATTERN.matcher(input).find()
-                || MENTION_PATTERN.matcher(input).find()) {
-            return guild.getMemberById(input.replaceAll("\\D", ""));
+        Matcher mentionMatcher = MENTION_PATTERN.matcher(input);
+        
+        if(ID_PATTERN.matcher(input).find()) return guild.getMemberById(input);
+        if(mentionMatcher.find()) {
+            return guild.getMemberById(mentionMatcher.group(1));
         } else if(NAME_PATTERN.matcher(input).find()) {
             String name = input.substring(0, input.indexOf("#"));
             String discriminator = input.substring(input.indexOf("#") + 1);
