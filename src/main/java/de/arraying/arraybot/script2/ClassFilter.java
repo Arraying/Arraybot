@@ -35,7 +35,7 @@ public final class ClassFilter implements jdk.nashorn.api.scripting.ClassFilter 
      * Whitelists a class for Nashorn usage.
      * @param clazz The class.
      */
-    public void whitelist(Class<?> clazz) {
+    void whitelist(Class<?> clazz) {
         whitelisted.add(clazz.getName());
     }
 

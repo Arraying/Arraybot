@@ -5,7 +5,9 @@ import de.arraying.arraybot.command.templates.SubCommand
 import de.arraying.arraybot.data.database.core.Category
 import de.arraying.arraybot.data.database.templates.SetEntry
 import de.arraying.arraybot.language.Message
+import de.arraying.arraybot.util.Limits
 import de.arraying.arraybot.util.UArguments
+import de.arraying.arraybot.util.UFormatting
 
 /**
  * Copyright 2017 Arraying
@@ -37,6 +39,10 @@ class FilterAddSubCommand: SubCommand("add",
             return
         }
         val phrase = UArguments.combine(args.toTypedArray(), 2)
+        if(UFormatting.stripFormatting(phrase).length > Limits.FILTER_ENTRY.limit) {
+            Message.COMMANDS_FILTER_PHRASE_LENGTH.send(channel, Limits.FILTER_ENTRY.limit.toString())
+            return
+        }
         entry.add(id, phrase)
         Message.COMMANDS_FILTER_UPDATED.send(channel).queue()
     }

@@ -3,9 +3,6 @@ package de.arraying.arraybot.manager;
 import de.arraying.arraybot.command.CommandEnvironment;
 import de.arraying.arraybot.script.ScriptRuntime;
 import de.arraying.arraybot.script2.ScriptEvaluator;
-import de.arraying.arraybot.script2.method.MessageMethods;
-import delight.nashornsandbox.NashornSandbox;
-import delight.nashornsandbox.NashornSandboxes;
 import org.apache.commons.io.IOUtils;
 
 import java.io.IOException;

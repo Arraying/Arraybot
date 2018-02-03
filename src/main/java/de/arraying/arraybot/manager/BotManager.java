@@ -21,7 +21,8 @@ import net.dv8tion.jda.core.entities.Game;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.Member;
 import net.dv8tion.jda.core.entities.User;
-import net.dv8tion.jda.core.requests.SessionReconnectQueue;
+import net.dv8tion.jda.core.exceptions.PermissionException;
+import net.dv8tion.jda.core.utils.SessionControllerAdapter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -50,7 +51,7 @@ public final class BotManager {
     private final Map<Integer, ShardEntry> shards = new TreeMap<>();
     private final Configuration configuration = Arraybot.getInstance().getConfiguration();
     private final Logger logger = LoggerFactory.getLogger("Bot-Manager");
-    private final SessionReconnectQueue reconnectQueue = new SessionReconnectQueue();
+    private final SessionControllerAdapter sessionControllerAdapter = new SessionControllerAdapter();
 
     /**
      * Gets all the shards.
@@ -97,7 +98,6 @@ public final class BotManager {
         shards.remove(shard);
         try {
             load(shard, configuration.getBotShards());
-            Thread.sleep(5000);
         } catch(Exception exception) {
             logger.error("There was an error restarting the shard.", exception);
             return false;
@@ -147,18 +147,22 @@ public final class BotManager {
                 for(Guild guild : entry.getJDA().getGuilds()) {
                     for(PunishmentObject punishment : punishmentManager.getAllPunishments(guild)) {
                         if(!punishment.isRevoked()) {
-                            if(punishment.getType() == PunishmentType.BAN) {
-                                if(!UPunishment.isBan(guild, punishment.getUser())) {
-                                    punishmentManager.revoke(guild, punishment, UDefaults.DEFAULT_UNKNOWN_SNOWFLAKE);
+                            try {
+                                if(punishment.getType() == PunishmentType.BAN) {
+                                    if(!UPunishment.isBan(guild, punishment.getUser())) {
+                                        punishmentManager.revoke(guild, punishment, UDefaults.DEFAULT_UNKNOWN_SNOWFLAKE);
+                                    }
+                                } else if(punishment.getType() == PunishmentType.MUTE) {
+                                    Member muted = guild.getMemberById(punishment.getUser());
+                                    if(muted == null) {
+                                        return;
+                                    }
+                                    if(!UPunishment.isMute(muted)) {
+                                        punishmentManager.revoke(guild, punishment, UDefaults.DEFAULT_UNKNOWN_SNOWFLAKE);
+                                    }
                                 }
-                            } else if(punishment.getType() == PunishmentType.MUTE) {
-                                Member muted = guild.getMemberById(punishment.getUser());
-                                if(muted == null) {
-                                    return;
-                                }
-                                if(!UPunishment.isMute(muted)) {
-                                    punishmentManager.revoke(guild, punishment, UDefaults.DEFAULT_UNKNOWN_SNOWFLAKE);
-                                }
+                            } catch(PermissionException exception) {
+                                logger.info("Could not handle punishments for the guild {} due to permission exception.", guild.getIdLong());
                             }
                         }
                         punishmentManager.schedulePunishmentRevocation(guild, punishment);
@@ -222,6 +226,7 @@ public final class BotManager {
                 .setToken(configuration.isBotBeta() ? configuration.getBotBetaToken() : configuration.getBotToken())
                 .setStatus(OnlineStatus.DO_NOT_DISTURB)
                 .addEventListener(new ReadyListener())
+                .setCorePoolSize(8)
                 .setGame(Game.listening(configuration.getBotPrefix() + "help || v" + configuration.getBotVersion()));
     }
 
@@ -232,7 +237,7 @@ public final class BotManager {
      * @return A JDA builder.
      */
     private JDABuilder getShardedBuilder(int shard, int total) {
-        return getBuilder().useSharding(shard, total).setReconnectQueue(reconnectQueue);
+        return getBuilder().useSharding(shard, total).setSessionController(sessionControllerAdapter);
     }
 
     /**

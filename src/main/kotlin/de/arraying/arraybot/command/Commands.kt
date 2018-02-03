@@ -67,7 +67,7 @@ object Commands {
         }
         val prefixEntry = Category.GUILD.entry as GuildEntry
         val guildPrefix = prefixEntry.fetch(prefixEntry.getField(GuildEntry.Fields.PREFIX), guild.idLong, null)
-        var message = environment.message.rawContent.replace(" +".toRegex(), " ").trim()
+        var message = environment.message.contentRaw.replace(" +".toRegex(), " ").trim()
         message = when {
             message.startsWith(defaultPrefix, true) -> message.substring(defaultPrefix.length)
             message.startsWith(guildPrefix, true) -> message.substring(guildPrefix.length)

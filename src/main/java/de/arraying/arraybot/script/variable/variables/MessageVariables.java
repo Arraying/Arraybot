@@ -70,8 +70,8 @@ public final class MessageVariables extends Variables {
     public ZeusRuntimeBuilder registerVariables(ZeusRuntimeBuilder builder, CommandEnvironment environment) throws ZeusException {
         Message message = environment.getMessage();
         return builder.withVariables(createConstant(this.message, message.getIdLong()),
-                createConstant(messageContent, message.getContent()),
-                createConstant(messageContentRaw, message.getRawContent()),
+                createConstant(messageContent, message.getContentDisplay()),
+                createConstant(messageContentRaw, message.getContentRaw()),
                 createMutable(messagePinned, message.isPinned()));
     }
 

@@ -3,10 +3,10 @@ package de.arraying.arraybot.script.method.methods;
 import de.arraying.arraybot.command.CommandEnvironment;
 import de.arraying.arraybot.language.Message;
 import de.arraying.arraybot.script.method.Methods;
+import de.arraying.arraybot.util.CustomEmbedBuilder;
 import de.arraying.arraybot.util.UZeus;
 import de.arraying.zeus.backend.annotations.ZeusMethod;
 import net.dv8tion.jda.client.exceptions.VerificationLevelException;
-import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.Member;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.exceptions.PermissionException;
@@ -143,7 +143,7 @@ public final class MessageMethods extends Methods {
             return;
         }
         try {
-            EmbedBuilder embedBuilder = methods.getEmbeds().get(embed);
+            CustomEmbedBuilder embedBuilder = methods.getEmbeds().get(embed);
             if(embedBuilder != null) {
                 environment.getChannel().sendMessage(embedBuilder.build()).queue();
             }
@@ -172,7 +172,7 @@ public final class MessageMethods extends Methods {
             return;
         }
         try {
-            EmbedBuilder embedBuilder = methods.getEmbeds().get(embed);
+            CustomEmbedBuilder embedBuilder = methods.getEmbeds().get(embed);
             if(embed != null) {
                 member.getUser().openPrivateChannel().queue(channel -> channel.sendMessage(embedBuilder.build()).queue());
             }

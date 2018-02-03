@@ -77,9 +77,11 @@ public final class UPunishment {
      * @param guild The guild.
      * @param user The user.
      * @return True if they are, false otherwise.
+     * @throws PermissionException If the bot has no permissions.
      */
-    public static boolean isBan(Guild guild, long user) {
-        return PermissionUtil.checkPermission(guild.getSelfMember(), Permission.BAN_MEMBERS) && guild.getBans().complete().stream().anyMatch(userObject -> userObject.getIdLong() == user);
+    public static boolean isBan(Guild guild, long user)
+            throws PermissionException {
+        return PermissionUtil.checkPermission(guild.getSelfMember(), Permission.BAN_MEMBERS) && guild.getBanList().complete().stream().anyMatch(ban -> ban.getUser().getIdLong() == user);
     }
 
     /**

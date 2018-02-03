@@ -90,7 +90,8 @@ public final class ScriptEvaluator {
             imports = imports.substring(0, imports.length()-1);
         }
         engine.eval("var imports = new JavaImporter(" + imports + ")");
-        String code = "function exec() {\n\twith(imports) {\n\t\t" + this.code + "\n\t}\n}exec();";
+        //String code = "function exec() {\n\twith(imports) {\n\t\t" + this.code + "\n\t}\n}exec();";
+        String code = this.code;
         engine.eval(code);
     }
 

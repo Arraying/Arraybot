@@ -25,7 +25,7 @@ public final class UFormatting {
     private static final char[] MARKUP_CHARS = {'*', '_', '~', '`'};
 
     /**
-     * Strips all the formatting.
+     * Strips all the formatting by escaping it.
      * @param input The input.
      * @return A stripped string.
      */

@@ -1,9 +1,10 @@
-package de.arraying.arraybot.script2.method;
+package de.arraying.arraybot.util;
 
 import de.arraying.arraybot.command.CommandEnvironment;
+import de.arraying.arraybot.language.Message;
 
 /**
- * Copyright 2017 Arraying
+ * Copyright 2018 Arraying
  * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,16 +18,14 @@ import de.arraying.arraybot.command.CommandEnvironment;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-public final class MessageMethods {
+public final class UScript {
 
-    private final CommandEnvironment environment;
-
-    public MessageMethods(CommandEnvironment environment) {
-        this.environment = environment;
-    }
-
-    public void channel(String message) {
-        environment.getChannel().sendMessage(message).queue();
+    /**
+     * Error in chat.
+     * @param exception The exception.
+     */
+    public static void error(CommandEnvironment environment, Exception exception) {
+        Message.SCRIPT_ERROR.send(environment.getChannel(), exception.getClass().getName(), exception.getMessage()).queue();
     }
 
 }
