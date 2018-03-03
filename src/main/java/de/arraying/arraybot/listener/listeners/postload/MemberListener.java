@@ -36,7 +36,6 @@ import org.slf4j.LoggerFactory;
 public final class MemberListener extends PostLoadListener {
 
     private final Logger logger = LoggerFactory.getLogger("Member-Listener");
-    private final String privateMessageParameter = "--pm";
 
     /**
      * Does not need initialization.
@@ -101,6 +100,7 @@ public final class MemberListener extends PostLoadListener {
         }
         message = UPlaceholder.replaceCore(event.getMember(), message);
         boolean privateMessage = false;
+        String privateMessageParameter = "--pm";
         if(message.contains(privateMessageParameter)) {
             privateMessage = true;
             message = message.replace(privateMessageParameter, "");

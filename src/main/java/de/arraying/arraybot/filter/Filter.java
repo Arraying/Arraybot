@@ -84,7 +84,7 @@ public final class Filter {
                 String filteredMessage = null;
                 phraseLoop:
                 for(String filtered : filterEntries.values(guildId)) {
-                    if(needsFiltering(filtered, event.getMessage().getRawContent(), regex)) {
+                    if(needsFiltering(filtered, event.getMessage().getContentRaw(), regex)) {
                         filteredMessage = filtered;
                         break;
                     }

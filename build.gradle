@@ -15,7 +15,8 @@ plugins {
 }
 
 group "de.arraying.arraybot"
-version "5.1.4"
+
+version "5.2.1"
 
 ext.main = "Arraybot"
 mainClassName = "de.arraying.arraybot.Arraybot"
@@ -34,13 +35,13 @@ repositories {
 }
 
 dependencies {
-    compile "com.github.Arraying:Kotys:0.3.3" // JSON
-    compile "com.github.Arraying:Zeus:0.4.4" // Script engine
+    compile "com.github.Arraying:Kotys:0.4.3" // JSON
     compile "ch.qos.logback:logback-classic:1.2.3" // Logging
-    compile "net.dv8tion:JDA:3.3.1_308" // Discord
+    compile "net.dv8tion:JDA:3.5.1_343" // Discord
     compile "biz.paluch.redis:lettuce:5.0.0.Beta1" // Database
     compile "commons-io:commons-io:2.5" // Utils
     compile "commons-lang:commons-lang:2.6" // Utils
+    compile "org.javadelight:delight-nashorn-sandbox:0.1.1"
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version" // Kotlin
     compile "org.jetbrains.kotlinx:kotlinx-coroutines-core:0.15" // Kotlin Coroutines
 }

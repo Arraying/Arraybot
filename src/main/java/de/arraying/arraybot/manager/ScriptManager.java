@@ -1,7 +1,15 @@
 package de.arraying.arraybot.manager;
 
 import de.arraying.arraybot.command.CommandEnvironment;
-import de.arraying.arraybot.script.ScriptRuntime;
+import de.arraying.arraybot.script.ScriptEvaluator;
+import de.arraying.arraybot.script.entity.ScriptGuild;
+import de.arraying.arraybot.script.entity.ScriptMessage;
+import de.arraying.arraybot.script.entity.ScriptTextChannel;
+import de.arraying.arraybot.script.entity.ScriptUser;
+import de.arraying.arraybot.script.method.CommandMethods;
+import de.arraying.arraybot.script.method.EmbedMethods;
+import de.arraying.arraybot.script.method.ManagerMethods;
+import de.arraying.arraybot.script.method.StorageMethods;
 import org.apache.commons.io.IOUtils;
 
 import java.io.IOException;
@@ -44,19 +52,18 @@ public final class ScriptManager {
      * @throws IOException If an exception occurs parsing the code.
      */
     public void executeScript(String scriptUrl, CommandEnvironment environment)
-            throws IOException {
-        String content = IOUtils.toString(new URL(scriptUrl), Charset.forName("utf-8"));
-        String[] code = content.split("\n");
-        executeStringRaw(code, environment);
-    }
-
-    /**
-     * Executes the script with a raw parameter.
-     * @param code The code.
-     * @param environment The command environment.
-     */
-    public void executeStringRaw(String[] code, CommandEnvironment environment) {
-        new ScriptRuntime(environment, code).create();
+            throws Exception {
+        String code = IOUtils.toString(new URL(scriptUrl), Charset.forName("utf-8"));
+        new ScriptEvaluator(code)
+                .variable("guild", new ScriptGuild(environment, environment.getGuild()))
+                .variable("channel", new ScriptTextChannel(environment, environment.getChannel()))
+                .variable("user", new ScriptUser(environment, environment.getMember()))
+                .variable("message", new ScriptMessage(environment, environment.getMessage()))
+                .variable("embeds", new EmbedMethods())
+                .variable("commands", new CommandMethods(environment))
+                .variable("manager", new ManagerMethods(environment))
+                .variable("storage", new StorageMethods(environment))
+                .evaluate();
     }
 
 }

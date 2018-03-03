@@ -10,6 +10,7 @@ import de.arraying.arraybot.util.UDefaults
 import de.arraying.arraybot.util.objects.MultiKeyMap
 import kotlinx.coroutines.experimental.CommonPool
 import kotlinx.coroutines.experimental.launch
+import kotlinx.coroutines.experimental.runBlocking
 import net.dv8tion.jda.core.Permission
 import net.dv8tion.jda.core.entities.TextChannel
 import net.dv8tion.jda.core.utils.PermissionUtil
@@ -67,7 +68,7 @@ object Commands {
         }
         val prefixEntry = Category.GUILD.entry as GuildEntry
         val guildPrefix = prefixEntry.fetch(prefixEntry.getField(GuildEntry.Fields.PREFIX), guild.idLong, null)
-        var message = environment.message.rawContent.replace(" +".toRegex(), " ").trim()
+        var message = environment.message.contentRaw.replace(" +".toRegex(), " ").trim()
         message = when {
             message.startsWith(defaultPrefix, true) -> message.substring(defaultPrefix.length)
             message.startsWith(guildPrefix, true) -> message.substring(guildPrefix.length)
@@ -90,6 +91,16 @@ object Commands {
             launch(CommonPool) {
                 customCommand.invoke(environment, args)
             }
+        }
+    }
+
+    /**
+     * Invokes the command through Kotlin.
+     * This method should only be executed in the script secion!
+     */
+    fun invokeThroughKotlin(command: Command, environment: CommandEnvironment, args: List<String>) {
+        runBlocking {
+            command.invoke(environment, args)
         }
     }
 

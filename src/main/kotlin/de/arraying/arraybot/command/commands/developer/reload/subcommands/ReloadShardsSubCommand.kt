@@ -1,6 +1,5 @@
 package de.arraying.arraybot.command.commands.developer.reload.subcommands
 
-import de.arraying.arraybot.Arraybot
 import de.arraying.arraybot.command.CommandEnvironment
 import de.arraying.arraybot.command.templates.SubCommand
 import de.arraying.arraybot.language.Message
@@ -36,40 +35,24 @@ class ReloadShardsSubCommand: SubCommand("shards",
             return
         }
         val toReload = args[2]
-        val shards = ArrayList<Int>()
-        val min: Int
-        val max: Int
-        if(config.botShards < 2) {
-            min = Arraybot.SINGLE_SHARD_INDEX
-            max = Arraybot.SINGLE_SHARD_INDEX
-        } else {
-            min = 0
-            max = config.botShards-1
-        }
+        val min = "0"
+        val max = (config.botShards - 1).toString()
         if(UDatatypes.isInt(toReload)) {
             val shard = toReload.toInt()
-            if(shard < min
-                    || shard > max) {
-                Message.COMMANDS_RELOAD_SHARD_INVALID.send(channel, min.toString(), max.toString()).queue()
-                return
+            try {
+                arraybot.botManager.shardManager.restart(shard)
+            } catch(exception: IllegalArgumentException) {
+                Message.COMMANDS_RELOAD_SHARD_INVALID.send(channel, min, max).queue()
             }
-            shards.add(shard)
         } else {
             if(toReload.equals("all", true)) {
-                shards.addAll(arraybot.botManager.shards.keys)
+                arraybot.botManager.shardManager.restart()
             } else {
-                Message.COMMANDS_RELOAD_SHARD_INVALID.send(channel, min.toString(), max.toString()).queue()
+                Message.COMMANDS_RELOAD_SHARD_INVALID.send(channel, min, max).queue()
                 return
             }
         }
         Message.COMMANDS_RELOAD_SHARD_RELOADED.send(channel).queue()
-        for(shard in shards) {
-            val result = arraybot.botManager.restartShard(shard)
-            if(!result) {
-                Message.COMMANDS_RELOAD_SHARD_ERROR.send(channel).queue()
-                return
-            }
-        }
     }
 
 }

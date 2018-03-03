@@ -21,7 +21,7 @@ import de.arraying.arraybot.startup.StartupTask;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-public class StartupMisc extends StartupTask {
+public final class StartupMisc extends StartupTask {
 
     /**
      * Creates the language startup task.

@@ -2,7 +2,6 @@ package de.arraying.arraybot.listener.listeners.preload;
 
 import de.arraying.arraybot.Arraybot;
 import de.arraying.arraybot.manager.BotManager;
-import de.arraying.arraybot.util.UShard;
 import net.dv8tion.jda.core.events.ReadyEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
 
@@ -32,7 +31,7 @@ public final class ReadyListener extends ListenerAdapter {
      */
     @Override
     public void onReady(ReadyEvent event) {
-        manager.ready(UShard.getShardId(event.getJDA()));
+        manager.ready(event.getJDA());
     }
 
 }

@@ -8,7 +8,6 @@ import de.arraying.arraybot.data.database.Redis
 import de.arraying.arraybot.language.Message
 import de.arraying.arraybot.util.UDatabase
 import de.arraying.arraybot.util.UEmbed
-import de.arraying.zeus.Zeus
 import net.dv8tion.jda.core.JDAInfo
 import net.dv8tion.jda.core.Permission
 import org.apache.commons.io.FileUtils
@@ -40,18 +39,18 @@ class StatsCommand: DefaultCommand("stats",
     override fun onCommand(environment: CommandEnvironment, args: List<String>) {
         val channel = environment.channel
         val resource = Redis.getInstance().resource
-        val shards = arraybot.botManager.shards.values
+        val shards = arraybot.botManager.shardManager.shards
         val jda = environment.guild.jda
         val guilds = shards.sumBy {
-            it.jda.guilds.size
+            it.guilds.size
         }.toString()
         val guildsShard = jda.guilds.size.toString()
         val users = shards.sumBy {
-            it.jda.users.size
+            it.users.size
         }.toString()
         val usersShard = jda.users.size.toString()
         val channels = shards.sumBy {
-            it.jda.textChannels.size + it.jda.voiceChannels.size
+            it.textChannels.size + it.voiceChannels.size
         }.toString()
         val channelsShard = (jda.textChannels.size + jda.voiceChannels.size).toString()
         val osMxBeam = ManagementFactory.getOperatingSystemMXBean() as OperatingSystemMXBean
@@ -64,9 +63,7 @@ class StatsCommand: DefaultCommand("stats",
                 .addField(Message.COMMANDS_STATS_EMBED_VERSION.getContent(channel),
                         arraybot.configuration.botVersion,
                         true)
-                .addField(Message.COMMANDS_STATS_EMBED_ZEUS.getContent(channel),
-                        Zeus.VERSION,
-                        true)
+                .addBlankField(true)
                 .addField(Message.COMMANDS_STATS_EMBED_JDA.getContent(channel),
                         JDAInfo.VERSION,
                         true)

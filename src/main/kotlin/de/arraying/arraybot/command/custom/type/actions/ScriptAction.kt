@@ -38,7 +38,11 @@ class ScriptAction: CustomCommandAction {
             Message.CUSTOM_SCRIPT_INVALID.send(environment.channel).queue()
             return false
         }
-        Arraybot.getInstance().scriptManager.executeScript(value, environment)
+        try {
+            Arraybot.getInstance().scriptManager.executeScript(value, environment)
+        } catch(exception: Exception) {
+            Message.SCRIPT_ERROR.send(environment.channel, exception.javaClass.name, exception.message?: "-").queue()
+        }
         return true
     }
 

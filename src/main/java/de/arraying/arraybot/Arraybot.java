@@ -32,11 +32,6 @@ import java.util.Set;
  */
 public final class Arraybot {
 
-    /**
-     * Gets the default single shard (running 1 total shards) index.
-     */
-    public static final int SINGLE_SHARD_INDEX = 0;
-
     private static Arraybot instance;
     private static final Object mutex = new Object();
     private final Logger logger = LoggerFactory.getLogger("Arraybot");

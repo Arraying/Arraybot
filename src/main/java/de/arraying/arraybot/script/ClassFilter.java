@@ -1,6 +1,6 @@
-package de.arraying.arraybot.request;
+package de.arraying.arraybot.script;
 
-import de.arraying.kotys.JSONField;
+import java.util.HashSet;
 
 /**
  * Copyright 2017 Arraying
@@ -17,29 +17,26 @@ import de.arraying.kotys.JSONField;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-@SuppressWarnings("unused")
-public final class Parameter {
+public final class ClassFilter implements jdk.nashorn.api.scripting.ClassFilter {
 
-    @JSONField(key = "key")
-    private String key;
-
-    @JSONField(key = "value")
-    private String value;
+    private final HashSet<String> whitelisted = new HashSet<>();
 
     /**
-     * Gets the parameter key.
-     * @return The key.
+     * Whether or not the specified class should be exposed to the script.
+     * @param name The fully qualified class name.
+     * @return True if it should, false otherwise.
      */
-    public String getKey() {
-        return key;
+    @Override
+    public boolean exposeToScripts(String name) {
+        return whitelisted.contains(name);
     }
 
     /**
-     * Gets the parameter value.
-     * @return The value.
+     * Whitelists a class for Nashorn usage.
+     * @param clazz The class.
      */
-    public String getValue() {
-        return value;
+    void whitelist(Class<?> clazz) {
+        whitelisted.add(clazz.getName());
     }
 
 }

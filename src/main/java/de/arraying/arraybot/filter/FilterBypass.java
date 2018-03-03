@@ -25,18 +25,15 @@ import java.util.List;
  */
 public final class FilterBypass {
 
-    private final int id;
     private final FilterBypassType type;
     private final long value;
 
     /**
      * Creates a new filter bypass.
-     * @param id The ID of the filter bypass.
      * @param type The type.
      * @param value The value.
      */
-    private FilterBypass(int id, FilterBypassType type, long value) {
-        this.id = id;
+    private FilterBypass(FilterBypassType type, long value) {
         this.type = type;
         this.value = value;
     }
@@ -52,7 +49,7 @@ public final class FilterBypass {
         FilterBypassEntry entry = (FilterBypassEntry) Category.FILTER_BYPASS.getEntry();
         String rawType = entry.fetch(entry.getField(FilterBypassEntry.Fields.TYPE), guildId, id);
         long value = Long.valueOf(entry.fetch(entry.getField(FilterBypassEntry.Fields.VALUE), guildId, id));
-        return new FilterBypass(id, FilterBypassType.fromString(rawType), value);
+        return new FilterBypass(FilterBypassType.fromString(rawType), value);
     }
 
     /**
@@ -60,7 +57,7 @@ public final class FilterBypass {
      * @param guild The guild.
      * @return A list of bypasses.
      */
-    public static List<FilterBypass> getAll(Guild guild) {
+    static List<FilterBypass> getAll(Guild guild) {
         SetEntry entries = (SetEntry) Category.FILTER_BYPASS_IDS.getEntry();
         List<FilterBypass> bypasses = new ArrayList<>();
         for(String value : entries.values(guild.getIdLong())) {

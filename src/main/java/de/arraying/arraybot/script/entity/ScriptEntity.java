@@ -1,10 +1,9 @@
-package de.arraying.arraybot.util;
+package de.arraying.arraybot.script.entity;
 
-import de.arraying.arraybot.Arraybot;
-import net.dv8tion.jda.core.JDA;
+import java.time.OffsetDateTime;
 
 /**
- * Copyright 2017 Arraying
+ * Copyright 2018 Arraying
  * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,15 +17,19 @@ import net.dv8tion.jda.core.JDA;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-public final class UShard {
+@SuppressWarnings("unused")
+public interface ScriptEntity {
 
     /**
-     * Gets the shard ID for a JDA object.
-     * @param jda The JDA object.
-     * @return An integer ID.
+     * Gets the ID of the entity.
+     * @return The ID.
      */
-    public static int getShardId(JDA jda) {
-        return jda.getShardInfo() == null ? Arraybot.SINGLE_SHARD_INDEX : jda.getShardInfo().getShardId();
-    }
+    String getID();
+
+    /**
+     * Gets the creation time of the entity.
+     * @return The creation time.
+     */
+    OffsetDateTime getCreationTime();
 
 }

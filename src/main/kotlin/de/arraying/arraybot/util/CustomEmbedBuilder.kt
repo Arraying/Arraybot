@@ -19,7 +19,7 @@ import java.awt.Color
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-class CustomEmbedBuilder : EmbedBuilder() {
+class CustomEmbedBuilder {
 
     companion object {
 
@@ -40,83 +40,98 @@ class CustomEmbedBuilder : EmbedBuilder() {
 
     }
 
+    private val embedBuilder = EmbedBuilder()
     private val lengthPlaceholder = "[...]"
     private var totalLength = 0
 
     /**
      * When the wrong field adding method is invoked.
      */
-    override fun addField(field: MessageEmbed.Field?): CustomEmbedBuilder {
+    fun addField(field: MessageEmbed.Field?): CustomEmbedBuilder {
+        embedBuilder.addField(field)
         return this
     }
 
     /**
      * Adds a field to the embed.
      */
-    override fun addField(name: String?, value: String?, inline: Boolean): CustomEmbedBuilder {
+    fun addField(name: String?, value: String?, inline: Boolean): CustomEmbedBuilder {
         val localName = if (name == null) getCorrectTitle("null") else getCorrectTitle(name)
         val localValue = if (value == null) getCorrectText("null") else getCorrectText(value)
-        super.addField(localName, localValue, inline)
+        embedBuilder.addField(localName, localValue, inline)
         return this
     }
 
-    /**
-     * When the description is appended to.
-     */
-    override fun appendDescription(description: CharSequence?): CustomEmbedBuilder {
+    fun addBlankField(inline: Boolean): CustomEmbedBuilder {
+        embedBuilder.addBlankField(inline)
         return this
     }
 
     /**
      * Sets the author.
      */
-    override fun setAuthor(name: String?, url: String?, iconUrl: String?): CustomEmbedBuilder {
+    fun setAuthor(name: String?, url: String?, iconUrl: String?): CustomEmbedBuilder {
         val localName = if (name == null) getCorrectTitle("null") else getCorrectTitle(name)
-        super.setAuthor(localName, url, iconUrl)
+        embedBuilder.setAuthor(localName, url, iconUrl)
         return this
     }
 
     /**
      * Sets the colour.
      */
-    override fun setColor(color: Color?): CustomEmbedBuilder {
+    fun setColor(color: Color?): CustomEmbedBuilder {
         val localColour = color ?: Color.RED
-        super.setColor(localColour)
+        embedBuilder.setColor(localColour)
         return this
     }
 
     /**
      * Sets the description.
      */
-    override fun setDescription(description: CharSequence?): CustomEmbedBuilder {
+    fun setDescription(description: CharSequence?): CustomEmbedBuilder {
         val localDescription = if (description == null) getCorrectText("null") else getCorrectText(description.toString())
-        super.setDescription(localDescription)
+        embedBuilder.setDescription(localDescription)
         return this
     }
 
     /**
      * Sets the title
      */
-    override fun setTitle(title: String?): CustomEmbedBuilder {
+    fun setTitle(title: String?): CustomEmbedBuilder {
         return setTitle(title, null)
     }
 
     /**
      * Sets the title.
      */
-    override fun setTitle(title: String?, url: String?): CustomEmbedBuilder {
+    fun setTitle(title: String?, url: String?): CustomEmbedBuilder {
         val localTitle = if (title == null) getCorrectTitle("null") else getCorrectTitle(title)
-        super.setTitle(localTitle, url)
+        embedBuilder.setTitle(localTitle, url)
+        return this
+    }
+
+    /**
+     * Sets the icon.
+     */
+    fun setThumbnail(icon: String): CustomEmbedBuilder {
+        embedBuilder.setThumbnail(icon)
         return this
     }
 
     /**
      * Sets the footer.
      */
-    override fun setFooter(text: String?, iconUrl: String?): CustomEmbedBuilder {
+    fun setFooter(text: String?, iconUrl: String?): CustomEmbedBuilder {
         val localText = if (text == null) getCorrectText("null") else getCorrectText(text)
-        super.setFooter(localText, iconUrl)
+        embedBuilder.setFooter(localText, iconUrl)
         return this
+    }
+
+    /**
+     * Builds this embed builder.
+     */
+    fun build(): MessageEmbed {
+        return embedBuilder.build()
     }
 
     /**

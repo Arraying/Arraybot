@@ -22,8 +22,6 @@ import net.dv8tion.jda.core.events.guild.member.GuildMemberLeaveEvent;
 import net.dv8tion.jda.core.events.guild.member.GuildMemberRoleAddEvent;
 import net.dv8tion.jda.core.events.guild.member.GuildMemberRoleRemoveEvent;
 
-import java.util.List;
-
 /**
  * Copyright 2017 Arraying
  * <p>
@@ -146,43 +144,34 @@ public final class PunishmentListener extends PostLoadListener {
      * @param revoke True: revocation, false: punishment creation.
      */
     private void handlePunishment(GenericGuildEvent event, User userObject, PunishmentType type, Role[] roles, boolean revoke) {
-        new AbstractTask("Punishment-EventHandler") {
-
-            /**
-             * Handles the punishment.
-             */
-            @Override
-            public void onExecution() {
-                Guild guild = event.getGuild();
-                if(guild == null
-                        || !event.getGuild().getSelfMember().hasPermission(Permission.VIEW_AUDIT_LOGS)) {
+        Guild guild = event.getGuild();
+        if(guild == null
+                || !event.getGuild().getSelfMember().hasPermission(Permission.VIEW_AUDIT_LOGS)) {
+            return;
+        }
+        long user = userObject.getIdLong();
+        guild.getAuditLogs().queue(entries -> {
+            if(entries.isEmpty()) {
+                return;
+            }
+            AuditLogEntry entry = entries.get(0);
+            if(!isPunishment(entry, user, type, roles)
+                    || entry.getUser().getIdLong() == guild.getSelfMember().getUser().getIdLong()) {
+                return;
+            }
+            long staff = entry.getUser().getIdLong();
+            if(!revoke) {
+                punishmentManager.punish(guild, user, type, staff, -1, true, entry.getReason());
+            } else {
+                PunishmentObject punishmentObject = ULambda.INSTANCE.getSpecificGeneralizedPunishment(guild, user, type);
+                if(punishmentObject == null) {
                     return;
                 }
-                long user = userObject.getIdLong();
-                List<AuditLogEntry> entries = guild.getAuditLogs().complete();
-                if(entries.isEmpty()) {
-                    return;
-                }
-                AuditLogEntry entry = entries.get(0);
-                if(!isPunishment(entry, user, type, roles)
-                        || entry.getUser().getIdLong() == guild.getSelfMember().getUser().getIdLong()) {
-                    return;
-                }
-                long staff = entry.getUser().getIdLong();
-                if(!revoke) {
-                    punishmentManager.punish(guild, user, type, staff, -1, true, entry.getReason());
-                } else {
-                    PunishmentObject punishmentObject = ULambda.INSTANCE.getSpecificGeneralizedPunishment(guild, user, type);
-                    if(punishmentObject == null) {
-                        return;
-                    }
-                    if(!punishmentManager.revoke(guild, punishmentObject, staff)) {
-                        logger.error("Failed the revocation of the punishment number {} in the guild {}.", punishmentObject.getId(), guild.getIdLong());
-                    }
+                if(!punishmentManager.revoke(guild, punishmentObject, staff)) {
+                    Arraybot.getInstance().getLogger().error("Failed the revocation of the punishment number {} in the guild {}.", punishmentObject.getId(), guild.getIdLong());
                 }
             }
-
-        }.create();
+        });
     }
 
 

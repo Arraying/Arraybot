@@ -1,9 +1,7 @@
-package de.arraying.arraybot.request;
-
-import de.arraying.kotys.JSONField;
+package de.arraying.arraybot.script;
 
 /**
- * Copyright 2017 Arraying
+ * Copyright 2018 Arraying
  * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,29 +15,14 @@ import de.arraying.kotys.JSONField;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-@SuppressWarnings("unused")
-public final class Parameter {
-
-    @JSONField(key = "key")
-    private String key;
-
-    @JSONField(key = "value")
-    private String value;
+public final class LimitError extends Exception {
 
     /**
-     * Gets the parameter key.
-     * @return The key.
+     * Creates a new limit error.
+     * @param message The message. NICHT NULL!
      */
-    public String getKey() {
-        return key;
-    }
-
-    /**
-     * Gets the parameter value.
-     * @return The value.
-     */
-    public String getValue() {
-        return value;
+    public LimitError(String message) {
+        super(message);
     }
 
 }

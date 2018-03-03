@@ -2,7 +2,6 @@ package de.arraying.arraybot.command.commands.developer.eval
 
 import de.arraying.arraybot.command.CommandEnvironment
 import de.arraying.arraybot.command.commands.developer.eval.engines.JSREngine
-import de.arraying.arraybot.command.commands.developer.eval.engines.ZeusEngine
 import de.arraying.arraybot.command.templates.DefaultCommand
 import de.arraying.arraybot.language.Message
 import de.arraying.arraybot.util.Limits
@@ -34,7 +33,6 @@ class EvalCommand: DefaultCommand("eval",
     private val placeholder = "[...]"
 
     init {
-        engines.add(ZeusEngine(), "zeus", arrayOf("z"))
         engines.add(JSREngine(JSREngine.Mode.JAVASCRIPT), "javascript", arrayOf("js", "javashit"))
     }
 

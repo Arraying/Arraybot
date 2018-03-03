@@ -37,23 +37,6 @@ open class PunishmentCommand(commandName: String,
         val channel = environment.channel
         val guild = environment.guild
         val member = environment.member
-        if(type == PunishmentType.MUTE
-                || type == PunishmentType.TEMP_MUTE) {
-            val mutedRole = UPunishment.getMutedRole(guild)
-            if(guild.getRoleById(mutedRole) == null) {
-                Message.PUNISH_MUTE_INVALID_ROLE.send(channel).queue()
-                return
-            }
-            val permission = CustomPermission(UPunishment.getMutedPermission(guild))
-            if(!permission.hasPermission(member, channel)) {
-                Message.PUNISH_MUTE_INVALID_PERMISSION.send(channel).queue()
-                return
-            }
-            if(UPunishment.isMute(member)) {
-                Message.PUNISH_COMMAND_ALREADY_MUTED.send(channel).queue()
-                return
-            }
-        }
         if(!PermissionUtil.checkPermission(channel, environment.member, newPermission)) {
             Message.COMMAND_PERMISSION.send(channel, permission.getName()).queue()
             return
@@ -67,6 +50,23 @@ open class PunishmentCommand(commandName: String,
         if(userObject == null) {
             Message.PUNISH_COMMAND_USER_INVALID.send(channel).queue()
             return
+        }
+        if(type == PunishmentType.MUTE
+                || type == PunishmentType.TEMP_MUTE) {
+            val mutedRole = UPunishment.getMutedRole(guild)
+            if(guild.getRoleById(mutedRole) == null) {
+                Message.PUNISH_MUTE_INVALID_ROLE.send(channel).queue()
+                return
+            }
+            val permission = CustomPermission(UPunishment.getMutedPermission(guild))
+            if(!permission.hasPermission(member, channel)) {
+                Message.PUNISH_MUTE_INVALID_PERMISSION.send(channel).queue()
+                return
+            }
+            if(UPunishment.isMute(userObject)) {
+                Message.PUNISH_COMMAND_ALREADY_MUTED.send(channel).queue()
+                return
+            }
         }
         val user = userObject.user.idLong
         if(user == guild.selfMember.user.idLong) {
