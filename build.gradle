@@ -15,6 +15,7 @@ plugins {
 }
 
 group "de.arraying.arraybot"
+
 version "5.2.1"
 
 ext.main = "Arraybot"
