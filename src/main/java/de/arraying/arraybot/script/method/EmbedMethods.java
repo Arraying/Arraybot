@@ -1,4 +1,4 @@
-package de.arraying.arraybot.script2.method;
+package de.arraying.arraybot.script.method;
 
 import net.dv8tion.jda.core.AccountType;
 import net.dv8tion.jda.core.EmbedBuilder;

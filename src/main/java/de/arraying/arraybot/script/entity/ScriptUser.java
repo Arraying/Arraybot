@@ -1,9 +1,11 @@
-package de.arraying.arraybot.script2.entity;
+package de.arraying.arraybot.script.entity;
 
 import de.arraying.arraybot.command.CommandEnvironment;
-import de.arraying.arraybot.script2.abstraction.AbstractMessenger;
+import de.arraying.arraybot.script.abstraction.AbstractMessenger;
 import net.dv8tion.jda.core.entities.Member;
 import net.dv8tion.jda.core.entities.MessageEmbed;
+
+import java.time.OffsetDateTime;
 
 /**
  * Copyright 2018 Arraying
@@ -20,7 +22,8 @@ import net.dv8tion.jda.core.entities.MessageEmbed;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-public final class ScriptUser extends AbstractMessenger {
+@SuppressWarnings("unused")
+public final class ScriptUser extends AbstractMessenger implements ScriptEntity {
 
     private final Member underlying;
 
@@ -55,5 +58,49 @@ public final class ScriptUser extends AbstractMessenger {
             throws Exception {
         underlying.getUser().openPrivateChannel().queue(channel -> channel.sendMessage(embed).queue());
     }
+
+    /**
+     * Gets the ID of the user.
+     * @return The ID.
+     */
+    @Override
+    public String getID() {
+        return underlying.getUser().getId();
+    }
+
+    /**
+     * Gets the creation time of the user.
+     * @return The creation time.
+     */
+    @Override
+    public OffsetDateTime getCreationTime() {
+        return underlying.getUser().getCreationTime();
+    }
+
+    /**
+     * Gets the user's avatar URL.
+     * @return The avatar URL.
+     */
+    public String getAvatar() {
+        return underlying.getUser().getEffectiveAvatarUrl();
+    }
+
+    /**
+     * Gets the name of the user.
+     * @return The name.
+     */
+    public String getName() {
+        return underlying.getUser().getName();
+    }
+
+    /**
+     * Gets the nickname of the user.
+     * @return The nickname.
+     */
+    public String getNickname() {
+        return underlying.getNickname();
+    }
+
+
 
 }

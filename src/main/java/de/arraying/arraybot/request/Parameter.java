@@ -1,6 +1,6 @@
 package de.arraying.arraybot.request;
 
-import de.arraying.kotys.JSONContainer;
+import de.arraying.kotys.JSONField;
 
 /**
  * Copyright 2017 Arraying
@@ -18,9 +18,12 @@ import de.arraying.kotys.JSONContainer;
  * limitations under the License.
  */
 @SuppressWarnings("unused")
-public final @JSONContainer class Parameter {
+public final class Parameter {
 
+    @JSONField(key = "key")
     private String key;
+
+    @JSONField(key = "value")
     private String value;
 
     /**

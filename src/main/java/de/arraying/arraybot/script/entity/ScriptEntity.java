@@ -1,9 +1,9 @@
-package de.arraying.arraybot.script.method;
+package de.arraying.arraybot.script.entity;
 
-import de.arraying.arraybot.command.CommandEnvironment;
+import java.time.OffsetDateTime;
 
 /**
- * Copyright 2017 Arraying
+ * Copyright 2018 Arraying
  * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,16 +17,19 @@ import de.arraying.arraybot.command.CommandEnvironment;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-public class Methods {
-
-    protected final CommandEnvironment environment;
+@SuppressWarnings("unused")
+public interface ScriptEntity {
 
     /**
-     * Creates a new method collection object.
-     * @param environment The command environment.
+     * Gets the ID of the entity.
+     * @return The ID.
      */
-    public Methods(CommandEnvironment environment) {
-        this.environment = environment;
-    }
+    String getID();
+
+    /**
+     * Gets the creation time of the entity.
+     * @return The creation time.
+     */
+    OffsetDateTime getCreationTime();
 
 }

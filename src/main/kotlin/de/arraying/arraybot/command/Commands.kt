@@ -10,6 +10,7 @@ import de.arraying.arraybot.util.UDefaults
 import de.arraying.arraybot.util.objects.MultiKeyMap
 import kotlinx.coroutines.experimental.CommonPool
 import kotlinx.coroutines.experimental.launch
+import kotlinx.coroutines.experimental.runBlocking
 import net.dv8tion.jda.core.Permission
 import net.dv8tion.jda.core.entities.TextChannel
 import net.dv8tion.jda.core.utils.PermissionUtil
@@ -90,6 +91,16 @@ object Commands {
             launch(CommonPool) {
                 customCommand.invoke(environment, args)
             }
+        }
+    }
+
+    /**
+     * Invokes the command through Kotlin.
+     * This method should only be executed in the script secion!
+     */
+    fun invokeThroughKotlin(command: Command, environment: CommandEnvironment, args: List<String>) {
+        runBlocking {
+            command.invoke(environment, args)
         }
     }
 

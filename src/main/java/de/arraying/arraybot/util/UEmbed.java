@@ -1,6 +1,7 @@
 package de.arraying.arraybot.util;
 
 import de.arraying.arraybot.Arraybot;
+import de.arraying.arraybot.data.Cache;
 import de.arraying.arraybot.data.database.categories.GuildEntry;
 import de.arraying.arraybot.data.database.core.Category;
 import de.arraying.arraybot.language.Message;
@@ -64,7 +65,7 @@ public final class UEmbed {
             languageFooter = "";
         }
         embedBuilder.setFooter(Message.EMBED_FOOTER.getContent(guild.getIdLong(), String.valueOf(year), languageFooter),
-                shouldImage(guild) ? jda.getSelfUser().getAvatarUrl() : null);
+                shouldImage(guild) ? Cache.getInstance().getAuthorIconUrl() : null);
         return embedBuilder;
     }
 

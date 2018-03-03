@@ -49,7 +49,7 @@ public final class Configuration {
     /**
      * Empty constructor.
      */
-    public Configuration() {}
+    private Configuration() {}
 
     /**
      * Gets the Configuration.

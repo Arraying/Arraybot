@@ -19,7 +19,7 @@ import de.arraying.arraybot.startup.StartupTask;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-public class StartupScripting extends StartupTask {
+public final class StartupScripting extends StartupTask {
 
     /**
      * Creates a new startup task.

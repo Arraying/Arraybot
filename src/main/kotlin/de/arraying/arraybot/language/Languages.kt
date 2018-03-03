@@ -49,7 +49,7 @@ object Languages {
                     continue
                 }
                 name = name.substring(0, name.lastIndex - 4)
-                languages.put(name, JSON(file.readText().replace("\\n", "\n")))
+                languages.put(name, JSON(file.readText()))
                 logger.info("Registered the language \"$name\"")
             }
             if(languages.isEmpty()) {

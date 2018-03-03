@@ -25,13 +25,13 @@ import de.arraying.arraybot.util.UDatabase;
 @SuppressWarnings("unchecked")
 public abstract class HashEntry<T> implements Entry {
 
-    protected final Redis redis;
-    protected Category category;
+    private final Redis redis;
+    private Category category;
 
     /**
      * Creates a new hash entry.
      */
-    public HashEntry() {
+    protected HashEntry() {
         this.redis = Redis.getInstance();
     }
 
@@ -46,7 +46,7 @@ public abstract class HashEntry<T> implements Entry {
      * Gets the parent category.
      * @return The parent category is a set containing all secondary keys.
      */
-    public abstract Category getParent();
+    protected abstract Category getParent();
 
     /**
      * Gets the entry type.

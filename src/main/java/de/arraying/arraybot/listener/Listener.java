@@ -2,12 +2,13 @@ package de.arraying.arraybot.listener;
 
 import de.arraying.arraybot.Arraybot;
 import de.arraying.arraybot.listener.listeners.PostLoadListener;
-import de.arraying.arraybot.listener.listeners.postload.*;
+import de.arraying.arraybot.listener.listeners.postload.GuildListener;
+import de.arraying.arraybot.listener.listeners.postload.MemberListener;
+import de.arraying.arraybot.listener.listeners.postload.MessageListener;
+import de.arraying.arraybot.listener.listeners.postload.PunishmentListener;
 import de.arraying.arraybot.request.BotListRequest;
 import de.arraying.arraybot.threadding.AbstractTask;
 import net.dv8tion.jda.core.JDA;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * Copyright 2017 Arraying
@@ -27,14 +28,9 @@ import org.slf4j.LoggerFactory;
 public final class Listener {
 
     /**
-     * The global listener logger.
-     */
-    public static final Logger LISTENER_LOGGER = LoggerFactory.getLogger("Listener");
-
-    /**
      * An array of all listeners that will be registered after the shard has loaded.
      */
-    public static final PostLoadListener[] POST_LOAD_LISTENERS = { new DeathListener(), new GuildListener(), new MemberListener(), new MessageListener(), new PunishmentListener() };
+    public static final PostLoadListener[] POST_LOAD_LISTENERS = { new GuildListener(), new MemberListener(), new MessageListener(), new PunishmentListener() };
 
     /**
      * The updater class that will handle updates.

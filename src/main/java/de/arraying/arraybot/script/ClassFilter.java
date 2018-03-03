@@ -1,4 +1,4 @@
-package de.arraying.arraybot.script2;
+package de.arraying.arraybot.script;
 
 import java.util.HashSet;
 

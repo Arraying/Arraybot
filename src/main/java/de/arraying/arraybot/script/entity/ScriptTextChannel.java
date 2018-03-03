@@ -1,11 +1,10 @@
-package de.arraying.arraybot.script2.entity;
+package de.arraying.arraybot.script.entity;
 
 import de.arraying.arraybot.command.CommandEnvironment;
-import de.arraying.arraybot.script2.abstraction.AbstractMessenger;
+import de.arraying.arraybot.script.abstraction.AbstractChannel;
+import de.arraying.arraybot.script.abstraction.AbstractMessenger;
 import net.dv8tion.jda.core.entities.MessageEmbed;
 import net.dv8tion.jda.core.entities.TextChannel;
-
-import java.time.OffsetDateTime;
 
 /**
  * Copyright 2018 Arraying
@@ -22,18 +21,25 @@ import java.time.OffsetDateTime;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-public final class ScriptChannel extends AbstractMessenger implements ScriptEntity {
+public final class ScriptTextChannel extends AbstractChannel implements ScriptEntity {
 
     private final TextChannel underlying;
+    private final AbstractMessenger messenger;
 
     /**
      * Creates a new script channel.
      * @param environment The command environment.
      * @param underlying The underlying text channel.
      */
-    public ScriptChannel(CommandEnvironment environment, TextChannel underlying) {
-        super(environment, false);
+    public ScriptTextChannel(CommandEnvironment environment, TextChannel underlying) {
+        super(underlying);
         this.underlying = underlying;
+        this.messenger = new AbstractMessenger(environment, false) {
+            @Override
+            protected void abstractMessage(String message) throws Exception { underlying.sendMessage(message).queue(); }
+            @Override
+            protected void abstractEmbed(MessageEmbed embed) throws Exception { underlying.sendMessage(embed).queue(); }
+        };
     }
 
     /**
@@ -41,38 +47,29 @@ public final class ScriptChannel extends AbstractMessenger implements ScriptEnti
      * @return The ID.
      */
     @Override
-    public long getID() {
-        return underlying.getIdLong();
+    public String getID() {
+        return underlying.getId();
     }
 
     /**
-     * Gets the creation time of the channel.
-     * @return The creation time.
-     */
-    @Override
-    public OffsetDateTime getCreationTime() {
-        return underlying.getCreationTime();
-    }
-
-    /**
-     * Sends a message to the channel.
+     * Sends a message.
      * @param message The message.
-     * @throws Exception If an error occurs.
+     * @throws Exception The exception.
      */
-    @Override
-    protected void abstractMessage(String message)
+    public void message(String message)
             throws Exception {
-        underlying.sendMessage(message).queue();
+        messenger.message(message);
     }
 
     /**
-     * Sends a message to the channel.
+     * Sends a message.
      * @param embed The embed.
-     * @throws Exception If an error occurs.
+     * @throws Exception The exception.
      */
-    @Override
-    protected void abstractEmbed(MessageEmbed embed)
+    public void message(MessageEmbed embed)
             throws Exception {
-        underlying.sendMessage(embed).queue();
+        System.out.println("owO");
+        messenger.message(embed);
     }
+
 }

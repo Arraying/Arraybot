@@ -1,7 +1,6 @@
-package de.arraying.arraybot.script2.entity;
+package de.arraying.arraybot.script.entity;
 
 import de.arraying.arraybot.command.CommandEnvironment;
-import net.dv8tion.jda.core.entities.ISnowflake;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.MessageEmbed;
 
@@ -23,6 +22,7 @@ import java.util.List;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+@SuppressWarnings("unused")
 public final class ScriptMessage {
 
     private final CommandEnvironment environment;
@@ -39,7 +39,7 @@ public final class ScriptMessage {
     }
 
     public String getId() {
-        return "";
+        return underlying.getId();
     }
 
     /**
@@ -54,8 +54,8 @@ public final class ScriptMessage {
      * Gets the text channel.
      * @return The channel.
      */
-    public ScriptChannel getChannel() {
-        return new ScriptChannel(environment, underlying.getTextChannel());
+    public ScriptTextChannel getChannel() {
+        return new ScriptTextChannel(environment, underlying.getTextChannel());
     }
 
     /**

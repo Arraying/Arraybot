@@ -22,8 +22,6 @@ import net.dv8tion.jda.core.events.guild.member.GuildMemberLeaveEvent;
 import net.dv8tion.jda.core.events.guild.member.GuildMemberRoleAddEvent;
 import net.dv8tion.jda.core.events.guild.member.GuildMemberRoleRemoveEvent;
 
-import java.util.List;
-
 /**
  * Copyright 2017 Arraying
  * <p>

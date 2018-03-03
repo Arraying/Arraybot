@@ -1,7 +1,7 @@
-package de.arraying.arraybot.script2.abstraction;
+package de.arraying.arraybot.script.abstraction;
 
 import de.arraying.arraybot.command.CommandEnvironment;
-import de.arraying.arraybot.script2.LimitError;
+import de.arraying.arraybot.script.LimitError;
 import de.arraying.arraybot.util.UScript;
 import net.dv8tion.jda.core.entities.MessageEmbed;
 

@@ -3,7 +3,6 @@ package de.arraying.arraybot.startup.startups;
 import de.arraying.arraybot.Arraybot;
 import de.arraying.arraybot.listener.listeners.postload.GuildListener;
 import de.arraying.arraybot.manager.BotManager;
-import de.arraying.arraybot.shard.ShardWatcher;
 import de.arraying.arraybot.startup.StartupTask;
 
 import java.io.IOException;
@@ -44,7 +43,6 @@ public final class StartupBot extends StartupTask {
         logger.info("Starting the bot manager...");
         manager.start();
         logger.info("Finished starting the shards, they should be loading asynchronously if they are not loaded yet.");
-        new ShardWatcher(30000).create();
         try {
             for(long guild : Arraybot.getInstance().getFileManager().getRemovalQueue()) {
                 new GuildListener.Remover(guild, true).create();

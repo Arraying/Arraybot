@@ -1,10 +1,7 @@
-package de.arraying.arraybot.util;
-
-import de.arraying.arraybot.Arraybot;
-import net.dv8tion.jda.core.JDA;
+package de.arraying.arraybot.script;
 
 /**
- * Copyright 2017 Arraying
+ * Copyright 2018 Arraying
  * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,15 +15,14 @@ import net.dv8tion.jda.core.JDA;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-public final class UShard {
+public final class LimitError extends Exception {
 
     /**
-     * Gets the shard ID for a JDA object.
-     * @param jda The JDA object.
-     * @return An integer ID.
+     * Creates a new limit error.
+     * @param message The message. NICHT NULL!
      */
-    public static int getShardId(JDA jda) {
-        return jda.getShardInfo() == null ? Arraybot.SINGLE_SHARD_INDEX : jda.getShardInfo().getShardId();
+    public LimitError(String message) {
+        super(message);
     }
 
 }

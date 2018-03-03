@@ -36,12 +36,12 @@ class ShardsCommand: DefaultCommand("shards",
         val embed = UEmbed.getEmbed(channel)
                 .setDescription(Message.COMMANDS_SHARDS_EMBED_TITLE.getContent(channel))
         val entries = ArrayList<String>()
-        for((shardId, shard) in Arraybot.getInstance().botManager.shards) {
-            entries.add("Shard #$shardId ${shard.jda.status} [" +
-                    "${shard.jda.guilds.size}g, " +
-                    "${shard.jda.users.size}u, " +
-                    "${shard.jda.textChannels.size + shard.jda.voiceChannels.size}c, " +
-                    "${shard.jda.ping}ms]")
+        for(shard in Arraybot.getInstance().botManager.shardManager.shards) {
+            entries.add("Shard #${shard.shardInfo.shardId} ${shard.status} [" +
+                    "${shard.guilds.size}g, " +
+                    "${shard.users.size}u, " +
+                    "${shard.textChannels.size + shard.voiceChannels.size}c, " +
+                    "${shard.ping}ms]")
         }
         val pages = PageBuilder()
                 .withType(PageBuilder.Type.LIST)
