@@ -83,6 +83,22 @@ public final class ManagerMethods {
     }
 
     /**
+     * Change a user's nickname.
+     * @param user The user.
+     * @param nickname The new nickname.
+     * @return True if successful, false otherwise.
+     */
+    public boolean nickname(ScriptUser user, String nickname) {
+        try {
+            Member member = environment.getGuild().getMemberById(user.getID());
+            environment.getGuild().getController().setNickname(member, nickname).complete();
+            return true;
+        } catch(Exception exception) {
+            return false;
+        }
+    }
+
+    /**
      * Manages the roles of a user.
      * @param user The user.
      * @param role The role.
