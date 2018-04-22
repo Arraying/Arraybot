@@ -23,7 +23,7 @@ import java.util.List;
  * limitations under the License.
  */
 @SuppressWarnings("unused")
-public final class ScriptMessage {
+public final class ScriptMessage  implements ScriptEntity {
 
     private final CommandEnvironment environment;
     private final Message underlying;
@@ -38,8 +38,22 @@ public final class ScriptMessage {
         this.underlying = underlying;
     }
 
-    public String getId() {
+    /**
+     * Gets the ID of the message.
+     * @return The ID.
+     */
+    @Override
+    public String getID() {
         return underlying.getId();
+    }
+
+    /**
+     * Gets the creation time of the message.
+     * @return The creation time.
+     */
+    @Override
+    public OffsetDateTime getCreationTime() {
+        return underlying.getCreationTime();
     }
 
     /**
