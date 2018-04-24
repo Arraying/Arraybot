@@ -30,7 +30,7 @@ class CatCommand: DefaultCommand("cat",
      */
     override fun onCommand(environment: CommandEnvironment, args: List<String>) {
         val channel = environment.channel
-        val json = URequest.get("http://random.cat/meow")
+        val json = URequest.get("http://aws.random.cat/meow")
         channel.sendMessage(json.getString("file")
                 .replace("\\", "")).queue()
     }
