@@ -12,6 +12,7 @@ import kotlinx.coroutines.experimental.CommonPool
 import kotlinx.coroutines.experimental.launch
 import kotlinx.coroutines.experimental.runBlocking
 import net.dv8tion.jda.core.Permission
+import net.dv8tion.jda.core.entities.Message
 import net.dv8tion.jda.core.entities.TextChannel
 import net.dv8tion.jda.core.utils.PermissionUtil
 import org.slf4j.LoggerFactory
@@ -59,26 +60,27 @@ object Commands {
     /**
      * Starts the command executor.
      */
-    fun executeCommand(environment: CommandEnvironment) {
-        val guild = environment.guild
-        val channel = environment.channel
-        val author = environment.author
+    fun executeCommand(message: Message) {
+        val guild = message.guild!!
+        val channel = message.textChannel!!
+        val author = message.author!!
         if (!PermissionUtil.checkPermission(channel, guild.selfMember, Permission.MESSAGE_WRITE)) {
             return
         }
         val prefixEntry = Category.GUILD.entry as GuildEntry
         val guildPrefix = prefixEntry.fetch(prefixEntry.getField(GuildEntry.Fields.PREFIX), guild.idLong, null)
-        var message = environment.message.contentRaw.replace(" +".toRegex(), " ").trim()
-        message = when {
-            message.startsWith(defaultPrefix, true) -> message.substring(defaultPrefix.length)
-            message.startsWith(guildPrefix, true) -> message.substring(guildPrefix.length)
+        var messageContent = message.contentRaw.replace(" +".toRegex(), " ").trim()
+        messageContent = when {
+            messageContent.startsWith(defaultPrefix, true) -> messageContent.substring(defaultPrefix.length)
+            messageContent.startsWith(guildPrefix, true) -> messageContent.substring(guildPrefix.length)
             else -> return
         }
         val blacklist = Category.BLACKLIST.entry as SetEntry
         if(blacklist.values(UDefaults.DEFAULT_BLACKLIST.toLong()).contains(author.id)) {
             return
         }
-        val args = message.split(" ")
+        val args = messageContent.split(" ")
+        val environment = CommandEnvironment(message, args)
         val commandName = args[0].toLowerCase()
         val command = commands.getByKeyOrAlias(commandName)
         launch(CommonPool) {

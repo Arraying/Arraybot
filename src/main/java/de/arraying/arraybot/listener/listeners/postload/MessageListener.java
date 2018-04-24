@@ -61,7 +61,7 @@ public final class MessageListener extends PostLoadListener {
             || event.getAuthor().isBot()) {
             return;
         }
-        Commands.INSTANCE.executeCommand(new CommandEnvironment(event.getMessage()));
+        Commands.INSTANCE.executeCommand(event.getMessage());
     }
 
 }
