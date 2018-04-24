@@ -103,7 +103,7 @@ public final class ManagerMethods {
      * @param user The user.
      * @param role The role.
      * @param add True = add, false = remove.
-     * @return True if success, false otherwise.
+     * @return True if successful, false otherwise.
      */
     private synchronized boolean manageRole(ScriptUser user, ScriptRole role, boolean add) {
         try {
