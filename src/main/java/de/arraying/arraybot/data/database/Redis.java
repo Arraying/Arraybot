@@ -72,7 +72,7 @@ public final class Redis {
         }
         RedisURI.Builder uri = RedisURI.Builder.redis(configuration.getRedisHost(), configuration.getRedisPort())
                 .withDatabase(configuration.getRedisIndex());
-        if(!configuration.getRedisAuth().isEmpty()) {
+        if(configuration.getRedisAuth()!=null && !configuration.getRedisAuth().isEmpty()) {
             uri.withPassword(configuration.getRedisAuth());
         }
         RedisClient client = RedisClient.create(uri.build());

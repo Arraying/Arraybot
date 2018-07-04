@@ -17,7 +17,7 @@ import net.dv8tion.jda.core.entities.Message
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-data class CommandEnvironment(val message: Message) {
+data class CommandEnvironment(val message: Message, val args: List<String>) {
 
     val guild = message.guild!!
     val channel = message.textChannel!!
