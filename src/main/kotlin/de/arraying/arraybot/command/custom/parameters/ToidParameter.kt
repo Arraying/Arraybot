@@ -34,7 +34,8 @@ class ToidParameter: Parameter {
         var value = input!!
         val message = environment!!.message
         for(user in message.mentionedUsers) {
-            value = value.replace(environment.guild.getMember(user).asMention, user.id)
+            value = value.replace("<@"+user.id+">", user.id)
+            value = value.replace("<@!"+user.id+">", user.id)
         }
         for(channel in message.mentionedChannels) {
             value = value.replace(channel.asMention, channel.id)
