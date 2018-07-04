@@ -1,6 +1,7 @@
 package de.arraying.arraybot.script.entity;
 
 import de.arraying.arraybot.command.CommandEnvironment;
+import de.arraying.arraybot.util.UUser;
 import net.dv8tion.jda.core.entities.*;
 
 import java.time.OffsetDateTime;
@@ -142,12 +143,13 @@ public final class ScriptGuild implements ScriptEntity {
     }
 
     /**
-     * Gets a user via ID.
-     * @param id The ID.
+     * Gets a user via input.
+     * @param input The input.
      * @return The user, or null if they do not exist.
      */
-    public ScriptUser getUser(String id) {
-        return users.get(id);
+    public ScriptUser getUser(String input) {
+        Member member = UUser.getMember(environment.getGuild(), input);
+        return member == null ? null : users.get(member.getUser().getId());
     }
 
     /**

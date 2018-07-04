@@ -22,6 +22,7 @@ import net.dv8tion.jda.core.managers.GuildController;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+@SuppressWarnings("unused")
 public final class ManagerMethods {
 
     private final CommandEnvironment environment;
@@ -83,11 +84,27 @@ public final class ManagerMethods {
     }
 
     /**
+     * Change a user's nickname.
+     * @param user The user.
+     * @param nickname The new nickname.
+     * @return True if successful, false otherwise.
+     */
+    public boolean nickname(ScriptUser user, String nickname) {
+        try {
+            Member member = environment.getGuild().getMemberById(user.getID());
+            environment.getGuild().getController().setNickname(member, nickname).complete();
+            return true;
+        } catch(Exception exception) {
+            return false;
+        }
+    }
+
+    /**
      * Manages the roles of a user.
      * @param user The user.
      * @param role The role.
      * @param add True = add, false = remove.
-     * @return True if success, false otherwise.
+     * @return True if successful, false otherwise.
      */
     private synchronized boolean manageRole(ScriptUser user, ScriptRole role, boolean add) {
         try {

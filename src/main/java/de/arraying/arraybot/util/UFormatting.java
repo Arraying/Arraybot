@@ -1,6 +1,6 @@
 package de.arraying.arraybot.util;
 
-import org.apache.commons.lang.WordUtils;
+import org.apache.commons.text.WordUtils;
 
 /**
  * Copyright 2017 Arraying

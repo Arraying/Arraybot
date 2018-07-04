@@ -23,14 +23,14 @@ import net.dv8tion.jda.core.Permission
 class CatCommand: DefaultCommand("cat",
         CommandCategory.FUN,
         Permission.MESSAGE_WRITE,
-        aliases = arrayOf("moew")) {
+        aliases = arrayOf("meow", "moew")) {
 
     /**
      * When the command is executed.
      */
     override fun onCommand(environment: CommandEnvironment, args: List<String>) {
         val channel = environment.channel
-        val json = URequest.get("http://random.cat/meow")
+        val json = URequest.get("http://aws.random.cat/meow")
         channel.sendMessage(json.getString("file")
                 .replace("\\", "")).queue()
     }

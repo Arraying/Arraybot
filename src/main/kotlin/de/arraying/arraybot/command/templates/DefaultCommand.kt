@@ -16,8 +16,8 @@ import kotlinx.coroutines.experimental.CommonPool
 import kotlinx.coroutines.experimental.launch
 import net.dv8tion.jda.core.Permission
 import net.dv8tion.jda.core.utils.PermissionUtil
-import org.apache.commons.lang.StringUtils
-import org.apache.commons.lang.WordUtils
+import org.apache.commons.lang3.StringUtils
+import org.apache.commons.text.WordUtils
 import org.slf4j.LoggerFactory
 
 /**
@@ -35,7 +35,7 @@ import org.slf4j.LoggerFactory
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-abstract class DefaultCommand(override final val name: String,
+abstract class DefaultCommand(final override val name: String,
                               val category: CommandCategory,
                               open val permission: Permission,
                               open val subCommands: Array<SubCommand> = arrayOf(),

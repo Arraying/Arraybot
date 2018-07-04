@@ -1,12 +1,12 @@
 package de.arraying.arraybot.listener.listeners.postload;
 
-import com.lambdaworks.redis.api.sync.RedisCommands;
 import de.arraying.arraybot.command.CommandEnvironment;
 import de.arraying.arraybot.command.Commands;
 import de.arraying.arraybot.data.database.Redis;
 import de.arraying.arraybot.filter.Filter;
 import de.arraying.arraybot.listener.listeners.PostLoadListener;
 import de.arraying.arraybot.util.UDatabase;
+import io.lettuce.core.api.sync.RedisCommands;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
 
