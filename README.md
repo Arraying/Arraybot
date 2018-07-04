@@ -1,8 +1,10 @@
 # Arraybot
 
-![Discord Bots](https://discordbots.org/api/widget/servers/177735619668213760.png)
-
-Arraybot is an elite multipurpose bot with advanced custom commands. It is being developed by my humble self and the rest of the development team. The programs that run the bot are written in multiple different languages including Java, Kotlin and Go. This is the respository for the main bot, other parts of the program are in separate repositories.
+Arraybot is an elite multipurpose bot with advanced custom commands.
+It is being developed by my humble self and the rest of the development team.
+The programs that run the bot are written in multiple different languages including Java, Kotlin and Go.
+This is the repository for the main bot, other parts of the program are in separate repositories.
+If you intend to self-host this for non-official purposes you will receive no support.
 
 ## Getting started
 
@@ -22,4 +24,4 @@ Arraybot comes hosted for you, if you would like to compile it and run it yourse
 
 ## Contributing
 
-If you want to make a few PRs here and there to fix bugs (and create ones) and/or add small new things then that's totally cool, we'd appreciate it. However, if you would like to join the active development team, then you will have to hope that you get recruited by me.
+Please see the CONTRIBUTING.md file.
