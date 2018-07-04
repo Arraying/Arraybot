@@ -82,13 +82,20 @@ public final class ScriptMessage {
      * Toggles the pin for the message.
      * @return True if the message has been pinned.
      */
-    public boolean pin(){
+    public boolean pin() {
         if(underlying.isPinned()) {
             underlying.unpin().queue();
         } else {
             underlying.pin().queue();
         }
         return underlying.isPinned();
+    }
+
+    /**
+     * Deletes the message.
+     */
+    public void delete() {
+        underlying.delete().queue();
     }
 
 }
