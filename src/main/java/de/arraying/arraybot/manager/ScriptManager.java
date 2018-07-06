@@ -63,6 +63,7 @@ public final class ScriptManager {
                 .variable("commands", new CommandMethods(environment))
                 .variable("manager", new ManagerMethods(environment))
                 .variable("storage", new StorageMethods(environment))
+                .variable("time", System.currentTimeMillis())
                 .evaluate();
     }
 
