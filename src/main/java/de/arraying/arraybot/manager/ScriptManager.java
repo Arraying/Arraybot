@@ -15,6 +15,7 @@ import org.apache.commons.io.IOUtils;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.time.Instant;
 import java.util.regex.Pattern;
 
 /**
@@ -63,7 +64,7 @@ public final class ScriptManager {
                 .variable("commands", new CommandMethods(environment))
                 .variable("manager", new ManagerMethods(environment))
                 .variable("storage", new StorageMethods(environment))
-                .variable("time", System.currentTimeMillis())
+                .variable("time", Instant.now())
                 .evaluate();
     }
 
