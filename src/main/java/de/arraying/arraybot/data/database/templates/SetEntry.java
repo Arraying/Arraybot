@@ -35,7 +35,7 @@ public final class SetEntry implements Entry {
      * @param deletable Whether or not the set entry can be deleted.
      */
     public SetEntry(boolean deletable) {
-        this.redis = Redis.getInstance();
+        this.redis = Redis.INSTANCE;
         this.deletable = deletable;
     }
 
@@ -43,7 +43,7 @@ public final class SetEntry implements Entry {
      * Creates a new set entry.
      */
     public SetEntry() {
-        this.redis = Redis.getInstance();
+        this.redis = Redis.INSTANCE;
         this.deletable = false;
     }
 

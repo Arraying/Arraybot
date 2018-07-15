@@ -32,30 +32,12 @@ import java.util.regex.PatternSyntaxException;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-public final class Filter {
-
-    private static Filter instance;
-    private final static Object mutex = new Object();
+public enum Filter {
 
     /**
-     * Private constructor to prevent initialization.
+     * The instance.
      */
-    private Filter(){}
-
-    /**
-     * The static instance getter. Thread safe.
-     * @return The instance.
-     */
-    public static Filter getInstance() {
-        if(instance == null) {
-            synchronized(mutex) {
-                if(instance == null) {
-                    instance = new Filter();
-                }
-            }
-        }
-        return instance;
-    }
+    INSTANCE;
 
     /**
      * Handles message filtering.
@@ -148,12 +130,10 @@ public final class Filter {
     private boolean needsFiltering(String filteredPhrase, String message, boolean regex) {
         if(!regex) {
             String phraseTrimmed = filteredPhrase.trim().toLowerCase();
-            if(message.contains(filteredPhrase.toLowerCase())
+            return message.contains(filteredPhrase.toLowerCase())
                     || (message.startsWith(phraseTrimmed) && message.contains(" "))
                     || (message.endsWith(phraseTrimmed) && message.contains(" "))
-                    || message.equalsIgnoreCase(phraseTrimmed)) {
-                return true;
-            }
+                    || message.equalsIgnoreCase(phraseTrimmed);
         } else {
             try {
                 return message.matches(filteredPhrase);
@@ -161,7 +141,6 @@ public final class Filter {
                 return false;
             }
         }
-        return false;
     }
 
     /**

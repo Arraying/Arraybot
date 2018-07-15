@@ -35,9 +35,10 @@ repositories {
 }
 
 dependencies {
-    compile "com.github.Arraying:Kotys:0.4.5" // JSON
+    compile "com.github.Arraying:Kotys:0.5.0" // JSON
+    compile "com.github.Arraying:Prime:0.1.1" // Scripting
     compile "ch.qos.logback:logback-classic:1.2.3" // Logging
-    compile "net.dv8tion:JDA:3.6.0_376" // Discord
+    compile "net.dv8tion:JDA:3.7.0_382" // Discord
     compile "io.lettuce:lettuce-core:5.1.0.M1" // Database
     compile "commons-io:commons-io:2.6" // Utils
     compile "org.apache.commons:commons-lang3:3.7" // Utils

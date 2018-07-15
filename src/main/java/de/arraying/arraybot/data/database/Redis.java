@@ -25,33 +25,15 @@ import org.slf4j.LoggerFactory;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-public final class Redis {
+public enum Redis {
 
-    private static Redis instance;
-    private static final Object mutex = new Object();
+    /**
+     * The instance.
+     */
+    INSTANCE;
+
     private final Logger logger = LoggerFactory.getLogger("Redis");
     private RedisCommands sync;
-
-    /**
-     * Private constructor to prevent initialization.
-     */
-    private Redis() {
-    }
-
-    /**
-     * The singleton getter. Thread safe.
-     * @return The singleton instance.
-     */
-    public static Redis getInstance() {
-        if(instance == null) {
-            synchronized(mutex) {
-                if(instance == null) {
-                    instance = new Redis();
-                }
-            }
-        }
-        return instance;
-    }
 
     /**
      * Gets the Redis resource from the pool.
@@ -64,9 +46,8 @@ public final class Redis {
     /**
      * Connects to the Redis server.
      * @param configuration The configuration object.
-     * @throws Exception If an error occurs.
      */
-    public void connect(Configuration configuration) throws Exception {
+    public void connect(Configuration configuration) {
         if(sync != null) {
             return;
         }

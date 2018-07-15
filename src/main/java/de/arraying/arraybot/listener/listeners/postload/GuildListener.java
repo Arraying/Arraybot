@@ -77,7 +77,7 @@ public final class GuildListener extends PostLoadListener {
             this.id = id;
             if(!start) {
                 try {
-                    Arraybot.getInstance().getFileManager().addToRemovalQueue(id);
+                    Arraybot.INSTANCE.getFileManager().addToRemovalQueue(id);
                 } catch(IOException exception) {
                     logger.error("An error occurred adding to the removal queue.", exception);
                 }
@@ -95,11 +95,11 @@ public final class GuildListener extends PostLoadListener {
             } catch(InterruptedException exception) {
                 logger.error("Encountered interrupted exception, ", exception);
             }
-            if(!Arraybot.getInstance().getBotManager().isGuild(id)) {
-                Redis.getInstance().purge(id);
+            if(!Arraybot.INSTANCE.getBotManager().isGuild(id)) {
+                Redis.INSTANCE.purge(id);
             }
             try {
-                Arraybot.getInstance().getFileManager().removeFromRemovalQueue(id);
+                Arraybot.INSTANCE.getFileManager().removeFromRemovalQueue(id);
             } catch(IOException exception) {
                 logger.error("An error occurred removing from the removal queue.", exception);
             }

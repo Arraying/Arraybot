@@ -31,7 +31,7 @@ object ULambda {
      * E.g. MUTE = MUTE || TEMP_MUTE
      */
     fun getSpecificGeneralizedPunishment(guild: Guild, user: Long, type: PunishmentType): PunishmentObject? {
-        return Arraybot.getInstance().punishmentManager.getSpecificPunishment(guild, {
+        return Arraybot.INSTANCE.punishmentManager.getSpecificPunishment(guild, {
             it.user == user
             && if(type == PunishmentType.BAN) {
                 (it.type == PunishmentType.BAN

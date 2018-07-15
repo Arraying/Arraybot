@@ -30,12 +30,11 @@ public final class StartupScripting extends StartupTask {
 
     /**
      * Runs the actual startup task.
-     * @throws Exception If an error occurs.
      */
     @Override
-    public void onTask() throws Exception {
+    public void onTask() {
         logger.info("Creating the script manager...");
-        Arraybot.getInstance().setScriptManager(new ScriptManager());
+        Arraybot.INSTANCE.setScriptManager(new ScriptManager());
     }
 
 }

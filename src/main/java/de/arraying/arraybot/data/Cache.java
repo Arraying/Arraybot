@@ -15,32 +15,16 @@ package de.arraying.arraybot.data;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-public final class Cache {
-    
+public enum Cache {
+
+    /**
+     * The instance.
+     */
+    INSTANCE;
+
     private static Cache instance;
     private static final Object mutex = new Object();
     private String authorIconUrl;
-
-    /**
-     * Empty constructor to prevent initialization.
-     */
-    private Cache() {
-    }
-
-    /**
-     * The static instance getter. Thread safe.
-     * @return The instance.
-     */
-    public static Cache getInstance() {
-        if(instance == null) {
-            synchronized(mutex) {
-                if(instance == null) {
-                    instance = new Cache();
-                }
-            }
-        }
-        return instance;
-    }
 
     /**
      * Gets the author's icon URL.

@@ -22,7 +22,7 @@ import net.dv8tion.jda.core.hooks.ListenerAdapter;
  */
 public final class ReadyListener extends ListenerAdapter {
 
-    private final BotManager manager = Arraybot.getInstance().getBotManager();
+    private final BotManager manager = Arraybot.INSTANCE.getBotManager();
 
     /**
      * This event gets fired when JDA is ready and all

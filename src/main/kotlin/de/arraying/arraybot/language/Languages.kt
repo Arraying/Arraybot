@@ -25,7 +25,7 @@ import java.util.regex.Pattern
 object Languages {
 
     private val languages = HashMap<String, JSON>()
-    private val default = Arraybot.getInstance().configuration.botLanguage
+    private val default = Arraybot.INSTANCE.configuration.botLanguage
     private val filePattern = Pattern.compile("[a-z]{2,}\\.json")
     private val logger = LoggerFactory.getLogger("Languages")
     private var refreshing = false
@@ -55,7 +55,7 @@ object Languages {
             if(languages.isEmpty()) {
                 throw IllegalArgumentException("No valid language were found.")
             }
-            if(!languages.containsKey(Arraybot.getInstance().configuration.botLanguage)) {
+            if(!languages.containsKey(Arraybot.INSTANCE.configuration.botLanguage)) {
                 throw IllegalArgumentException("The default language specified does not exist.")
             }
             refreshing = false

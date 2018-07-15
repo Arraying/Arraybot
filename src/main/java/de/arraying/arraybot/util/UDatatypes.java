@@ -62,7 +62,7 @@ public final class UDatatypes {
      * @return The shard ID.
      */
     public static int getShardId(long guildId) {
-        int shards = Arraybot.getInstance().getConfiguration().getBotShards();
+        int shards = Arraybot.INSTANCE.getConfiguration().getBotShards();
         return (int) ((guildId >> 22) % shards);
     }
 

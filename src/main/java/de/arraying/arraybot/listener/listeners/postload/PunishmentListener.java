@@ -37,6 +37,7 @@ import net.dv8tion.jda.core.events.guild.member.GuildMemberRoleRemoveEvent;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+@SuppressWarnings("ToArrayCallWithZeroLengthArrayArgument")
 public final class PunishmentListener extends PostLoadListener {
 
     private PunishmentManager punishmentManager;
@@ -46,7 +47,7 @@ public final class PunishmentListener extends PostLoadListener {
      */
     @Override
     public void init() {
-        punishmentManager = Arraybot.getInstance().getPunishmentManager();
+        punishmentManager = Arraybot.INSTANCE.getPunishmentManager();
     }
 
     /**
@@ -156,6 +157,7 @@ public final class PunishmentListener extends PostLoadListener {
             }
             AuditLogEntry entry = entries.get(0);
             if(!isPunishment(entry, user, type, roles)
+                    || entry.getUser() == null
                     || entry.getUser().getIdLong() == guild.getSelfMember().getUser().getIdLong()) {
                 return;
             }
@@ -168,7 +170,7 @@ public final class PunishmentListener extends PostLoadListener {
                     return;
                 }
                 if(!punishmentManager.revoke(guild, punishmentObject, staff)) {
-                    Arraybot.getInstance().getLogger().error("Failed the revocation of the punishment number {} in the guild {}.", punishmentObject.getId(), guild.getIdLong());
+                    Arraybot.INSTANCE.getLogger().error("Failed the revocation of the punishment number {} in the guild {}.", punishmentObject.getId(), guild.getIdLong());
                 }
             }
         });

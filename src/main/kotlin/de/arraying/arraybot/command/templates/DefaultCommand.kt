@@ -43,7 +43,7 @@ abstract class DefaultCommand(final override val name: String,
                               private val customPermissionChecking: Boolean = false,
                               private val beta: Boolean = false): Command {
 
-    protected val arraybot = Arraybot.getInstance()!!
+    protected val arraybot = Arraybot.INSTANCE
     private val logger = LoggerFactory.getLogger("Command-${WordUtils.capitalize(name)}")
     private val descriptionPath = "commands_${name}_description"
     private val syntaxPath = "commands_${name}_syntax"
@@ -124,7 +124,7 @@ abstract class DefaultCommand(final override val name: String,
         val author = environment.author
         launch(context = CommonPool) {
             logger.info("${author.idLong} executed the command in the guild ${channel.guild.idLong}.")
-            val resource = Redis.getInstance().resource
+            val resource = Redis.INSTANCE.resource
             resource.incr(UDatabase.COMMANDS_KEY)
         }
         status?.let {

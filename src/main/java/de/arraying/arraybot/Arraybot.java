@@ -30,10 +30,13 @@ import java.util.Set;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-public final class Arraybot {
+public enum Arraybot {
 
-    private static Arraybot instance;
-    private static final Object mutex = new Object();
+    /**
+     * The singleton instance.
+     */
+    INSTANCE;
+
     private final Logger logger = LoggerFactory.getLogger("Arraybot");
     private final Set<Long> overrides = new HashSet<>();
     private Configuration configuration;
@@ -50,28 +53,7 @@ public final class Arraybot {
      */
     public static void main(String[] args) {
         Thread.currentThread().setName("Main");
-        Arraybot.getInstance().init();
-    }
-
-    /**
-     * Private constructor to prevent initialization.
-     */
-    private Arraybot() {
-    }
-
-    /**
-     * The singleton getter. Thread safe.
-     * @return The singleton instance.
-     */
-    public static Arraybot getInstance() {
-        if(instance == null) {
-            synchronized(mutex) {
-                if(instance == null) {
-                    instance = new Arraybot();
-                }
-            }
-        }
-        return instance;
+        Arraybot.INSTANCE.init();
     }
 
     /**

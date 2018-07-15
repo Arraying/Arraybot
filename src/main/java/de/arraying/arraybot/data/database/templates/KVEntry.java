@@ -31,7 +31,7 @@ public final class KVEntry implements Entry {
      * Creates a new key/value entry.
      */
     public KVEntry() {
-        this.redis = Redis.getInstance();
+        this.redis = Redis.INSTANCE;
     }
 
     /**

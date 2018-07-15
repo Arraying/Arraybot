@@ -53,7 +53,7 @@ public final class Listener {
          */
         @Override
         public void onExecution() {
-            BotListRequest[] requests = Arraybot.getInstance().getConfiguration().getRequests();
+            BotListRequest[] requests = Arraybot.INSTANCE.getConfiguration().getRequests();
             if(requests == null) {
                 logger.warn("Could not POST an updated guild count due to there being no endpoints.");
                 return;

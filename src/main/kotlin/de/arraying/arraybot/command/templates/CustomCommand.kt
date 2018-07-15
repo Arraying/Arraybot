@@ -55,7 +55,7 @@ class CustomCommand(override val name: String,
         val channel = environment.channel
         launch(CommonPool) {
             logger.info("${environment.author.idLong} executed the custom command in the guild ${channel.guild.idLong}.")
-            val resource = Redis.getInstance().resource
+            val resource = Redis.INSTANCE.resource
             resource.incr(UDatabase.COMMANDS_KEY)
         }
         if(type == CustomCommandType.UNKNOWN) {
@@ -75,7 +75,7 @@ class CustomCommand(override val name: String,
             return
         }
         val uid = environment.message.idLong
-        val storageManager = Arraybot.getInstance().storageManager
+        val storageManager = Arraybot.INSTANCE.storageManager
         storageManager.customCommandStorageDataStorage.create(uid)
         var value: String =
             if(syntax == CustomCommandSyntax.STARTSWITH) {

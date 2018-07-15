@@ -32,16 +32,15 @@ public final class StartupMisc extends StartupTask {
 
     /**
      * Runs the actual startup task.
-     * @throws Exception If an error occurs.
      */
     @Override
-    public void onTask() throws Exception {
+    public void onTask() {
         logger.info("Creating file manager...");
-        Arraybot.getInstance().setFileManager(new FileManager());
+        Arraybot.INSTANCE.setFileManager(new FileManager());
         logger.info("Creating punishment manager...");
-        Arraybot.getInstance().setPunishmentManager(new PunishmentManager());
+        Arraybot.INSTANCE.setPunishmentManager(new PunishmentManager());
         logger.info("Creating storage manager...");
-        Arraybot.getInstance().setStorageManager(new StorageManager());
+        Arraybot.INSTANCE.setStorageManager(new StorageManager());
     }
 
 }

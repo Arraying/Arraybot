@@ -32,7 +32,7 @@ class DeleteParameter: Parameter {
      * Parses the parameter.
      */
     override fun parse(environment: CommandEnvironment?, input: String?): String {
-        Arraybot.getInstance().storageManager.customCommandStorageDataStorage.get(environment!!.message.idLong).isDelete = true
+        Arraybot.INSTANCE.storageManager.customCommandStorageDataStorage.get(environment!!.message.idLong).isDelete = true
         return input!!
     }
 

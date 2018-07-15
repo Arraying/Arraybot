@@ -32,7 +32,7 @@ public abstract class HashEntry<T> implements Entry {
      * Creates a new hash entry.
      */
     protected HashEntry() {
-        this.redis = Redis.getInstance();
+        this.redis = Redis.INSTANCE;
     }
 
     /**

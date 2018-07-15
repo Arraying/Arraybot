@@ -35,7 +35,7 @@ object Commands {
 
     val commands = MultiKeyMap<String, DefaultCommand>()
     private val logger = LoggerFactory.getLogger("Command-Manager")
-    private val defaultPrefix = Arraybot.getInstance().configuration.botPrefix
+    private val defaultPrefix = Arraybot.INSTANCE.configuration.botPrefix
     /**
      * Registers all commands.
      */

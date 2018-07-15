@@ -27,7 +27,7 @@ class JSREngine(private val mode: Mode): EvalEngine {
     private val javaScriptEngine = scriptEngineManager.getEngineByName("nashorn")!!
 
     init {
-        javaScriptEngine.put("arraybot", Arraybot.getInstance())
+        javaScriptEngine.put("arraybot", Arraybot.INSTANCE)
         javaScriptEngine.eval("var imports = new JavaImporter(java.io, java.lang, java.util, java.net, " +
                 "Packages.net.dv8tion.jda.core, Packages.net.dv8tion.jda.core.entities, Packages.net.dv8tion.jda.core.managers);")
     }

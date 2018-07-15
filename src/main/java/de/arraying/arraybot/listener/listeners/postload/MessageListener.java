@@ -42,7 +42,7 @@ public final class MessageListener extends PostLoadListener {
     @SuppressWarnings("unchecked")
     @Override
     public void onMessageReceived(MessageReceivedEvent event) {
-        RedisCommands resource = Redis.getInstance().getResource();
+        RedisCommands resource = Redis.INSTANCE.getResource();
         resource.incr(UDatabase.MESSAGES_KEY);
     }
 
@@ -56,7 +56,7 @@ public final class MessageListener extends PostLoadListener {
         if(event == null) {
             return;
         }
-        Filter.getInstance().handle(event);
+        Filter.INSTANCE.handle(event);
         if(event.getAuthor().isFake()
             || event.getAuthor().isBot()) {
             return;

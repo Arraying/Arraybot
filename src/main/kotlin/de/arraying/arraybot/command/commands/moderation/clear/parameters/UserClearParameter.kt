@@ -36,7 +36,7 @@ class UserClearParameter: Parameter {
     override fun parse(environment: CommandEnvironment?, input: String?): String {
         var toReturn = input!!.replace(trigger, "")
         val id = environment!!.message.idLong
-        val storage = Arraybot.getInstance().storageManager.clearCommandStorageDataStorage.get(id)
+        val storage = Arraybot.INSTANCE.storageManager.clearCommandStorageDataStorage.get(id)
         val userRaw = UParameter.getParameterValue(input, trigger)
         if(userRaw.isEmpty()) {
             return toReturn

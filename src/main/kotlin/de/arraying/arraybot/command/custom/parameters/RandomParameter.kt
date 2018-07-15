@@ -32,7 +32,7 @@ class RandomParameter: Parameter {
      * Parses the parameter.
      */
     override fun parse(environment: CommandEnvironment?, input: String?): String {
-        Arraybot.getInstance().storageManager.customCommandStorageDataStorage.get(environment!!.message.idLong).isRandom = true
+        Arraybot.INSTANCE.storageManager.customCommandStorageDataStorage.get(environment!!.message.idLong).isRandom = true
         return input!!
     }
 

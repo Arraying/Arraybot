@@ -32,7 +32,7 @@ class SilentParameter: Parameter {
      * Parses the parameter.
      */
     override fun parse(environment: CommandEnvironment?, input: String?): String {
-        Arraybot.getInstance().storageManager.customCommandStorageDataStorage.get(environment!!.message.idLong).isSilent = true
+        Arraybot.INSTANCE.storageManager.customCommandStorageDataStorage.get(environment!!.message.idLong).isSilent = true
         return input!!
     }
 

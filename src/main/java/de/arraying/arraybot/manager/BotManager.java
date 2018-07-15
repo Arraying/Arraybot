@@ -45,7 +45,7 @@ public final class BotManager {
 
     private ShardManager shardManager;
 
-    private final Configuration configuration = Arraybot.getInstance().getConfiguration();
+    private final Configuration configuration = Arraybot.INSTANCE.getConfiguration();
     private final Logger logger = LoggerFactory.getLogger("Bot-Manager");
 
     /**
@@ -88,7 +88,7 @@ public final class BotManager {
         shard.addEventListener((Object[]) Listener.POST_LOAD_LISTENERS);
         new Listener.Updater(shard).create();
         setAuthorUrl(shard);
-        PunishmentManager punishmentManager = Arraybot.getInstance().getPunishmentManager();
+        PunishmentManager punishmentManager = Arraybot.INSTANCE.getPunishmentManager();
         new AbstractTask("Punishments") {
 
             /**
@@ -181,7 +181,7 @@ public final class BotManager {
     private void setAuthorUrl(JDA shard) {
         User author = shard.getUserById(configuration.getBotAuthors()[0]);
         if(author != null) {
-            Cache.getInstance().setAuthorIconUrl(author.getAvatarUrl());
+            Cache.INSTANCE.setAuthorIconUrl(author.getAvatarUrl());
         }
     }
 

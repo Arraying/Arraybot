@@ -36,7 +36,7 @@ class ShardsCommand: DefaultCommand("shards",
         val embed = UEmbed.getEmbed(channel)
                 .setDescription(Message.COMMANDS_SHARDS_EMBED_TITLE.getContent(channel))
         val entries = ArrayList<String>()
-        for(shard in Arraybot.getInstance().botManager.shardManager.shards) {
+        for(shard in Arraybot.INSTANCE.botManager.shardManager.shards) {
             entries.add("Shard #${shard.shardInfo.shardId} ${shard.status} [" +
                     "${shard.guilds.size}g, " +
                     "${shard.users.size}u, " +

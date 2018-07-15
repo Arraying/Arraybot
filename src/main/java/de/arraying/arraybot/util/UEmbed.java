@@ -59,13 +59,13 @@ public final class UEmbed {
             embedBuilder.setThumbnail(icon);
         }
         String languageFooter;
-        if(!language.equalsIgnoreCase(Arraybot.getInstance().getConfiguration().getBotLanguage())) {
+        if(!language.equalsIgnoreCase(Arraybot.INSTANCE.getConfiguration().getBotLanguage())) {
             languageFooter = Message.EMBED_TRANSLATED.getContent(guild.getIdLong());
         } else {
             languageFooter = "";
         }
         embedBuilder.setFooter(Message.EMBED_FOOTER.getContent(guild.getIdLong(), String.valueOf(year), languageFooter),
-                shouldImage(guild) ? Cache.getInstance().getAuthorIconUrl() : null);
+                shouldImage(guild) ? Cache.INSTANCE.getAuthorIconUrl() : null);
         return embedBuilder;
     }
 

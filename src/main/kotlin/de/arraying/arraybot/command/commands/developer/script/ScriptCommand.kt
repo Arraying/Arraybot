@@ -39,6 +39,8 @@ class ScriptCommand: DefaultCommand("script",
             Message.COMMANDS_SCRIPT_ERROR_LINK.send(channel).queue()
             return
         }
-        arraybot.scriptManager.executeScript(link, environment)
+        arraybot.scriptManager.executeScript(link, environment) {
+            it.printStackTrace()
+        }
     }
 }

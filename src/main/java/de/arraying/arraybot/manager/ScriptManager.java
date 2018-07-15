@@ -1,7 +1,6 @@
 package de.arraying.arraybot.manager;
 
 import de.arraying.arraybot.command.CommandEnvironment;
-import de.arraying.arraybot.script.ScriptEvaluator;
 import de.arraying.arraybot.script.entity.ScriptGuild;
 import de.arraying.arraybot.script.entity.ScriptMessage;
 import de.arraying.arraybot.script.entity.ScriptTextChannel;
@@ -10,13 +9,19 @@ import de.arraying.arraybot.script.method.CommandMethods;
 import de.arraying.arraybot.script.method.EmbedMethods;
 import de.arraying.arraybot.script.method.ManagerMethods;
 import de.arraying.arraybot.script.method.StorageMethods;
+import de.arraying.arraybot.script.provider.GistProvider;
+import de.arraying.arraybot.script.provider.PastebinProvider;
+import de.arraying.arraybot.script.provider.StandardProvider;
+import de.arraying.prime.Prime;
+import de.arraying.prime.PrimeSourceProvider;
 import org.apache.commons.io.IOUtils;
 
 import java.io.IOException;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.time.Instant;
-import java.util.regex.Pattern;
+import java.util.Arrays;
+import java.util.function.Consumer;
 
 /**
  * Copyright 2017 Arraying
@@ -35,7 +40,25 @@ import java.util.regex.Pattern;
  */
 public final class ScriptManager {
 
-    private final Pattern pastebin = Pattern.compile("^(http(s)?://pastebin\\.com/raw/[0-9a-zA-Z]+)$");
+    /**
+     * All providers.
+     */
+    private static final PrimeSourceProvider[] PROVIDERS = new PrimeSourceProvider[] {
+            new GistProvider(),
+            new PastebinProvider(),
+            new StandardProvider(),
+    };
+
+    /**
+     * A Prime instance just for testing, this should never evaluate.
+     */
+    private static final Prime PRIME_TEST;
+
+    static {
+        Prime.Builder builder = new Prime.Builder();
+        Arrays.stream(PROVIDERS).forEach(builder::withProvider);
+        PRIME_TEST = builder.build("print('Something went really wrong...')");
+    }
 
     /**
      * Whether or not the provided script URL is valid.
@@ -43,29 +66,32 @@ public final class ScriptManager {
      * @return True if it is, false otherwise.
      */
     public boolean isValid(String value) {
-        return pastebin.matcher(value).find();
+        return Prime.Util.getMatches(PRIME_TEST, value) != null;
     }
 
     /**
      * Executes the script.
      * @param scriptUrl The script URL.
      * @param environment The command environment.
+     * @param error The error consumer.
      * @throws IOException If an exception occurs parsing the code.
      */
-    public void executeScript(String scriptUrl, CommandEnvironment environment)
+    public void executeScript(String scriptUrl, CommandEnvironment environment, Consumer<Exception> error)
             throws Exception {
         String code = IOUtils.toString(new URL(scriptUrl), Charset.forName("utf-8"));
-        new ScriptEvaluator(code)
-                .variable("guild", new ScriptGuild(environment, environment.getGuild()))
-                .variable("channel", new ScriptTextChannel(environment, environment.getChannel()))
-                .variable("user", new ScriptUser(environment, environment.getMember()))
-                .variable("message", new ScriptMessage(environment, environment.getMessage()))
-                .variable("embeds", new EmbedMethods())
-                .variable("commands", new CommandMethods(environment))
-                .variable("manager", new ManagerMethods(environment))
-                .variable("storage", new StorageMethods(environment))
-                .variable("time", Instant.now())
-                .evaluate();
+        Prime.Builder primeBuilder = new Prime.Builder()
+                .withVariable("guild", new ScriptGuild(environment, environment.getGuild()))
+                .withVariable("channel", new ScriptTextChannel(environment, environment.getChannel()))
+                .withVariable("user", new ScriptUser(environment, environment.getMember()))
+                .withVariable("message", new ScriptMessage(environment, environment.getMessage()))
+                .withVariable("embeds", new EmbedMethods())
+                .withVariable("commands", new CommandMethods(environment))
+                .withVariable("manager", new ManagerMethods(environment))
+                .withVariable("storage", new StorageMethods(environment))
+                .withVariable("time", Instant.now());
+        Arrays.stream(PROVIDERS).forEach(primeBuilder::withProvider);
+        Prime prime = primeBuilder.build(code);
+        prime.evaluate(error);
     }
 
 }

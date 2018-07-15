@@ -26,7 +26,7 @@ object UPremium {
      * Checks if the guild is able to execute premium commands.
      */
     fun isPremium(environment: CommandEnvironment): Boolean {
-        val arraybot = Arraybot.getInstance()
+        val arraybot = Arraybot.INSTANCE
         val logger = LoggerFactory.getLogger("Premium")
         val hub = arraybot.botManager.hub
         if(hub == null) {

@@ -21,11 +21,11 @@ import de.arraying.arraybot.command.CommandEnvironment
 abstract class SubCommand(open val name: String,
                           open val aliases: Array<String> = arrayOf()) {
 
-    protected val arraybot = Arraybot.getInstance()!!
+    protected val arraybot = Arraybot.INSTANCE
 
     /**
      * Executes the subcommand.
      */
-    abstract fun onSubCommand(environment: CommandEnvironment, args: List<String>);
+    abstract fun onSubCommand(environment: CommandEnvironment, args: List<String>)
 
 }

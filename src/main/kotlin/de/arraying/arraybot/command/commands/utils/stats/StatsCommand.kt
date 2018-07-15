@@ -38,7 +38,7 @@ class StatsCommand: DefaultCommand("stats",
      */
     override fun onCommand(environment: CommandEnvironment, args: List<String>) {
         val channel = environment.channel
-        val resource = Redis.getInstance().resource
+        val resource = Redis.INSTANCE.resource
         val shards = arraybot.botManager.shardManager.shards
         val jda = environment.guild.jda
         val guilds = shards.sumBy {

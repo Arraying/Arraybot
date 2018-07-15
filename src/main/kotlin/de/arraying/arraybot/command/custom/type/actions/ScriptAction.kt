@@ -34,16 +34,25 @@ class ScriptAction: CustomCommandAction {
      * Executes the script.
      */
     override fun onAction(environment: CommandEnvironment, value: String): Boolean {
-        if(!Arraybot.getInstance().scriptManager.isValid(value)) {
+        if(!Arraybot.INSTANCE.scriptManager.isValid(value)) {
             Message.CUSTOM_SCRIPT_INVALID.send(environment.channel).queue()
             return false
         }
         try {
-            Arraybot.getInstance().scriptManager.executeScript(value, environment)
+            Arraybot.INSTANCE.scriptManager.executeScript(value, environment) {
+                error(environment, it)
+            }
         } catch(exception: Exception) {
-            Message.SCRIPT_ERROR.send(environment.channel, exception.javaClass.name, exception.message?: "-").queue()
+            error(environment, exception)
         }
         return true
+    }
+
+    /**
+     * Errors.
+     */
+    private fun error(environment: CommandEnvironment, exception: Exception?) {
+        Message.SCRIPT_ERROR.send(environment.channel, exception?.javaClass?.name?: "", exception?.message?: "-").queue()
     }
 
 }

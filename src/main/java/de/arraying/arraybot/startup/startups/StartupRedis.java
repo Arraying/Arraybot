@@ -21,7 +21,7 @@ import de.arraying.arraybot.startup.StartupTask;
  */
 public final class StartupRedis extends StartupTask {
 
-    private final Arraybot arraybot = Arraybot.getInstance();
+    private final Arraybot arraybot = Arraybot.INSTANCE;
 
     /**
      * Creates the Redis startup task.
@@ -32,12 +32,11 @@ public final class StartupRedis extends StartupTask {
 
     /**
      * Runs the actual startup task.
-     * @throws Exception If an error occurs.
      */
     @Override
-    public void onTask() throws Exception {
+    public void onTask() {
         logger.info("Attempting to start up Redis...");
-        Redis redis = Redis.getInstance();
+        Redis redis = Redis.INSTANCE;
         redis.connect(arraybot.getConfiguration());
         logger.info("Successfully connected to the Redis server.");
         logger.info("All Redis entries have been registered.");

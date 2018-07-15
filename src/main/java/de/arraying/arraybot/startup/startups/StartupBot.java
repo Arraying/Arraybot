@@ -33,18 +33,17 @@ public final class StartupBot extends StartupTask {
 
     /**
      * Runs the actual startup task.
-     * @throws Exception If an error occurs.
      */
     @Override
-    public void onTask() throws Exception {
+    public void onTask() {
         logger.info("Creating the bot manager...");
         BotManager manager = new BotManager();
-        Arraybot.getInstance().setBotManager(manager);
+        Arraybot.INSTANCE.setBotManager(manager);
         logger.info("Starting the bot manager...");
         manager.start();
         logger.info("Finished starting the shards, they should be loading asynchronously if they are not loaded yet.");
         try {
-            for(long guild : Arraybot.getInstance().getFileManager().getRemovalQueue()) {
+            for(long guild : Arraybot.INSTANCE.getFileManager().getRemovalQueue()) {
                 new GuildListener.Remover(guild, true).create();
             }
         } catch(IOException exception) {

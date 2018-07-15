@@ -60,12 +60,12 @@ public final class GuildEntry extends HashEntry<GuildEntry.Fields> {
         /**
          * The guild's prefix.
          */
-        PREFIX(new EntryField("prefix", Arraybot.getInstance().getConfiguration().getBotPrefix())),
+        PREFIX(new EntryField("prefix", Arraybot.INSTANCE.getConfiguration().getBotPrefix())),
 
         /**
          * The guild's bot language.
          */
-        LANGUAGE(new EntryField("language", Arraybot.getInstance().getConfiguration().getBotLanguage())),
+        LANGUAGE(new EntryField("language", Arraybot.INSTANCE.getConfiguration().getBotLanguage())),
 
         /**
          * The join announcer toggle.

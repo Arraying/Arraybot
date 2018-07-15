@@ -33,7 +33,7 @@ class BotsClearParameter: Parameter {
      */
     override fun parse(environment: CommandEnvironment?, input: String?): String {
         val id = environment!!.message.idLong
-        val storage = Arraybot.getInstance().storageManager.clearCommandStorageDataStorage.get(id)
+        val storage = Arraybot.INSTANCE.storageManager.clearCommandStorageDataStorage.get(id)
         storage.isBots = true
         return input!!.replace(trigger, "")
     }
