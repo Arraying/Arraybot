@@ -352,5 +352,6 @@
   "role_invalid":"The provided role is invalid. Please mention/give the name/give the ID of an existing role.",
   "role_or_permission_invalid":"The permission provided it invalid. Please input a role or permission. For more information see the wiki.",
   "script_error":"Error [%s]: %s",
-  "script_error_premium":"Unfortunately, you are unable to store more variables. Each guild is limited to %s variables they can store. Premium guilds can bypass this limit, for more information execute \"{prefix}premium\"."
+  "script_error_premium":"Unfortunately, you are unable to store more variables. Each guild is limited to %s variables they can store. Premium guilds can bypass this limit, for more information execute \"{prefix}premium\".",
+  "script_error_url":"The URL provided for the script URL is invalid (stdlib scripts are also not allowed as values)."
 }

@@ -1,6 +1,7 @@
 package de.arraying.arraybot.manager;
 
 import de.arraying.arraybot.command.CommandEnvironment;
+import de.arraying.arraybot.language.Message;
 import de.arraying.arraybot.script.entity.ScriptGuild;
 import de.arraying.arraybot.script.entity.ScriptMessage;
 import de.arraying.arraybot.script.entity.ScriptTextChannel;
@@ -14,9 +15,11 @@ import de.arraying.arraybot.script.provider.PastebinProvider;
 import de.arraying.arraybot.script.provider.StandardProvider;
 import de.arraying.prime.Prime;
 import de.arraying.prime.PrimeSourceProvider;
+import net.dv8tion.jda.core.entities.TextChannel;
 import org.apache.commons.io.IOUtils;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.time.Instant;
@@ -78,7 +81,19 @@ public final class ScriptManager {
      */
     public void executeScript(String scriptUrl, CommandEnvironment environment, Consumer<Exception> error)
             throws Exception {
-        String code = IOUtils.toString(new URL(scriptUrl), Charset.forName("utf-8"));
+        PrimeSourceProvider provider = Prime.Util.getProvider(PRIME_TEST, scriptUrl);
+        if(provider == null
+                || provider instanceof StandardProvider) {
+            invalidURL(environment.getChannel());
+            return;
+        }
+        String code;
+        try {
+            code = IOUtils.toString(new URL(scriptUrl), Charset.forName("utf-8"));
+        } catch(MalformedURLException exception) {
+            invalidURL(environment.getChannel());
+            return;
+        }
         Prime.Builder primeBuilder = new Prime.Builder()
                 .withVariable("guild", new ScriptGuild(environment, environment.getGuild()))
                 .withVariable("channel", new ScriptTextChannel(environment, environment.getChannel()))
@@ -88,10 +103,19 @@ public final class ScriptManager {
                 .withVariable("commands", new CommandMethods(environment))
                 .withVariable("manager", new ManagerMethods(environment))
                 .withVariable("storage", new StorageMethods(environment))
-                .withVariable("time", Instant.now());
+                .withVariable("time", Instant.now())
+                .withMaxRuntime(10);
         Arrays.stream(PROVIDERS).forEach(primeBuilder::withProvider);
         Prime prime = primeBuilder.build(code);
         prime.evaluate(error);
+    }
+
+    /**
+     * If the URL is invalid.
+     * @param channel The channel.
+     */
+    private void invalidURL(TextChannel channel) {
+        Message.SCRIPT_ERROR_URL.send(channel).queue();
     }
 
 }

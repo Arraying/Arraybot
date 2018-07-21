@@ -21,6 +21,7 @@ import net.dv8tion.jda.core.entities.TextChannel;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+@SuppressWarnings("ALL")
 public final class ScriptTextChannel extends AbstractChannel implements ScriptEntity {
 
     private final TextChannel underlying;
@@ -68,7 +69,6 @@ public final class ScriptTextChannel extends AbstractChannel implements ScriptEn
      */
     public void message(MessageEmbed embed)
             throws Exception {
-        System.out.println("owO");
         messenger.message(embed);
     }
 

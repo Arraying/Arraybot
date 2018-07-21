@@ -55,7 +55,7 @@ public abstract class AbstractMessenger {
      */
     public void message(String message) {
         if(message == null
-                || !preprocess()) {
+                || isLimited()) {
             return;
         }
         try {
@@ -71,7 +71,7 @@ public abstract class AbstractMessenger {
      */
     public void message(MessageEmbed embed) {
         if(embed == null
-                || !preprocess()) {
+                || isLimited()) {
             return;
         }
         try {
@@ -85,17 +85,17 @@ public abstract class AbstractMessenger {
      * Preprocesses the message.
      * @return True if the message can be sent, false otherwise.
      */
-    private synchronized boolean preprocess() {
+    private synchronized boolean isLimited() {
         int messagesLimit = 5;
+        messagesSent++;
         if(messagesSent > messagesLimit) {
             if(messagesSent == messagesLimit + 1) {
                 String say = direct ? "direct" : "channel";
                 UScript.error(environment, new LimitError("Can only send " + messagesLimit + " " + say + " messages per custom command."));
             }
-            messagesSent++;
-            return false;
+            return true;
         }
-        return true;
+        return false;
     }
 
 }

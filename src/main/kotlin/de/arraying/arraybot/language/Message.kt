@@ -305,7 +305,8 @@ enum class Message(private val prefix: Boolean = false) {
     ROLE_INVALID,
     ROLE_OR_PERMISSION_INVALID,
     SCRIPT_ERROR,
-    SCRIPT_ERROR_PREMIUM(true);
+    SCRIPT_ERROR_PREMIUM(true),
+    SCRIPT_ERROR_URL;
 
     /**
      * Returns a usable rest action that can be queued to send to the channel.

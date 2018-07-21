@@ -3,6 +3,7 @@ package de.arraying.arraybot.command.commands.developer.script
 import de.arraying.arraybot.command.CommandEnvironment
 import de.arraying.arraybot.command.templates.DefaultCommand
 import de.arraying.arraybot.language.Message
+import de.arraying.arraybot.util.UScript
 import net.dv8tion.jda.core.Permission
 
 /**
@@ -40,7 +41,7 @@ class ScriptCommand: DefaultCommand("script",
             return
         }
         arraybot.scriptManager.executeScript(link, environment) {
-            it.printStackTrace()
+            UScript.error(environment, it)
         }
     }
 }

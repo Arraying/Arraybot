@@ -170,6 +170,7 @@ public final class BotManager {
                 .setShardsTotal(configuration.getBotShards())
                 .addEventListeners(new ReadyListener())
                 .setCorePoolSize(8)
+                .setUseShutdownNow(true)
                 .setGame(Game.listening(configuration.getBotPrefix() + "help || v" + configuration.getBotVersion()))
                 .build();
     }

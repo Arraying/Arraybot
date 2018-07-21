@@ -4,6 +4,7 @@ import de.arraying.arraybot.Arraybot
 import de.arraying.arraybot.command.CommandEnvironment
 import de.arraying.arraybot.command.custom.type.CustomCommandAction
 import de.arraying.arraybot.language.Message
+import de.arraying.arraybot.util.UScript
 import net.dv8tion.jda.core.entities.TextChannel
 
 /**
@@ -38,21 +39,10 @@ class ScriptAction: CustomCommandAction {
             Message.CUSTOM_SCRIPT_INVALID.send(environment.channel).queue()
             return false
         }
-        try {
-            Arraybot.INSTANCE.scriptManager.executeScript(value, environment) {
-                error(environment, it)
-            }
-        } catch(exception: Exception) {
-            error(environment, exception)
+        Arraybot.INSTANCE.scriptManager.executeScript(value, environment) {
+            UScript.error(environment, it)
         }
         return true
-    }
-
-    /**
-     * Errors.
-     */
-    private fun error(environment: CommandEnvironment, exception: Exception?) {
-        Message.SCRIPT_ERROR.send(environment.channel, exception?.javaClass?.name?: "", exception?.message?: "-").queue()
     }
 
 }
