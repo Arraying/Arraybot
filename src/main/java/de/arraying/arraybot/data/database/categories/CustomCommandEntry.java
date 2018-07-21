@@ -68,6 +68,14 @@ public final class CustomCommandEntry extends HashEntry<CustomCommandEntry.Field
         }
     }
 
+    /**
+     * Sets the category.
+     */
+    @Override
+    public void setCategory() {
+        this.category = Category.CUSTOM_COMMAND;
+    }
+
     public enum Fields {
 
         /**

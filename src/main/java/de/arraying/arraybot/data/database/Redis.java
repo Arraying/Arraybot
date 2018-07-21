@@ -61,7 +61,7 @@ public enum Redis {
         sync = connection.sync();
         for(Category category : Category.values()) {
             logger.info("Registered the category {} with the type {}.", category, category.getEntry().getType());
-            category.getEntry().setCategory(category);
+            category.getEntry().setCategory();
         }
     }
 

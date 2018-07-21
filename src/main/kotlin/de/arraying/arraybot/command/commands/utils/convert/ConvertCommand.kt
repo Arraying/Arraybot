@@ -4,10 +4,7 @@ import de.arraying.arraybot.command.CommandEnvironment
 import de.arraying.arraybot.command.templates.DefaultCommand
 import de.arraying.arraybot.language.Message
 import de.arraying.arraybot.util.UDatatypes
-import de.arraying.kotys.JSON
 import net.dv8tion.jda.core.Permission
-import okhttp3.OkHttpClient
-import okhttp3.Request
 import java.awt.Color
 
 /**
@@ -83,38 +80,7 @@ class ConvertCommand: DefaultCommand("convert",
                 }
             }
             else -> {
-                if(args.size < 3) {
-                    Message.COMMANDS_CONVERT_PROVIDE_TO.send(channel).queue()
-                    return
-                }
-                val to = args[2].toUpperCase()
-                val amount = if(args.size < 4) null else args[3]
-                val request = Request.Builder()
-                        .url("https://api.fixer.io/latest?base=$from")
-                        .build()
-                val response = OkHttpClient().newCall(request).execute()
-                val json = JSON(response.body()!!.string())
-                if(json.has("error")) {
-                    Message.COMMANDS_CONVERT_MONEY_INVALID.send(channel).queue()
-                    return
-                }
-                val multiplier: Double = if(amount != null) {
-                    val result: Double? = UDatatypes.toDouble(amount)
-                    if(result != null) {
-                        result
-                    } else {
-                        Message.COMMANDS_CONVERT_MONEY_NUMBER.send(channel).queue()
-                        return
-                    }
-                } else {
-                    1.0
-                }
-                if(!json.json("rates").has(to)) {
-                    Message.COMMANDS_CONVERT_MONEY_INVALID.send(channel).queue()
-                    return
-                }
-                val value = multiplier * json.json("rates").decimal(to)
-                Message.COMMANDS_CONVERT_MONEY_RESULT.send(channel, value.toString()).queue()
+                Message.COMMANDS_CONVERT_UNKNOWN.send(channel).queue()
             }
         }
     }

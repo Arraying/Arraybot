@@ -3,8 +3,9 @@ package de.arraying.arraybot.command
 import de.arraying.arraybot.command.commands.`fun`.cat.CatCommand
 import de.arraying.arraybot.command.commands.`fun`.dog.DogCommand
 import de.arraying.arraybot.command.commands.`fun`.eightball.EightballCommand
-import de.arraying.arraybot.command.commands.`fun`.skin.SkinCommand
 import de.arraying.arraybot.command.commands.`fun`.urban.UrbanCommand
+import de.arraying.arraybot.command.commands.customization.announcements.AnnouncementsCommand
+import de.arraying.arraybot.command.commands.customization.announcements.subcommands.*
 import de.arraying.arraybot.command.commands.customization.announcer.AnnouncerCommand
 import de.arraying.arraybot.command.commands.customization.announcer.AnnouncerGenericSubCommand
 import de.arraying.arraybot.command.commands.customization.autorole.AutoRoleCommand
@@ -66,6 +67,19 @@ import net.dv8tion.jda.core.Permission
  * limitations under the License.
  */
 enum class CommandCollection(val command: DefaultCommand) {
+
+    /**
+     * The command that handles announcements at regular intervals.
+     */
+    ANNOUNCEMENTS(AnnouncementsCommand(arrayOf(
+            AnnouncementsToggleSubCommand(),
+            AnnouncementsChannelSubCommand(),
+            AnnouncementsIntervalSubCommand(),
+            AnnouncementsAddSubCommand(),
+            AnnouncementsDeleteSubCommand(),
+            AnnouncementsInfoSubCommand(),
+            AnnouncementsListSubCommand()
+    ))),
 
     /**
      * The command handles join and leave messages and their corresponding settings.
@@ -257,11 +271,6 @@ enum class CommandCollection(val command: DefaultCommand) {
      * The command to display statistics about a shard.
      */
     SHARDS(ShardsCommand()),
-
-    /**
-     * Shows the Minecraft skin of a player.
-     */
-    SKIN(SkinCommand()),
 
     /**
      * The command that displays statistics.

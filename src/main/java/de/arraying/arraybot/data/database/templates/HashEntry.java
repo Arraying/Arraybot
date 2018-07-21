@@ -7,6 +7,8 @@ import de.arraying.arraybot.data.database.core.EntryField;
 import de.arraying.arraybot.util.UDatabase;
 import io.lettuce.core.api.sync.RedisCommands;
 
+import java.util.List;
+
 /**
  * Copyright 2017 Arraying
  * <p>
@@ -26,7 +28,7 @@ import io.lettuce.core.api.sync.RedisCommands;
 public abstract class HashEntry<T> implements Entry {
 
     private final Redis redis;
-    private Category category;
+    protected Category category;
 
     /**
      * Creates a new hash entry.
@@ -53,17 +55,8 @@ public abstract class HashEntry<T> implements Entry {
      * @return The type.
      */
     @Override
-    public Type getType() {
+    public final Type getType() {
         return Type.HASH;
-    }
-
-    /**
-     * Sets the category,
-     * @param category The category.
-     */
-    @Override
-    public void setCategory(Category category) {
-        this.category = category;
     }
 
     /**
@@ -71,7 +64,7 @@ public abstract class HashEntry<T> implements Entry {
      * @param guild The ID of the guild.
      * @param key The entry key. This can be null.
      */
-    public void deleteSingleEntry(long guild, Object key) {
+    public final void deleteSingleEntry(long guild, Object key) {
         RedisCommands resource = redis.getResource();
         resource.del(UDatabase.getKey(category, guild, key));
         Category parentCategory = getParent();
@@ -87,7 +80,7 @@ public abstract class HashEntry<T> implements Entry {
      * @param id The ID.
      */
     @Override
-    public void deleteGuild(long id) {
+    public final void deleteGuild(long id) {
         RedisCommands resource = redis.getResource();
         Category parentCategory = getParent();
         if(parentCategory == null) {
@@ -108,7 +101,7 @@ public abstract class HashEntry<T> implements Entry {
      * @param secondaryKey The secondary key.
      * @return The value. It is never null.
      */
-    public String fetch(EntryField field, long id, Object secondaryKey) {
+    public final String fetch(EntryField field, long id, Object secondaryKey) {
         RedisCommands resource = redis.getResource();
         Object redisResult = resource.hget(UDatabase.getKey(category, id, secondaryKey), field.getRedisKey());
         return redisResult == null ? setDefault(field, id, secondaryKey) : redisResult.toString();
@@ -122,19 +115,30 @@ public abstract class HashEntry<T> implements Entry {
      * @param value The value.
      */
 
-    public void push(EntryField field, long id, Object secondaryKey, Object value) {
+    public final void push(EntryField field, long id, Object secondaryKey, Object value) {
         RedisCommands resource = redis.getResource();
         resource.hset(UDatabase.getKey(category, id, secondaryKey), field.getRedisKey(), value.toString());
     }
 
     /**
+     * Gets the keys of a hash.
+     * @param id The primary key.
+     * @param secondaryKey The secondary key.
+     * @return The list.
+     */
+    public final List<String> keys(long id, Object secondaryKey) {
+        RedisCommands resource = redis.getResource();
+        return resource.hkeys(UDatabase.getKey(category, id, secondaryKey));
+    }
+
+    /**
      * Removes a hash value.
-     * This should only be used in Zeus' variable storage.
+     * This should only be used in the Script' variable storage.
      * @param field The field.
      * @param id The primary key.
      * @param secondaryKey The secondary key.
      */
-    public void purge(EntryField field, long id, Object secondaryKey) {
+    public final void purge(EntryField field, long id, Object secondaryKey) {
         RedisCommands resource = redis.getResource();
         resource.hdel(UDatabase.getKey(category, id, secondaryKey), field.getRedisKey());
     }

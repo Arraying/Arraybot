@@ -1,8 +1,6 @@
 package de.arraying.arraybot.data.database.core;
 
 import de.arraying.arraybot.data.database.categories.*;
-import de.arraying.arraybot.data.database.templates.KVEntry;
-import de.arraying.arraybot.data.database.templates.SetEntry;
 
 /**
  * Copyright 2017 Arraying
@@ -25,7 +23,7 @@ public enum Category {
      * A collection of all announcement IDs for a guild.
      * Set.
      */
-    ANNOUNCEMENT_IDS("ai", new SetEntry()),
+    ANNOUNCEMENT_IDS("ai", new AnnouncementIdsEntry()),
 
     /**
      * An announcement for a specific guild.
@@ -37,13 +35,13 @@ public enum Category {
      * A collection of all blacklisted user IDs.
      * Set.
      */
-    BLACKLIST("b", new SetEntry()),
+    BLACKLIST("b", new BlacklistEntry()),
 
     /**
      * A collection of all custom command names in a guild.
      * Set.
      */
-    CUSTOM_COMMAND_NAMES("cn", new SetEntry()),
+    CUSTOM_COMMAND_NAMES("cn", new CustomCommandNamesEntry()),
 
     /**
      * A custom command for a specific guild.
@@ -55,19 +53,19 @@ public enum Category {
      * A disabled command name for a specific guild.
      * Set.
      */
-    DISABLED_COMMAND("d", new SetEntry(true)),
+    DISABLED_COMMAND("d", new DisabledCommandEntry()),
 
     /**
      * A collection of filtered phrases.
      * Set.
      */
-    FILTER("f", new SetEntry(true)),
+    FILTER("f", new FilterEntry()),
 
     /**
      * A collection of all filter bypass IDs.
      * Set.
      */
-    FILTER_BYPASS_IDS("fbi", new SetEntry()),
+    FILTER_BYPASS_IDS("fbi", new FilterBypassIdsEntry()),
 
     /**
      * A filter bypass for a specific guild.
@@ -85,7 +83,7 @@ public enum Category {
      * A collection of punishment IDs.
      * Set.
      */
-    PUNISHMENT_IDS("pi", new SetEntry()),
+    PUNISHMENT_IDS("pi", new PunishmentIdsEntry()),
 
     /**
      * A punishment for a specific guild.
@@ -102,13 +100,14 @@ public enum Category {
      * Any misc. things that need to be stored.
      * KV.
      */
-    MISC("m", new KVEntry());
+    MISC("m", new MiscEntry());
 
     private final String prefix;
     private final Entry entry;
 
     /**
      * Sets the prefix for the category.
+     * The categories are only kept for easy purge access.
      * @param prefix The prefix.
      * @param entry The entry to use.
      */

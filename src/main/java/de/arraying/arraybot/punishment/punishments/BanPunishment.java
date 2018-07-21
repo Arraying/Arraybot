@@ -44,4 +44,5 @@ public final class BanPunishment implements Punishment {
     public boolean revoke(Guild guild, long punishedId) {
         return UPunishment.unban(guild, punishedId);
     }
+
 }

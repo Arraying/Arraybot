@@ -2,8 +2,8 @@ package de.arraying.arraybot.command.commands.`fun`.cat
 
 import de.arraying.arraybot.command.CommandEnvironment
 import de.arraying.arraybot.command.templates.DefaultCommand
-import de.arraying.arraybot.util.URequest
 import net.dv8tion.jda.core.Permission
+import java.net.URL
 
 /**
  * Copyright 2017 Arraying
@@ -29,10 +29,7 @@ class CatCommand: DefaultCommand("cat",
      * When the command is executed.
      */
     override fun onCommand(environment: CommandEnvironment, args: List<String>) {
-        val channel = environment.channel
-        val json = URequest.get("http://aws.random.cat/meow")
-        channel.sendMessage(json.getString("file")
-                .replace("\\", "")).queue()
+        environment.channel.sendFile(URL("https://cataas.com/cat").openStream(), "cat.png").queue()
     }
 
 }

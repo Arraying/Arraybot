@@ -3,12 +3,15 @@ package de.arraying.arraybot.manager;
 import de.arraying.arraybot.Arraybot;
 import de.arraying.arraybot.data.Cache;
 import de.arraying.arraybot.data.Configuration;
+import de.arraying.arraybot.data.database.categories.GuildEntry;
+import de.arraying.arraybot.data.database.core.Category;
 import de.arraying.arraybot.listener.Listener;
 import de.arraying.arraybot.listener.listeners.PostLoadListener;
 import de.arraying.arraybot.listener.listeners.preload.ReadyListener;
 import de.arraying.arraybot.punishment.PunishmentObject;
 import de.arraying.arraybot.punishment.PunishmentType;
 import de.arraying.arraybot.threadding.AbstractTask;
+import de.arraying.arraybot.threadding.impl.AnnouncementsTask;
 import de.arraying.arraybot.util.UDatatypes;
 import de.arraying.arraybot.util.UDefaults;
 import de.arraying.arraybot.util.UPunishment;
@@ -89,7 +92,7 @@ public final class BotManager {
         new Listener.Updater(shard).create();
         setAuthorUrl(shard);
         PunishmentManager punishmentManager = Arraybot.INSTANCE.getPunishmentManager();
-        new AbstractTask("Punishments") {
+        new AbstractTask("Ready " + shard.getShardInfo().getShardString()) {
 
             /**
              * Iterates through all guilds and handles punishments.
@@ -97,6 +100,11 @@ public final class BotManager {
             @Override
             public void onExecution() {
                 for(Guild guild : shard.getGuilds()) {
+                    GuildEntry guildEntry = (GuildEntry) Category.GUILD.getEntry();
+                    boolean doAnnouncements = Boolean.valueOf(guildEntry.fetch(guildEntry.getField(GuildEntry.Fields.ANNOUNCEMENT_ANNOUNCER), guild.getIdLong(), null));
+                    if(doAnnouncements) {
+                        AnnouncementsTask.addTask(guild.getIdLong());
+                    }
                     for(PunishmentObject punishment : punishmentManager.getAllPunishments(guild)) {
                         if(!punishment.isRevoked()) {
                             try {

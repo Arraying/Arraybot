@@ -5,6 +5,7 @@ import de.arraying.arraybot.data.database.Redis;
 import de.arraying.arraybot.listener.Listener;
 import de.arraying.arraybot.listener.listeners.PostLoadListener;
 import de.arraying.arraybot.threadding.AbstractTask;
+import de.arraying.arraybot.threadding.impl.AnnouncementsTask;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.events.guild.GuildJoinEvent;
 import net.dv8tion.jda.core.events.guild.GuildLeaveEvent;
@@ -97,6 +98,7 @@ public final class GuildListener extends PostLoadListener {
             }
             if(!Arraybot.INSTANCE.getBotManager().isGuild(id)) {
                 Redis.INSTANCE.purge(id);
+                AnnouncementsTask.stopTask(id);
             }
             try {
                 Arraybot.INSTANCE.getFileManager().removeFromRemovalQueue(id);

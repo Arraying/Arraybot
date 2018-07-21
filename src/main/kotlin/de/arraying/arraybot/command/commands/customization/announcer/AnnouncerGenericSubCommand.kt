@@ -53,7 +53,7 @@ class AnnouncerGenericSubCommand(override val name: String,
                 } else {
                     GuildEntry.Fields.LEAVE_ANNOUNCER
                 }
-                val announcing = entry.fetch(entry.getField(field), guildId, null).toBoolean()
+                val announcing = entry.fetch(entry.getField(field), guildId, null)!!.toBoolean()
                 entry.push(entry.getField(field), guildId, null, !announcing)
                 if(announcing) {
                     Message.COMMANDS_ANNOUNCER_TOGGLE_OFF.send(channel).queue()

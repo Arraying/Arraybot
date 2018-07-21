@@ -71,6 +71,14 @@ public final class FilterBypassEntry extends HashEntry<FilterBypassEntry.Fields>
         push(getField(Fields.VALUE), guild, id, value);
     }
 
+    /**
+     * Sets the category.
+     */
+    @Override
+    public void setCategory() {
+        this.category = Category.FILTER_BYPASS;
+    }
+
     public enum Fields {
 
         /**

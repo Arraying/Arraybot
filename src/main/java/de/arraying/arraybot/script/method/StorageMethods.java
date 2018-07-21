@@ -48,6 +48,15 @@ public final class StorageMethods {
     }
 
     /**
+     * Gets the stored keys.
+     * @return A string array of keys.
+     */
+    public String[] getKeys() {
+        VariablesEntry entry = (VariablesEntry) Category.VARIABLES.getEntry();
+        return entry.keys(environment.getGuild().getIdLong(), null).toArray(new String[0]);
+    }
+
+    /**
      * Sets a storage value via key.
      * @param key The key.
      * @param value The new value.

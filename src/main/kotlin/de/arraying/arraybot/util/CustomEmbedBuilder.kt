@@ -26,17 +26,17 @@ class CustomEmbedBuilder {
         /**
          * The maximum length for a title.
          */
-        val TITLE_MAX_LENGTH = 256
+        const val TITLE_MAX_LENGTH = 256
 
         /**
          * The maximum length for an embed value.
          */
-        val TEXT_MAX_LENGTH = 2048
+        const val TEXT_MAX_LENGTH = 1024
 
         /**
          * The overall maximum length of the embed.
          */
-        val MAX_LENGTH = 6000
+        const val MAX_LENGTH = 6000
 
     }
 

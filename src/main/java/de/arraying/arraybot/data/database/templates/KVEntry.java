@@ -22,34 +22,26 @@ import io.lettuce.core.api.sync.RedisCommands;
  * limitations under the License.
  */
 @SuppressWarnings("unchecked")
-public final class KVEntry implements Entry {
+public abstract class KVEntry implements Entry {
 
     private final Redis redis;
-    private Category category;
+    protected Category category;
 
     /**
      * Creates a new key/value entry.
      */
-    public KVEntry() {
+    protected KVEntry() {
         this.redis = Redis.INSTANCE;
     }
+
 
     /**
      * Gets the entry type.
      * @return The type.
      */
     @Override
-    public Type getType() {
+    public final Type getType() {
         return Type.KV;
-    }
-
-    /**
-     * Sets the category.
-     * @param category The category.
-     */
-    @Override
-    public void setCategory(Category category) {
-        this.category = category;
     }
 
     /**
@@ -58,7 +50,7 @@ public final class KVEntry implements Entry {
      */
     @SuppressWarnings("unused")
     @Override
-    public void deleteGuild(long id) {
+    public final void deleteGuild(long id) {
     }
 
     /**
@@ -66,7 +58,7 @@ public final class KVEntry implements Entry {
      * @param key The key.
      * @return The value, can be null.
      */
-    public String get(String key) {
+    public final String get(String key) {
         RedisCommands resource = redis.getResource();
         Object result = resource.get(UDatabase.getKey(category, key));
         return result == null ? null : result.toString();
@@ -77,7 +69,7 @@ public final class KVEntry implements Entry {
      * @param key The key.
      * @param value The value. Cannot be null.
      */
-    public void set(String key, Object value) {
+    public final void set(String key, Object value) {
         RedisCommands resource = redis.getResource();
         resource.set(UDatabase.getKey(category, key), value.toString());
     }

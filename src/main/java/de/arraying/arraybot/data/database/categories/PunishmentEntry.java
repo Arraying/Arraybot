@@ -54,6 +54,14 @@ public final class PunishmentEntry extends HashEntry<PunishmentEntry.Fields> {
         return null;
     }
 
+    /**
+     * Sets the category.
+     */
+    @Override
+    public void setCategory() {
+        this.category = Category.PUNISHMENT;
+    }
+
     public enum Fields {
 
         /**

@@ -1,12 +1,14 @@
-package de.arraying.arraybot.command.commands.`fun`.skin
+package de.arraying.arraybot.command.commands.customization.announcements
 
 import de.arraying.arraybot.command.CommandEnvironment
 import de.arraying.arraybot.command.templates.DefaultCommand
+import de.arraying.arraybot.command.templates.SubCommand
 import de.arraying.arraybot.language.Message
+import de.arraying.arraybot.util.UEmbed
 import net.dv8tion.jda.core.Permission
 
 /**
- * Copyright 2017 Arraying
+ * Copyright 2018 Arraying
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,22 +22,23 @@ import net.dv8tion.jda.core.Permission
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-class SkinCommand: DefaultCommand("skin",
-        CommandCategory.FUN,
-        Permission.MESSAGE_WRITE,
-        aliases = arrayOf("minecraftskin")) {
+class AnnouncementsCommand(override val subCommands: Array<SubCommand>): DefaultCommand("announcements",
+        CommandCategory.CUSTOMIZATION,
+        Permission.MANAGE_SERVER,
+        aliases = arrayOf("announcement")) {
 
     /**
      * When the command is executed.
      */
     override fun onCommand(environment: CommandEnvironment, args: List<String>) {
         val channel = environment.channel
-        if(args.size < 2) {
-            Message.COMMANDS_SKIN_PROVIDE.send(channel).queue()
-            return
-        }
-        val name = args[1]
-        channel.sendMessage("https://mcapi.ca/skin/2d/" + name).queue()
+        val embed = UEmbed.getEmbed(channel)
+                .setDescription(Message.COMMANDS_ANNOUNCEMENTS_EMBED_DESCRIPTION.getContent(channel))
+                .addField(Message.EMBED_TITLE_COMMANDS.getContent(channel),
+                        Message.COMMANDS_ANNOUNCEMENTS_EMBED_VALUE.getContent(channel),
+                        false)
+                .build()
+        channel.sendMessage(embed).queue()
     }
 
 }

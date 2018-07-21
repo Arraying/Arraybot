@@ -45,6 +45,11 @@ public final class UDefaults {
     public static final int DEFAULT_BLACKLIST = 5;
 
     /**
+     * The default announcement interval.
+     */
+    public static final int DEFAULT_ANNOUNCEMENT_INTERVAL = 5;
+
+    /**
      * The default ID for unknown snowflakes.
      */
     public static final long DEFAULT_UNKNOWN_SNOWFLAKE = -1337;

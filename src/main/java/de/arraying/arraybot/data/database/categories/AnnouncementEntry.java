@@ -54,12 +54,15 @@ public final class AnnouncementEntry extends HashEntry<AnnouncementEntry.Fields>
         return Category.ANNOUNCEMENT_IDS;
     }
 
-    public enum Fields {
+    /**
+     * Sets the category.
+     */
+    @Override
+    public void setCategory() {
+        this.category = Category.ANNOUNCEMENT;
+    }
 
-        /**
-         * The announcement's per guild unique ID.
-         */
-        ANNOUNCEMENT_ID(new EntryField("announcement_id", UDefaults.DEFAULT_ID)),
+    public enum Fields {
 
         /**
          * The actual text of the announcement.

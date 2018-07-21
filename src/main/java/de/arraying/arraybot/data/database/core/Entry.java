@@ -25,17 +25,12 @@ public interface Entry {
     Type getType();
 
     /**
-     * Sets the category.
-     * This cannot be done in the constructor otherwise the category would be null.
-     * @param category The category.
-     */
-    void setCategory(Category category);
-
-    /**
      * Deletes everything corresponding to the ID.
      * @param id The ID.
      */
     void deleteGuild(long id);
+
+    void setCategory();
 
     enum Type {
 

@@ -39,14 +39,15 @@ class UrbanCommand: DefaultCommand("urban",
         }
         val phrase = UArguments.combine(args.toTypedArray(), 1)
                 .replace(" ", "%20")
-        var json = URequest.get("http://api.urbandictionary.com/v0/define?term="+phrase)
-        if(json.getString("result_type") == "no_results") {
+        var json = URequest.get("http://api.urbandictionary.com/v0/define?term=$phrase")
+        val array = json.getJSONArray("list")
+        if(array.length() == 0) {
             Message.COMMANDS_URBAN_NONE.send(channel).queue()
             return
         }
         json = json.getJSONArray("list").getJSONObject(0)
         val embed = UEmbed.getEmbed(channel)
-                .setDescription(Message.COMMANDS_URBAN_EMBED_DESCRIPTION.getContent(channel, phrase))
+                .setDescription(Message.COMMANDS_URBAN_EMBED_DESCRIPTION.getContent(channel, "[$phrase](https://www.urbandictionary.com/define.php?term=$phrase)"))
                 .addField(Message.COMMANDS_URBAN_EMBED_DEFINITION.getContent(channel),
                         json.getString("definition"),
                         false)

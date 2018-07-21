@@ -24,11 +24,11 @@ import java.util.Set;
  * limitations under the License.
  */
 @SuppressWarnings("unchecked")
-public final class SetEntry implements Entry {
+public abstract class SetEntry implements Entry {
 
     private final Redis redis;
     private final boolean deletable;
-    private Category category;
+    protected Category category;
 
     /**
      * Creates a new set entry.
@@ -43,8 +43,7 @@ public final class SetEntry implements Entry {
      * Creates a new set entry.
      */
     public SetEntry() {
-        this.redis = Redis.INSTANCE;
-        this.deletable = false;
+        this(false);
     }
 
     /**
@@ -52,17 +51,8 @@ public final class SetEntry implements Entry {
      * @return The type.
      */
     @Override
-    public Type getType() {
+    public final Type getType() {
         return Type.SET;
-    }
-
-    /**
-     * Sets the category.
-     * @param category The category.
-     */
-    @Override
-    public void setCategory(Category category) {
-        this.category = category;
     }
 
     /**
@@ -79,7 +69,7 @@ public final class SetEntry implements Entry {
      * @param id The ID.
      */
     @Override
-    public void deleteGuild(long id) {
+    public final void deleteGuild(long id) {
         if(deletable) {
             internalDelete(id);
         }
@@ -90,7 +80,7 @@ public final class SetEntry implements Entry {
      * @param id The snowflake identifier ID.
      * @return A set of entries. Cannot be null.
      */
-    public Set<String> values(long id) {
+    public final Set<String> values(long id) {
         RedisCommands resource = redis.getResource();
         return resource.smembers(UDatabase.getKey(category, id));
     }
@@ -100,7 +90,7 @@ public final class SetEntry implements Entry {
      * @param id The snowflake identifier ID.
      * @param entry The entry. Cannot be null.
      */
-    public void add(long id, Object entry) {
+    public final void add(long id, Object entry) {
         RedisCommands resource = redis.getResource();
         resource.sadd(UDatabase.getKey(category, id), entry.toString());
     }
@@ -110,7 +100,7 @@ public final class SetEntry implements Entry {
      * @param id The snowflake identifier ID.
      * @param entry The entry. Cannot be null.
      */
-    public void remove(long id, Object entry) {
+    public final void remove(long id, Object entry) {
         RedisCommands resource = redis.getResource();
         resource.srem(UDatabase.getKey(category, id), entry.toString());
     }
@@ -121,7 +111,7 @@ public final class SetEntry implements Entry {
      * @param entry The entry. Cannot be null.
      * @return True if it does, false otherwise.
      */
-    public boolean contains(long id, Object entry) {
+    public final boolean contains(long id, Object entry) {
         RedisCommands resource = redis.getResource();
         return resource.sismember(UDatabase.getKey(category, id), entry.toString());
     }

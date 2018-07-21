@@ -30,6 +30,11 @@ public abstract class AbstractWatcher extends AbstractTask {
     }
 
     /**
+     * The task itself.
+     */
+    public abstract void onTask();
+
+    /**
      * When the watcher is executed for the fist time.
      */
     @Override
@@ -45,8 +50,10 @@ public abstract class AbstractWatcher extends AbstractTask {
     }
 
     /**
-     * The task itself.
+     * Interrupts the task.
      */
-    public abstract void onTask();
+    public void interrupt() {
+        Thread.currentThread().interrupt();
+    }
 
 }

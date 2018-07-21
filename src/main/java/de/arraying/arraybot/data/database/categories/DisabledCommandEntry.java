@@ -1,12 +1,10 @@
 package de.arraying.arraybot.data.database.categories;
 
 import de.arraying.arraybot.data.database.core.Category;
-import de.arraying.arraybot.data.database.core.EntryField;
-import de.arraying.arraybot.data.database.templates.HashEntry;
-import de.arraying.arraybot.util.UDefaults;
+import de.arraying.arraybot.data.database.templates.SetEntry;
 
 /**
- * Copyright 2017 Arraying
+ * Copyright 2018 Arraying
  * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,33 +18,14 @@ import de.arraying.arraybot.util.UDefaults;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-public final class VariablesEntry extends HashEntry<String> {
-
-    /**
-     * Gets a field by key.
-     * @param key The key.
-     * @return A field.
-     */
-    @Override
-    public EntryField getField(String key) {
-        return new EntryField(key, UDefaults.DEFAULT_NULL);
-    }
-
-    /**
-     * Gets the parent.
-     * @return The parent category.
-     */
-    @Override
-    public Category getParent() {
-        return null;
-    }
+public final class DisabledCommandEntry extends SetEntry {
 
     /**
      * Sets the category.
      */
     @Override
     public void setCategory() {
-        this.category = Category.VARIABLES;
+        this.category = Category.DISABLED_COMMAND;
     }
 
 }

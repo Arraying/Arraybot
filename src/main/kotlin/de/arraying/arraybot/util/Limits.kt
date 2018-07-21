@@ -18,6 +18,21 @@ package de.arraying.arraybot.util
 enum class Limits(val limit: Int) {
 
     /**
+     * The minimum announcement interval in minutes.
+     */
+    ANNOUNCEMENTS_INTERVAL_MIN(1),
+
+    /**
+     * The maximum announcement interval in minutes.
+     */
+    ANNOUNCEMENTS_INTERVAL_MAX(60 * 24),
+
+    /**
+     * The maximum length for announcement messages.
+     */
+    ANNOUNCEMENTS_MESSAGE(1500),
+
+    /**
      * The maximum length for join and leave messages.
      */
     ANNOUNCER_MESSAGE(1500),

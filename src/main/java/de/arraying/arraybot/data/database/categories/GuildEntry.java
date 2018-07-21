@@ -55,6 +55,14 @@ public final class GuildEntry extends HashEntry<GuildEntry.Fields> {
         return null;
     }
 
+    /**
+     * Sets the category.
+     */
+    @Override
+    public void setCategory() {
+        this.category = Category.GUILD;
+    }
+
     public enum Fields {
 
         /**
@@ -106,6 +114,16 @@ public final class GuildEntry extends HashEntry<GuildEntry.Fields> {
          * The announcements channel.
          */
         ANNOUNCEMENT_CHANNEL(new EntryField("announcement_channel", UDefaults.DEFAULT_SNOWFLAKE)),
+
+        /**
+         * The announcements interval.
+         */
+        ANNOUNCEMENT_INTERVAL(new EntryField("announcement_interval", UDefaults.DEFAULT_ANNOUNCEMENT_INTERVAL)),
+
+        /**
+         * The last announcement ID.
+         */
+        ANNOUNCEMENT_LAST_ID(new EntryField("announcement_last_id", UDefaults.DEFAULT_ID)),
 
         /**
          * The autorole toggle.

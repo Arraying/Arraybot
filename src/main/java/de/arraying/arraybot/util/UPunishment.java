@@ -117,6 +117,9 @@ public final class UPunishment {
      * @return True if the unban was successful, false otherwise.
      */
     public static boolean unban(Guild guild, long punishedId) {
+        if(!isBan(guild, punishedId)) {
+            return true;
+        }
         try {
             guild.getController().unban(String.valueOf(punishedId)).queue();
             return true;
