@@ -79,12 +79,17 @@ class CustomCommand(override val name: String,
         storageManager.customCommandStorageDataStorage.create(uid)
         var value: String =
             if(syntax == CustomCommandSyntax.STARTSWITH) {
+                var localValue = this.value
                 if(args.size < 2) {
                     Message.CUSTOM_ARGUMENT_PROVIDE.send(channel, name, Message.CUSTOM_ARGUMENT.getContent(channel)).queue()
                     return
                 }
                 val input = UArguments.combine(args.toTypedArray(), 1)
-                this.value.replace("{input}", input)
+                val inputSlot = input.split(" ")
+                for(i in (1..inputSlot.size)) {
+                    localValue = localValue.replace("{argument_$i}", inputSlot[i-1])
+                }
+                localValue.replace("{input}", input)
             } else {
                 this.value
             }
