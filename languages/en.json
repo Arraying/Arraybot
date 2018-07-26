@@ -1,5 +1,6 @@
 {
   "channel_invalid":"The provided channel is invalid. Please mention/give the name/give the ID of an existing text channel.",
+  "command_file_error":"I could not send the specified file as it exceeds the file size limit.",
   "command_name_provide":"You must provide a command name, without the prefix.",
   "command_name_invalid":"That command name is invalid.",
   "command_permission":"You lack the permission required to execute this command. If you feel like this is a mistake, please contact a server administrator.",

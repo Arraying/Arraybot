@@ -5,7 +5,6 @@ import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.MessageEmbed;
 
 import java.time.OffsetDateTime;
-import java.util.List;
 
 /**
  * Copyright 2018 Arraying
@@ -85,10 +84,10 @@ public final class ScriptMessage implements ScriptEntity {
 
     /**
      * Gets the embeds of a message.
-     * @return The embeds.
+     * @return An array of message embeds.
      */
-    public List<MessageEmbed> getEmbeds() {
-        return underlying.getEmbeds();
+    public MessageEmbed[] getEmbeds() {
+        return underlying.getEmbeds().toArray(new MessageEmbed[0]);
     }
 
     /**

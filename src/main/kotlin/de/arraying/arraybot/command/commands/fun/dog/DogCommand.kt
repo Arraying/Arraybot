@@ -2,6 +2,7 @@ package de.arraying.arraybot.command.commands.`fun`.dog
 
 import de.arraying.arraybot.command.CommandEnvironment
 import de.arraying.arraybot.command.templates.DefaultCommand
+import de.arraying.arraybot.language.Message
 import de.arraying.arraybot.util.URequest
 import net.dv8tion.jda.core.Permission
 import java.net.URL
@@ -32,7 +33,10 @@ class DogCommand: DefaultCommand("dog",
     override fun onCommand(environment: CommandEnvironment, args: List<String>) {
         val channel = environment.channel
         val url = URequest.get("https://random.dog/woof.json").getString("url")
-        channel.sendFile(URL(url).openStream(), "dog.png").queue()
+        channel.sendFile(URL(url).openStream(), "dog.png")
+                .queue(null) {
+                    Message.COMMAND_FILE_ERROR.send(channel).queue()
+                }
     }
 
 }

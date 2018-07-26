@@ -91,14 +91,12 @@ public final class AnnouncementsTask extends AbstractWatcher {
         TextChannel channel = Arraybot.INSTANCE.getBotManager().getShardManager().getTextChannelById(channelId);
         if(channel == null
                 || channel.getGuild().getIdLong() != guild) {
-            System.out.println("fucking hell invalid crap");
             stopTask(guild);
             return;
         }
         AnnouncementIdsEntry announcementIdsEntry = (AnnouncementIdsEntry) Category.ANNOUNCEMENT_IDS.getEntry();
         Set<String> idsRaw = announcementIdsEntry.values(guild);
         if(idsRaw.isEmpty()) {
-            System.out.println("ids empty ugh");
             return;
         }
         TreeSet<Integer> ids = new TreeSet<>();
@@ -108,7 +106,6 @@ public final class AnnouncementsTask extends AbstractWatcher {
             }
         }
         if(ids.isEmpty()) {
-            System.out.println("parsed ids empty ffs");
             return;
         }
         int min = Collections.min(ids);

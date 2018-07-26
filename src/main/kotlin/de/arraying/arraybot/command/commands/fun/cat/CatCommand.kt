@@ -2,6 +2,7 @@ package de.arraying.arraybot.command.commands.`fun`.cat
 
 import de.arraying.arraybot.command.CommandEnvironment
 import de.arraying.arraybot.command.templates.DefaultCommand
+import de.arraying.arraybot.language.Message
 import net.dv8tion.jda.core.Permission
 import java.net.URL
 
@@ -29,7 +30,11 @@ class CatCommand: DefaultCommand("cat",
      * When the command is executed.
      */
     override fun onCommand(environment: CommandEnvironment, args: List<String>) {
-        environment.channel.sendFile(URL("https://cataas.com/cat").openStream(), "cat.png").queue()
+        val channel = environment.channel
+        channel.sendFile(URL("https://cataas.com/cat").openStream(), "cat.png")
+                .queue(null) {
+                    Message.COMMAND_FILE_ERROR.send(channel).queue()
+                }
     }
 
 }

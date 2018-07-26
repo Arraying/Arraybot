@@ -5,8 +5,6 @@ import de.arraying.arraybot.util.UUser;
 import net.dv8tion.jda.core.entities.*;
 
 import java.time.OffsetDateTime;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -102,10 +100,10 @@ public final class ScriptGuild implements ScriptEntity {
 
     /**
      * Gets all text channels.
-     * @return A collection of text channels.
+     * @return An array of text channels.
      */
-    public Collection<ScriptTextChannel> getTextChannels() {
-        return Collections.unmodifiableCollection(textChannels.values());
+    public ScriptTextChannel[] getTextChannels() {
+        return textChannels.values().toArray(new ScriptTextChannel[0]);
     }
 
     /**
@@ -119,10 +117,10 @@ public final class ScriptGuild implements ScriptEntity {
 
     /**
      * Gets all voice channels.
-     * @return A collection of voice channels.
+     * @return An array of voice channels.
      */
-    public Collection<ScriptVoiceChannel> getVoiceChannels() {
-        return Collections.unmodifiableCollection(voiceChannels.values());
+    public ScriptVoiceChannel[] getVoiceChannels() {
+        return voiceChannels.values().toArray(new ScriptVoiceChannel[0]);
     }
 
     /**
@@ -136,10 +134,10 @@ public final class ScriptGuild implements ScriptEntity {
 
     /**
      * Gets all users.
-     * @return A collection of users.
+     * @return An array of users.
      */
-    public Collection<ScriptUser> getUsers() {
-        return Collections.unmodifiableCollection(users.values());
+    public ScriptUser[] getUsers() {
+        return users.values().toArray(new ScriptUser[0]);
     }
 
     /**
@@ -154,10 +152,10 @@ public final class ScriptGuild implements ScriptEntity {
 
     /**
      * Gets all roles.
-     * @return A collection of roles.
+     * @return An array of roles.
      */
-    public Collection<ScriptRole> getRoles() {
-        return Collections.unmodifiableCollection(roles.values());
+    public ScriptRole[] getRoles() {
+        return roles.values().toArray(new ScriptRole[0]);
     }
 
     /**

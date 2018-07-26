@@ -23,6 +23,7 @@ import net.dv8tion.jda.core.requests.RestAction
 enum class Message(private val prefix: Boolean = false) {
 
     CHANNEL_INVALID,
+    COMMAND_FILE_ERROR,
     COMMAND_NAME_PROVIDE,
     COMMAND_NAME_INVALID,
     COMMAND_PERMISSION,

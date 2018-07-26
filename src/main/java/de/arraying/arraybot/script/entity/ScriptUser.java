@@ -4,8 +4,11 @@ import de.arraying.arraybot.command.CommandEnvironment;
 import de.arraying.arraybot.script.abstraction.AbstractMessenger;
 import net.dv8tion.jda.core.entities.Member;
 import net.dv8tion.jda.core.entities.MessageEmbed;
+import net.dv8tion.jda.core.entities.Role;
 
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Copyright 2018 Arraying
@@ -22,7 +25,7 @@ import java.time.OffsetDateTime;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "RedundantThrows"})
 public final class ScriptUser extends AbstractMessenger implements ScriptEntity {
 
     private final Member underlying;
@@ -101,6 +104,16 @@ public final class ScriptUser extends AbstractMessenger implements ScriptEntity 
         return underlying.getNickname();
     }
 
-
+    /**
+     * Gets the roles of the user.
+     * @return An array of roles.
+     */
+    public ScriptRole[] getRoles() {
+        List<ScriptRole> roles = new ArrayList<>();
+        for(Role jdaRole : underlying.getRoles()) {
+            roles.add(new ScriptRole(jdaRole));
+        }
+        return roles.toArray(new ScriptRole[0]);
+    }
 
 }
