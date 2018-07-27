@@ -43,11 +43,11 @@ class CommandsDisableSubCommand: SubCommand("disable",
             return
         }
         val commandName = args[2].toLowerCase()
-        if(!Commands.commands.containsKey(commandName)) {
+        val command = Commands.commands.getByKeyOrAlias(commandName)
+        if(command == null) {
             Message.COMMAND_NAME_INVALID.send(channel).queue()
             return
         }
-        val command = Commands.commands[commandName]!!
         if(command.category == DefaultCommand.CommandCategory.DEVELOPER) {
             Message.COMMANDS_COMMANDS_DISABLE_DEVELOPER.send(channel).queue()
             return

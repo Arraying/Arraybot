@@ -158,8 +158,11 @@ abstract class DefaultCommand(final override val name: String,
             }
         }
         val entry = Category.DISABLED_COMMAND.entry as SetEntry
-        if(entry.contains(environment.guild.idLong, name)) {
-            logger.info("Did not execute command as it was disabled in the guild ${environment.guild.idLong}")
+        if(entry.contains(environment.guild.idLong, name)
+            || aliases.any {
+                    entry.contains(environment.guild.idLong, it)
+                }) {
+            logger.info("Did not execute command as it was disabled in the guild ${environment.guild.idLong}.")
             return
         }
         if(!subCommands.isEmpty()

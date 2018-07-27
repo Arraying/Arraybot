@@ -9,6 +9,7 @@ import de.arraying.arraybot.data.database.core.EntryField;
 import de.arraying.arraybot.threadding.AbstractWatcher;
 import de.arraying.arraybot.util.UDatatypes;
 import de.arraying.arraybot.util.UDefaults;
+import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.TextChannel;
 
 import java.util.Collections;
@@ -90,7 +91,8 @@ public final class AnnouncementsTask extends AbstractWatcher {
         long channelId = Long.valueOf(guildEntry.fetch(guildEntry.getField(GuildEntry.Fields.ANNOUNCEMENT_CHANNEL), guild, null));
         TextChannel channel = Arraybot.INSTANCE.getBotManager().getShardManager().getTextChannelById(channelId);
         if(channel == null
-                || channel.getGuild().getIdLong() != guild) {
+                || channel.getGuild().getIdLong() != guild
+                || !channel.getGuild().getSelfMember().hasPermission(channel, Permission.MESSAGE_WRITE)) {
             stopTask(guild);
             return;
         }

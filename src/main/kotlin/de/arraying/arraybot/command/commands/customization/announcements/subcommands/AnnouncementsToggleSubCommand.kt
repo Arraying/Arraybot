@@ -36,8 +36,8 @@ class AnnouncementsToggleSubCommand: SubCommand("toggle",
         val announcing = entry.fetch(field, guild, null)!!.toBoolean()
         entry.push(field, guild, null, !announcing)
         if(announcing) {
-            AnnouncementsTask.stopTask(guild)
             Message.COMMANDS_ANNOUNCEMENTS_TOGGLE_OFF.send(channel).queue()
+            AnnouncementsTask.stopTask(guild)
         } else {
             AnnouncementsTask.addTask(guild)
             Message.COMMANDS_ANNOUNCEMENTS_TOGGLE_ON.send(channel).queue()

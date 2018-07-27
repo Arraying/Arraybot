@@ -41,7 +41,7 @@ class CommandsEnableSubCommand: SubCommand("enable",
             return
         }
         val commandName = args[2].toLowerCase()
-        if(!Commands.commands.containsKey(commandName)) {
+        if(Commands.commands.getByKeyOrAlias(commandName) == null) {
             Message.COMMAND_NAME_INVALID.send(channel).queue()
             return
         }

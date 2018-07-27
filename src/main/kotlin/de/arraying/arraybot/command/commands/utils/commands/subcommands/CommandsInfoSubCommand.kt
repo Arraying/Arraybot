@@ -42,8 +42,8 @@ class CommandsInfoSubCommand: SubCommand("info",
         }
         val commandName = args[2].toLowerCase()
         when {
-            Commands.commands.containsKey(commandName) -> {
-                val command = Commands.commands[commandName]!!
+            Commands.commands.getByKeyOrAlias(commandName) != null -> {
+                val command = Commands.commands.getByKeyOrAlias(commandName)
                 val builder = StringBuilder()
                 for(alias in command.aliases) {
                     builder.append(alias)

@@ -85,7 +85,7 @@ class CustomCommand(override val name: String,
                     return
                 }
                 val input = UArguments.combine(args.toTypedArray(), 1)
-                val inputSlot = input.split(" ")
+                val inputSlot = input.split(" ".toRegex())
                 for(i in (1..inputSlot.size)) {
                     localValue = localValue.replace("{argument_$i}", inputSlot[i-1])
                 }

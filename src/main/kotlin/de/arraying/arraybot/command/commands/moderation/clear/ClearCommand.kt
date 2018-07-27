@@ -53,7 +53,7 @@ class ClearCommand: DefaultCommand("clear",
                 input = parameter.parse(environment, input)
             }
         }
-        val args = input.split(" ")
+        val args = input.split(" ".toRegex())
         if(args.size < 2) {
             Message.COMMANDS_CLEAR_PROVIDE.send(channel).queue()
             return
@@ -72,7 +72,7 @@ class ClearCommand: DefaultCommand("clear",
         val storage = arraybot.storageManager.clearCommandStorageDataStorage.get(storageId)
         val channelDelete = storage.channel?: channel
         val messageHistory = channelDelete.history
-        messageHistory.retrievePast(amount + 1).queue({
+        messageHistory.retrievePast(amount + 1).queue {
             val target = ArrayList<net.dv8tion.jda.core.entities.Message>()
             if(storage.isBots) {
                 it.filterTo(target) { msg -> msg.author.isBot }
@@ -84,18 +84,18 @@ class ClearCommand: DefaultCommand("clear",
                     target.addAll(it)
                 }
             }
-            target.removeIf({
+            target.removeIf {
                 msg -> msg.creationTime.isBefore(OffsetDateTime.now().minusWeeks(2))
-            })
+            }
             if(target.size < 2) {
                 Message.COMMANDS_CLEAR_LITTLE.send(channel).queue()
                 return@queue
             }
-            channelDelete.deleteMessages(target).queue({
+            channelDelete.deleteMessages(target).queue {
                 Message.COMMANDS_CLEAR_CLEAR.send(channel, target.size.toString()).queue()
                 arraybot.storageManager.clearCommandStorageDataStorage.remove(storageId)
-            })
-        })
+            }
+        }
     }
 
 }

@@ -78,7 +78,7 @@ object Commands {
         if(blacklist.values(UDefaults.DEFAULT_BLACKLIST.toLong()).contains(author.id)) {
             return
         }
-        val args = message.split(" ")
+        val args = message.split(" ".toRegex())
         val commandName = args[0].toLowerCase()
         val command = commands.getByKeyOrAlias(commandName)
         launch(CommonPool) {

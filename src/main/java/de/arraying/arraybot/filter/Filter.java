@@ -163,13 +163,23 @@ public enum Filter {
                 && needsFiltering(filteredPhrase, embed.getFooter().getText(), regex);
     }
 
+    /**
+     * Whether or not there is a bypass present for the event.
+     * @param bypass The bypass.
+     * @param event The event.
+     * @return True if there is, false otherwise.
+     */
     private boolean isBypass(FilterBypass bypass, GuildMessageReceivedEvent event) {
+        if(bypass == null) {
+            return false;
+        }
         return (bypass.getType() == FilterBypassType.USER
                 && event.getAuthor().getIdLong() == bypass.getValue())
                 || (bypass.getType() == FilterBypassType.CHANNEL
                 && event.getChannel().getIdLong() == bypass.getValue())
                 || (bypass.getType() == FilterBypassType.ROLE
-                && event.getMember().getRoles().stream().anyMatch(role -> role.getIdLong() == bypass.getValue()));
+                && event.getMember().getRoles() != null
+                && event.getMember().getRoles().stream().anyMatch(role -> role != null && role.getIdLong() == bypass.getValue()));
     }
 
 }
