@@ -145,14 +145,14 @@ class CustomCommand(override val name: String,
         /**
          * Creates a custom command from Redis.
          */
-        fun fromRedis(guildId: Long, commandName: String, channel: TextChannel): CustomCommand {
+        fun fromRedis(guildId: Long, commandName: String): CustomCommand {
             val commandEntry = Category.CUSTOM_COMMAND.entry as CustomCommandEntry
             val syntax = CustomCommandSyntax.fromString(commandEntry.fetch(commandEntry.getField(CustomCommandEntry.Fields.SYNTAX), guildId, commandName))
             val permission = CustomPermission(commandEntry.fetch(commandEntry.getField(CustomCommandEntry.Fields.PERMISSION), guildId, commandName))
             val type = CustomCommandType.fromString(commandEntry.fetch(commandEntry.getField(CustomCommandEntry.Fields.TYPE), guildId, commandName))
             val descriptionString = commandEntry.fetch(commandEntry.getField(CustomCommandEntry.Fields.DESCRIPTION), guildId, commandName)
             val description = if(descriptionString == UDefaults.DEFAULT_NULL) {
-                    Message.CUSTOM_DESCRIPTION.getContent(channel)
+                    Message.CUSTOM_DESCRIPTION.getContent(guildId)
                 } else {
                     descriptionString
                 }
@@ -163,12 +163,12 @@ class CustomCommand(override val name: String,
         /**
          * Gets all custom commands for the guild.
          */
-        fun getAll(guildId: Long, channel: TextChannel): Array<CustomCommand> {
+        fun getAll(guildId: Long): Array<CustomCommand> {
             val commandList = Category.CUSTOM_COMMAND_NAMES.entry as SetEntry
             val commandNames = commandList.values(guildId)
             val commands = ArrayList<CustomCommand>()
             commandNames.mapTo(commands) {
-                CustomCommand.fromRedis(guildId, it, channel)
+                CustomCommand.fromRedis(guildId, it)
             }
             return commands.toTypedArray()
         }

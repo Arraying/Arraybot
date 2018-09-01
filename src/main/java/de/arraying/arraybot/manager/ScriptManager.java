@@ -104,6 +104,7 @@ public final class ScriptManager {
                 .withVariable("manager", new ManagerMethods(environment))
                 .withVariable("storage", new StorageMethods(environment))
                 .withVariable("time", Instant.now())
+                .withBlacklistedBindings(Prime.DEFAULT_BINDINGS)
                 .withMaxRuntime(10);
         Arrays.stream(PROVIDERS).forEach(primeBuilder::withProvider);
         Prime prime = primeBuilder.build(code);

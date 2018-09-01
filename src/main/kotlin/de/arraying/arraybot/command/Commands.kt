@@ -87,7 +87,7 @@ object Commands {
         val entry = Category.CUSTOM_COMMAND_NAMES.entry as SetEntry
         val guildId = guild.idLong
         if(entry.contains(guildId, commandName)) {
-            val customCommand = CustomCommand.fromRedis(guildId, commandName, channel)
+            val customCommand = CustomCommand.fromRedis(guildId, commandName)
             launch(CommonPool) {
                 customCommand.invoke(environment, args)
             }
@@ -116,7 +116,7 @@ object Commands {
             !disabled.contains(it.name)
                     && it.category != DefaultCommand.CommandCategory.DEVELOPER
         }
-        commands.addAll(CustomCommand.getAll(id, channel))
+        commands.addAll(CustomCommand.getAll(id))
         return commands.toTypedArray()
     }
 

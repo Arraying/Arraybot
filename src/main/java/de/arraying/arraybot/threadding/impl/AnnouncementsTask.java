@@ -17,6 +17,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Copyright 2018 Arraying
@@ -45,11 +46,28 @@ public final class AnnouncementsTask extends AbstractWatcher {
     /**
      * Creates a new announcement task.
      * @param guild The guild ID.
-     * @param interval The interval in seconds.
+     * @param interval The interval in minutes.
      */
     private AnnouncementsTask(long guild, int interval) {
-        super("Announcements-" + guild, interval * 60 * 1000);
+        super("Announcements-" + guild, (int) TimeUnit.MINUTES.toMillis(interval));
         this.guild = guild;
+    }
+
+    /**
+     * Sets the interval.
+     * @param interval The interval in minutes.
+     */
+    public void setInterval(int interval) {
+        setWaitDuration((int) TimeUnit.MINUTES.toMillis(interval));
+    }
+
+    /**
+     * Gets the announcement task for the guild.
+     * @param guild The guild ID.
+     * @return The announcement task, possibly null.
+     */
+    public static synchronized AnnouncementsTask getTask(long guild) {
+        return tasks.get(guild);
     }
 
     /**

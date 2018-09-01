@@ -79,7 +79,7 @@ class CommandsInfoSubCommand: SubCommand("info",
                 channel.sendMessage(embed.build()).queue()
             }
             entry.contains(channel.guild.idLong, commandName) -> {
-                val command = CustomCommand.fromRedis(guildId, commandName, channel)
+                val command = CustomCommand.fromRedis(guildId, commandName)
                 val embed = UEmbed.getEmbed(channel)
                         .setDescription(Message.COMMANDS_COMMANDS_INFO_DESCRIPTION.getContent(channel))
                         .addField(Message.COMMANDS_COMMANDS_INFO_NAME.getContent(channel),

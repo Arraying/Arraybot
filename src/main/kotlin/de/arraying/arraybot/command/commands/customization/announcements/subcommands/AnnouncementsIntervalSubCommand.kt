@@ -5,6 +5,7 @@ import de.arraying.arraybot.command.templates.SubCommand
 import de.arraying.arraybot.data.database.categories.GuildEntry
 import de.arraying.arraybot.data.database.core.Category
 import de.arraying.arraybot.language.Message
+import de.arraying.arraybot.threadding.impl.AnnouncementsTask
 import de.arraying.arraybot.util.Limits
 import de.arraying.arraybot.util.UDatatypes
 
@@ -54,6 +55,7 @@ class AnnouncementsIntervalSubCommand: SubCommand("interval",
             return
         }
         entry.push(entry.getField(GuildEntry.Fields.ANNOUNCEMENT_INTERVAL), guild, null, new)
+        AnnouncementsTask.getTask(guild)?.setInterval(new)
         Message.COMMANDS_ANNOUNCEMENTS_INTERVAL_UPDATED.send(channel).queue()
     }
 

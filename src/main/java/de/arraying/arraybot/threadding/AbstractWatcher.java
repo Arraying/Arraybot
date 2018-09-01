@@ -17,7 +17,7 @@ package de.arraying.arraybot.threadding;
  */
 public abstract class AbstractWatcher extends AbstractTask {
 
-    private final int waitDuration;
+    private int waitDuration;
 
     /**
      * Creates a new abstract watcher.
@@ -54,6 +54,14 @@ public abstract class AbstractWatcher extends AbstractTask {
      */
     public void interrupt() {
         Thread.currentThread().interrupt();
+    }
+
+    /**
+     * Sets the wait duration.
+     * @param waitDuration The new wait duration.
+     */
+    protected void setWaitDuration(int waitDuration) {
+        this.waitDuration = waitDuration;
     }
 
 }

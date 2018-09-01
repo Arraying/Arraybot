@@ -139,6 +139,7 @@ enum class CommandCollection(val command: DefaultCommand) {
     CUSTOM(CustomCommand(arrayOf(
             CustomCreateSubCommand(),
             CustomDeleteSubCommand(),
+            CustomInfoSubCommand(),
             CustomListSubCommand(),
             CustomSetDescriptionSubCommand(),
             CustomSetPermSubCommand(),

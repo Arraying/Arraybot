@@ -31,7 +31,7 @@ class CustomListSubCommand: SubCommand("list",
      */
     override fun onSubCommand(environment: CommandEnvironment, args: List<String>) {
         val channel = environment.channel
-        val commands = CustomCommand.getAll(environment.guild.idLong, channel)
+        val commands = CustomCommand.getAll(environment.guild.idLong)
         val embed = UEmbed.getEmbed(channel)
                 .setDescription(Message.COMMANDS_CUSTOM_LIST.getContent(channel))
         val pages = PageBuilder()

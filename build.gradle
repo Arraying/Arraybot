@@ -1,5 +1,5 @@
 buildscript {
-    ext.kotlin_version = "1.2.51"
+    ext.kotlin_version = "1.2.60"
     repositories {
         mavenCentral()
     }
@@ -16,7 +16,7 @@ plugins {
 
 group "de.arraying.arraybot"
 
-version "5.5.3"
+version "5.5.4"
 
 ext.main = "Arraybot"
 mainClassName = "de.arraying.arraybot.Arraybot"
@@ -36,9 +36,9 @@ repositories {
 
 dependencies {
     compile "com.github.Arraying:Kotys:0.5.0" // JSON
-    compile "com.github.Arraying:Prime:0.1.3" // Scripting
+    compile "com.github.Arraying:Prime:0.1.4" // Scripting
     compile "ch.qos.logback:logback-classic:1.2.3" // Logging
-    compile "net.dv8tion:JDA:3.7.1_386" // Discord
+    compile "net.dv8tion:JDA:3.7.1_409" // Discord
     compile "io.lettuce:lettuce-core:5.1.0.M1" // Database
     compile "commons-io:commons-io:2.6" // Utils
     compile "org.apache.commons:commons-lang3:3.7" // Utils
