@@ -5,7 +5,7 @@ import de.arraying.arraybot.command.CommandEnvironment
 import de.arraying.arraybot.command.custom.type.CustomCommandAction
 import de.arraying.arraybot.language.Message
 import de.arraying.arraybot.util.UScript
-import net.dv8tion.jda.core.entities.TextChannel
+import net.dv8tion.jda.api.entities.TextChannel
 
 /**
  * Copyright 2017 Arraying

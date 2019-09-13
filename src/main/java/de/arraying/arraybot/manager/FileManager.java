@@ -1,7 +1,7 @@
 package de.arraying.arraybot.manager;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
+import de.arraying.kotys.JSON;
+import de.arraying.kotys.JSONArray;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -35,7 +35,7 @@ public final class FileManager {
     public FileManager() {
         try {
             if(removalFile.createNewFile()) {
-                JSONObject json = new JSONObject().put("pending", new JSONArray());
+                JSON json = new JSON().put("pending", new JSONArray());
                 write(removalFile, json.toString());
             }
         } catch(IOException exception) {
@@ -71,8 +71,8 @@ public final class FileManager {
         if(!removalFile.exists()) {
             throw new IllegalStateException("Removal file no longer exists.");
         }
-        JSONObject json = new JSONObject(content(removalFile));
-        json.getJSONArray("pending").put(id);
+        JSON json = new JSON(content(removalFile));
+        json.array("pending").append(id);
         write(removalFile, json.toString());
     }
 
@@ -86,11 +86,11 @@ public final class FileManager {
         if(!removalFile.exists()) {
             throw new IllegalStateException("Removal file no longer exists.");
         }
-        JSONObject json = new JSONObject(content(removalFile));
-        JSONArray array = json.getJSONArray("pending");
+        JSON json = new JSON(content(removalFile));
+        JSONArray array = json.array("pending");
         for(int i = 0; i < array.length(); i++) {
-            if(array.getLong(i) == id) {
-                array.remove(i);
+            if(array.large(i) == id) {
+                array.delete(i);
             }
         }
         write(removalFile, json.toString());
@@ -106,11 +106,11 @@ public final class FileManager {
         if(!removalFile.exists()) {
             throw new IllegalStateException("Removal file no longer exists.");
         }
-        JSONObject json = new JSONObject(content(removalFile));
-        JSONArray array = json.getJSONArray("pending");
+        JSON json = new JSON(content(removalFile));
+        JSONArray array = json.array("pending");
         List<Long> pending = new ArrayList<>();
         for(int i = 0; i < array.length(); i++) {
-            pending.add(array.getLong(i));
+            pending.add(array.large(i));
         }
         return pending;
     }

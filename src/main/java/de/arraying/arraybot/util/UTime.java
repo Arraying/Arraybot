@@ -1,6 +1,6 @@
 package de.arraying.arraybot.util;
 
-import net.dv8tion.jda.core.entities.Guild;
+import net.dv8tion.jda.api.entities.Guild;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

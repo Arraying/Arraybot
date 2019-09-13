@@ -3,7 +3,7 @@ package de.arraying.arraybot.request;
 import de.arraying.arraybot.util.UDatatypes;
 import de.arraying.kotys.JSON;
 import de.arraying.kotys.JSONField;
-import net.dv8tion.jda.core.JDA;
+import net.dv8tion.jda.api.JDA;
 import okhttp3.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -66,11 +66,9 @@ public final class BotListRequest {
         for(Parameter parameter : parameters) {
             String value = parameter.getValue()
                     .replace("{guilds}", String.valueOf(shard.getGuilds().size()));
-            if(shardInfo != null) {
-                value = value
-                        .replace("{total}", String.valueOf(shardInfo.getShardTotal()))
-                        .replace("{shard}", String.valueOf(shardInfo.getShardId()));
-            }
+            value = value
+                    .replace("{total}", String.valueOf(shardInfo.getShardTotal()))
+                    .replace("{shard}", String.valueOf(shardInfo.getShardId()));
             Object object;
             if(UDatatypes.isInt(value)) {
                 object = Integer.valueOf(value);

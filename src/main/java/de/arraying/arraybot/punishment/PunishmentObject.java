@@ -4,7 +4,7 @@ import de.arraying.arraybot.data.database.categories.GuildEntry;
 import de.arraying.arraybot.data.database.categories.PunishmentEntry;
 import de.arraying.arraybot.data.database.core.Category;
 import de.arraying.arraybot.data.database.templates.SetEntry;
-import net.dv8tion.jda.core.entities.Guild;
+import net.dv8tion.jda.api.entities.Guild;
 
 /**
  * Copyright 2017 Arraying

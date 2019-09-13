@@ -6,7 +6,7 @@ import de.arraying.arraybot.language.Message
 import de.arraying.arraybot.util.UArguments
 import de.arraying.arraybot.util.UEmbed
 import de.arraying.arraybot.util.URequest
-import net.dv8tion.jda.core.Permission
+import net.dv8tion.jda.api.Permission
 
 /**
  * Copyright 2017 Arraying
@@ -40,18 +40,18 @@ class UrbanCommand: DefaultCommand("urban",
         val phrase = UArguments.combine(args.toTypedArray(), 1)
                 .replace(" ", "%20")
         var json = URequest.get("http://api.urbandictionary.com/v0/define?term=$phrase")
-        val array = json.getJSONArray("list")
+        val array = json.array("list")
         if(array.length() == 0) {
             Message.COMMANDS_URBAN_NONE.send(channel).queue()
             return
         }
-        json = json.getJSONArray("list").getJSONObject(0)
+        json = json.array("list").json(0)
         val embed = UEmbed.getEmbed(channel)
                 .setDescription(Message.COMMANDS_URBAN_EMBED_DESCRIPTION.getContent(channel, "[$phrase](https://www.urbandictionary.com/define.php?term=$phrase)"))
                 .addField(Message.COMMANDS_URBAN_EMBED_DEFINITION.getContent(channel),
-                        json.getString("definition"),
+                        json.string("definition"),
                         false)
-        val example = json.getString("example")
+        val example = json.string("example")
         if(example.isNotEmpty()) {
             embed.addField(Message.COMMANDS_URBAN_EMBED_EXAMPLE.getContent(channel),
                     example,

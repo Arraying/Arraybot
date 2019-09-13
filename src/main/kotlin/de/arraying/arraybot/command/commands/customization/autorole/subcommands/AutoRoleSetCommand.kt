@@ -42,7 +42,7 @@ class AutoRoleSetCommand: SubCommand("set") {
         }
         val guildEntry = Category.GUILD.entry as GuildEntry
         guildEntry.push(guildEntry.getField(GuildEntry.Fields.AUTOROLE_ROLE), guildId, null, role.idLong)
-        val enabled = guildEntry.fetch(guildEntry.getField(GuildEntry.Fields.AUTOROLE_ENABLED), guildId, null).toBoolean()
+        val enabled = guildEntry.fetch(guildEntry.getField(GuildEntry.Fields.AUTOROLE_ENABLED), guildId, null)!!.toBoolean()
         val append = if(enabled) {
             ""
         } else {

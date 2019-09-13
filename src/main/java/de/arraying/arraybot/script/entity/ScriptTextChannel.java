@@ -3,8 +3,8 @@ package de.arraying.arraybot.script.entity;
 import de.arraying.arraybot.command.CommandEnvironment;
 import de.arraying.arraybot.script.abstraction.AbstractChannel;
 import de.arraying.arraybot.script.abstraction.AbstractMessenger;
-import net.dv8tion.jda.core.entities.MessageEmbed;
-import net.dv8tion.jda.core.entities.TextChannel;
+import net.dv8tion.jda.api.entities.MessageEmbed;
+import net.dv8tion.jda.api.entities.TextChannel;
 
 /**
  * Copyright 2018 Arraying

@@ -1,7 +1,7 @@
 package de.arraying.arraybot.util;
 
-import net.dv8tion.jda.core.entities.Guild;
-import net.dv8tion.jda.core.entities.Member;
+import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.entities.Member;
 
 import java.util.regex.Pattern;
 

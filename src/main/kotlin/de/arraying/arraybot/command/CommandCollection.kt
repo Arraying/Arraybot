@@ -49,7 +49,7 @@ import de.arraying.arraybot.command.commands.utils.premium.PremiumCommand
 import de.arraying.arraybot.command.commands.utils.stats.StatsCommand
 import de.arraying.arraybot.command.templates.DefaultCommand
 import de.arraying.arraybot.punishment.PunishmentType
-import net.dv8tion.jda.core.Permission
+import net.dv8tion.jda.api.Permission
 
 /**
  * Copyright 2017 Arraying

@@ -7,7 +7,7 @@ import de.arraying.arraybot.language.Message
 import de.arraying.arraybot.util.Limits
 import de.arraying.arraybot.util.UArguments
 import de.arraying.arraybot.util.objects.MultiKeyMap
-import net.dv8tion.jda.core.Permission
+import net.dv8tion.jda.api.Permission
 
 /**
  * Copyright 2017 Arraying

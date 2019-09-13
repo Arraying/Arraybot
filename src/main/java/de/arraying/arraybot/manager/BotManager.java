@@ -15,15 +15,15 @@ import de.arraying.arraybot.threadding.impl.AnnouncementsTask;
 import de.arraying.arraybot.util.UDatatypes;
 import de.arraying.arraybot.util.UDefaults;
 import de.arraying.arraybot.util.UPunishment;
-import net.dv8tion.jda.bot.sharding.DefaultShardManagerBuilder;
-import net.dv8tion.jda.bot.sharding.ShardManager;
-import net.dv8tion.jda.core.JDA;
-import net.dv8tion.jda.core.OnlineStatus;
-import net.dv8tion.jda.core.entities.Game;
-import net.dv8tion.jda.core.entities.Guild;
-import net.dv8tion.jda.core.entities.Member;
-import net.dv8tion.jda.core.entities.User;
-import net.dv8tion.jda.core.exceptions.PermissionException;
+import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.OnlineStatus;
+import net.dv8tion.jda.api.entities.Activity;
+import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.User;
+import net.dv8tion.jda.api.exceptions.PermissionException;
+import net.dv8tion.jda.api.sharding.DefaultShardManagerBuilder;
+import net.dv8tion.jda.api.sharding.ShardManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -143,6 +143,7 @@ public final class BotManager {
             long hub = configuration.getGuildId();
             int id = UDatatypes.getShardId(hub);
             JDA shard = shardManager.getShardById(id);
+            assert shard != null;
             return shard.getGuildById(hub);
         } catch(IllegalArgumentException exception) {
             logger.error("Could not get hub guild.");
@@ -159,6 +160,7 @@ public final class BotManager {
         try {
             int shardId = UDatatypes.getShardId(id);
             JDA shard = shardManager.getShardById(shardId);
+            assert shard != null;
             return shard.getGuildById(id) != null;
         } catch(IllegalArgumentException exception) {
             return false;
@@ -177,9 +179,8 @@ public final class BotManager {
                 .setStatus(OnlineStatus.DO_NOT_DISTURB)
                 .setShardsTotal(configuration.getBotShards())
                 .addEventListeners(new ReadyListener())
-                .setCorePoolSize(8)
                 .setUseShutdownNow(true)
-                .setGame(Game.listening(configuration.getBotPrefix() + "help || v" + configuration.getBotVersion()))
+                .setActivity(Activity.listening(configuration.getBotPrefix() + "help || v" + configuration.getBotVersion()))
                 .build();
     }
 

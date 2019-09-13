@@ -1,6 +1,6 @@
 package de.arraying.arraybot.listener.listeners;
 
-import net.dv8tion.jda.core.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 /**
  * Copyright 2017 Arraying

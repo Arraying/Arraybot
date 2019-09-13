@@ -1,7 +1,7 @@
 package de.arraying.arraybot.util
 
-import net.dv8tion.jda.core.EmbedBuilder
-import net.dv8tion.jda.core.entities.MessageEmbed
+import net.dv8tion.jda.api.EmbedBuilder
+import net.dv8tion.jda.api.entities.MessageEmbed
 import java.awt.Color
 
 /**

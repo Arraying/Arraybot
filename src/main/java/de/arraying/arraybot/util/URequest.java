@@ -1,9 +1,9 @@
 package de.arraying.arraybot.util;
 
+import de.arraying.kotys.JSON;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-import org.json.JSONObject;
 
 import java.io.IOException;
 
@@ -33,13 +33,13 @@ public final class URequest {
      * @throws IOException If an error occurs.
      */
     @SuppressWarnings("ConstantConditions")
-    public static JSONObject get(String url)
+    public static JSON get(String url)
             throws IOException {
         Request request = new Request.Builder()
                 .url(url)
                 .build();
         Response response = client.newCall(request).execute();
-        return new JSONObject(response.body().string());
+        return new JSON(response.body().string());
     }
 
 }

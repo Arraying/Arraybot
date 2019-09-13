@@ -1,6 +1,6 @@
 package de.arraying.arraybot.parameter.storage;
 
-import net.dv8tion.jda.core.entities.TextChannel;
+import net.dv8tion.jda.api.entities.TextChannel;
 
 import java.util.HashSet;
 import java.util.Set;

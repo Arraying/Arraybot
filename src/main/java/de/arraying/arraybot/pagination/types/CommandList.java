@@ -8,7 +8,7 @@ import de.arraying.arraybot.data.database.core.Category;
 import de.arraying.arraybot.language.Message;
 import de.arraying.arraybot.pagination.PageImpl;
 import de.arraying.arraybot.util.CustomEmbedBuilder;
-import net.dv8tion.jda.core.entities.TextChannel;
+import net.dv8tion.jda.api.entities.TextChannel;
 
 import java.util.List;
 

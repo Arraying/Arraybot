@@ -2,7 +2,7 @@ package de.arraying.arraybot.script.entity;
 
 import de.arraying.arraybot.command.CommandEnvironment;
 import de.arraying.arraybot.util.UUser;
-import net.dv8tion.jda.core.entities.*;
+import net.dv8tion.jda.api.entities.*;
 
 import java.time.OffsetDateTime;
 import java.util.HashMap;
@@ -71,7 +71,7 @@ public final class ScriptGuild implements ScriptEntity {
      */
     @Override
     public OffsetDateTime getCreationTime() {
-        return underlying.getCreationTime();
+        return underlying.getTimeCreated();
     }
 
     /**

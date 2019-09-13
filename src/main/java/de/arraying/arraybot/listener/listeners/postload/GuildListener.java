@@ -6,9 +6,9 @@ import de.arraying.arraybot.listener.Listener;
 import de.arraying.arraybot.listener.listeners.PostLoadListener;
 import de.arraying.arraybot.threadding.AbstractTask;
 import de.arraying.arraybot.threadding.impl.AnnouncementsTask;
-import net.dv8tion.jda.core.JDA;
-import net.dv8tion.jda.core.events.guild.GuildJoinEvent;
-import net.dv8tion.jda.core.events.guild.GuildLeaveEvent;
+import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.events.guild.GuildJoinEvent;
+import net.dv8tion.jda.api.events.guild.GuildLeaveEvent;
 
 import java.io.IOException;
 

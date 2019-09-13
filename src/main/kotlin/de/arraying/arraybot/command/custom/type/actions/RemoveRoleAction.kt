@@ -3,8 +3,8 @@ package de.arraying.arraybot.command.custom.type.actions
 import de.arraying.arraybot.command.CommandEnvironment
 import de.arraying.arraybot.command.custom.type.CustomCommandAction
 import de.arraying.arraybot.language.Message
-import net.dv8tion.jda.core.entities.TextChannel
-import net.dv8tion.jda.core.exceptions.PermissionException
+import net.dv8tion.jda.api.entities.TextChannel
+import net.dv8tion.jda.api.exceptions.PermissionException
 
 /**
  * Copyright 2017 Arraying
@@ -39,7 +39,7 @@ class RemoveRoleAction: CustomCommandAction, RoleAction() {
         val action = preprocess(environment, value) ?: return false
         val user = if(action.b == null) environment.member.user.idLong else action.b!!
         return try {
-            guild.controller.removeSingleRoleFromMember(guild.getMemberById(user), guild.getRoleById(action.a)).queue()
+            guild.getMemberById(user)?.let { guild.getRoleById(action.a)?.let { it1 -> guild.removeRoleFromMember(it, it1).queue() } }
             true
         } catch(exception: PermissionException) {
             Message.CUSTOM_TYPE_ROLE_PERMISSION.send(channel).queue()

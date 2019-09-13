@@ -8,8 +8,8 @@ import de.arraying.arraybot.data.database.Redis
 import de.arraying.arraybot.language.Message
 import de.arraying.arraybot.util.UDatabase
 import de.arraying.arraybot.util.UEmbed
-import net.dv8tion.jda.core.JDAInfo
-import net.dv8tion.jda.core.Permission
+import net.dv8tion.jda.api.JDAInfo
+import net.dv8tion.jda.api.Permission
 import org.apache.commons.io.FileUtils
 import java.lang.management.ManagementFactory
 

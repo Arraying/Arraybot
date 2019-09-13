@@ -1,6 +1,6 @@
 package de.arraying.arraybot.command
 
-import net.dv8tion.jda.core.entities.Message
+import net.dv8tion.jda.api.entities.Message
 
 /**
  * Copyright 2017 Arraying
@@ -19,9 +19,9 @@ import net.dv8tion.jda.core.entities.Message
  */
 data class CommandEnvironment(val message: Message) {
 
-    val guild = message.guild!!
-    val channel = message.textChannel!!
-    val author = message.author!!
+    val guild = message.guild
+    val channel = message.textChannel
+    val author = message.author
     val member = message.member!!
 
 }

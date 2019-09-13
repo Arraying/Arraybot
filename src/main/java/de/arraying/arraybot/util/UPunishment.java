@@ -3,12 +3,12 @@ package de.arraying.arraybot.util;
 import de.arraying.arraybot.data.database.categories.GuildEntry;
 import de.arraying.arraybot.data.database.core.Category;
 import de.arraying.arraybot.util.objects.Pair;
-import net.dv8tion.jda.core.Permission;
-import net.dv8tion.jda.core.entities.Guild;
-import net.dv8tion.jda.core.entities.Member;
-import net.dv8tion.jda.core.entities.Role;
-import net.dv8tion.jda.core.exceptions.PermissionException;
-import net.dv8tion.jda.core.utils.PermissionUtil;
+import net.dv8tion.jda.api.Permission;
+import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.Role;
+import net.dv8tion.jda.api.exceptions.PermissionException;
+import net.dv8tion.jda.internal.utils.PermissionUtil;
 
 /**
  * Copyright 2017 Arraying
@@ -81,7 +81,7 @@ public final class UPunishment {
      */
     public static boolean isBan(Guild guild, long user)
             throws PermissionException {
-        return PermissionUtil.checkPermission(guild.getSelfMember(), Permission.BAN_MEMBERS) && guild.getBanList().complete().stream().anyMatch(ban -> ban.getUser().getIdLong() == user);
+        return PermissionUtil.checkPermission(guild.getSelfMember(), Permission.BAN_MEMBERS) && guild.retrieveBanList().complete().stream().anyMatch(ban -> ban.getUser().getIdLong() == user);
     }
 
     /**
@@ -103,7 +103,7 @@ public final class UPunishment {
      */
     public static Pair<Boolean, Boolean> ban(Guild guild, long punishedId, String reason) {
         try {
-            guild.getController().ban(String.valueOf(punishedId), 0, reason).queue();
+            guild.ban(String.valueOf(punishedId), 0, reason).queue();
             return new Pair<>(true, false);
         } catch(PermissionException exception) {
             return new Pair<>(false, false);
@@ -121,7 +121,7 @@ public final class UPunishment {
             return true;
         }
         try {
-            guild.getController().unban(String.valueOf(punishedId)).queue();
+            guild.unban(String.valueOf(punishedId)).queue();
             return true;
         } catch(PermissionException exception) {
             return false;
@@ -147,9 +147,9 @@ public final class UPunishment {
         }
         try {
             if(apply) {
-                guild.getController().addSingleRoleToMember(muted, mutedRole).queue();
+                guild.addRoleToMember(muted, mutedRole).queue();
             } else {
-                guild.getController().removeSingleRoleFromMember(muted, mutedRole).queue();
+                guild.removeRoleFromMember(muted, mutedRole).queue();
             }
             return new Pair<>(true, false);
         } catch(PermissionException exception) {

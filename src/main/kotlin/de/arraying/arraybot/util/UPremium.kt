@@ -2,7 +2,7 @@ package de.arraying.arraybot.util
 
 import de.arraying.arraybot.Arraybot
 import de.arraying.arraybot.command.CommandEnvironment
-import net.dv8tion.jda.core.Permission
+import net.dv8tion.jda.api.Permission
 import org.slf4j.LoggerFactory
 
 /**
@@ -40,7 +40,7 @@ object UPremium {
         return environment.guild.members.any {
             it.hasPermission(Permission.MANAGE_SERVER)
                     && hub.getMemberById(it.user.idLong) != null
-                    && hub.getMemberById(it.user.idLong).roles.any {
+                    && hub.getMemberById(it.user.idLong)!!.roles.any {
                 role -> role.idLong == roleId
             }
         }

@@ -1,11 +1,11 @@
 package de.arraying.arraybot.util
 
 import de.arraying.arraybot.language.Message
-import net.dv8tion.jda.core.Permission
-import net.dv8tion.jda.core.entities.Guild
-import net.dv8tion.jda.core.entities.Member
-import net.dv8tion.jda.core.entities.TextChannel
-import net.dv8tion.jda.core.utils.PermissionUtil
+import net.dv8tion.jda.api.Permission
+import net.dv8tion.jda.api.entities.Guild
+import net.dv8tion.jda.api.entities.Member
+import net.dv8tion.jda.api.entities.TextChannel
+import net.dv8tion.jda.internal.utils.PermissionUtil
 
 /**
  * Copyright 2017 Arraying
@@ -32,16 +32,12 @@ class CustomPermission(val value: String) {
         fun getPermissionFromString(guild: Guild, input: String): CustomPermission? {
             val permission: String?
             val role = URole.getRole(guild, input)
-            permission = if(role != null) {
-                role.id
-            } else {
-                try {
-                    Permission.valueOf(input.toUpperCase()).toString()
-                } catch(exception: Exception) {
-                    return null
-                }
+            permission = role?.id ?: try {
+                Permission.valueOf(input.toUpperCase()).toString()
+            } catch(exception: Exception) {
+                return null
             }
-            return CustomPermission(permission!!)
+            return CustomPermission(permission)
         }
 
     }

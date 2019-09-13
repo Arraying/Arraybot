@@ -2,9 +2,9 @@ package de.arraying.arraybot.script.entity;
 
 import de.arraying.arraybot.command.CommandEnvironment;
 import de.arraying.arraybot.script.abstraction.AbstractMessenger;
-import net.dv8tion.jda.core.entities.Member;
-import net.dv8tion.jda.core.entities.MessageEmbed;
-import net.dv8tion.jda.core.entities.Role;
+import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.MessageEmbed;
+import net.dv8tion.jda.api.entities.Role;
 
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
@@ -77,7 +77,7 @@ public final class ScriptUser extends AbstractMessenger implements ScriptEntity 
      */
     @Override
     public OffsetDateTime getCreationTime() {
-        return underlying.getUser().getCreationTime();
+        return underlying.getUser().getTimeCreated();
     }
 
     /**

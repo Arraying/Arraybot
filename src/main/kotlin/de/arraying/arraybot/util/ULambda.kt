@@ -5,8 +5,8 @@ import de.arraying.arraybot.filter.FilterBypass
 import de.arraying.arraybot.filter.FilterBypassType
 import de.arraying.arraybot.punishment.PunishmentObject
 import de.arraying.arraybot.punishment.PunishmentType
-import net.dv8tion.jda.core.entities.Guild
-import net.dv8tion.jda.core.entities.Message
+import net.dv8tion.jda.api.entities.Guild
+import net.dv8tion.jda.api.entities.Message
 
 /**
  * Copyright 2017 Arraying
@@ -31,9 +31,9 @@ object ULambda {
      * E.g. MUTE = MUTE || TEMP_MUTE
      */
     fun getSpecificGeneralizedPunishment(guild: Guild, user: Long, type: PunishmentType): PunishmentObject? {
-        return Arraybot.INSTANCE.punishmentManager.getSpecificPunishment(guild, {
+        return Arraybot.INSTANCE.punishmentManager.getSpecificPunishment(guild) {
             it.user == user
-            && if(type == PunishmentType.BAN) {
+                    && if(type == PunishmentType.BAN) {
                 (it.type == PunishmentType.BAN
                         || it.type == PunishmentType.TEMP_BAN)
             } else if (it.type == PunishmentType.MUTE){
@@ -42,8 +42,8 @@ object ULambda {
             } else {
                 true
             }
-            && !it.isRevoked
-        })
+                    && !it.isRevoked
+        }
     }
 
     /**
@@ -55,7 +55,7 @@ object ULambda {
                 || (it.type == FilterBypassType.CHANNEL
                 && it.value == message.channel.idLong)
                 || (it.type ==FilterBypassType.ROLE
-                && message.member.roles.any {
+                && message.member!!.roles.any {
             role -> it.value == role.idLong
         })
     }

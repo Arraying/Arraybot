@@ -7,7 +7,7 @@ import de.arraying.arraybot.manager.*;
 import de.arraying.arraybot.startup.Starter;
 import de.arraying.arraybot.util.UDefaults;
 import de.arraying.arraybot.util.objects.Splash;
-import net.dv8tion.jda.core.JDAInfo;
+import net.dv8tion.jda.api.JDAInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

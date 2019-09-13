@@ -1,7 +1,7 @@
 package de.arraying.arraybot.command.custom.type
 
 import de.arraying.arraybot.command.CommandEnvironment
-import net.dv8tion.jda.core.entities.TextChannel
+import net.dv8tion.jda.api.entities.TextChannel
 
 /**
  * Copyright 2017 Arraying

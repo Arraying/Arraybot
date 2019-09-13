@@ -1,7 +1,7 @@
 package de.arraying.arraybot.script.entity;
 
 import de.arraying.arraybot.script.abstraction.AbstractChannel;
-import net.dv8tion.jda.core.entities.VoiceChannel;
+import net.dv8tion.jda.api.entities.VoiceChannel;
 
 import java.time.OffsetDateTime;
 
@@ -48,7 +48,7 @@ public final class ScriptVoiceChannel extends AbstractChannel implements ScriptE
      */
     @Override
     public OffsetDateTime getCreationTime() {
-        return underlying.getCreationTime();
+        return underlying.getTimeCreated();
     }
 
 }

@@ -3,7 +3,7 @@ package de.arraying.arraybot.command.custom.type.actions
 import de.arraying.arraybot.command.CommandEnvironment
 import de.arraying.arraybot.command.custom.type.CustomCommandAction
 import de.arraying.arraybot.language.Message
-import net.dv8tion.jda.core.entities.TextChannel
+import net.dv8tion.jda.api.entities.TextChannel
 
 /**
  * Copyright 2017 Arraying
@@ -30,9 +30,9 @@ class PrivateMessageAction: CustomCommandAction {
      * Private messages the user executing the command.
      */
     override fun onAction(environment: CommandEnvironment, value: String): Boolean {
-        environment.author.openPrivateChannel().queue({
+        environment.author.openPrivateChannel().queue {
             it.sendMessage(value).queue()
-        })
+        }
         return true
     }
 

@@ -29,10 +29,9 @@ public final class StartupCommands extends StartupTask {
 
     /**
      * Runs the actual startup task.
-     * @throws Exception If an error occurs.
      */
     @Override
-    public void onTask() throws Exception {
+    public void onTask() {
         Commands.INSTANCE.registerCommands();
     }
 

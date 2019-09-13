@@ -2,8 +2,8 @@ package de.arraying.arraybot.punishment.punishments;
 
 import de.arraying.arraybot.punishment.Punishment;
 import de.arraying.arraybot.util.objects.Pair;
-import net.dv8tion.jda.core.entities.Guild;
-import net.dv8tion.jda.core.exceptions.PermissionException;
+import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.exceptions.PermissionException;
 
 /**
  * Copyright 2017 Arraying
@@ -32,7 +32,7 @@ public final class KickPunishment implements Punishment {
     @Override
     public Pair<Boolean, Boolean> punish(Guild guild, long punishedId, String reason) {
         try {
-            guild.getController().kick(String.valueOf(punishedId), reason).queue();
+            guild.kick(String.valueOf(punishedId), reason).queue();
             return new Pair<>(true, false);
         } catch(PermissionException | IllegalArgumentException exception) {
             return new Pair<>(false, false);

@@ -6,8 +6,8 @@ import de.arraying.arraybot.command.templates.SubCommand
 import de.arraying.arraybot.data.database.core.Category
 import de.arraying.arraybot.data.database.templates.SetEntry
 import de.arraying.arraybot.language.Message
-import net.dv8tion.jda.core.Permission
-import net.dv8tion.jda.core.utils.PermissionUtil
+import net.dv8tion.jda.api.Permission
+import net.dv8tion.jda.internal.utils.PermissionUtil
 
 /**
  * Copyright 2017 Arraying

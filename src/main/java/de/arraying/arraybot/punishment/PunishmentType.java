@@ -6,8 +6,8 @@ import de.arraying.arraybot.punishment.punishments.KickPunishment;
 import de.arraying.arraybot.punishment.punishments.MutePunishment;
 import de.arraying.arraybot.punishment.punishments.SoftBanPunishment;
 import de.arraying.arraybot.util.objects.Pair;
-import net.dv8tion.jda.core.audit.ActionType;
-import net.dv8tion.jda.core.entities.Guild;
+import net.dv8tion.jda.api.audit.ActionType;
+import net.dv8tion.jda.api.entities.Guild;
 
 /**
  * Copyright 2017 Arraying

@@ -31,7 +31,7 @@ class FilterToggleSubCommand: SubCommand("toggle",
         val channel = environment.channel
         val guildId = environment.guild.idLong
         val guildEntry = Category.GUILD.entry as GuildEntry
-        val filter = guildEntry.fetch(guildEntry.getField(GuildEntry.Fields.FILTER_ENABLED), guildId, null).toBoolean()
+        val filter = guildEntry.fetch(guildEntry.getField(GuildEntry.Fields.FILTER_ENABLED), guildId, null)!!.toBoolean()
         guildEntry.push(guildEntry.getField(GuildEntry.Fields.FILTER_ENABLED), guildId, null, !filter)
         if(filter) {
             Message.COMMANDS_FILTER_TOGGLE_OFF.send(channel).queue()

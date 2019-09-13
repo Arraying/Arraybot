@@ -31,7 +31,7 @@ class FilterRegexSubCommand: SubCommand("regex",
         val channel = environment.channel
         val guildId = environment.guild.idLong
         val guildEntry = Category.GUILD.entry as GuildEntry
-        val filter = guildEntry.fetch(guildEntry.getField(GuildEntry.Fields.FILTER_REGEX), guildId, null).toBoolean()
+        val filter = guildEntry.fetch(guildEntry.getField(GuildEntry.Fields.FILTER_REGEX), guildId, null)!!.toBoolean()
         guildEntry.push(guildEntry.getField(GuildEntry.Fields.FILTER_REGEX), guildId, null, !filter)
         if(filter) {
             Message.COMMANDS_FILTER_REGEX_OFF.send(channel).queue()

@@ -7,7 +7,7 @@ import de.arraying.arraybot.data.database.core.Category;
 import de.arraying.arraybot.language.Message;
 import de.arraying.arraybot.util.Limits;
 import de.arraying.arraybot.util.UPremium;
-import net.dv8tion.jda.core.entities.Guild;
+import net.dv8tion.jda.api.entities.Guild;
 
 
 /**

@@ -7,7 +7,7 @@ import de.arraying.arraybot.data.database.core.Category
 import de.arraying.arraybot.language.Message
 import de.arraying.arraybot.util.UChannel
 import de.arraying.arraybot.util.UDefaults
-import net.dv8tion.jda.core.Permission
+import net.dv8tion.jda.api.Permission
 
 /**
  * Copyright 2017 Arraying

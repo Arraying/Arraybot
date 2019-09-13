@@ -15,7 +15,7 @@ import de.arraying.arraybot.script.provider.PastebinProvider;
 import de.arraying.arraybot.script.provider.StandardProvider;
 import de.arraying.prime.Prime;
 import de.arraying.prime.PrimeSourceProvider;
-import net.dv8tion.jda.core.entities.TextChannel;
+import net.dv8tion.jda.api.entities.TextChannel;
 import org.apache.commons.io.IOUtils;
 
 import java.io.IOException;

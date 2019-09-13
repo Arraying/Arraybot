@@ -9,12 +9,13 @@ import de.arraying.arraybot.util.UDefaults;
 import de.arraying.arraybot.util.UFormatting;
 import de.arraying.arraybot.util.ULambda;
 import de.arraying.arraybot.util.UPlaceholder;
-import net.dv8tion.jda.core.entities.Guild;
-import net.dv8tion.jda.core.entities.MessageEmbed;
-import net.dv8tion.jda.core.entities.TextChannel;
-import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
-import net.dv8tion.jda.core.exceptions.PermissionException;
+import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.entities.MessageEmbed;
+import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.api.exceptions.PermissionException;
 
+import java.util.Objects;
 import java.util.regex.PatternSyntaxException;
 
 /**
@@ -101,7 +102,7 @@ public enum Filter {
                 if(response.equals(UDefaults.DEFAULT_NULL)) {
                     response = Message.FILTER_MESSAGE.getContent(channel);
                 }
-                response = UPlaceholder.replaceCore(event.getMember(), response);
+                response = UPlaceholder.replaceCore(Objects.requireNonNull(event.getMember()), response);
                 response = UPlaceholder.replaceChannel(channel, response);
                 response = UPlaceholder.replaceMessage(event.getMessage(), response);
                 if(dm) {
@@ -178,7 +179,7 @@ public enum Filter {
                 || (bypass.getType() == FilterBypassType.CHANNEL
                 && event.getChannel().getIdLong() == bypass.getValue())
                 || (bypass.getType() == FilterBypassType.ROLE
-                && event.getMember().getRoles() != null
+                && event.getMember() != null
                 && event.getMember().getRoles().stream().anyMatch(role -> role != null && role.getIdLong() == bypass.getValue()));
     }
 

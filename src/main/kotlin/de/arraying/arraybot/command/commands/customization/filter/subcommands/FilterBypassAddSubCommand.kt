@@ -11,7 +11,7 @@ import de.arraying.arraybot.language.Message
 import de.arraying.arraybot.util.UChannel
 import de.arraying.arraybot.util.URole
 import de.arraying.arraybot.util.UUser
-import net.dv8tion.jda.core.entities.ISnowflake
+import net.dv8tion.jda.api.entities.ISnowflake
 
 /**
  * Copyright 2017 Arraying
