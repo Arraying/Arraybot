@@ -41,7 +41,7 @@ class ShardsCommand: DefaultCommand("shards",
                     "${shard.guilds.size}g, " +
                     "${shard.users.size}u, " +
                     "${shard.textChannels.size + shard.voiceChannels.size}c, " +
-                    "${shard.restPing}ms]")
+                    "${shard.restPing.complete()}ms]")
         }
         val pages = PageBuilder()
                 .withType(PageBuilder.Type.LIST)

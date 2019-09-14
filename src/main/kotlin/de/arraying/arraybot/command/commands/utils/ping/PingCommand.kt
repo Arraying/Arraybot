@@ -29,7 +29,7 @@ class PingCommand : DefaultCommand("ping",
      */
     override fun onCommand(environment: CommandEnvironment, args: List<String>) {
         val channel = environment.channel
-        Message.COMMANDS_PING_PING.send(channel, channel.jda.restPing.toString()).queue()
+        Message.COMMANDS_PING_PING.send(channel, channel.jda.restPing.complete().toString()).queue()
     }
 
 }
