@@ -2,8 +2,8 @@ package de.arraying.arraybot.language
 
 import de.arraying.arraybot.data.database.categories.GuildEntry
 import de.arraying.arraybot.data.database.core.Category
-import net.dv8tion.jda.core.entities.TextChannel
-import net.dv8tion.jda.core.requests.RestAction
+import net.dv8tion.jda.api.entities.TextChannel
+import net.dv8tion.jda.api.requests.RestAction
 
 /**
  * Copyright 2017 Arraying
@@ -331,7 +331,7 @@ enum class Message(private val prefix: Boolean = false) {
      * Returns a usable rest action that can be queued to send to the channel.
      * The replace parameter can be used to format the string.
      */
-    fun send(channel: TextChannel, vararg format: String): RestAction<net.dv8tion.jda.core.entities.Message> {
+    fun send(channel: TextChannel, vararg format: String): RestAction<net.dv8tion.jda.api.entities.Message> {
         return channel.sendMessage(getContent(channel.guild.idLong, *format))
     }
 

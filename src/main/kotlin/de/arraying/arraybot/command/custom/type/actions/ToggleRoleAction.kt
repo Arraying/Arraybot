@@ -3,8 +3,8 @@ package de.arraying.arraybot.command.custom.type.actions
 import de.arraying.arraybot.command.CommandEnvironment
 import de.arraying.arraybot.command.custom.type.CustomCommandAction
 import de.arraying.arraybot.language.Message
-import net.dv8tion.jda.core.entities.TextChannel
-import net.dv8tion.jda.core.exceptions.PermissionException
+import net.dv8tion.jda.api.entities.TextChannel
+import net.dv8tion.jda.api.exceptions.PermissionException
 
 /**
  * Copyright 2017 Arraying
@@ -41,10 +41,12 @@ class ToggleRoleAction: CustomCommandAction, RoleAction() {
         val member = guild.getMemberById(user)
         val role = guild.getRoleById(action.a)
         return try {
-            if(member.roles.contains(role)) {
-                guild.controller.removeSingleRoleFromMember(member, role).queue()
-            } else {
-                guild.controller.addSingleRoleToMember(member, role).queue()
+            if (member != null
+                && role != null) {
+                if(member.roles.contains(role)) {
+                    guild.removeRoleFromMember(member, role).queue()
+                    guild.addRoleToMember(member, role).queue()
+                }
             }
             true
         } catch(exception: PermissionException) {

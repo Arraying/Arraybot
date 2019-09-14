@@ -8,8 +8,8 @@ import de.arraying.arraybot.command.templates.DefaultCommand
 import de.arraying.arraybot.language.Message
 import de.arraying.arraybot.util.UArguments
 import de.arraying.arraybot.util.UDatatypes
-import net.dv8tion.jda.core.Permission
-import net.dv8tion.jda.core.utils.PermissionUtil
+import net.dv8tion.jda.api.Permission
+import net.dv8tion.jda.internal.utils.PermissionUtil
 import java.time.OffsetDateTime
 
 
@@ -72,8 +72,8 @@ class ClearCommand: DefaultCommand("clear",
         val storage = arraybot.storageManager.clearCommandStorageDataStorage.get(storageId)
         val channelDelete = storage.channel?: channel
         val messageHistory = channelDelete.history
-        messageHistory.retrievePast(amount + 1).queue {
-            val target = ArrayList<net.dv8tion.jda.core.entities.Message>()
+        messageHistory.retrievePast(amount + 1).queue { it ->
+            val target = ArrayList<net.dv8tion.jda.api.entities.Message>()
             if(storage.isBots) {
                 it.filterTo(target) { msg -> msg.author.isBot }
             }
@@ -85,7 +85,7 @@ class ClearCommand: DefaultCommand("clear",
                 }
             }
             target.removeIf {
-                msg -> msg.creationTime.isBefore(OffsetDateTime.now().minusWeeks(2))
+                msg -> msg.timeCreated.isBefore(OffsetDateTime.now().minusWeeks(2))
             }
             if(target.size < 2) {
                 Message.COMMANDS_CLEAR_LITTLE.send(channel).queue()

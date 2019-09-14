@@ -1,10 +1,10 @@
 package de.arraying.arraybot.util;
 
-import net.dv8tion.jda.core.Permission;
-import net.dv8tion.jda.core.entities.Guild;
-import net.dv8tion.jda.core.entities.Member;
-import net.dv8tion.jda.core.entities.TextChannel;
-import net.dv8tion.jda.core.utils.PermissionUtil;
+import net.dv8tion.jda.api.Permission;
+import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.internal.utils.PermissionUtil;
 
 import java.util.List;
 import java.util.regex.Pattern;
@@ -64,10 +64,9 @@ public class UChannel {
      * @param channel The channel.
      * @return True if they can, false otherwise.
      */
-    public static boolean canTalk(TextChannel channel) {
+    public static boolean cantTalk(TextChannel channel) {
         Member self = channel.getGuild().getSelfMember();
-        return PermissionUtil.checkPermission(channel, self, Permission.MESSAGE_READ)
-                && PermissionUtil.checkPermission(channel, self, Permission.MESSAGE_WRITE);
+        return !PermissionUtil.checkPermission(channel, self, Permission.MESSAGE_READ) || !PermissionUtil.checkPermission(channel, self, Permission.MESSAGE_WRITE);
     }
 
 }

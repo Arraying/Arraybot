@@ -2,8 +2,8 @@ package de.arraying.arraybot.listener.listeners.preload;
 
 import de.arraying.arraybot.Arraybot;
 import de.arraying.arraybot.manager.BotManager;
-import net.dv8tion.jda.core.events.ReadyEvent;
-import net.dv8tion.jda.core.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.events.ReadyEvent;
+import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 /**
  * Copyright 2017 Arraying

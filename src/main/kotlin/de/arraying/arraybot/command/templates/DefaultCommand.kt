@@ -14,8 +14,8 @@ import de.arraying.arraybot.util.UDatabase
 import de.arraying.arraybot.util.UPremium
 import kotlinx.coroutines.experimental.CommonPool
 import kotlinx.coroutines.experimental.launch
-import net.dv8tion.jda.core.Permission
-import net.dv8tion.jda.core.utils.PermissionUtil
+import net.dv8tion.jda.api.Permission
+import net.dv8tion.jda.internal.utils.PermissionUtil
 import org.apache.commons.lang3.StringUtils
 import org.apache.commons.text.WordUtils
 import org.slf4j.LoggerFactory

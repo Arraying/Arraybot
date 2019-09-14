@@ -1,7 +1,7 @@
 package de.arraying.arraybot.script.abstraction;
 
 import de.arraying.arraybot.script.entity.ScriptEntity;
-import net.dv8tion.jda.core.entities.Channel;
+import net.dv8tion.jda.api.entities.GuildChannel;
 
 import java.time.OffsetDateTime;
 
@@ -23,13 +23,13 @@ import java.time.OffsetDateTime;
 @SuppressWarnings("unused")
 public abstract class AbstractChannel implements ScriptEntity {
 
-    private final Channel underlying;
+    private final GuildChannel underlying;
 
     /**
      * Creates a new abstract channel.
      * @param underlying The underlying channel.
      */
-    protected AbstractChannel(Channel underlying) {
+    protected AbstractChannel(GuildChannel underlying) {
         this.underlying = underlying;
     }
 
@@ -48,25 +48,21 @@ public abstract class AbstractChannel implements ScriptEntity {
      */
     @Override
     public OffsetDateTime getCreationTime() {
-        return underlying.getCreationTime();
+        return underlying.getTimeCreated();
     }
 
     /**
      * Creates an invite.
      * @return The invite code.
-     * @throws Exception If an error occurs.
      */
-    public String createInvite()
-            throws Exception {
-        return underlying.createInvite().complete().getURL();
+    public String createInvite() {
+        return underlying.createInvite().complete().getUrl();
     }
 
     /**
      * Deletes the channel.
-     * @throws Exception If an error occurs.
      */
-    public void delete()
-            throws Exception {
+    public void delete() {
         underlying.delete().queue();
     }
 
@@ -89,60 +85,48 @@ public abstract class AbstractChannel implements ScriptEntity {
     /**
      * Sets the bitrate.
      * @param bitrate The bitrate.
-     * @throws Exception If an error occurs.
      */
-    public void setBitrate(int bitrate)
-            throws Exception {
+    public void setBitrate(int bitrate) {
         underlying.getManager().setBitrate(bitrate).queue();
     }
 
     /**
      * Sets the name.
      * @param name The name.
-     * @throws Exception If an error occurs.
      */
-    public void setName(String name)
-            throws Exception {
+    public void setName(String name) {
         underlying.getManager().setName(name).queue();
     }
 
     /**
      * Sets the channel NSFW property.
      * @param nsfw The property.
-     * @throws Exception If an error occurs.
      */
-    public void setNSFW(boolean nsfw)
-            throws Exception {
+    public void setNSFW(boolean nsfw) {
         underlying.getManager().setNSFW(nsfw).queue();
     }
 
     /**
      * Sets the channel position.
      * @param position The position.
-     * @throws Exception If an error occurs.
      */
-    public void setPosition(int position)
-            throws Exception {
+    public void setPosition(int position) {
         underlying.getManager().setPosition(position).queue();
     }
 
     /**
      * Sets the channel topic.
      * @param topic The topic.
-     * @throws Exception If an error occurs.
      */
-    public void setTopic(String topic)
-            throws Exception {
+    public void setTopic(String topic) {
         underlying.getManager().setTopic(topic).queue();
     }
 
     /**
      * Sets the user limit.
      * @param userLimit The user limit.
-     * @throws Exception If an error occurs.
      */
-    public void setUserLimit(int userLimit)
-            throws Exception {
+    public void setUserLimit(int userLimit) {
         underlying.getManager().setUserLimit(userLimit).queue();
     }
 

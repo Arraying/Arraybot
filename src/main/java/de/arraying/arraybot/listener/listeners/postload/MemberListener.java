@@ -7,14 +7,15 @@ import de.arraying.arraybot.util.Limits;
 import de.arraying.arraybot.util.UChannel;
 import de.arraying.arraybot.util.UDefaults;
 import de.arraying.arraybot.util.UPlaceholder;
-import net.dv8tion.jda.core.entities.Guild;
-import net.dv8tion.jda.core.entities.Member;
-import net.dv8tion.jda.core.entities.Role;
-import net.dv8tion.jda.core.entities.TextChannel;
-import net.dv8tion.jda.core.events.guild.member.GenericGuildMemberEvent;
-import net.dv8tion.jda.core.events.guild.member.GuildMemberJoinEvent;
-import net.dv8tion.jda.core.events.guild.member.GuildMemberLeaveEvent;
-import net.dv8tion.jda.core.exceptions.PermissionException;
+import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.Role;
+import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.events.guild.member.GenericGuildMemberEvent;
+import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
+import net.dv8tion.jda.api.events.guild.member.GuildMemberLeaveEvent;
+import net.dv8tion.jda.api.exceptions.PermissionException;
+import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -49,7 +50,7 @@ public final class MemberListener extends PostLoadListener {
      * @param event The event.
      */
     @Override
-    public void onGuildMemberJoin(GuildMemberJoinEvent event) {
+    public void onGuildMemberJoin(@NotNull GuildMemberJoinEvent event) {
         handleMemberMessages(event, true);
         assignAutoRole(event.getMember());
     }
@@ -59,7 +60,7 @@ public final class MemberListener extends PostLoadListener {
      * @param event The event.
      */
     @Override
-    public void onGuildMemberLeave(GuildMemberLeaveEvent event) {
+    public void onGuildMemberLeave(@NotNull GuildMemberLeaveEvent event) {
         handleMemberMessages(event, false);
     }
 
@@ -91,7 +92,7 @@ public final class MemberListener extends PostLoadListener {
         String id = entry.fetch(entry.getField(channelId), guildId, null);
         TextChannel channel = guild.getTextChannelById(id);
         if(channel == null
-                || !UChannel.canTalk(channel)) {
+                || UChannel.cantTalk(channel)) {
             return;
         }
         String message = entry.fetch(entry.getField(messageId), guildId, null);
@@ -134,7 +135,7 @@ public final class MemberListener extends PostLoadListener {
             return;
         }
         try {
-            guild.getController().addSingleRoleToMember(member, role).queue();
+            guild.addRoleToMember(member, role).queue();
         } catch(PermissionException exception) {
             logger.warn("Could not apply the autorole in the guild {} due to a permission error.", guildId);
         }

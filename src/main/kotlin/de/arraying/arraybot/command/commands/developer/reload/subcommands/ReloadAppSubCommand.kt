@@ -30,9 +30,9 @@ class ReloadAppSubCommand: SubCommand("app",
     override fun onSubCommand(environment: CommandEnvironment, args: List<String>) {
         val channel = environment.channel
         Runtime.getRuntime().addShutdownHook(RestartShutdownHook("Restart-Shutdown-Hook"))
-        Message.COMMANDS_RELOAD_APP.send(channel).queue({
+        Message.COMMANDS_RELOAD_APP.send(channel).queue {
             System.exit(0)
-        })
+        }
     }
 
     class RestartShutdownHook(name: String): Thread(name) {

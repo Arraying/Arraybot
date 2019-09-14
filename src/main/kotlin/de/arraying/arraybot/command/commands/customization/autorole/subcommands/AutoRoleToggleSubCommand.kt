@@ -31,7 +31,7 @@ class AutoRoleToggleSubCommand: SubCommand("toggle",
         val channel = environment.channel
         val guildId = environment.guild.idLong
         val guildEntry = Category.GUILD.entry as GuildEntry
-        val autorole = guildEntry.fetch(guildEntry.getField(GuildEntry.Fields.AUTOROLE_ENABLED), guildId, null).toBoolean()
+        val autorole = guildEntry.fetch(guildEntry.getField(GuildEntry.Fields.AUTOROLE_ENABLED), guildId, null)!!.toBoolean()
         guildEntry.push(guildEntry.getField(GuildEntry.Fields.AUTOROLE_ENABLED), guildId, null, !autorole)
         if(autorole) {
             Message.COMMANDS_AUTOROLE_TOGGLE_OFF.send(channel).queue()

@@ -1,6 +1,8 @@
 package de.arraying.arraybot.util;
 
-import net.dv8tion.jda.core.entities.*;
+import net.dv8tion.jda.api.entities.*;
+
+import java.util.Objects;
 
 /**
  * Copyright 2017 Arraying
@@ -38,7 +40,7 @@ public final class UPlaceholder {
                 .replace("{guild_icon}", guild.getIconUrl() == null ? "null" : guild.getIconUrl())
                 .replace("{guild_members}", String.valueOf(guild.getMembers().size()))
                 .replace("{guild_name}", guild.getName())
-                .replace("{guild_owner}", guild.getOwner().getAsMention())
+                .replace("{guild_owner}", Objects.requireNonNull(guild.getOwner()).getAsMention())
                 .replace("{guild_owner_name}", guild.getOwner().getUser().getName())
                 .replace("{guild_owner_discriminator}", guild.getOwner().getUser().getDiscriminator())
                 .replace("{guild_owner_nickname}", guild.getOwner().getEffectiveName())
@@ -67,7 +69,7 @@ public final class UPlaceholder {
      */
     public static String replaceMessage(Message message, String input) {
         return input.replace("{message_id}", message.getId())
-                .replace("{message_time}", message.getCreationTime().toString());
+                .replace("{message_time}", message.getTimeCreated().toString());
     }
 
 }

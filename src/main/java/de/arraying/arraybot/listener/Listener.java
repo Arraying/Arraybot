@@ -8,7 +8,7 @@ import de.arraying.arraybot.listener.listeners.postload.MessageListener;
 import de.arraying.arraybot.listener.listeners.postload.PunishmentListener;
 import de.arraying.arraybot.request.BotListRequest;
 import de.arraying.arraybot.threadding.AbstractTask;
-import net.dv8tion.jda.core.JDA;
+import net.dv8tion.jda.api.JDA;
 
 /**
  * Copyright 2017 Arraying

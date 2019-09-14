@@ -3,9 +3,9 @@ package de.arraying.arraybot.script.method;
 import de.arraying.arraybot.command.CommandEnvironment;
 import de.arraying.arraybot.script.entity.ScriptRole;
 import de.arraying.arraybot.script.entity.ScriptUser;
-import net.dv8tion.jda.core.entities.Member;
-import net.dv8tion.jda.core.entities.Role;
-import net.dv8tion.jda.core.managers.GuildController;
+import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.Role;
 
 /**
  * Copyright 2018 Arraying
@@ -62,7 +62,7 @@ public final class ManagerMethods {
      */
     public boolean kick(ScriptUser user) {
         try {
-            environment.getGuild().getController().kick(user.getID()).complete();
+            environment.getGuild().kick(user.getID()).complete();
             return true;
         } catch(Exception exception) {
             return false;
@@ -76,7 +76,7 @@ public final class ManagerMethods {
      */
     public boolean ban(ScriptUser user) {
         try {
-            environment.getGuild().getController().ban(user.getID(), 0).complete();
+            environment.getGuild().ban(user.getID(), 0).complete();
             return true;
         } catch(Exception exception) {
             return false;
@@ -92,7 +92,9 @@ public final class ManagerMethods {
     public boolean nickname(ScriptUser user, String nickname) {
         try {
             Member member = environment.getGuild().getMemberById(user.getID());
-            environment.getGuild().getController().setNickname(member, nickname).complete();
+            if(member != null) {
+                environment.getGuild().modifyNickname(member, nickname).complete();
+            }
             return true;
         } catch(Exception exception) {
             return false;
@@ -108,13 +110,16 @@ public final class ManagerMethods {
      */
     private synchronized boolean manageRole(ScriptUser user, ScriptRole role, boolean add) {
         try {
-            GuildController controller = environment.getGuild().getController();
+            Guild guild = environment.getGuild();
             Member member = environment.getGuild().getMemberById(user.getID());
             Role rank = environment.getGuild().getRoleById(role.getID());
-            if(add) {
-                controller.addSingleRoleToMember(member, rank).complete();
-            } else {
-                controller.removeSingleRoleFromMember(member, rank).complete();
+            if(member != null
+                    && rank != null) {
+                if(add) {
+                    guild.addRoleToMember(member, rank).complete();
+                } else {
+                    guild.removeRoleFromMember(member, rank).complete();
+                }
             }
             return true;
         } catch(Exception exception) {

@@ -18,7 +18,7 @@ import de.arraying.arraybot.language.Message
 import de.arraying.arraybot.util.*
 import kotlinx.coroutines.experimental.CommonPool
 import kotlinx.coroutines.experimental.launch
-import net.dv8tion.jda.core.entities.TextChannel
+import net.dv8tion.jda.api.entities.TextChannel
 import org.slf4j.LoggerFactory
 import java.util.*
 

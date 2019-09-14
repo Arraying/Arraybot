@@ -3,7 +3,7 @@ package de.arraying.arraybot.filter;
 import de.arraying.arraybot.data.database.categories.FilterBypassEntry;
 import de.arraying.arraybot.data.database.core.Category;
 import de.arraying.arraybot.data.database.templates.SetEntry;
-import net.dv8tion.jda.core.entities.Guild;
+import net.dv8tion.jda.api.entities.Guild;
 
 import java.util.ArrayList;
 import java.util.List;

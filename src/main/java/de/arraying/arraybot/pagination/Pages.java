@@ -1,7 +1,7 @@
 package de.arraying.arraybot.pagination;
 
 import de.arraying.arraybot.util.CustomEmbedBuilder;
-import net.dv8tion.jda.core.entities.TextChannel;
+import net.dv8tion.jda.api.entities.TextChannel;
 
 /**
  * Copyright 2017 Arraying

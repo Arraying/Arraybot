@@ -4,7 +4,7 @@ import de.arraying.arraybot.command.CommandEnvironment
 import de.arraying.arraybot.command.templates.DefaultCommand
 import de.arraying.arraybot.language.Message
 import de.arraying.arraybot.util.UScript
-import net.dv8tion.jda.core.Permission
+import net.dv8tion.jda.api.Permission
 
 /**
  * Copyright 2017 Arraying

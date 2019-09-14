@@ -1,8 +1,8 @@
 package de.arraying.arraybot.script.entity;
 
 import de.arraying.arraybot.command.CommandEnvironment;
-import net.dv8tion.jda.core.entities.Message;
-import net.dv8tion.jda.core.entities.MessageEmbed;
+import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.entities.MessageEmbed;
 
 import java.time.OffsetDateTime;
 
@@ -51,7 +51,7 @@ public final class ScriptMessage implements ScriptEntity {
      */
     @Override
     public OffsetDateTime getCreationTime() {
-        return underlying.getCreationTime();
+        return underlying.getTimeCreated();
     }
 
     /**
@@ -79,7 +79,7 @@ public final class ScriptMessage implements ScriptEntity {
     }
 
     public OffsetDateTime getEditTime() {
-        return underlying.getEditedTime();
+        return underlying.getTimeEdited();
     }
 
     /**

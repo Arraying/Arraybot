@@ -7,7 +7,7 @@ import de.arraying.arraybot.pagination.PageBuilder
 import de.arraying.arraybot.pagination.PageImpl
 import de.arraying.arraybot.util.UArguments
 import de.arraying.arraybot.util.UEmbed
-import net.dv8tion.jda.core.Permission
+import net.dv8tion.jda.api.Permission
 
 /**
  * Copyright 2017 Arraying

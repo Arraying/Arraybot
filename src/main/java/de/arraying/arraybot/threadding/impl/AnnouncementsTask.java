@@ -9,8 +9,8 @@ import de.arraying.arraybot.data.database.core.EntryField;
 import de.arraying.arraybot.threadding.AbstractWatcher;
 import de.arraying.arraybot.util.UDatatypes;
 import de.arraying.arraybot.util.UDefaults;
-import net.dv8tion.jda.core.Permission;
-import net.dv8tion.jda.core.entities.TextChannel;
+import net.dv8tion.jda.api.Permission;
+import net.dv8tion.jda.api.entities.TextChannel;
 
 import java.util.Collections;
 import java.util.Map;

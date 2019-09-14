@@ -7,7 +7,7 @@ import de.arraying.arraybot.language.Message
 import de.arraying.arraybot.pagination.PageBuilder
 import de.arraying.arraybot.pagination.PageImpl
 import de.arraying.arraybot.util.UEmbed
-import net.dv8tion.jda.core.Permission
+import net.dv8tion.jda.api.Permission
 
 /**
  * Copyright 2017 Arraying
@@ -41,7 +41,7 @@ class ShardsCommand: DefaultCommand("shards",
                     "${shard.guilds.size}g, " +
                     "${shard.users.size}u, " +
                     "${shard.textChannels.size + shard.voiceChannels.size}c, " +
-                    "${shard.ping}ms]")
+                    "${shard.restPing.complete()}ms]")
         }
         val pages = PageBuilder()
                 .withType(PageBuilder.Type.LIST)

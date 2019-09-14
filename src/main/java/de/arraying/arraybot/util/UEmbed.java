@@ -5,9 +5,8 @@ import de.arraying.arraybot.data.Cache;
 import de.arraying.arraybot.data.database.categories.GuildEntry;
 import de.arraying.arraybot.data.database.core.Category;
 import de.arraying.arraybot.language.Message;
-import net.dv8tion.jda.core.JDA;
-import net.dv8tion.jda.core.entities.Guild;
-import net.dv8tion.jda.core.entities.TextChannel;
+import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.entities.TextChannel;
 
 import java.awt.*;
 import java.util.Calendar;
@@ -47,7 +46,6 @@ public final class UEmbed {
      */
     public static CustomEmbedBuilder getEmbed(Guild guild) {
         Calendar calendar = Calendar.getInstance();
-        JDA jda = guild.getJDA();
         int year = calendar.get(Calendar.YEAR);
         GuildEntry entry = (GuildEntry) Category.GUILD.getEntry();
         String language = entry.fetch(entry.getField(GuildEntry.Fields.LANGUAGE), guild.getIdLong(), null);

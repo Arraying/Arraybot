@@ -3,7 +3,7 @@ package de.arraying.arraybot.command.commands.utils.ping
 import de.arraying.arraybot.command.CommandEnvironment
 import de.arraying.arraybot.command.templates.DefaultCommand
 import de.arraying.arraybot.language.Message
-import net.dv8tion.jda.core.Permission
+import net.dv8tion.jda.api.Permission
 
 /**
  * Copyright 2017 Arraying
@@ -29,7 +29,7 @@ class PingCommand : DefaultCommand("ping",
      */
     override fun onCommand(environment: CommandEnvironment, args: List<String>) {
         val channel = environment.channel
-        Message.COMMANDS_PING_PING.send(channel, channel.jda.ping.toString()).queue()
+        Message.COMMANDS_PING_PING.send(channel, channel.jda.restPing.complete().toString()).queue()
     }
 
 }

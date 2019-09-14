@@ -17,6 +17,6 @@ package de.arraying.arraybot.command.commands.utils.commands
  */
 object CommandsCommandData {
 
-    val name = "commands"
+    const val name = "commands"
 
 }

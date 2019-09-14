@@ -3,7 +3,7 @@ package de.arraying.arraybot.pagination.types;
 import de.arraying.arraybot.pagination.PageImpl;
 import de.arraying.arraybot.util.CustomEmbedBuilder;
 import de.arraying.arraybot.util.UFormatting;
-import net.dv8tion.jda.core.entities.TextChannel;
+import net.dv8tion.jda.api.entities.TextChannel;
 
 import java.util.List;
 

@@ -8,8 +8,8 @@ import de.arraying.arraybot.util.CustomPermission
 import de.arraying.arraybot.util.ULambda
 import de.arraying.arraybot.util.UPunishment
 import de.arraying.arraybot.util.UUser
-import net.dv8tion.jda.core.Permission
-import net.dv8tion.jda.core.utils.PermissionUtil
+import net.dv8tion.jda.api.Permission
+import net.dv8tion.jda.internal.utils.PermissionUtil
 
 /**
  * Copyright 2017 Arraying

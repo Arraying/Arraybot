@@ -1,7 +1,7 @@
 package de.arraying.arraybot.punishment;
 
 import de.arraying.arraybot.util.objects.Pair;
-import net.dv8tion.jda.core.entities.Guild;
+import net.dv8tion.jda.api.entities.Guild;
 
 /**
  * Copyright 2017 Arraying

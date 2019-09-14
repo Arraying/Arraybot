@@ -1,6 +1,6 @@
 package de.arraying.arraybot.script.entity;
 
-import net.dv8tion.jda.core.entities.Role;
+import net.dv8tion.jda.api.entities.Role;
 
 import java.awt.*;
 import java.time.OffsetDateTime;
@@ -48,7 +48,7 @@ public final class ScriptRole implements ScriptEntity {
      */
     @Override
     public OffsetDateTime getCreationTime() {
-        return underlying.getCreationTime();
+        return underlying.getTimeCreated();
     }
 
     /**

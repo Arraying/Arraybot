@@ -3,7 +3,7 @@ package de.arraying.arraybot.script.abstraction;
 import de.arraying.arraybot.command.CommandEnvironment;
 import de.arraying.arraybot.script.LimitError;
 import de.arraying.arraybot.util.UScript;
-import net.dv8tion.jda.core.entities.MessageEmbed;
+import net.dv8tion.jda.api.entities.MessageEmbed;
 
 /**
  * Copyright 2018 Arraying

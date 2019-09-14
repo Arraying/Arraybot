@@ -11,9 +11,9 @@ import de.arraying.arraybot.util.objects.MultiKeyMap
 import kotlinx.coroutines.experimental.CommonPool
 import kotlinx.coroutines.experimental.launch
 import kotlinx.coroutines.experimental.runBlocking
-import net.dv8tion.jda.core.Permission
-import net.dv8tion.jda.core.entities.TextChannel
-import net.dv8tion.jda.core.utils.PermissionUtil
+import net.dv8tion.jda.api.Permission
+import net.dv8tion.jda.api.entities.TextChannel
+import net.dv8tion.jda.internal.utils.PermissionUtil
 import org.slf4j.LoggerFactory
 
 /**

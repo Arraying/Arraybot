@@ -7,8 +7,9 @@ import de.arraying.arraybot.filter.Filter;
 import de.arraying.arraybot.listener.listeners.PostLoadListener;
 import de.arraying.arraybot.util.UDatabase;
 import io.lettuce.core.api.sync.RedisCommands;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
-import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Copyright 2017 Arraying
@@ -41,7 +42,7 @@ public final class MessageListener extends PostLoadListener {
      */
     @SuppressWarnings("unchecked")
     @Override
-    public void onMessageReceived(MessageReceivedEvent event) {
+    public void onMessageReceived(@NotNull MessageReceivedEvent event) {
         RedisCommands resource = Redis.INSTANCE.getResource();
         resource.incr(UDatabase.MESSAGES_KEY);
     }
@@ -52,10 +53,7 @@ public final class MessageListener extends PostLoadListener {
      * @param event The event.
      */
     @Override
-    public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
-        if(event == null) {
-            return;
-        }
+    public void onGuildMessageReceived(@NotNull GuildMessageReceivedEvent event) {
         Filter.INSTANCE.handle(event);
         if(event.getAuthor().isFake()
             || event.getAuthor().isBot()) {

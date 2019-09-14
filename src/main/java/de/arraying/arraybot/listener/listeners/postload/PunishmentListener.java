@@ -9,18 +9,19 @@ import de.arraying.arraybot.threadding.AbstractTask;
 import de.arraying.arraybot.util.ULambda;
 import de.arraying.arraybot.util.UPunishment;
 import de.arraying.arraybot.util.objects.Pair;
-import net.dv8tion.jda.core.Permission;
-import net.dv8tion.jda.core.audit.AuditLogEntry;
-import net.dv8tion.jda.core.entities.Guild;
-import net.dv8tion.jda.core.entities.Role;
-import net.dv8tion.jda.core.entities.User;
-import net.dv8tion.jda.core.events.guild.GenericGuildEvent;
-import net.dv8tion.jda.core.events.guild.GuildBanEvent;
-import net.dv8tion.jda.core.events.guild.GuildUnbanEvent;
-import net.dv8tion.jda.core.events.guild.member.GuildMemberJoinEvent;
-import net.dv8tion.jda.core.events.guild.member.GuildMemberLeaveEvent;
-import net.dv8tion.jda.core.events.guild.member.GuildMemberRoleAddEvent;
-import net.dv8tion.jda.core.events.guild.member.GuildMemberRoleRemoveEvent;
+import net.dv8tion.jda.api.Permission;
+import net.dv8tion.jda.api.audit.AuditLogEntry;
+import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.entities.Role;
+import net.dv8tion.jda.api.entities.User;
+import net.dv8tion.jda.api.events.guild.GenericGuildEvent;
+import net.dv8tion.jda.api.events.guild.GuildBanEvent;
+import net.dv8tion.jda.api.events.guild.GuildUnbanEvent;
+import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
+import net.dv8tion.jda.api.events.guild.member.GuildMemberLeaveEvent;
+import net.dv8tion.jda.api.events.guild.member.GuildMemberRoleAddEvent;
+import net.dv8tion.jda.api.events.guild.member.GuildMemberRoleRemoveEvent;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Copyright 2017 Arraying
@@ -57,8 +58,7 @@ public final class PunishmentListener extends PostLoadListener {
      */
     @Override
     public void onGuildMemberJoin(GuildMemberJoinEvent event) {
-        if(event.getGuild() == null
-                || !event.getGuild().getSelfMember().hasPermission(Permission.VIEW_AUDIT_LOGS)) {
+        if(event.getGuild().getSelfMember().hasPermission(Permission.VIEW_AUDIT_LOGS)) {
             return;
         }
         new AbstractTask("Punishment-BypassChecker") {
@@ -94,7 +94,7 @@ public final class PunishmentListener extends PostLoadListener {
      * @param event The event.
      */
     @Override
-    public void onGuildMemberLeave(GuildMemberLeaveEvent event) {
+    public void onGuildMemberLeave(@NotNull GuildMemberLeaveEvent event) {
         handlePunishment(event, event.getUser(), PunishmentType.KICK, null, false);
     }
 
@@ -104,7 +104,7 @@ public final class PunishmentListener extends PostLoadListener {
      * @param event The event.
      */
     @Override
-    public void onGuildMemberRoleAdd(GuildMemberRoleAddEvent event) {
+    public void onGuildMemberRoleAdd(@NotNull GuildMemberRoleAddEvent event) {
         handlePunishment(event, event.getUser(), PunishmentType.MUTE, event.getRoles().toArray(new Role[event.getRoles().size()]), false);
     }
 
@@ -113,7 +113,7 @@ public final class PunishmentListener extends PostLoadListener {
      * @param event The event.
      */
     @Override
-    public void onGuildBan(GuildBanEvent event) {
+    public void onGuildBan(@NotNull GuildBanEvent event) {
         handlePunishment(event, event.getUser(), PunishmentType.BAN, null, false);
     }
 
@@ -123,7 +123,7 @@ public final class PunishmentListener extends PostLoadListener {
      * @param event The event.
      */
     @Override
-    public void onGuildMemberRoleRemove(GuildMemberRoleRemoveEvent event) {
+    public void onGuildMemberRoleRemove(@NotNull GuildMemberRoleRemoveEvent event) {
         handlePunishment(event, event.getUser(), PunishmentType.MUTE, event.getRoles().toArray(new Role[event.getRoles().size()]), true);
     }
 
@@ -132,7 +132,7 @@ public final class PunishmentListener extends PostLoadListener {
      * @param event The event.
      */
     @Override
-    public void onGuildUnban(GuildUnbanEvent event) {
+    public void onGuildUnban(@NotNull GuildUnbanEvent event) {
         handlePunishment(event, event.getUser(), PunishmentType.BAN, null, true);
     }
 
@@ -146,12 +146,11 @@ public final class PunishmentListener extends PostLoadListener {
      */
     private void handlePunishment(GenericGuildEvent event, User userObject, PunishmentType type, Role[] roles, boolean revoke) {
         Guild guild = event.getGuild();
-        if(guild == null
-                || !event.getGuild().getSelfMember().hasPermission(Permission.VIEW_AUDIT_LOGS)) {
+        if(!event.getGuild().getSelfMember().hasPermission(Permission.VIEW_AUDIT_LOGS)) {
             return;
         }
         long user = userObject.getIdLong();
-        guild.getAuditLogs().queue(entries -> {
+        guild.retrieveAuditLogs().queue(entries -> {
             if(entries.isEmpty()) {
                 return;
             }
