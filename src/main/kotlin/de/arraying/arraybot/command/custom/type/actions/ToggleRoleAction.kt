@@ -45,6 +45,7 @@ class ToggleRoleAction: CustomCommandAction, RoleAction() {
                 && role != null) {
                 if(member.roles.contains(role)) {
                     guild.removeRoleFromMember(member, role).queue()
+                } else {
                     guild.addRoleToMember(member, role).queue()
                 }
             }
