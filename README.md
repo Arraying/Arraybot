@@ -24,4 +24,4 @@ Arraybot comes hosted for you, if you would like to compile it and run it yourse
 
 ## Contributing
 
-Please see the CONTRIBUTING.md file.
+Please see the [CONTRIBUTING.md](https://github.com/Arraying/Arraybot/blob/master/CONTRIBUTING.md) file.
