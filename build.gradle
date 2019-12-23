@@ -16,7 +16,7 @@ plugins {
 
 group "de.arraying.arraybot"
 
-version "5.6.0"
+version "5.6.2"
 
 ext.main = "Arraybot"
 mainClassName = "de.arraying.arraybot.Arraybot"
@@ -38,7 +38,7 @@ dependencies {
     compile "com.github.Arraying:Kotys:0.5.0" // JSON
     compile "com.github.Arraying:Prime:0.1.4" // Scripting
     compile "ch.qos.logback:logback-classic:1.2.3" // Logging
-    compile "net.dv8tion:JDA:4.0.0_46" // Discord
+    compile "net.dv8tion:JDA:4.1.0_81" // Discord
     compile "io.lettuce:lettuce-core:5.1.8.RELEASE" // Database
     compile "commons-io:commons-io:2.6" // Utils
     compile "org.apache.commons:commons-lang3:3.9" // Utils
