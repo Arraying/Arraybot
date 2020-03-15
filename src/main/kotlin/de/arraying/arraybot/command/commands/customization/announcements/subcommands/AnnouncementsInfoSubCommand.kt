@@ -23,8 +23,7 @@ import de.arraying.arraybot.util.UDatatypes
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-class AnnouncementsInfoSubCommand: SubCommand("info",
-        aliases = arrayOf("i")) {
+class AnnouncementsInfoSubCommand: SubCommand("info") {
 
     /**
      * When the sub command is executed.
