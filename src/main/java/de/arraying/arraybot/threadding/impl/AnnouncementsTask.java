@@ -46,19 +46,19 @@ public final class AnnouncementsTask extends AbstractWatcher {
     /**
      * Creates a new announcement task.
      * @param guild The guild ID.
-     * @param interval The interval in minutes.
+     * @param period The period in minutes.
      */
-    private AnnouncementsTask(long guild, int interval) {
-        super("Announcements-" + guild, (int) TimeUnit.MINUTES.toMillis(interval));
+    private AnnouncementsTask(long guild, int period) {
+        super("Announcements-" + guild, (int) TimeUnit.MINUTES.toMillis(period));
         this.guild = guild;
     }
 
     /**
-     * Sets the interval.
-     * @param interval The interval in minutes.
+     * Sets the period.
+     * @param period The period in minutes.
      */
-    public void setInterval(int interval) {
-        setWaitDuration((int) TimeUnit.MINUTES.toMillis(interval));
+    public void setPeriod(int period) {
+        setWaitDuration((int) TimeUnit.MINUTES.toMillis(period));
     }
 
     /**
@@ -79,9 +79,9 @@ public final class AnnouncementsTask extends AbstractWatcher {
             return;
         }
         GuildEntry entry = (GuildEntry) Category.GUILD.getEntry();
-        EntryField intervalEntry = entry.getField(GuildEntry.Fields.ANNOUNCEMENT_INTERVAL);
-        int interval = Integer.valueOf(entry.fetch(intervalEntry, guild, null));
-        AnnouncementsTask task = new AnnouncementsTask(guild, interval);
+        EntryField periodEntry = entry.getField(GuildEntry.Fields.ANNOUNCEMENT_PERIOD);
+        int period = Integer.valueOf(entry.fetch(periodEntry, guild, null));
+        AnnouncementsTask task = new AnnouncementsTask(guild, period);
         tasks.put(guild, task);
         task.create();
         Arraybot.INSTANCE.getLogger().info("Enabled announcements for the guild {}.", guild);

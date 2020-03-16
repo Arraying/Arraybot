@@ -35,28 +35,28 @@ class AnnouncementsPeriodSubCommand: SubCommand("period",
         val guild = environment.guild.idLong
         val entry = Category.GUILD.entry as GuildEntry
         if(args.size < 3) {
-            val period = entry.fetch(entry.getField(GuildEntry.Fields.ANNOUNCEMENT_INTERVAL), guild, null)
-            Message.COMMANDS_ANNOUNCEMENTS_INTERVAL.send(channel, period).queue()
+            val period = entry.fetch(entry.getField(GuildEntry.Fields.ANNOUNCEMENT_PERIOD), guild, null)
+            Message.COMMANDS_ANNOUNCEMENTS_PERIOD.send(channel, period).queue()
             return
         }
         val newRaw = args[2]
         if(!UDatatypes.isInt(newRaw)) {
-            Message.COMMANDS_ANNOUNCEMENTS_INTERVAL_INVALID.send(channel,
-                    Limits.ANNOUNCEMENTS_INTERVAL_MIN.limit.toString(),
-                    Limits.ANNOUNCEMENTS_INTERVAL_MAX.limit.toString()).queue()
+            Message.COMMANDS_ANNOUNCEMENTS_PERIOD_INVALID.send(channel,
+                    Limits.ANNOUNCEMENTS_PERIOD_MIN.limit.toString(),
+                    Limits.ANNOUNCEMENTS_PERIOD_MAX.limit.toString()).queue()
             return
         }
         val new = newRaw.toInt()
-        if(new > Limits.ANNOUNCEMENTS_INTERVAL_MAX.limit
-            || new < Limits.ANNOUNCEMENTS_INTERVAL_MIN.limit) {
-            Message.COMMANDS_ANNOUNCEMENTS_INTERVAL_INVALID.send(channel,
-                    Limits.ANNOUNCEMENTS_INTERVAL_MIN.limit.toString(),
-                    Limits.ANNOUNCEMENTS_INTERVAL_MAX.limit.toString()).queue()
+        if(new > Limits.ANNOUNCEMENTS_PERIOD_MAX.limit
+            || new < Limits.ANNOUNCEMENTS_PERIOD_MIN.limit) {
+            Message.COMMANDS_ANNOUNCEMENTS_PERIOD_INVALID.send(channel,
+                    Limits.ANNOUNCEMENTS_PERIOD_MIN.limit.toString(),
+                    Limits.ANNOUNCEMENTS_PERIOD_MAX.limit.toString()).queue()
             return
         }
-        entry.push(entry.getField(GuildEntry.Fields.ANNOUNCEMENT_INTERVAL), guild, null, new)
-        AnnouncementsTask.getTask(guild)?.setInterval(new)
-        Message.COMMANDS_ANNOUNCEMENTS_INTERVAL_UPDATED.send(channel).queue()
+        entry.push(entry.getField(GuildEntry.Fields.ANNOUNCEMENT_PERIOD), guild, null, new)
+        AnnouncementsTask.getTask(guild)?.setPeriod(new)
+        Message.COMMANDS_ANNOUNCEMENTS_PERIOD_UPDATED.send(channel).queue()
     }
 
 }
