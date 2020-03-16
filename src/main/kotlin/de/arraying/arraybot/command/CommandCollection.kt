@@ -69,12 +69,12 @@ import net.dv8tion.jda.api.Permission
 enum class CommandCollection(val command: DefaultCommand) {
 
     /**
-     * The command that handles announcements at regular intervals.
+     * The command that handles announcements at regular periods.
      */
     ANNOUNCEMENTS(AnnouncementsCommand(arrayOf(
             AnnouncementsToggleSubCommand(),
             AnnouncementsChannelSubCommand(),
-            AnnouncementsIntervalSubCommand(),
+            AnnouncementsPeriodSubCommand(),
             AnnouncementsAddSubCommand(),
             AnnouncementsDeleteSubCommand(),
             AnnouncementsInfoSubCommand(),
