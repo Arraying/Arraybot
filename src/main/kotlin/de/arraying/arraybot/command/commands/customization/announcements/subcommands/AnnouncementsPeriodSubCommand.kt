@@ -25,7 +25,7 @@ import de.arraying.arraybot.util.UDatatypes
  * limitations under the License.
  */
 class AnnouncementsPeriodSubCommand: SubCommand("period",
-        aliases = arrayOf("i")) {
+        aliases = arrayOf("p")) {
 
     /**
      * When the sub command is executed.
