@@ -24,7 +24,7 @@ import de.arraying.arraybot.util.UDatatypes
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-class AnnouncementsIntervalSubCommand: SubCommand("interval",
+class AnnouncementsPeriodSubCommand: SubCommand("period",
         aliases = arrayOf("i")) {
 
     /**
@@ -35,8 +35,8 @@ class AnnouncementsIntervalSubCommand: SubCommand("interval",
         val guild = environment.guild.idLong
         val entry = Category.GUILD.entry as GuildEntry
         if(args.size < 3) {
-            val interval = entry.fetch(entry.getField(GuildEntry.Fields.ANNOUNCEMENT_INTERVAL), guild, null)
-            Message.COMMANDS_ANNOUNCEMENTS_INTERVAL.send(channel, interval).queue()
+            val period = entry.fetch(entry.getField(GuildEntry.Fields.ANNOUNCEMENT_INTERVAL), guild, null)
+            Message.COMMANDS_ANNOUNCEMENTS_INTERVAL.send(channel, period).queue()
             return
         }
         val newRaw = args[2]
