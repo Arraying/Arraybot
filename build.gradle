@@ -1,5 +1,5 @@
 buildscript {
-    ext.kotlin_version = "1.2.60"
+    ext.kotlin_version = "1.4.10"
     repositories {
         mavenCentral()
     }
@@ -11,15 +11,13 @@ buildscript {
 plugins {
     id "java"
     id "application"
-    id "com.github.johnrengelman.shadow" version "2.0.1"
+    id "com.github.johnrengelman.shadow" version "5.2.0"
 }
 
 group "de.arraying.arraybot"
-
-version "5.6.3"
-
 ext.main = "Arraybot"
 mainClassName = "de.arraying.arraybot.Arraybot"
+version "5.6.4"
 
 apply plugin: "java" // Java
 apply plugin: "kotlin" // Kotlin
@@ -38,18 +36,18 @@ dependencies {
     compile "com.github.Arraying:Kotys:0.5.0" // JSON
     compile "com.github.Arraying:Prime:0.1.4" // Scripting
     compile "ch.qos.logback:logback-classic:1.2.3" // Logging
-    compile "net.dv8tion:JDA:4.1.0_81" // Discord
+    compile "net.dv8tion:JDA:4.2.0_214" // Discord
     compile "io.lettuce:lettuce-core:5.1.8.RELEASE" // Database
     compile "commons-io:commons-io:2.6" // Utils
     compile "org.apache.commons:commons-lang3:3.9" // Utils
     compile "org.apache.commons:commons-text:1.8" // Utils
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version" // Kotlin
-    compile "org.jetbrains.kotlinx:kotlinx-coroutines-core:0.15" // Kotlin Coroutines
+    compile "org.jetbrains.kotlinx:kotlinx-coroutines-core:0.27.0-eap13" // Kotlin Coroutines
 }
 
 
-kotlin {
-    experimental {
-        coroutines 'enable'
-    }
-}
+//kotlin {
+//    experimental {
+//        coroutines 'enable'
+//    }
+//}

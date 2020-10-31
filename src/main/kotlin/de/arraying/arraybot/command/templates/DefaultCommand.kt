@@ -12,8 +12,8 @@ import de.arraying.arraybot.language.Message
 import de.arraying.arraybot.util.Limits
 import de.arraying.arraybot.util.UDatabase
 import de.arraying.arraybot.util.UPremium
-import kotlinx.coroutines.experimental.CommonPool
-import kotlinx.coroutines.experimental.launch
+import kotlinx.coroutines.CommonPool
+import kotlinx.coroutines.launch
 import net.dv8tion.jda.api.Permission
 import net.dv8tion.jda.internal.utils.PermissionUtil
 import org.apache.commons.lang3.StringUtils

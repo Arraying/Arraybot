@@ -22,12 +22,19 @@ import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.exceptions.PermissionException;
+import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.sharding.DefaultShardManagerBuilder;
 import net.dv8tion.jda.api.sharding.ShardManager;
+import net.dv8tion.jda.api.utils.ChunkingFilter;
+import net.dv8tion.jda.api.utils.MemberCachePolicy;
+import net.dv8tion.jda.api.utils.cache.CacheFlag;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.security.auth.login.LoginException;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.stream.Collectors;
 
 /**
  * Copyright 2017 Arraying
@@ -174,8 +181,14 @@ public final class BotManager {
      */
     private ShardManager createShardManager()
             throws LoginException {
-        return new DefaultShardManagerBuilder()
+        Collection<GatewayIntent> intents = Arrays.stream(GatewayIntent.values())
+            .filter(intent -> intent != GatewayIntent.GUILD_PRESENCES)
+            .collect(Collectors.toSet());
+        return DefaultShardManagerBuilder.create(intents)
+                .disableCache(CacheFlag.ACTIVITY, CacheFlag.CLIENT_STATUS)
                 .setToken(configuration.isBotBeta() ? configuration.getBotBetaToken() : configuration.getBotToken())
+                .setMemberCachePolicy(MemberCachePolicy.ALL)
+                .setChunkingFilter(ChunkingFilter.NONE)
                 .setStatus(OnlineStatus.DO_NOT_DISTURB)
                 .setShardsTotal(configuration.getBotShards())
                 .addEventListeners(new ReadyListener())
