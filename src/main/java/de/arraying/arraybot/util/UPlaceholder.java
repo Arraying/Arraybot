@@ -30,6 +30,7 @@ public final class UPlaceholder {
     public static String replaceCore(Member member, String input) {
         Guild guild = member.getGuild();
         User user = member.getUser();
+        Member guildOwner = member.getGuild().retrieveOwner().complete();
         return input.replace("{user}", user.getAsMention())
                 .replace("{user_id}", user.getId())
                 .replace("{user_avatar}", user.getEffectiveAvatarUrl())
@@ -40,10 +41,10 @@ public final class UPlaceholder {
                 .replace("{guild_icon}", guild.getIconUrl() == null ? "null" : guild.getIconUrl())
                 .replace("{guild_members}", String.valueOf(guild.getMembers().size()))
                 .replace("{guild_name}", guild.getName())
-                .replace("{guild_owner}", Objects.requireNonNull(guild.getOwner()).getAsMention())
-                .replace("{guild_owner_name}", guild.getOwner().getUser().getName())
-                .replace("{guild_owner_discriminator}", guild.getOwner().getUser().getDiscriminator())
-                .replace("{guild_owner_nickname}", guild.getOwner().getEffectiveName())
+                .replace("{guild_owner}", guildOwner.getAsMention())
+                .replace("{guild_owner_name}", guildOwner.getUser().getName())
+                .replace("{guild_owner_discriminator}", guildOwner.getUser().getDiscriminator())
+                .replace("{guild_owner_nickname}", guildOwner.getEffectiveName())
                 .replace("{guild_region}", guild.getRegionRaw())
                 .replace("{date}", UTime.getDisplayableTime(guild, System.currentTimeMillis()));
     }
