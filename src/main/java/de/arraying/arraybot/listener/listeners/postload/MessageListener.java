@@ -55,8 +55,7 @@ public final class MessageListener extends PostLoadListener {
     @Override
     public void onGuildMessageReceived(@NotNull GuildMessageReceivedEvent event) {
         Filter.INSTANCE.handle(event);
-        if(event.getAuthor().isFake()
-            || event.getAuthor().isBot()) {
+        if(event.getAuthor().isBot()) {
             return;
         }
         Commands.INSTANCE.executeCommand(new CommandEnvironment(event.getMessage()));

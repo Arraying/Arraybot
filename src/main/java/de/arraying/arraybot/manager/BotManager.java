@@ -32,9 +32,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.security.auth.login.LoginException;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.stream.Collectors;
+import java.util.*;
 
 /**
  * Copyright 2017 Arraying
@@ -181,9 +179,11 @@ public final class BotManager {
      */
     private ShardManager createShardManager()
             throws LoginException {
-        Collection<GatewayIntent> intents = Arrays.stream(GatewayIntent.values())
-            .filter(intent -> intent != GatewayIntent.GUILD_PRESENCES)
-            .collect(Collectors.toSet());
+        List<GatewayIntent> intents = Arrays.asList(
+            GatewayIntent.GUILD_MEMBERS,
+            GatewayIntent.GUILD_BANS,
+            GatewayIntent.GUILD_MESSAGES
+        );
         return DefaultShardManagerBuilder.create(intents)
                 .disableCache(CacheFlag.ACTIVITY, CacheFlag.CLIENT_STATUS)
                 .setToken(configuration.isBotBeta() ? configuration.getBotBetaToken() : configuration.getBotToken())

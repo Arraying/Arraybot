@@ -1,7 +1,6 @@
 package de.arraying.arraybot.script.method;
 
 
-import net.dv8tion.jda.api.AccountType;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 
@@ -46,7 +45,7 @@ public final class EmbedMethods {
      * @return True if it can, false otherwise.
      */
     public boolean canSend(MessageEmbed messageEmbed) {
-        return messageEmbed != null && messageEmbed.isSendable(AccountType.BOT);
+        return messageEmbed != null && messageEmbed.isSendable();
     }
 
 }

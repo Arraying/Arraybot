@@ -17,7 +17,7 @@ plugins {
 group "de.arraying.arraybot"
 ext.main = "Arraybot"
 mainClassName = "de.arraying.arraybot.Arraybot"
-version "5.6.5"
+version "5.6.6"
 
 apply plugin: "java" // Java
 apply plugin: "kotlin" // Kotlin
@@ -30,13 +30,17 @@ repositories {
     maven {
         url "https://jitpack.io" // Arraying's repositories
     }
+    maven {
+        name 'm2-dv8tion'
+        url 'https://m2.dv8tion.net/releases'
+    }
 }
 
 dependencies {
     compile "com.github.Arraying:Kotys:0.5.0" // JSON
     compile "com.github.Arraying:Prime:0.1.4" // Scripting
     compile "ch.qos.logback:logback-classic:1.2.3" // Logging
-    compile "net.dv8tion:JDA:4.2.0_214" // Discord
+    compile "net.dv8tion:JDA:4.3.0_310" // Discord
     compile "io.lettuce:lettuce-core:5.1.8.RELEASE" // Database
     compile "commons-io:commons-io:2.6" // Utils
     compile "org.apache.commons:commons-lang3:3.9" // Utils
