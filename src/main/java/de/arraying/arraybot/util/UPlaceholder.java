@@ -39,7 +39,7 @@ public final class UPlaceholder {
                 .replace("{user_nickname}", member.getEffectiveName())
                 .replace("{guild_id}", guild.getId())
                 .replace("{guild_icon}", guild.getIconUrl() == null ? "null" : guild.getIconUrl())
-                .replace("{guild_members}", String.valueOf(guild.getMembers().size()))
+                .replace("{guild_members}", String.valueOf(guild.getMemberCount()))
                 .replace("{guild_name}", guild.getName())
                 .replace("{guild_owner}", guildOwner.getAsMention())
                 .replace("{guild_owner_name}", guildOwner.getUser().getName())

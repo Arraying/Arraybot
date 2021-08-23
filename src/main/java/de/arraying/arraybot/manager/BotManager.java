@@ -188,7 +188,7 @@ public final class BotManager {
                 .disableCache(CacheFlag.ACTIVITY, CacheFlag.CLIENT_STATUS)
                 .setToken(configuration.isBotBeta() ? configuration.getBotBetaToken() : configuration.getBotToken())
                 .setMemberCachePolicy(MemberCachePolicy.ALL)
-                .setChunkingFilter(ChunkingFilter.ALL)
+                .setChunkingFilter(ChunkingFilter.NONE)
                 .setStatus(OnlineStatus.DO_NOT_DISTURB)
                 .setShardsTotal(configuration.getBotShards())
                 .addEventListeners(new ReadyListener())
