@@ -30,7 +30,6 @@ public final class ScriptGuild implements ScriptEntity {
     private final Guild underlying;
     private final Map<String, ScriptTextChannel> textChannels = new HashMap<>();
     private final Map<String, ScriptVoiceChannel> voiceChannels = new HashMap<>();
-    private final Map<String, ScriptUser> users = new HashMap<>();
     private final Map<String, ScriptRole> roles = new HashMap<>();
 
     /**
@@ -47,9 +46,6 @@ public final class ScriptGuild implements ScriptEntity {
         }
         for(VoiceChannel channel : underlying.getVoiceChannels()) {
             voiceChannels.put(channel.getId(), new ScriptVoiceChannel(channel));
-        }
-        for(Member user : underlying.getMembers()) {
-            users.put(user.getUser().getId(), new ScriptUser(environment, user));
         }
         for(Role role : underlying.getRoles()) {
             roles.put(role.getId(), new ScriptRole(role));
@@ -133,11 +129,14 @@ public final class ScriptGuild implements ScriptEntity {
     }
 
     /**
-     * Gets all users.
-     * @return An array of users.
+     * Gets all CACHED users.
+     * @return An array of users. If a user is not cached, they will not be here.
      */
     public ScriptUser[] getUsers() {
-        return users.values().toArray(new ScriptUser[0]);
+        return environment.getGuild().getMembers()
+            .stream()
+            .map(member -> new ScriptUser(environment, member))
+            .toArray(ScriptUser[]::new);
     }
 
     /**
@@ -147,7 +146,17 @@ public final class ScriptGuild implements ScriptEntity {
      */
     public ScriptUser getUser(String input) {
         Member member = UUser.getMember(environment.getGuild(), input);
-        return member == null ? null : users.get(member.getUser().getId());
+        if (member == null) {
+            // Try to retrieve the member if it's by ID.
+            if (UUser.ID_PATTERN.matcher(input).find()
+                || UUser.MENTION_PATTERN.matcher(input).find()) {
+                try {
+                    member = environment.getGuild().retrieveMemberById(input.replaceAll("\\D", "")).complete();
+                } catch(Exception ignored) {
+                }
+            }
+        }
+        return member == null ? null : new ScriptUser(environment, member);
     }
 
     /**

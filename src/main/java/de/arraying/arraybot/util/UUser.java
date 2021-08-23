@@ -30,7 +30,7 @@ public final class UUser {
     /**
      * The regular expression for a mention.
      */
-    private static final Pattern MENTION_PATTERN = Pattern.compile("^<@!?\\d{17,20}>$");
+    public static final Pattern MENTION_PATTERN = Pattern.compile("^<@!?\\d{17,20}>$");
 
     /**
      * The regular expression for a username#discriminator combination.
