@@ -36,6 +36,7 @@ object Commands {
     val commands = MultiKeyMap<String, DefaultCommand>()
     private val logger = LoggerFactory.getLogger("Command-Manager")
     private val defaultPrefix = Arraybot.INSTANCE.configuration.botPrefix
+    private val fallbackPrefix = "!//"
     /**
      * Registers all commands.
      */
@@ -71,6 +72,7 @@ object Commands {
         var message = environment.message.contentRaw.replace(" +".toRegex(), " ").trim()
         message = when {
             message.startsWith(defaultPrefix, true) -> message.substring(defaultPrefix.length)
+            message.startsWith(fallbackPrefix, true) -> message.substring(fallbackPrefix.length)
             message.startsWith(guildPrefix, true) -> message.substring(guildPrefix.length)
             else -> return
         }
